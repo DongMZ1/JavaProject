@@ -100,21 +100,29 @@ public class GameScreen implements Inputtable{
     }
     public void handleKeyType(char c) {}
     public void handleMousePress(int x, int y, int button) {
-    	Coordinate coords = camera.getPosOnBoard(x, y);
+  /*  	Coordinate coords = camera.getPosOnBoard(x, y);
     	System.out.println("X: " + coords.getX());
-    	System.out.println("Y: " + coords.getY());
+    	System.out.println("Y: " + coords.getY()); */
     	
         if(y > gameStatus.screenHeight - gameUi.uiHeight)
             gameUi.handleMousePress(x, y, button);
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameStatus.movingCharacter) {
-            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-            mainHero.time.advance();
-            gameUi.moveButton.setLabel("End Move");
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
+        	
+        	if(gameStatus.current == Status.MOVING) {
+	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
+	            mainHero.time.advance();
+	            gameUi.moveButton.setLabel("End Move");
+	        
+        }
         }
     }
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
+        if (gameStatus.current == Status.WAITING) {
+        	mainHero.time.advance();
+        	gameStatus.current = Status.NONE;
+        }
     }
     public void handleMouseMove(int x, int y) {
         if(movingCam) {

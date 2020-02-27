@@ -1,5 +1,7 @@
 import org.minueto.MinuetoFileException;
 
+
+
 public class GameUi implements Inputtable {
     private static GameUi gameUi;
 
@@ -61,12 +63,12 @@ public class GameUi implements Inputtable {
         }
         else {
             if(moveButton.isClicked(x, y) && moveButton.isClickable()) {
-                if (!gameStatus.movingCharacter) {
-                    gameStatus.movingCharacter = true;
+                if (!(gameStatus.current == Status.MOVING)) {
+                    gameStatus.current = Status.MOVING;
                     moveButton.setLabel("Cancel Move");
                 }
                 else {
-                    gameStatus.movingCharacter = false;
+                    gameStatus.current = Status.NONE;
                     moveButton.setLabel("Move");
                 }
             }
@@ -78,8 +80,10 @@ public class GameUi implements Inputtable {
                 ; //TODO dropButton
             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y))
                 ; //TODO tradeButton
-            else if(waitButton.isClickable() && waitButton.isClicked(x, y))
-                ; //TODO waitButton
+            else if(waitButton.isClickable() && waitButton.isClicked(x, y)) {
+            	gameStatus.current = Status.WAITING;
+            }
+                
         }
     }
     public void handleMouseRelease(int x, int y, int button) { }

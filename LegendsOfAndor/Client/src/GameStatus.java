@@ -21,7 +21,7 @@ public class GameStatus {
 	int focus;
 	int currentScreen;
 	MinuetoWindow screen;
-	boolean movingCharacter = false;
+	Status current = Status.NONE;
 
 	private GameStatus() throws MinuetoFileException {
 		focus = FOCUS_ON_GAMESCREEN;
@@ -35,4 +35,6 @@ public class GameStatus {
 			gameStatus = new GameStatus();
 		return gameStatus;
 	}
+	
+	
 }

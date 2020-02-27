@@ -29,3 +29,5 @@
 /Time.class
 /Gender.class
 /HeroInitializer.class
+/GameStatus$status.class
+/Status.class
