@@ -14,6 +14,7 @@ public class GameScreen implements Inputtable{
     private boolean movingCam;
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
+    private Castle castle = new Castle(1);
     private Hero mainHero;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
@@ -31,7 +32,9 @@ public class GameScreen implements Inputtable{
         tiles = new TileInitialiser().initialiseTiles(screen);
         tiles = new TileInitialiser().initialiseCoords(tiles);
         monsters = MonsterInitializer.initializeMonsters();
-        mainHero = new Hero(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0);
+        mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0);
+        mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
+        heroes.add(mainHero);
         tiles.get(mainHero.tile).addTileEntity(mainHero);
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
@@ -43,6 +46,7 @@ public class GameScreen implements Inputtable{
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
+        mainHero.time.draw();
     }
 
     public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
@@ -73,11 +77,20 @@ public class GameScreen implements Inputtable{
     		}
     	}
     	
+    	//These are monsters that reached castle
     	for (Monster rMonster : toRemove)
     	{
     		monsters.remove(rMonster);
+    		castle.damage(rMonster);
+    		
+    	}
+    	for (Hero hero : heroes)
+    	{
+    		hero.time.reset();
     	}
     }
+    
+    
 
     public void handleKeyPress(int key) {
 
@@ -87,12 +100,16 @@ public class GameScreen implements Inputtable{
     }
     public void handleKeyType(char c) {}
     public void handleMousePress(int x, int y, int button) {
+    	Coordinate coords = camera.getPosOnBoard(x, y);
+    	System.out.println("X: " + coords.getX());
+    	System.out.println("Y: " + coords.getY());
+    	
         if(y > gameStatus.screenHeight - gameUi.uiHeight)
             gameUi.handleMousePress(x, y, button);
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameStatus.movingCharacter) {
             moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-            newDay();
+            mainHero.time.advance();
             gameUi.moveButton.setLabel("End Move");
         }
     }

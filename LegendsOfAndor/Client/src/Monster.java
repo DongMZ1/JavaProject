@@ -35,16 +35,10 @@ public class Monster implements TileEntity
     	
     	
     	
-    	if (tile == 0) {
-    		damageCastle();
-    	}
+    	
     	return false;
     }
     
-    public void damageCastle() {
-    	//TODO
-    	// Should decrease shield count of castle
-    	System.out.println("Damaged castle");
-    }
+    
 
 }
