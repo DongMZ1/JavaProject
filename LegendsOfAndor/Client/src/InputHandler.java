@@ -65,6 +65,6 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 	}
 
 	public void handleMouseWheelRotate(int i) {
-		inputs.get(gameStatus.focus).handleMouseWheelRotate(i);
+//		inputs.get(gameStatus.focus).handleMouseWheelRotate(i);
 	}
 }

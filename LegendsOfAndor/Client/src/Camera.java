@@ -9,7 +9,7 @@ public class Camera {
 	private int edgeOfBoard;
 	private GameStatus gameStatus;
 	private Camera() throws MinuetoFileException {
-		boardZoom = 3;
+		boardZoom = 4;
 		currentPos = new Coordinate(0, 0);
 		bottomOfBoard = Constants.TOP_OF_BOARD / boardZoom;
 		edgeOfBoard = Constants.SIDE_OF_BOARD / boardZoom;
@@ -49,7 +49,7 @@ public class Camera {
 		this.boardZoom = boardZoom;
 		bottomOfBoard = Constants.TOP_OF_BOARD / boardZoom;
 		edgeOfBoard = Constants.SIDE_OF_BOARD / boardZoom;
-		moveCamera(currentPos.getX(), currentPos.getY());
+		moveCamera(currentPos.getX(), currentPos.getY()); 
 	}
 
 	/**

@@ -25,17 +25,28 @@ public class TileInitialiser {
     }
 
     public ArrayList<Tile> initialiseCoords(ArrayList<Tile> tiles) {
-        tiles.get(0).addCoords(1353, 1439);
-        tiles.get(1).addCoords(1450, 2225);
-        tiles.get(2).addCoords(2043,2205);
-        tiles.get(3).addCoords(1800, 2685);
-        tiles.get(4).addCoords(994, 2408);
-        tiles.get(5).addCoords(378, 2256);
-        tiles.get(6).addCoords(2725, 2079);
-        tiles.get(7).addCoords(1289, 784);
-        tiles.get(8).addCoords(2095, 866);
-        tiles.get(9).addCoords(1551, 283);
-        tiles.get(10).addCoords(2028, 3074);
+    	Tile tile0 = tiles.get(0);
+    	Tile tile1 = tiles.get(1);
+    	Tile tile2 = tiles.get(2);
+    	Tile tile3 = tiles.get(3);
+    	Tile tile4 = tiles.get(4);
+    	Tile tile5 = tiles.get(5);
+    	Tile tile6 = tiles.get(6);
+    	Tile tile7 = tiles.get(7);
+    	Tile tile8 = tiles.get(8);
+    	Tile tile9 = tiles.get(9);
+    	Tile tile10 = tiles.get(10);
+    	tile0.setup(1353, 1439,0);
+    	tile1.setup(1450, 2225,0);
+    	tile2.setup(2043,2205,1);
+    	tile3.setup(1800, 2685,2);
+    	tile4.setup(994, 2408,3);
+    	tile5.setup(378, 2256,4);
+    	tile6.setup(2725, 2079,5);
+    	tile7.setup(1289, 784, 6);
+    	tile8.setup(2095, 866, 7);
+    	tile9.setup(1551, 283, 8);
+    	tile10.setup(2028, 3074, 9);
         return tiles;
     }
 

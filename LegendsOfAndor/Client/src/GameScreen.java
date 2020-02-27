@@ -12,7 +12,8 @@ public class GameScreen implements Inputtable{
     private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
     private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
     private boolean movingCam;
-    private ArrayList<Tile> tiles;
+    static ArrayList<Tile> tiles;
+    private ArrayList<Monster> monsters;
     private Hero mainHero;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
@@ -29,8 +30,9 @@ public class GameScreen implements Inputtable{
         this.movingCam = false;
         tiles = new TileInitialiser().initialiseTiles(screen);
         tiles = new TileInitialiser().initialiseCoords(tiles);
+        monsters = MonsterInitializer.initializeMonsters();
         mainHero = new Hero(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0);
-        tiles.get(0).addTileEntity(mainHero);
+        tiles.get(mainHero.tile).addTileEntity(mainHero);
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
     }
@@ -43,7 +45,7 @@ public class GameScreen implements Inputtable{
         gameUi.draw();
     }
 
-    public void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
+    public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
         assert(tiles.get(currentTile).containsTileEntity(tileEntity));
         tiles.get(currentTile).removeTileEntity(tileEntity);
         tiles.get(destination).addTileEntity(tileEntity);
@@ -61,6 +63,21 @@ public class GameScreen implements Inputtable{
         }
         return closestNum;
     }
+    
+    public void newDay() {
+    	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
+    	for (Monster monster : monsters) {
+    		if(monster.advance()) {
+    			tiles.get(monster.tile).removeTileEntity(monster);
+    			toRemove.add(monster);
+    		}
+    	}
+    	
+    	for (Monster rMonster : toRemove)
+    	{
+    		monsters.remove(rMonster);
+    	}
+    }
 
     public void handleKeyPress(int key) {
 
@@ -75,6 +92,7 @@ public class GameScreen implements Inputtable{
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameStatus.movingCharacter) {
             moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
+            newDay();
             gameUi.moveButton.setLabel("End Move");
         }
     }
