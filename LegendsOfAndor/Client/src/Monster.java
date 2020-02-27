@@ -21,22 +21,16 @@ public class Monster implements TileEntity
         return this.monsterImage;
     }
     
-    public boolean advance()
+//    @Return the tile that the monster advances to
+    public int advance()
     {
-    	//Returns True if monster should be destroyed (Reached castle)
-    	//Else false (Monster stays on board)
-    	if (tile > 0) {
     	Tile current = GameScreen.tiles.get(tile);
+    	if (tile > 0) {
+    	
     	GameScreen.moveTileEntity(this, tile, current.getNextTile());
     	}
-    	else {
-    		return true;
-    	}
     	
-    	
-    	
-    	
-    	return false;
+    	return current.getNextTile();
     }
     
     

@@ -71,10 +71,22 @@ public class GameScreen implements Inputtable{
     
     public void newDay() {
     	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
+    	ArrayList<Integer> occupiedSpaces = new ArrayList<>();
+    	
     	for (Monster monster : monsters) {
-    		if(monster.advance()) {
+    		Integer mTile = monster.advance();
+    		//If at castle then toRemove
+    		if(mTile == 0) {
     			tiles.get(monster.tile).removeTileEntity(monster);
     			toRemove.add(monster);
+    		}
+    		//If space is occupied, skip over it and add new space to occupied space
+    		else if (occupiedSpaces.contains(mTile)) {
+    			occupiedSpaces.add(monster.advance());
+    		}
+    		//Else was just a normal move. Save tile that ended on
+    		else {
+    			occupiedSpaces.add(mTile);
     		}
     	}
     	
@@ -94,7 +106,7 @@ public class GameScreen implements Inputtable{
     
 
     public void handleKeyPress(int key) {
-
+    	newDay();
     }
     public void handleKeyRelease(int key) {
 
