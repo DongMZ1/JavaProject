@@ -7,11 +7,12 @@ public class Hero implements TileEntity {
     int tile;
     GameStatus gameStatus;
     Time time;
-    public Hero(MinuetoImage heroImage, int tile) throws MinuetoFileException {
+    public final boolean mainHero;
+    public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws MinuetoFileException {
         this.heroImage = heroImage;
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();
-        
+        this.mainHero = mainHero;
            }
     public void setTile(int tile) {
         this.tile = tile;

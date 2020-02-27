@@ -62,17 +62,23 @@ public class GameUi implements Inputtable {
             textBox.handleMousePress(x, y, button);
         }
         else {
-            if(moveButton.isClicked(x, y) && moveButton.isClickable()) {
-                if (!(gameStatus.ui == UIStatus.MOVING)) {
-                    gameStatus.ui = UIStatus.MOVING;
+            if(moveButton.isClicked(x, y) && moveButton.isClickable() && GameScreen.currentHero == GameScreen.mainHero) {
+                if (gameStatus.ui == UIStatus.NONE) {
+                    gameStatus.ui = UIStatus.MOVEBEGIN;
                     moveButton.setLabel("Cancel Move");
                 }
-                else {
+                else if ((gameStatus.ui == UIStatus.MOVEBEGIN)) {
                     gameStatus.ui = UIStatus.NONE;
-                    moveButton.setLabel("Move");
+                    gameUi.moveButton.setLabel("Move");
+                    
                 }
+                else if ((gameStatus.ui == UIStatus.MOVING)) {
+                    gameStatus.ui = UIStatus.MOVED;
+                    
+                }
+                
             }
-            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && gameStatus.ui == UIStatus.NONE) {
+            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
             	gameStatus.ui = UIStatus.FIGHTING;
             }
             else if(pickupButton.isClickable() && pickupButton.isClicked(x, y))
@@ -81,11 +87,19 @@ public class GameUi implements Inputtable {
                 ; //TODO dropButton
             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y))
                 ; //TODO tradeButton
-            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && gameStatus.ui == UIStatus.NONE) {
+            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && verify()) {
             	gameStatus.ui = UIStatus.WAITING;
             }
                 
         }
+    }
+    private boolean verify() {
+    	if (gameStatus.ui == UIStatus.NONE && GameScreen.currentHero == GameScreen.mainHero) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
     public void handleMouseRelease(int x, int y, int button) { }
     public void handleMouseMove(int x, int y) { }

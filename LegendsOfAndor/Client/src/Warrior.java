@@ -4,8 +4,8 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Warrior extends Hero {
     //TODO Implement Class Separation
-    public Warrior(MinuetoImage heroImage, int tile) throws MinuetoFileException {
-        super(heroImage, tile);
+    public Warrior(MinuetoImage heroImage, int tile, boolean mainHero) throws MinuetoFileException {
+        super(heroImage, tile, mainHero);
         
 
     }

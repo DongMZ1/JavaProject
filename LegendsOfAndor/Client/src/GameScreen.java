@@ -15,8 +15,10 @@ public class GameScreen implements Inputtable{
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
     private Castle castle = new Castle(1);
-    private Hero mainHero;
-    private ArrayList<Hero> heroes = new ArrayList<>();
+    static Hero mainHero;
+    static Hero currentHero;
+    private Hero hero2;
+    private TurnManager tm;
     private Fight fight = new Fight();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
@@ -30,13 +32,24 @@ public class GameScreen implements Inputtable{
         this.screen.setVisible(true);
         camera = Camera.getInstance();
         this.movingCam = false;
+        
         tiles = new TileInitialiser().initialiseTiles(screen);
         tiles = new TileInitialiser().initialiseCoords(tiles);
         monsters = MonsterInitializer.initializeMonsters();
-        mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0);
+        
+        
+        mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
-        heroes.add(mainHero);
-        tiles.get(mainHero.tile).addTileEntity(mainHero);
+        hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
+        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
+        
+        tm = new TurnManager(new ArrayList<Hero>());
+        tm.addHero(mainHero);
+        tm.addHero(hero2);
+        currentHero = mainHero;
+        
+        
+        
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
     }
@@ -47,7 +60,7 @@ public class GameScreen implements Inputtable{
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
-        mainHero.time.draw();
+        tm.draw();
     }
 
     public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
@@ -97,21 +110,31 @@ public class GameScreen implements Inputtable{
     		castle.damage(rMonster);
     		
     	}
-    	for (Hero hero : heroes)
-    	{
-    		hero.time.reset();
-    	}
+    	tm.newDay();
+    	
+    }
+    
+    public void endTurn() {
+    	currentHero = tm.endTurn();
     }
     
     
 
     public void handleKeyPress(int key) {
-    	newDay();
     }
     public void handleKeyRelease(int key) {
 
     }
-    public void handleKeyType(char c) {}
+    //IAN testing shit
+    public void handleKeyType(char c) {
+    	if (c == 'd') {
+    		newDay();
+    	}
+    	else if (c == 'a')
+    	{
+    		mainHero = currentHero;
+    	}
+    }
     public void handleMousePress(int x, int y, int button) {
   /*  	Coordinate coords = camera.getPosOnBoard(x, y);
     	System.out.println("X: " + coords.getX());
@@ -122,19 +145,30 @@ public class GameScreen implements Inputtable{
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
         	
-        	if(gameStatus.ui == UIStatus.MOVING) {
+        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
 	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
 	            mainHero.time.advance();
+	            gameStatus.ui = UIStatus.MOVING;
 	            gameUi.moveButton.setLabel("End Move");
-	        
-        }
+	        }
+        	else if(gameStatus.ui == UIStatus.MOVING) {
+	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
+	            mainHero.time.advance();	            
+	            
+	        }
         }
     }
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
         if (gameStatus.ui == UIStatus.WAITING) {
-        	mainHero.time.advance();
+        	currentHero.time.advance();
+        	endTurn();
         	gameStatus.ui = UIStatus.NONE;
+        }
+        else if (gameStatus.ui == UIStatus.MOVED) {
+        	gameStatus.ui = UIStatus.NONE;
+        	endTurn();
+        	gameUi.moveButton.setLabel("Move");
         }
         else if (gameStatus.ui == UIStatus.FIGHTING) {
         	Tile t = tiles.get(mainHero.getTile());
