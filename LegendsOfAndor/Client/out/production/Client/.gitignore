@@ -24,6 +24,7 @@
 /sounds/
 /Monster.class
 /MonsterInitializer.class
+<<<<<<< HEAD
 /Castle.class
 /Gor.class
 /Time.class
@@ -31,3 +32,5 @@
 /HeroInitializer.class
 /GameStatus$status.class
 /Status.class
+=======
+>>>>>>> master
