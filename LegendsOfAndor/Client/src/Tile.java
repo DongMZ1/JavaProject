@@ -18,6 +18,7 @@ public class Tile {
     private int[] adjacentTiles;
     private int tileNumber;
     private static Camera camera;
+    private int nextTile;
     public Tile(int moveX, int moveY, MinuetoWindow screen, int tileNumber, int[] adjacentTiles) throws MinuetoFileException {
         this.coords = new ArrayList<>();
         this.moveCoords = new Coordinate(moveX, moveY);
@@ -27,8 +28,9 @@ public class Tile {
         this.tileNumber = tileNumber;
         camera = Camera.getInstance();
     }
-    public void addCoords(int x, int y) {
+    public void setup(int x, int y, int next) {
         coords.add(new Coordinate(x, y));
+        this.nextTile = next;
     }
 
     public void addTileEntity(TileEntity object) {
@@ -62,4 +64,7 @@ public class Tile {
     public int getMoveY() {
         return this.moveCoords.getY() - 25;
     }
+	public int getNextTile() {
+		return nextTile;
+	}
 }

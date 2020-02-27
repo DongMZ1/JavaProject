@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="LegendsOfAndor/Client/src"/>
+	<classpathentry kind="src" path="LegendsOfAndor/Minueto_2.0/src/core"/>
+	<classpathentry kind="src" path="LegendsOfAndor/Minueto_2.0/src/samples"/>
+	<classpathentry kind="src" path="LegendsOfAndor/Server/src"/>
+	<classpathentry exported="true" kind="lib" path="LegendsOfAndor/Minueto_2.0/minueto-samples.jar"/>
+	<classpathentry exported="true" kind="lib" path="LegendsOfAndor/Minueto_2.0/minueto.jar"/>
+	<classpathentry kind="output" path="LegendsOfAndor/Client/out/production/Client"/>
+</classpath>
