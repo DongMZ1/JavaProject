@@ -17,6 +17,7 @@ public class GameScreen implements Inputtable{
     private Castle castle = new Castle(1);
     private Hero mainHero;
     private ArrayList<Hero> heroes = new ArrayList<>();
+    private Fight fight = new Fight();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
@@ -109,7 +110,7 @@ public class GameScreen implements Inputtable{
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
         	
-        	if(gameStatus.current == Status.MOVING) {
+        	if(gameStatus.ui == UIStatus.MOVING) {
 	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
 	            mainHero.time.advance();
 	            gameUi.moveButton.setLabel("End Move");
@@ -119,9 +120,25 @@ public class GameScreen implements Inputtable{
     }
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
-        if (gameStatus.current == Status.WAITING) {
+        if (gameStatus.ui == UIStatus.WAITING) {
         	mainHero.time.advance();
-        	gameStatus.current = Status.NONE;
+        	gameStatus.ui = UIStatus.NONE;
+        }
+        else if (gameStatus.ui == UIStatus.FIGHTING) {
+        	Tile t = tiles.get(mainHero.getTile());
+        	for (Monster monster : monsters)
+        	{
+        		if(t.containsTileEntity(monster)) {
+        			fight.isHappening = true;
+        			fight.fightTile = t;
+        			fight.start();
+        			break;
+        		}
+        	}
+        	if (!fight.isHappening) {
+        		System.out.println("UNABLE TO FIGHT");
+        	}
+        	gameStatus.ui = UIStatus.NONE;
         }
     }
     public void handleMouseMove(int x, int y) {

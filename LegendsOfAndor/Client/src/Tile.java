@@ -44,11 +44,15 @@ public class Tile {
     public void removeTileEntity(TileEntity tileEntity) {
         tileEntities.remove(tileEntity);
     }
+    
+    public ArrayList<TileEntity> getTileEntities(){
+    	return tileEntities;
+    }
 
     public void draw() {
         Coordinate coordinates;
         for(int i = 0; i < tileEntities.size(); i++) {
-            coordinates = camera.getPosOnScreen(coords.get(i));
+            coordinates = camera.getPosOnScreen(coords.get(0));
             this.screen.draw(tileEntities.get(i).getImage(), coordinates.getX(), coordinates.getY());
         }
     }

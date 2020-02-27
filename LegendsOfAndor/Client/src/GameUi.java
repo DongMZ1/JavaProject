@@ -63,25 +63,26 @@ public class GameUi implements Inputtable {
         }
         else {
             if(moveButton.isClicked(x, y) && moveButton.isClickable()) {
-                if (!(gameStatus.current == Status.MOVING)) {
-                    gameStatus.current = Status.MOVING;
+                if (!(gameStatus.ui == UIStatus.MOVING)) {
+                    gameStatus.ui = UIStatus.MOVING;
                     moveButton.setLabel("Cancel Move");
                 }
                 else {
-                    gameStatus.current = Status.NONE;
+                    gameStatus.ui = UIStatus.NONE;
                     moveButton.setLabel("Move");
                 }
             }
-            else if(fightButton.isClickable() && fightButton.isClicked(x, y))
-                ;//TODO fightButton
+            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && gameStatus.ui == UIStatus.NONE) {
+            	gameStatus.ui = UIStatus.FIGHTING;
+            }
             else if(pickupButton.isClickable() && pickupButton.isClicked(x, y))
                 ;//TODO pickupButton
             else if(dropButton.isClickable() && dropButton.isClicked(x, y))
                 ; //TODO dropButton
             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y))
                 ; //TODO tradeButton
-            else if(waitButton.isClickable() && waitButton.isClicked(x, y)) {
-            	gameStatus.current = Status.WAITING;
+            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && gameStatus.ui == UIStatus.NONE) {
+            	gameStatus.ui = UIStatus.WAITING;
             }
                 
         }

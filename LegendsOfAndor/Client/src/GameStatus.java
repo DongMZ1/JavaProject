@@ -21,7 +21,7 @@ public class GameStatus {
 	int focus;
 	int currentScreen;
 	MinuetoWindow screen;
-	Status current = Status.NONE;
+	UIStatus ui = UIStatus.NONE;
 
 	private GameStatus() throws MinuetoFileException {
 		focus = FOCUS_ON_GAMESCREEN;
