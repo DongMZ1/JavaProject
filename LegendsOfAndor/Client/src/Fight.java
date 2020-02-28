@@ -34,9 +34,7 @@ public class Fight implements Inputtable{
 
 	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws MinuetoFileException {
 		
-		fightMembers = new ArrayList<>();
-		fightHeroes = new ArrayList<>();
-		fightMonsters = new ArrayList<>();
+		
 		this.screen = screen;
 		this.tm = tm;
 		background = new MinuetoRectangle(x, y, MinuetoColor.RED, true);
@@ -49,6 +47,9 @@ public class Fight implements Inputtable{
 	}
 	
 	public void start(Tile fightTile) {
+		fightMembers = new ArrayList<>();
+		fightHeroes = new ArrayList<>();
+		fightMonsters = new ArrayList<>();
 		this.fightTile = fightTile;
 		isHappening = true;
 		int monsterOffset = 1;
@@ -184,8 +185,8 @@ public class Fight implements Inputtable{
 			}
 			else {
 				for (Hero h : fightHeroes) {
-					h.health -= (monsterRoll - heroRoll);
-					damage = ("Heroes took " + (heroRoll - monsterRoll) + " damage.");
+					h.wp -= (monsterRoll - heroRoll);
+					damage = ("Heroes took " + (monsterRoll - heroRoll) + " damage.");
 				}
 			}
 			try {
@@ -200,6 +201,8 @@ public class Fight implements Inputtable{
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 			gameStatus.currentScreen = GameStatus.GAME_SCREEN;
+			GameScreen.currentHero = tm.endTurn();
+			isHappening = false;
 		}
 	}
 

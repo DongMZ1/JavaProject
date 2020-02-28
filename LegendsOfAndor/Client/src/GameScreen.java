@@ -14,13 +14,12 @@ public class GameScreen implements Inputtable{
     private boolean movingCam;
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
-    private ArrayList<Farmer> farmers;
     private Castle castle = new Castle(1);
     static Hero mainHero;
     static Hero currentHero;
     private Hero hero2;
     private TurnManager tm;
-    private Fight fight;
+     Fight fight;
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
@@ -37,7 +36,7 @@ public class GameScreen implements Inputtable{
         tiles = new TileInitialiser().initialiseTiles(screen);
         tiles = new TileInitialiser().initialiseCoords(tiles);
         monsters = MonsterInitializer.initializeMonsters();
-        farmers = FarmerInitializer.initializeFarmers();
+        
         
         mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
@@ -181,6 +180,7 @@ public class GameScreen implements Inputtable{
         	{
         		if(t.containsTileEntity(monster)) {
         			fight.start(t);
+        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
         			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
         			break;
         		}

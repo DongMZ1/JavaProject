@@ -4,15 +4,16 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class Hero implements TileEntity {
+public class Hero implements Character {
     MinuetoImage heroImage;
     int tile;
+    int wp;
     GameStatus gameStatus;
     Time time;
     Farmer farmer = null;
     boolean hasfarmer = false;
     //get a final list of items
-    public final ArrayList<Items> items = new ArrayList<Items>();
+    public final ArrayList<Item> items = new ArrayList<Item>();
     
     public final boolean mainHero;
     public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws MinuetoFileException {
@@ -35,8 +36,8 @@ public class Hero implements TileEntity {
 	  if(!hasfarmer) {
 		  hasfarmer = true;
 		  this.farmer = farmer;
-		  farmer.isguideby(this);
-		  items.add(farmer);
+		  farmer.isGuidedBy(this);
+		  
 		  // call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
 	  }
   }
@@ -45,22 +46,12 @@ public class Hero implements TileEntity {
 	  if(hasfarmer) {
 		  hasfarmer = false;
 		  this.farmer = null;
-		  farmer.isdropped();
+		  farmer.isDropped();
 		  //this for loop check if the item is farmer, then remove it.
-		  for(Items i: items) {
-			  if(i instanceof Farmer) {
-				  items.remove(i);
-			  }
-		  }
+		  
 	  }
   }
-  //this method allow that if the hero move to different regions, the items which hero
-  // processed will also change its tile(move with heros), this should be called after hero's movement
-  public void keepupdateHeroTile() {
-	  for(Items i : items) {
-		  i.tile = this.tile;
-	  }
-  }
+
 
     // TODO Move HeroDraw to Hero
     // TODO Scale drawing of Hero with boardZoom
