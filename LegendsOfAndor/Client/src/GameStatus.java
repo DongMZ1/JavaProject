@@ -15,6 +15,7 @@ public class GameStatus {
 
     public static final int LOBBY_SCREEN = 0;
     public static final int GAME_SCREEN = 1;
+    public static final int FIGHT_SCREEN = 2;
 
 	int screenWidth = 1280;
 	int screenHeight = 720;

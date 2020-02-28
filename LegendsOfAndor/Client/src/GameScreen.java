@@ -19,7 +19,7 @@ public class GameScreen implements Inputtable{
     static Hero currentHero;
     private Hero hero2;
     private TurnManager tm;
-    private Fight fight = new Fight();
+    private Fight fight;
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
@@ -47,11 +47,15 @@ public class GameScreen implements Inputtable{
         tm.addHero(mainHero);
         tm.addHero(hero2);
         currentHero = mainHero;
-        
-        
+               
         
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
+        fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
+    }
+    
+    public void fight() {
+    	fight.draw();
     }
 
     public void draw() {
@@ -175,9 +179,8 @@ public class GameScreen implements Inputtable{
         	for (Monster monster : monsters)
         	{
         		if(t.containsTileEntity(monster)) {
-        			fight.isHappening = true;
-        			fight.fightTile = t;
-        			fight.start();
+        			fight.start(t);
+        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
         			break;
         		}
         	}

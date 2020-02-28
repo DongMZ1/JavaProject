@@ -73,6 +73,9 @@ public class Client{
                 lobbyScreen.draw();
             else if(gameStatus.currentScreen == gameStatus.GAME_SCREEN)
                 gameBoard.draw();
+            else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
+            	gameBoard.fight();
+            }
             textBox.draw();
 
             gameStatus.screen.render();

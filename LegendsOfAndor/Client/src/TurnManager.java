@@ -32,6 +32,14 @@ public class TurnManager {
 		return getHero();
 	}
 	
+	public boolean contains(TileEntity hero) {
+		return heroes.contains(hero);
+	}
+	
+	public int indexOf(TileEntity hero) {
+		return heroes.indexOf(hero);
+	}
+	
 	//Circular array getHero
 	public Hero getHero() {
 		index++;
