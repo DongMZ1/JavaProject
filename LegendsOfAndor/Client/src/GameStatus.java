@@ -11,11 +11,13 @@ public class GameStatus {
 
     public static final int FOCUS_ON_LOBBY = 0;
     public static final int FOCUS_ON_GAMESCREEN = 1;
+    
     public static final int FOCUS_ON_TEXTBOX = 2;
+    public static final int FOCUS_ON_FIGHT = 3;
 
     public static final int LOBBY_SCREEN = 0;
     public static final int GAME_SCREEN = 1;
-    public static final int FIGHT_SCREEN = 2;
+    public static final int FIGHT_SCREEN = 3;
 
 	int screenWidth = 1280;
 	int screenHeight = 720;
@@ -23,6 +25,7 @@ public class GameStatus {
 	int currentScreen;
 	MinuetoWindow screen;
 	UIStatus ui = UIStatus.NONE;
+	FightStatus fight = FightStatus.NONE;
 
 	private GameStatus() throws MinuetoFileException {
 		focus = FOCUS_ON_GAMESCREEN;

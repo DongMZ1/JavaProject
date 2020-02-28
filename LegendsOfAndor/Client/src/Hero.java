@@ -2,11 +2,12 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class Hero implements TileEntity {
+public class Hero implements Character {
     MinuetoImage heroImage;
     int tile;
     GameStatus gameStatus;
     Time time;
+    int health;
     public final boolean mainHero;
     public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws MinuetoFileException {
         this.heroImage = heroImage;

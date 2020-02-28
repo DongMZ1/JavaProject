@@ -66,6 +66,7 @@ public class Client{
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameBoard);
         inputHandler.addInput(textBox);
+        inputHandler.addInput(gameBoard.fight);
 
 
         while(true) {

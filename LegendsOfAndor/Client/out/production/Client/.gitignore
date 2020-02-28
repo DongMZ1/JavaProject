@@ -38,3 +38,6 @@
 /UIStatus.class
 /TurnManager.class
 /Tuple.class
+/Fightable.class
+/Character.class
+/FightStatus.class

@@ -1,11 +1,13 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
-public class Monster implements TileEntity
+public class Monster implements Character
 {
 	MinuetoImage monsterImage;
     int tile;
     GameStatus gameStatus;
+    int health; 
+    
     public Monster(MinuetoImage monsterImage, int tile) throws MinuetoFileException {
         this.monsterImage = monsterImage;
         this.tile = tile;

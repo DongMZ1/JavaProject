@@ -14,6 +14,7 @@ public class Tile {
     private MinuetoWindow screen;
     private ArrayList<Coordinate> coords;
     private ArrayList<TileEntity> tileEntities;
+    private ArrayList<Character> tileCharacters;
     private Coordinate moveCoords;
     private int[] adjacentTiles;
     private int tileNumber;
@@ -24,6 +25,7 @@ public class Tile {
         this.moveCoords = new Coordinate(moveX, moveY);
         this.screen = screen;
         this.tileEntities = new ArrayList<>();
+        this.tileCharacters = new ArrayList<>();
         this.adjacentTiles = adjacentTiles;
         this.tileNumber = tileNumber;
         camera = Camera.getInstance();
@@ -33,8 +35,11 @@ public class Tile {
         this.nextTile = next;
     }
 
-    public void addTileEntity(TileEntity object) {
-        tileEntities.add(object);
+    public void addTileEntity(TileEntity tileEntity) {
+        tileEntities.add(tileEntity);
+        if (tileEntity instanceof Character) {
+        	tileCharacters.add((Character) tileEntity);
+        	        }
     }
 
     public boolean containsTileEntity(TileEntity tileEntity) {
@@ -43,10 +48,18 @@ public class Tile {
 
     public void removeTileEntity(TileEntity tileEntity) {
         tileEntities.remove(tileEntity);
+        if (tileEntity instanceof Character) {
+        	tileCharacters.remove((Character) tileEntity);
+        	
+        }
     }
     
     public ArrayList<TileEntity> getTileEntities(){
     	return tileEntities;
+    }
+    
+    public ArrayList<Character> getTileCharacters(){
+    	return tileCharacters;
     }
 
     public void draw() {
