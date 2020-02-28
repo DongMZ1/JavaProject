@@ -33,8 +33,12 @@ public class GameScreen implements Inputtable{
         camera = Camera.getInstance();
         this.movingCam = false;
         
-        tiles = new TileInitialiser().initialiseTiles(screen);
-        tiles = new TileInitialiser().initialiseCoords(tiles);
+//        tiles = new TileInitialiser().initialiseTiles(screen);
+//        tiles = new TileInitialiser().initialiseCoords(tiles);
+        tiles = Tile.getAll();
+        for (Tile tile : tiles)
+        	tile.setScreen(screen);
+        
         monsters = MonsterInitializer.initializeMonsters();
         
         
@@ -77,12 +81,18 @@ public class GameScreen implements Inputtable{
     public int findTileClicked(Coordinate clickedCoord) {
         int closestDist = Integer.MAX_VALUE;
         int closestNum = 0;
-        for(int i = 0; i < tiles.size(); i++) {
-            if(Math.abs(clickedCoord.getX() - tiles.get(i).getMoveX() + clickedCoord.getY() - tiles.get(i).getMoveY()) < closestDist) {
-                closestDist = Math.abs(clickedCoord.getX() - tiles.get(i).getMoveX() + clickedCoord.getY() - tiles.get(i).getMoveY());
-                closestNum = i;
-            }
+        for (Tile tile: tiles) {
+        	if(Math.abs(clickedCoord.getX() - tile.getMoveX() + clickedCoord.getY() - tile.getMoveY()) < closestDist) {
+                closestDist = Math.abs(clickedCoord.getX() - tile.getMoveX() + clickedCoord.getY() - tile.getMoveY());
+                closestNum ++;
+        	}
         }
+//        for(int i = 0; i < tiles.size(); i++) {
+//            if(Math.abs(clickedCoord.getX() - tiles.get(i).getMoveX() + clickedCoord.getY() - tiles.get(i).getMoveY()) < closestDist) {
+//                closestDist = Math.abs(clickedCoord.getX() - tiles.get(i).getMoveX() + clickedCoord.getY() - tiles.get(i).getMoveY());
+//                closestNum = i;
+//            }
+//        }
         return closestNum;
     }
     

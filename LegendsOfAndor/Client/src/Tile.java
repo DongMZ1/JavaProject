@@ -20,7 +20,9 @@ public class Tile {
     private int tileNumber;
     private static Camera camera;
     private int nextTile;
-    public Tile(int moveX, int moveY, MinuetoWindow screen, int tileNumber, int[] adjacentTiles) throws MinuetoFileException {
+    private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
+
+    public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles) {
         this.coords = new ArrayList<>();
         this.moveCoords = new Coordinate(moveX, moveY);
         this.screen = screen;
@@ -28,8 +30,41 @@ public class Tile {
         this.tileCharacters = new ArrayList<>();
         this.adjacentTiles = adjacentTiles;
         this.tileNumber = tileNumber;
-        camera = Camera.getInstance();
+        try {
+			camera = Camera.getInstance();
+		} catch (MinuetoFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
+    
+    static {
+    	TILES.add(new Tile(1353, 1439, 0, new int[] {1, 2, 4, 5, 6, 7, 11}));
+    	TILES.add(new Tile(1450, 2225, 1, new int[] {0, 2, 3, 4}));
+    	TILES.add(new Tile(2043,2205, 2, new int[] {0, 1, 3, 6, 14}));
+    	TILES.add(new Tile(1800, 2685, 3, new int[] {1, 2, 4, 10, 14, 19, 20}));
+    	TILES.add(new Tile(994, 2408, 4, new int[] {0, 1, 3, 5, 20, 21}));
+    	TILES.add(new Tile(378, 2256, 5, new int[] {0, 4, 21}));
+    	TILES.add(new Tile(2725, 2079, 6, new int[] {0, 2, 11, 13, 14, 17}));
+    	TILES.add(new Tile(1289, 784, 7, new int[] {0, 8, 9, 11, 15}));
+    	TILES.add(new Tile(2095, 866, 8, new int[] {7, 9, 11}));
+    	TILES.add(new Tile(1551, 283, 9, new int[] {7, 8, 15}));
+    	TILES.add(new Tile(2028, 3074, 10, new int[] {3, 14, 18, 19}));        
+    }
+    
+    public static Tile get (int index) {
+    	assert (index >= 0) && (index <= Constants.NUM_OF_TILES);
+    	return TILES.get(index);
+    }
+    
+    public static ArrayList<Tile> getAll () {
+    	return TILES;
+    }
+    
+    public void setScreen(MinuetoWindow screen) {
+    	this.screen = screen;
+    }
+    
     public void setup(int x, int y, int next) {
         coords.add(new Coordinate(x, y));
         this.nextTile = next;
