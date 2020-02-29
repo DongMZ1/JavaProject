@@ -8,6 +8,7 @@ public class Hero implements Character {
     MinuetoImage heroImage;
     int tile;
     int wp;
+    int gold;
     GameStatus gameStatus;
     Time time;
     Farmer farmer = null;
