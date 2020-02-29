@@ -21,4 +21,16 @@ public class Castle {
 		}
     	
     }
+	public void IncreaseHealthIfThereIsFarmer() {
+		// assume tile 0 is the place of castle
+		// if the farmer was dropped at tile 0, then farmer will appear at the tileentities list, heath++ then remove the farmer
+		for(TileEntity t: Tile.get(0).getTileEntities()) {
+			if(t instanceof Farmer) {
+				health++;
+				Tile.get(0).getTileEntities().remove(t);
+			}
+			
+		}
+	}
+}
 }
