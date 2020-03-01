@@ -24,6 +24,7 @@ public class Tile {
 
     public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles) {
         this.coords = new ArrayList<>();
+        coords.add(new Coordinate(moveX, moveY));
         this.moveCoords = new Coordinate(moveX, moveY);
         this.screen = screen;
         this.tileEntities = new ArrayList<>();
