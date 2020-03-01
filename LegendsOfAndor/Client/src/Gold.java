@@ -1,7 +1,7 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
-public class Gold implements TileEntity{
+public class Gold implements Item{
 	MinuetoImage goldImage; 
 	int tile;
 	public Gold(MinuetoImage goldImage, int tile) throws MinuetoFileException {
