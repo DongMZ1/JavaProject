@@ -4,38 +4,52 @@ import org.minueto.image.MinuetoImage;
 public class Well implements TileEntity{
 
 	MinuetoImage wellImage;
-	int tile;
-	boolean IsEmpty; //Boolean shows whether the well is empty
+	private int tile;
+	GameStatus gameStatus;
+	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
+	//constructor 
+	public Well(MinuetoImage image, int assignedTile) throws MinuetoFileException {
+		wellImage = image;
+		IsEmpty = false;
+		tile = assignedTile;
+		gameStatus = GameStatus.getInstance();
+
+	}	
+	
+	//replenish the well in a new day
 	public void replenishWell() {
 		if(!IsEmpty) {
 			IsEmpty = false;
 		}
 	}
 	
-	public int emptiedByHero() {
-		if(!this.IsEmpty) {
+	//this function's called when a hero intends to drink from the well
+	public int emptiedByHero(Hero hero) {
+		//will point returned to specific hero class 
+		int wp;
+		
+		if(!this.IsEmpty && hero instanceof Warrior) {
 			this.IsEmpty = true;
-			return 3;
+			wp = 5;
+		}
+		
+		else if(!this.IsEmpty) {
+			this.IsEmpty = true;
+			wp = 3;			
 		}
 		
 		else {
-			return 0;
+			wp = 0;
 		}
-	}
-	
-	
-	public Well(int tile) throws MinuetoFileException {
 		
-		IsEmpty = false;
-		this.tile = tile;
-		// TODO Auto-generated constructor stub
+		return wp;
 	}
 	
 	@Override
 	public MinuetoImage getImage() {
-		//No well image
-		return null;
+		
+		return wellImage;
 	}
 
 	@Override
