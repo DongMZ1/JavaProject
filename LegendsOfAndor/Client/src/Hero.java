@@ -8,6 +8,7 @@ public class Hero implements Character {
     MinuetoImage heroImage;
     int tile;
     int wp;
+    int sp;
     GameStatus gameStatus;
     Time time;
     Farmer farmer = null;
@@ -21,6 +22,7 @@ public class Hero implements Character {
         this.gameStatus = GameStatus.getInstance();
         this.mainHero = mainHero;
            }
+    
     public void setTile(int tile) {
         this.tile = tile;
     }
@@ -29,6 +31,15 @@ public class Hero implements Character {
     }
     public MinuetoImage getImage() {
         return this.heroImage;
+    }
+  
+    //replenish hero's WP from a well token
+    public void replenishWP() {
+    	for(TileEntity t: Tile.get(tile).getTileEntities()) {
+    		if(t instanceof Well) {
+    			wp += ((Well) t).emptiedByHero();
+    		}
+    	}
     }
     
   public void pickupFarmer() {
@@ -79,6 +90,7 @@ public class Hero implements Character {
 				  break;
 			  }
 	  }
+		  }
 		  
 	 public int getGoldNm() {
 		 int goldCount = 0;
