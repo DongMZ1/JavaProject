@@ -21,6 +21,8 @@ public class Hero implements Character {
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();
         this.mainHero = mainHero;
+        this.sp = 1;
+        this.wp = 7;
            }
     
     public void setTile(int tile) {
@@ -37,7 +39,7 @@ public class Hero implements Character {
     public void replenishWP() {
     	for(TileEntity t: Tile.get(tile).getTileEntities()) {
     		if(t instanceof Well) {
-    			wp += ((Well) t).emptiedByHero();
+    			wp += ((Well) t).emptiedByHero(this);
     		}
     	}
     }

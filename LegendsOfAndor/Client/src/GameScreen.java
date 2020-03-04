@@ -14,6 +14,7 @@ public class GameScreen implements Inputtable{
     private boolean movingCam;
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
+    private ArrayList<Well> wells;
     private Castle castle = new Castle(1);
     static Hero mainHero;
     static Hero currentHero;
@@ -40,6 +41,7 @@ public class GameScreen implements Inputtable{
         	tile.setScreen(screen);
         
         monsters = MonsterInitializer.initializeMonsters();
+        wells = WellInitializer.initializeWells();
         
         
         mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
@@ -124,6 +126,12 @@ public class GameScreen implements Inputtable{
     		castle.damage(rMonster);
     		
     	}
+    	
+    	//replenish all wells on map
+    	for(Well w: wells) {
+    		w.replenishWell();
+    	}
+    	
     	tm.newDay();
     	
     }
