@@ -31,6 +31,11 @@ public class Fight implements Inputtable{
 	private Button damageButton;
 	private MinuetoImageFile diceRoll;
 	
+	//button only shown to archer class
+	private Button rollAgain;
+	
+	//button only shown to mage class
+	private Button changeRollResult;
 
 	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws MinuetoFileException {
 		
@@ -43,7 +48,8 @@ public class Fight implements Inputtable{
 		yourTurn = new Button(new Coordinate(700,500),50,50,"Your Turn",false);
 		confirm = new Button(new Coordinate(700,500),50,50,"OK",true);
 		notYourTurn = new Button(new Coordinate(700,500),50,50,"Not Your Turn",false);
-
+		rollAgain = new Button(new Coordinate(700,500),50,50,"Roll Again",false);
+		changeRollResult = new Button(new Coordinate(700,500),50,50,"Change Roll Result",false);
 	}
 	
 	public void start(Tile fightTile) {
@@ -61,6 +67,11 @@ public class Fight implements Inputtable{
 				fightHeroes.add((Hero) entity);
 				
 			}
+			
+			//TODO check if the hero is archer and if there's monster on adjacent tile 
+//			else if(tm.contains(entity) && entity instanceof Archer && this.fightTile.getTileEntities().contains(entity.getTile())) {
+//				
+//			}
 			
 			//member is a Monster
 			else {
@@ -84,11 +95,24 @@ public class Fight implements Inputtable{
 			if (mainHero == currentHero) {
 				yourTurn.draw();
 				rollButton.draw();
+				
+				//check if the hero is Archer
+				if(currentHero instanceof Archer) {
+					rollAgain.setClickable(true);
+					rollAgain.draw();
+				}
+				
+				//check if the hero is Mage
+				if(currentHero instanceof Archer) {
+					rollAgain.draw();
+				}
+				
 			}
 			else {
 				notYourTurn.draw();
 			}
 		}
+		
 		else if (gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			if (mainHero == currentHero) {
 				confirm.draw();
@@ -110,13 +134,14 @@ public class Fight implements Inputtable{
 		//TODO Draw items once items are implemented
 	}
 	
+	
 	public int heroRoll() throws MinuetoFileException {
 		int roll = ((int) (Math.random() * 6) + 1);
 		String diceFile = ("images/Heroes/Dice/" + roll + ".png");
 		System.out.println(diceFile);
 		diceRoll = new MinuetoImageFile(diceFile);
 		gameStatus.fight = FightStatus.ROLLRESPONSE;
-		herosLeft--;
+		herosLeft--;		
 		return roll;
 	}
 	
@@ -155,12 +180,43 @@ public class Fight implements Inputtable{
 	public void handleMousePress(int x, int y, int button) {
 		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) {
 			try {
-			heroRoll += heroRoll();
+				heroRoll += heroRoll();
+				
+				//check if hero's Archer and make rollAgain button clickable
+				if(currentHero instanceof Archer) {
+					rollAgain.setClickable(true);
+				}
+				
+				//check if hero's Archer and make change roll result button clickable
+				if(currentHero instanceof Mage) {
+					changeRollResult.setClickable(true);
+				}				
 			}
 			catch (Exception e){
 				System.out.println(e);
 			}
 		}
+		
+		//allow only archer class to make another roll
+		else if (mainHero == currentHero && currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			try {
+				heroRoll += heroRoll();
+			}
+			catch (Exception e){
+				System.out.println(e);
+			}
+		}
+		
+		//allow only mage class to change roll result
+		else if (currentHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			try {
+				heroRoll = 6 - heroRoll + 1;
+			}
+			catch (Exception e){
+				System.out.println(e);
+			}
+		}		
+		
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			if (herosLeft != 0) {
 				currentHero = tm.endTurn();

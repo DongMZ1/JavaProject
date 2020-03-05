@@ -5,7 +5,7 @@ import org.minueto.image.MinuetoImageFile;
 
 public class DwarfMineInitializer {
 	public static DwarfMine initializemine() throws MinuetoFileException {
-        DwarfMine m = new DwarfMine(new MinuetoImageFile("images/Well.png"), 71); 
+        DwarfMine m = new DwarfMine(new MinuetoImageFile("images/DwarfMine.png"), 71); 
         GameScreen.tiles.get(m.getTile()).addTileEntity(m);
         return m;
     }
