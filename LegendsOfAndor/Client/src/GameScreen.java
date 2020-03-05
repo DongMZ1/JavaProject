@@ -22,6 +22,7 @@ public class GameScreen implements Inputtable{
     private Hero hero2;
     private TurnManager tm;
     Fight fight;
+    private TextBox textBox = TextBox.getInstance();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
@@ -162,12 +163,13 @@ public class GameScreen implements Inputtable{
     	}
     }
     public void handleMousePress(int x, int y, int button) {
-  /*  	Coordinate coords = camera.getPosOnBoard(x, y);
-    	System.out.println("X: " + coords.getX());
-    	System.out.println("Y: " + coords.getY()); */
+ /*   	Coordinate coords = camera.getPosOnScreen(x, y);
+    	System.out.println("X: " + x);
+    	System.out.println("Y: " + y); */
     	
-        if(y > gameStatus.screenHeight - gameUi.uiHeight)
+        if(y > gameStatus.screenHeight - gameUi.uiHeight && x < 650)
             gameUi.handleMousePress(x, y, button);
+        
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
         	

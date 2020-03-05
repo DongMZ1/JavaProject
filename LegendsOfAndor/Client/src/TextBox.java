@@ -67,12 +67,19 @@ public class TextBox implements Inputtable{
         }
     }
 
+    
+    /*  Previous: 
+     * 
+     * INPUT: y > -gameStatus.screenHeight && x > -width && y < -gameStatus.screenHeight+inputHeight && x < 0;
+     * OUTPUT: y > -gameStatus.screenHeight+inputHeight && x > -width && y < -gameStatus.screenHeight+outputHeight && x < 0;
+     */
+    
     public boolean inputClicked(int x, int y) {
-        return y > -gameStatus.screenHeight && x > -width && y < -gameStatus.screenHeight+inputHeight && x < 0;
+        return  x < width && y > gameStatus.screenHeight - inputHeight;
     }
     public boolean outputClicked(int x, int y) {
-        return y > -gameStatus.screenHeight+inputHeight && x > -width && y < -gameStatus.screenHeight+outputHeight && x < 0;
-    }
+        return !inputClicked(x,y) && x < width  && y > gameStatus.screenHeight - inputHeight - outputHeight; 
+        }
 
     public void handleKeyPress(int i) {}
     public void handleKeyRelease(int i) {}
