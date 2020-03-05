@@ -196,7 +196,6 @@ public class Fight implements Inputtable{
 				System.out.println(e);
 			}
 		}
-		
 		//allow only archer class to make another roll
 		else if (mainHero == currentHero && currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			try {
