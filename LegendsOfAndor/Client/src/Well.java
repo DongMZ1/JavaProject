@@ -22,7 +22,7 @@ public class Well implements TileEntity{
 	public void replenishWell() throws MinuetoFileException {
 		if(!IsEmpty) {
 			IsEmpty = false;
-			setImage(new MinuetoImageFile("images/emptyWell.png"));
+			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
 	
