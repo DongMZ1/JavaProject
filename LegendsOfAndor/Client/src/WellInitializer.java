@@ -6,18 +6,16 @@ import org.minueto.window.MinuetoWindow;
 
 public class WellInitializer {
 
-	public static ArrayList<Monster> initializeMonsters() throws MinuetoFileException {
+	public static ArrayList<Well> initializeWells() throws MinuetoFileException {
         ArrayList<Well> output = new ArrayList<>();
-        Monster m1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png"), 4);
-        Monster m2 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png"), 5);
-        output.add(m1);
-        output.add(m2);
-        for (Monster monster : output)
+        Well w1 = new Well(new MinuetoImageFile("images/Well.png"), 5);
+        output.add(w1);
+        
+        for (Well well : output)
         {
-        	GameScreen.tiles.get(monster.tile).addTileEntity(monster);
+        	GameScreen.tiles.get(well.getTile()).addTileEntity(well);
         }
         
-
         return output;
     }
 	

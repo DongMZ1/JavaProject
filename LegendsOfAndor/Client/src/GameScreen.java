@@ -20,7 +20,7 @@ public class GameScreen implements Inputtable{
     static Hero currentHero;
     private Hero hero2;
     private TurnManager tm;
-     Fight fight;
+    Fight fight;
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;

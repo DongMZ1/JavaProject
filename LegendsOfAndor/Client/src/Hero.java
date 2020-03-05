@@ -103,7 +103,8 @@ public class Hero implements Character {
 		  }
 		  return goldCount;
 	 }
-		  
+	
+
 		  public void Buy2WPfor2Gold() {
 			  //firstly, find out if the hero has more than two gold for trade willpower
 			 if(getGoldNm() > 2) { 
