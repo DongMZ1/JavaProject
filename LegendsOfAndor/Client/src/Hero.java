@@ -39,7 +39,12 @@ public class Hero implements Character {
     public void replenishWP() {
     	for(TileEntity t: Tile.get(tile).getTileEntities()) {
     		if(t instanceof Well) {
-    			wp += ((Well) t).emptiedByHero(this);
+    			try {
+					wp += ((Well) t).emptiedByHero(this);
+				} catch (MinuetoFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		}
     	}
     }

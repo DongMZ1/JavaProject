@@ -1,5 +1,6 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
+import org.minueto.image.MinuetoImageFile;
 
 public class Well implements TileEntity{
 
@@ -18,14 +19,15 @@ public class Well implements TileEntity{
 	}	
 	
 	//replenish the well in a new day
-	public void replenishWell() {
+	public void replenishWell() throws MinuetoFileException {
 		if(!IsEmpty) {
 			IsEmpty = false;
+			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
 	
 	//this function's called when a hero intends to drink from the well
-	public int emptiedByHero(Hero hero) {
+	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
 		if(!this.IsEmpty && hero instanceof Warrior) {
@@ -42,7 +44,12 @@ public class Well implements TileEntity{
 			wp = 0;
 		}
 		
+		setImage(new MinuetoImageFile("images/emptyWell.png"));
 		return wp;
+	}
+	
+	private void setImage(MinuetoImage image) {
+		wellImage = image;
 	}
 	
 	@Override

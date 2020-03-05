@@ -134,7 +134,12 @@ public class GameScreen implements Inputtable{
     	
     	//replenish all wells on map
     	for(Well w: wells) {
-    		w.replenishWell();
+    		try {
+				w.replenishWell();
+			} catch (MinuetoFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     	
     	tm.newDay();
