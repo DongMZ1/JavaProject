@@ -28,7 +28,6 @@ public class Well implements TileEntity{
 	public int emptiedByHero(Hero hero) {
 		//will point returned to specific hero class 
 		int wp;
-		
 		if(!this.IsEmpty && hero instanceof Warrior) {
 			this.IsEmpty = true;
 			wp = 5;
