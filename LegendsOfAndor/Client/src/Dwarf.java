@@ -10,8 +10,7 @@ public class Dwarf extends Hero{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void Buy_SP_from_dwarf_mine() {
-		
+	public void Buy_SP_from_dwarf_mine() {		
 		// check for remaining gold number and hero position
 		// there's only one dwarf mine in game, which is located on tile 71
 		
