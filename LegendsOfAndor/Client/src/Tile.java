@@ -61,10 +61,28 @@ public class Tile {
     	TILES.add(new Tile(1212, 1576, 18, new int[] {10, 14, 17, 19, 28, 36, 72}, 14));
     	TILES.add(new Tile(668, 1440, 19, new int[] {3, 10, 18, 20, 22, 23, 72}, 3));
     	TILES.add(new Tile(380, 1348, 20, new int[] {3, 4, 19, 21, 22}, 3));
-    	TILES.add(new Tile(108, 1328, 21, new int[] {4, 5, 20, 22, 24}, 4));
-
+    	TILES.add(new Tile(108, 1328, 21, new int[] {4, 5, 20, 22, 24}, 4));   	
+    	TILES.add(new Tile(380, 1680, 22, new int[] {19, 20, 21, 23, 24, 72}, 10));
+    	TILES.add(new Tile(550, 1876, 23, new int[] {19, 22, 24, 25, 31, 34, 35, 72}, 19));
+    	TILES.add(new Tile(120, 1784, 24, new int[] {20, 21, 2, 23, 25}, 21));
+    	TILES.add(new Tile(140, 2164, 25, new int[] {23, 24, 26, 27, 31}, 24));
+    	TILES.add(new Tile(72, 2596, 26, new int[] {25, 27}, 25));
+    	TILES.add(new Tile(280, 2552, 27, new int[] {25, 6, 31}, 25));
+    	TILES.add(new Tile(1516, 1836, 28, new int[] {18, 29, 36, 38, 72}, 18));
+    	TILES.add(new Tile(1180, 2016, 29, new int[] {28, 30, 34, 72}, 28));   	
+    	TILES.add(new Tile(1040, 2300, 30, new int[] {29, 33, 34, 35}, 29));
+    	TILES.add(new Tile(440, 2408, 31, new int[] {23, 25, 27, 33, 35}, 23));
+    	TILES.add(new Tile(2200, 1272, 32, new int[] {16, 38}, 16));
+    	TILES.add(new Tile(740, 2452, 33, new int[] {30, 31, 35}, 30));
+    	TILES.add(new Tile(828, 2024, 34, new int[] {23, 29, 30, 35, 72}, 23));
+    	TILES.add(new Tile(604, 2216, 35, new int[] {23, 30, 31, 33, 34}, 23));
+    	TILES.add(new Tile(1676, 1556, 36, new int[] {16, 17, 18, 28, 38}, 16));
+    	TILES.add(new Tile(1112, 2684, 37, new int[] {41}, 41));   	
+    	TILES.add(new Tile(2060, 1632, 38, new int[] {16, 28, 32, 36, 39}, 16));
+    	TILES.add(new Tile(2428, 1908, 39, new int[] {38, 40, 42, 43}, 38));
+    	TILES.add(new Tile(1932, 2060, 40, new int[] {39, 41}, 39));
+    	TILES.add(new Tile(1568, 2300, 41, new int[] {37, 40}, 40));
     	
- 
     }
     
     public static Tile get (int index) {
