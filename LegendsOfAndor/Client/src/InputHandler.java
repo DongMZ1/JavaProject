@@ -33,6 +33,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 
 	public void addInput(Inputtable input) {
 		inputs.add(input);
+		
 	}
 	
 	public void removeInput(Inputtable input) {
@@ -58,6 +59,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 
 	public void handleMousePress(int i, int i1, int i2) {
 		inputs.get(gameStatus.focus).handleMousePress(i, i1, i2);
+		
 	}
 
 	public void handleMouseRelease(int i, int i1, int i2) {

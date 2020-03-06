@@ -65,7 +65,8 @@ public class GameScreen implements Inputtable{
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
-//        cd = new CollaborativeDecision(DecisionType.START,screen);
+ //       cd = new CollaborativeDecision(DecisionType.START,screen, tm);
+        
     }
     
     public void fight() {

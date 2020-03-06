@@ -1,11 +1,13 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
+import org.minueto.image.MinuetoImageFile;
 
 public class Gold implements Item{
 	MinuetoImage goldImage; 
 	int tile;
-	public Gold(MinuetoImage goldImage, int tile) throws MinuetoFileException {
-		this.goldImage = goldImage;
+	public Gold(int tile) throws MinuetoFileException {
+		this.goldImage = new MinuetoImageFile("images/gold.png");
+;
 		this.tile = tile;
 		// TODO Auto-generated constructor stub
 	}

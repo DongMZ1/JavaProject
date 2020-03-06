@@ -4,7 +4,7 @@ public class TurnManager {
 	/**
 	 * 
 	 */
-	
+	private static TurnManager tm;
 	private ArrayList<Hero> heroes;
 	private int index = 0;
 	
@@ -29,9 +29,10 @@ public class TurnManager {
 	}
 	
 	public Hero endTurn() {
-		
 		return getHero();
 	}
+	
+	
 	
 	public boolean contains(TileEntity hero) {
 		return heroes.contains(hero);

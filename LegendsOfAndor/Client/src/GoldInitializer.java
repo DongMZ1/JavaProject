@@ -8,10 +8,10 @@ public class GoldInitializer {
 	//freeGoldList is that there are some gold has no regions
         ArrayList<Gold> freeGoldList = new ArrayList<>();
         MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
-        Item gold1 = new Gold(goldImage, -1);
-        Item gold2 = new Gold(goldImage, -1);
-        Item gold3 = new Gold(goldImage, -1);
-        Item gold4 = new Gold(goldImage, 10);
+        Item gold1 = new Gold( -1);
+        Item gold2 = new Gold( -1);
+        Item gold3 = new Gold( -1);
+        Item gold4 = new Gold(10);
        
         for (Gold gd : output)
         {
