@@ -83,8 +83,9 @@ public class GameUi implements Inputtable {
             else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
             	gameStatus.ui = UIStatus.FIGHTING;
             }
-            else if(pickupButton.isClickable() && pickupButton.isClicked(x, y))
-                ;//TODO pickupButton
+            else if(pickupButton.isClickable() && pickupButton.isClicked(x, y)) {
+            	gameStatus.ui = UIStatus.PICKING;
+            }
             else if(dropButton.isClickable() && dropButton.isClicked(x, y))
                 ; //TODO dropButton
             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y))

@@ -48,8 +48,7 @@ public class GameScreen implements Inputtable{
         monsters = MonsterInitializer.initializeMonsters();
         wells = WellInitializer.initializeWells();
         
-// Uncomment the following line only when tile 71 is implemented
-        //mine = DwarfMineInitializer.initializemine();
+        mine = DwarfMineInitializer.initializemine();
         
         
         mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
