@@ -67,16 +67,18 @@ public class Client{
         inputHandler.addInput(gameBoard);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameBoard.fight);
+        
 
 
         while(true) {
             if(gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
                 lobbyScreen.draw();
-            else if(gameStatus.currentScreen == gameStatus.GAME_SCREEN)
+            else if(gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN)
                 gameBoard.draw();
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
             	gameBoard.fight();
             }
+            
             textBox.draw();
 
             gameStatus.screen.render();

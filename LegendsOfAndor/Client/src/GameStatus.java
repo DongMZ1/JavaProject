@@ -11,13 +11,14 @@ public class GameStatus {
 
     public static final int FOCUS_ON_LOBBY = 0;
     public static final int FOCUS_ON_GAMESCREEN = 1;
-    
     public static final int FOCUS_ON_TEXTBOX = 2;
     public static final int FOCUS_ON_FIGHT = 3;
+    public static final int FOCUS_ON_COLLABORATIVE = 4;
 
     public static final int LOBBY_SCREEN = 0;
     public static final int GAME_SCREEN = 1;
     public static final int FIGHT_SCREEN = 3;
+    public static final int COLLABORATIVE_SCREEN = 4;
 
 	int screenWidth = 1280;
 	int screenHeight = 720;

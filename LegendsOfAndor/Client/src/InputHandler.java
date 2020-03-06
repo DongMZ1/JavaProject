@@ -35,6 +35,10 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 		inputs.add(input);
 	}
 	
+	public void removeInput(Inputtable input) {
+		inputs.remove(input);
+	}
+	
 	public void handleQueue() {
 		while(queue.hasNext())
 			queue.handle();
@@ -65,6 +69,6 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 	}
 
 	public void handleMouseWheelRotate(int i) {
-		inputs.get(gameStatus.focus).handleMouseWheelRotate(i);
+//		inputs.get(gameStatus.focus).handleMouseWheelRotate(i);
 	}
 }

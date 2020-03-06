@@ -21,7 +21,9 @@ public class GameScreen implements Inputtable{
     static Hero currentHero;
     private Hero hero2;
     private TurnManager tm;
+    private InputHandler inputHandler;
     Fight fight;
+    CollaborativeDecision cd;
     private TextBox textBox = TextBox.getInstance();
     private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
@@ -35,6 +37,7 @@ public class GameScreen implements Inputtable{
         this.screen.setVisible(true);
         camera = Camera.getInstance();
         this.movingCam = false;
+        inputHandler = InputHandler.getInputHandler();
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
@@ -63,6 +66,7 @@ public class GameScreen implements Inputtable{
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
+        cd = new CollaborativeDecision(DecisionType.START,screen);
     }
     
     public void fight() {
@@ -76,6 +80,9 @@ public class GameScreen implements Inputtable{
             tile.draw();
         gameUi.draw();
         tm.draw();
+        if (gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
+        	cd.draw();
+        }
     }
 
     public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
@@ -102,6 +109,8 @@ public class GameScreen implements Inputtable{
 //        }
         return closestNum;
     }
+    
+    
     
     public void newDay() {
     	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
