@@ -30,12 +30,15 @@ public class Fight implements Inputtable{
 	private Button confirm;
 	private Button damageButton;
 	private MinuetoImageFile diceRoll;
-	
+
 	//button only shown to archer class
 	private Button rollAgain;
 	
+	
+	
 	//button only shown to mage class
 	private Button changeRollResult;
+		
 
 	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws MinuetoFileException {
 		
@@ -205,6 +208,17 @@ public class Fight implements Inputtable{
 				System.out.println(e);
 			}
 		}
+		
+		//allow only archer class to make another roll
+		else if (mainHero == currentHero && currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			try {
+				heroRoll += heroRoll();
+			}
+			catch (Exception e){
+				System.out.println(e);
+			}
+		}
+
 		
 		//allow only mage class to change roll result
 		else if (currentHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {

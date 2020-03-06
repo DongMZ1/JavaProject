@@ -50,6 +50,25 @@ public class Hero implements Character {
     }
     
   public void pickupFarmer() {
+	
+      //replenish hero's WP from a well token
+    public void replenishWP() {
+    	ArrayList<TileEntity> entities = Tile.get(tile).getTileEntities(); 	
+    	if(entities != null) {
+			for (TileEntity t : entities) {
+				if (t instanceof Well) {
+					try {
+						wp += ((Well) t).emptiedByHero(this);
+					} catch (MinuetoFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+    	}
+    }  
+	
+  public void pickupFarmer(Farmer farmer) {
 	  if(!hasfarmer) {
 		  for(TileEntity t: Tile.get(tile).getTileEntities()) {
 			  if(t instanceof Farmer) {

@@ -228,6 +228,11 @@ public class GameScreen implements Inputtable{
         	}
         	gameStatus.ui = UIStatus.NONE;
         }
+	    
+        else if(gameStatus.ui == UIStatus.PICKING) {
+        	mainHero.replenishWP();
+        }	    
+	    
     }
     public void handleMouseMove(int x, int y) {
         if(movingCam) {
