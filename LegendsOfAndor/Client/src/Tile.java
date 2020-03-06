@@ -167,11 +167,11 @@ public class Tile {
     }
 
     public void draw() {
-//        Coordinate coordinates;
-//        for(int i = 0; i < tileEntities.size(); i++) {
-//            coordinates = camera.getPosOnScreen(coords.get(0));
-//            Tile.screen.draw(tileEntities.get(i).getImage(), coordinates.getX(), coordinates.getY());
-//        }
+        Coordinate coordinates;
+        for(int i = 0; i < tileEntities.size(); i++) {
+            coordinates = camera.getPosOnScreen(coords.get(0));
+            Tile.screen.draw(tileEntities.get(i).getImage(), coordinates.getX(), coordinates.getY());
+        }
     }
     public boolean isAdjacent(int adjacentTile) {
         for(int tileNum : adjacentTiles)
