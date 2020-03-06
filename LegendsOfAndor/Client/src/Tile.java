@@ -61,6 +61,8 @@ public class Tile {
     	TILES.add(new Tile(1212, 1576, 18, new int[] {10, 14, 17, 19, 28, 36, 72}, 14));
     	TILES.add(new Tile(668, 1440, 19, new int[] {3, 10, 18, 20, 22, 23, 72}, 3));
     	TILES.add(new Tile(380, 1348, 20, new int[] {3, 4, 19, 21, 22}, 3));
+    	TILES.add(new Tile(108, 1328, 21, new int[] {4, 5, 20, 22, 24}, 4));
+
     	
  
     }
