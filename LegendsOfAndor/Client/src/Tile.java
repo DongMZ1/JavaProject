@@ -113,9 +113,12 @@ public class Tile {
     	TILES.add(new Tile(3476, 2320, 69, new int[] {68, 70}, 68)); 	
     	TILES.add(new Tile(3404, 2484, 70, new int[] {69, 81}, 69));
     	TILES.add(new Tile(1932, 3188, 71, new int[] {43}, 43));
-    	TILES.add(new Tile(968, 1728, 72, new int[] {18, 19, 23, 28, 29, 34}, 18));
-    	
-    	
+    	TILES.add(new Tile(968, 1728, 72, new int[] {18, 19, 23, 28, 29, 34}, 18));    	
+    	TILES.add(new Tile(3896, 2572, 80, new int[] {}, 80));
+    	TILES.add(new Tile(3368, 2640, 81, new int[] {70, 80}, 70));
+    	TILES.add(new Tile(3140, 2736, 82, new int[] {81, 84}, 81)); 	
+    	TILES.add(new Tile(4032, 1520, 83, new int[] {}, 83));
+    	TILES.add(new Tile(2928, 2508, 84, new int[] {82}, 84)); 		
     }
     
     public static Tile get (int index) {
