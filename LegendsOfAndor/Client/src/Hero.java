@@ -35,21 +35,9 @@ public class Hero implements Character {
         return this.heroImage;
     }
   
-    //replenish hero's WP from a well token
-    public void replenishWP() {
-    	for(TileEntity t: Tile.get(tile).getTileEntities()) {
-    		if(t instanceof Well) {
-    			try {
-					wp += ((Well) t).emptiedByHero(this);
-				} catch (MinuetoFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-    		}
-    	}
-    }
     
-  public void pickupFarmer() {
+    
+
 	
       //replenish hero's WP from a well token
     public void replenishWP() {
