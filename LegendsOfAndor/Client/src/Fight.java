@@ -256,7 +256,9 @@ public class Fight implements Inputtable{
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 			gameStatus.currentScreen = GameStatus.GAME_SCREEN;
+			GameScreen.currentHero.time.advance();
 			GameScreen.currentHero = tm.endTurn();
+			
 			isHappening = false;
 		}
 	}

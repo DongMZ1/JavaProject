@@ -29,6 +29,7 @@ public class TurnManager {
 	}
 	
 	public Hero endTurn() {
+		
 		return getHero();
 	}
 	
