@@ -13,6 +13,9 @@ public class Hero implements Character {
     Time time;
     Farmer farmer = null;
     boolean hasfarmer = false;
+	boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
+    //set it true before move, so that timer will not increase if this attribute is true
+    //get a final list of items
     //get a final list of items
     public final ArrayList<Item> items = new ArrayList<Item>();
     public final boolean mainHero;
@@ -36,7 +39,30 @@ public class Hero implements Character {
     }
   
     
+     public void addWineSkin() throws MinuetoFileException {
+    	//
+    	int wineSkinCount = 0;
+		  for(Item i: items) {
+			  if(i instanceof Wineskin) {
+				  wineSkinCount ++;
+			  }
+		  }
+		  if(wineSkinCount < 2) {
+			  this.items.add(new Wineskin(this.tile));
+		  }
+    }
     
+    public void ReadytoUseWineskin() {
+    	if(holdWineSkinForUse == false) {
+    	for(Item i: items) {
+			  if(i instanceof Wineskin) {
+				  holdWineSkinForUse = true;
+				  items.remove(i);
+				  break; //use a wineskin, remove the wine skin item from items list, set holdWineSkinForUse = false
+			  }
+		  }
+    }
+    }
 
 	
       //replenish hero's WP from a well token
