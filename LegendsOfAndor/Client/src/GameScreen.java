@@ -6,6 +6,7 @@ import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameScreen implements Inputtable{
     private MinuetoWindow screen;
@@ -215,13 +216,25 @@ public class GameScreen implements Inputtable{
         else if (gameStatus.ui == UIStatus.FIGHTING) {
         	Tile t = tiles.get(mainHero.getTile());
         	for (Monster monster : monsters)
-        	{
+        	{	
+        		//normal fight
         		if(t.containsTileEntity(monster)) {
         			fight.start(t);
         			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
         			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
         			break;
         		}
+        		
+        		//fight monter on adjacent tile
+        		else if(mainHero instanceof Archer && Arrays.asList(t.getAdjacentTiles()).contains(monster.getTile())) {
+        			
+        			Tile monsterTile = tiles.get(monster.getTile());
+        			fight.startAdjacent(monsterTile, mainHero);
+        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
+        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+        			break;
+        		}
+        				
         	}
         	if (!fight.isHappening) {
         		System.out.println("UNABLE TO FIGHT");
