@@ -34,4 +34,5 @@ public class Dwarf extends Hero{
 			
 	}//end of function
 	
+	Dice dice = new DwarfDice();
 }
