@@ -3,11 +3,12 @@ import org.minueto.image.MinuetoImage;
 public class Merchant implements TileEntity {
 	MinuetoImage merchantImage;
 	int tile;
-	@Override
+	
 	public Merchant(MinuetoImage merchantImage,int tile ) {
 		this.merchantImage = merchantImage;
 		this.tile = tile ;
 	}
+	@Override
 	public MinuetoImage getImage() {
 		// TODO Auto-generated method stub
 		return this.merchantImage;
