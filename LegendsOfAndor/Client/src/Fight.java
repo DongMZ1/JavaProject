@@ -113,8 +113,7 @@ public class Fight implements Inputtable{
 				fightMonsters.add((Monster) entity);
 			}
 			
-		}
-		
+		}	
 		herosLeft = fightHeroes.size();
 		gameStatus.fight = FightStatus.ROLLPROMPT;
 		

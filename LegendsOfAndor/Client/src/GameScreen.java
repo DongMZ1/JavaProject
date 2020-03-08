@@ -230,6 +230,7 @@ public class GameScreen implements Inputtable{
         			
         			Tile monsterTile = tiles.get(monster.getTile());
         			fight.startAdjacent(monsterTile, mainHero);
+        			
         			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
         			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
         			break;
