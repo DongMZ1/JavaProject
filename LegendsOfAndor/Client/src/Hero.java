@@ -13,7 +13,7 @@ public class Hero implements Character {
     Time time;
     Farmer farmer = null;
     boolean hasfarmer = false;
-	boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
+    boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
     //set it true before move, so that timer will not increase if this attribute is true
     //get a final list of items
     //get a final list of items
