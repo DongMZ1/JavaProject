@@ -134,6 +134,10 @@ abstract class Dice {
 		rollsLeft = currentNumOfDice;
 	}
 	
+	public int getRollsLeft() {
+		return rollsLeft;
+	}
+	
 	void upgrade() { currentNumOfDice ++; rollsLeft ++;}
 	void downgrade() {currentNumOfDice --; rollsLeft --;}
 }

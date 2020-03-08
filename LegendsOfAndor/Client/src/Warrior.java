@@ -13,4 +13,6 @@ public class Warrior extends Hero {
     public MinuetoImage getImage() {
         return this.heroImage;
     }
+    
+    Dice dice = new WarriorDice();
 }

@@ -11,6 +11,6 @@ public class Archer extends Hero{
 		
 	}
 	
-	
+	Dice dice = new ArcherDice();
 
 }

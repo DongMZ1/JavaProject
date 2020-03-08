@@ -35,6 +35,6 @@ public class Monster implements Character
     	return current.getNextTile();
     }
     
-    
+    Dice dice = new MonsterDice();
 
 }

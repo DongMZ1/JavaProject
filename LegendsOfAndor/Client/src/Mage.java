@@ -9,5 +9,7 @@ public class Mage extends Hero{
 		super(heroImage, tile, mainHero);
 		// TODO Auto-generated constructor stub
 	}
+	
+	Dice dice = new MageDice();
 
 }
