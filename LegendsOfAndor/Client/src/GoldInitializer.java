@@ -16,7 +16,7 @@ public class GoldInitializer {
         for (Gold gd : output)
         {
         	if(gd.tile >0) {
-        	GameScreen.tiles.get(f.tile).addTileEntity(f);
+        	GameScreen.tiles.get(gd.tile).addTileEntity(gd);
         }
         }
         output.add(gold1);
