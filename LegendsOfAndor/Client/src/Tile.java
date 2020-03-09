@@ -188,4 +188,8 @@ public class Tile {
 	public int getNextTile() {
 		return nextTile;
 	}
+
+	public int[] getAdjacentTiles() {
+		return adjacentTiles;
+	}
 }
