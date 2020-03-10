@@ -6,6 +6,7 @@ import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Tile {
@@ -20,6 +21,8 @@ public class Tile {
     private int tileNumber;
     private static Camera camera;
     private int nextTile;
+    private ArrayList<Grid> grids = new ArrayList<>();
+    
     private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
 
     public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTilesn, int nextTile) {
@@ -38,6 +41,10 @@ public class Tile {
 			e.printStackTrace();
 		}
         this.nextTile = nextTile;
+    }
+    
+    public void addGrids(Grid...grids) {
+    	this.grids.addAll(Arrays.asList(grids));
     }
     
     static {
