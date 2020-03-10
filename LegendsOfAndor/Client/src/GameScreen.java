@@ -48,10 +48,11 @@ public class GameScreen implements Inputtable{
         	tile.setScreen(screen);
         
         monsters = MonsterInitializer.initializeMonsters();
-        FarmerInitializer.initializeFarmers();
         wells = WellInitializer.initializeWells();
         mine = DwarfMineInitializer.initializemine();
         
+        FarmerInitializer.initializeFarmers();
+        GoldInitializer.GoldIntializer();
         
         mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
@@ -247,11 +248,12 @@ public class GameScreen implements Inputtable{
         else if(gameStatus.ui == UIStatus.PICKING) {
         	mainHero.replenishWP();
         	mainHero.pickupFarmer();
-
+        	mainHero.pickupGold();
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
         	mainHero.dropFarmer();
+        	mainHero.dropGold();
         }
 	    
     }
