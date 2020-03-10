@@ -13,6 +13,7 @@ public class GoldInitializer {
         Item gold2 = new Gold( -1);
         Item gold3 = new Gold( -1);
         Item gold4 = new Gold(10);
+        
        
         for (Gold gd : output)
         {

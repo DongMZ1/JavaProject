@@ -16,6 +16,7 @@ public class WellInitializer {
         output.add(w2);
         output.add(w3);
         output.add(w4);
+        
 	
         for (Well well : output)
         {
