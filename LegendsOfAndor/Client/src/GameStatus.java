@@ -41,5 +41,7 @@ public class GameStatus {
 		return gameStatus;
 	}
 	
-	
+	public static void updateVariable(String variable, String value) {
+
+	}
 }
