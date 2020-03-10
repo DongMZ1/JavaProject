@@ -47,6 +47,12 @@ public class Tile {
     	this.grids.addAll(Arrays.asList(grids));
     }
     
+    public void mapTilesToGrides() {
+    	for (Grid grid : grids)
+    		grid.setTile(this);
+    	
+    }
+       
     static {
     	TILES.add(new Tile(1353, 1439, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
     	TILES.add(new Tile(1450, 2225, 1, new int[] {0, 2, 3, 4}, 0));

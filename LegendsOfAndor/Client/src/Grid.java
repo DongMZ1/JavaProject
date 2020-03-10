@@ -5,10 +5,14 @@ import org.minueto.image.MinuetoImage;
 public class Grid {
 
     private MinuetoImage boardImage;
-    private boolean isMappedToSingleTile;
     private Optional<Tile> currentTile = Optional.empty();
     
-    public Grid(MinuetoImage boardImage) {
+    public void setTile(Tile tile) {
+		currentTile = Optional.of(tile);
+	}
+
+    
+	public Grid(MinuetoImage boardImage) {
     	this.boardImage = boardImage;
     }
     
@@ -16,5 +20,6 @@ public class Grid {
     public Optional<Tile> getTile() {
     	return currentTile;
     }
+    
     
 }

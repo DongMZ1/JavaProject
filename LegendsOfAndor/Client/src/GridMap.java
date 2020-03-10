@@ -44,7 +44,7 @@ public class GridMap {
 		}
 	}
 	
-	public void mapGrids() {
+	public void mapGridsToTiles() {
 		
 		for(int i = 2; i < 6; i++)
 			Tile.get(0).addGrids(gridMap[i][6], gridMap[i][7], gridMap[i][8], gridMap[i][9]);
@@ -267,23 +267,65 @@ public class GridMap {
 		for(int i = 43; i < 46; i++)
 			Tile.get(60).addGrids(gridMap[i][2], gridMap[i][3], gridMap[i][4]);
 		
+		for(int i = 44; i < 47; i++)
+			Tile.get(61).addGrids(gridMap[i][9], gridMap[i][10], gridMap[i][11], gridMap[i][12]);	
 		
+		for(int i = 45; i < 47; i++)
+			Tile.get(62).addGrids(gridMap[i][6], gridMap[i][7], gridMap[i][8]);
 		
+		for(int i = 38; i < 43; i++)
+			Tile.get(63).addGrids(gridMap[i][9], gridMap[i][10], gridMap[i][11]);
 		
+		for(int i = 35; i < 43; i++)
+			Tile.get(64).addGrids(gridMap[i][12], gridMap[i][13], gridMap[i][14]);
+		
+		for(int i = 38; i < 41; i++)
+			Tile.get(65).addGrids(gridMap[i][16], gridMap[i][17]);
+		
+		for(int i = 41; i < 43; i++)
+			Tile.get(66).addGrids(gridMap[i][30]);
+		for(int i = 42; i < 44; i++)
+			Tile.get(66).addGrids(gridMap[i][21]);
+		
+		Tile.get(67).addGrids(gridMap[41][22]);
+		for(int i = 42; i < 44; i++)
+			Tile.get(67).addGrids(gridMap[i][23]);
+		
+		Tile.get(68).addGrids(gridMap[40][24]);
+		for(int i = 41; i < 43; i++)
+			Tile.get(68).addGrids(gridMap[i][24], gridMap[i][25]);
+		
+		for(int i = 38; i < 40; i++)
+			Tile.get(69).addGrids(gridMap[i][25], gridMap[i][26]);
+		Tile.get(69).addGrids(gridMap[40][26]);
+		
+		for(int i = 38; i < 40; i++)
+			Tile.get(70).addGrids(gridMap[i][27], gridMap[i][28]);
+		
+		for(int i = 35; i < 37; i++)
+			Tile.get(71).addGrids(gridMap[i][21], gridMap[i][22]);
+		Tile.get(71).addGrids(gridMap[36][20]);
 
+		for(int i = 9; i < 12; i++)
+			Tile.get(72).addGrids(gridMap[i][18], gridMap[i][19], gridMap[i][20]);
+		Tile.get(72).addGrids(gridMap[12][19], gridMap[12][20]);
 
+		for(int i = 42; i < 46; i++)
+			Tile.get(80).addGrids(gridMap[i][27], gridMap[i][28], gridMap[i][29], gridMap[i][30]);
 		
-		
-		
+		for(int i = 37; i < 39; i++)
+			Tile.get(81).addGrids(gridMap[i][29], gridMap[i][30]);
+		Tile.get(81).addGrids(gridMap[39][30]);
 
-		
+		for(int i = 34; i < 37; i++)
+			Tile.get(82).addGrids(gridMap[i][30], gridMap[i][31]);
 
+		for(int i = 44; i < 47; i++)
+			Tile.get(83).addGrids(gridMap[i][16], gridMap[i][17], gridMap[i][18]);
 		
-		
-		
-		
-		
-		
+		for(int i = 32; i < 35; i++)
+			Tile.get(84).addGrids(gridMap[i][27], gridMap[i][28], gridMap[i][29]);
+			
 	}
 }
 
