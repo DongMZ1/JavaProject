@@ -82,7 +82,7 @@ public class Hero implements Character {
     	}
     }  
 	
-  public void pickupFarmer(Farmer farmer) {
+  public void pickupFarmer() {
 	  if(!hasfarmer) {
 		  for(TileEntity t: Tile.get(tile).getTileEntities()) {
 			  if(t instanceof Farmer) {
@@ -103,10 +103,9 @@ public class Hero implements Character {
   public void dropFarmer() {
 	  if(hasfarmer) {
 		  hasfarmer = false;
-		  Tile.get(tile).getTileEntities().add(this.farmer);
-		  this.farmer = null;
+		  Tile.get(tile).getTileEntities().add(this.farmer);	  
 		  farmer.isDropped();
-		  
+		  this.farmer = null;
 	  }
   }
 

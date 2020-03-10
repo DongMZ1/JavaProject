@@ -48,7 +48,7 @@ public class GameScreen implements Inputtable{
         	tile.setScreen(screen);
         
         monsters = MonsterInitializer.initializeMonsters();
-        farmers = FarmerInitializer.initializeFarmers();
+        FarmerInitializer.initializeFarmers();
         wells = WellInitializer.initializeWells();
         mine = DwarfMineInitializer.initializemine();
         
@@ -246,7 +246,13 @@ public class GameScreen implements Inputtable{
 	    
         else if(gameStatus.ui == UIStatus.PICKING) {
         	mainHero.replenishWP();
-        }	    
+        	mainHero.pickupFarmer();
+
+        }
+        
+        else if(gameStatus.ui == UIStatus.DROPING) {
+        	mainHero.dropFarmer();
+        }
 	    
     }
     public void handleMouseMove(int x, int y) {
