@@ -60,8 +60,9 @@ public class GameUi implements Inputtable {
     public void handleKeyType(char c) { }
     public void handleMousePress(int x, int y, int button) {
         if(textBox.inputClicked(x, y) || textBox.outputClicked(x, y)) {
+        	gameStatus.lastFocused=gameStatus.FOCUS_ON_GAMESCREEN;
             gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
-            System.out.print("JFJFJF");
+            
         }
         else {
             if(moveButton.isClicked(x, y) && moveButton.isClickable() && GameScreen.currentHero == GameScreen.mainHero) {

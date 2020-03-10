@@ -52,7 +52,7 @@ public class GameScreen implements Inputtable{
         mine = DwarfMineInitializer.initializemine();
         
         
-        mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
         hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
         hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
@@ -66,7 +66,7 @@ public class GameScreen implements Inputtable{
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
- //       cd = new CollaborativeDecision(DecisionType.START,screen, tm);
+        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         
     }
     
@@ -158,6 +158,9 @@ public class GameScreen implements Inputtable{
     
     public void endTurn() {
     	currentHero = tm.endTurn();
+    	if (!tm.timeLeft()) {
+    		newDay();
+    	}
     }
     
     
@@ -187,25 +190,37 @@ public class GameScreen implements Inputtable{
         
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-        	
-        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
-	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-	            mainHero.time.advance();
-	            gameStatus.ui = UIStatus.MOVING;
-	            gameUi.moveButton.setLabel("End Move");
-	        }
-        	else if(gameStatus.ui == UIStatus.MOVING) {
-	            moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-	            mainHero.time.advance();	            
-	            
-	        }
-        }
+        	if (mainHero.time.left()){
+	        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
+	        		
+	        			moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
+			            mainHero.time.advance();
+			            gameStatus.ui = UIStatus.MOVING;
+			            gameUi.moveButton.setLabel("End Move");
+		            
+		            
+		        }
+	        	else if(gameStatus.ui == UIStatus.MOVING) {
+		            	moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));	
+		            	mainHero.time.advance();	            
+		            }
+		            
+		            
+		        }
+        	else {
+            	gameUi.moveButton.setLabel("No Time");
+
+            	}
+	       }
+        
     }
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
         if (gameStatus.ui == UIStatus.WAITING) {
-        	currentHero.time.advance();
+        	if(mainHero.time.left()) {currentHero.time.advance();}
+        	
         	endTurn();
+        	
         	gameStatus.ui = UIStatus.NONE;
         }
         else if (gameStatus.ui == UIStatus.MOVED) {
@@ -215,27 +230,32 @@ public class GameScreen implements Inputtable{
         }
         else if (gameStatus.ui == UIStatus.FIGHTING) {
         	Tile t = tiles.get(mainHero.getTile());
-        	for (Monster monster : monsters)
-        	{	
-        		//normal fight
-        		if(t.containsTileEntity(monster)) {
-        			fight.start(t);
-        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
-        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
-        			break;
-        		}
-        		
-        		//fight monter on adjacent tile
-        		else if(mainHero instanceof Archer && Arrays.asList(t.getAdjacentTiles()).contains(monster.getTile())) {
-        			
-        			Tile monsterTile = tiles.get(monster.getTile());
-        			fight.startAdjacent(monsterTile, mainHero);
-        			
-        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
-        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
-        			break;
-        		}
-        				
+        	if (mainHero.time.left()) {
+	        	for (Monster monster : monsters)
+	        	{	
+	        		//normal fight
+	        		if(t.containsTileEntity(monster)) {
+	        			fight.start(t);
+	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
+	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+	        			break;
+	        		}
+	        		
+	        		//fight monter on adjacent tile
+	        		else if(mainHero instanceof Archer && Arrays.asList(t.getAdjacentTiles()).contains(monster.getTile())) {
+	        			
+	        			Tile monsterTile = tiles.get(monster.getTile());
+	        			fight.startAdjacent(monsterTile, mainHero);
+	        			
+	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
+	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+	        			break;
+	        		}
+	        				
+	        	}
+        	}
+        	else {
+        		System.out.println("NO TIME");
         	}
         	if (!fight.isHappening) {
         		System.out.println("UNABLE TO FIGHT");

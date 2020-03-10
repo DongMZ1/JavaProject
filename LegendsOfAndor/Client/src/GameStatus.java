@@ -20,6 +20,8 @@ public class GameStatus {
     public static final int FIGHT_SCREEN = 3;
     public static final int COLLABORATIVE_SCREEN = 4;
 
+    public static int lastFocused = 0;
+    
 	int screenWidth = 1280;
 	int screenHeight = 720;
 	int focus;

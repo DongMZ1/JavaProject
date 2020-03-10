@@ -12,23 +12,28 @@ public class CollaborativeDecision implements Inputtable {
 	InputHandler inputHandler;
 	MinuetoImage background;
 	TurnManager tm;
-	ArrayList<Item> items;
+	ArrayList<Tuple<Item,Hero>> items;
 	ArrayList<Button> itemButtons;
+	Button okButton;
+	TextBox textBox;
+	
 	
 	public CollaborativeDecision(DecisionType d, MinuetoWindow screen, TurnManager tm){
 		toDecide = d;		
 		try {
 		 gameStatus = GameStatus.getInstance();
 		 inputHandler = InputHandler.getInputHandler();
+		 textBox = TextBox.getInstance();
 		}
 		catch (Exception e) {}
 		
-		inputHandler.addInput(this);
+		
 		
 		gameStatus.focus = GameStatus.FOCUS_ON_COLLABORATIVE;
 		
 		
 		this.screen = screen;
+		this.tm = tm;
 		background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
 		
 		items = new ArrayList<>();
@@ -37,33 +42,56 @@ public class CollaborativeDecision implements Inputtable {
 			int offset = 1;
 			try {
 			for (int i = 0; i < 5; i++) {
-				items.add(new Gold(-1));
+				items.add(new Tuple(new Gold(-1),null));
 				itemButtons.add(new Button(new Coordinate(100*offset,150), 50, 89, "Claim", true));
 				offset++;
 			}
+			for (int i = 0; i < 2; i++) {
+				items.add(new Tuple(new Wineskin(-1),null));
+				itemButtons.add(new Button(new Coordinate(100*offset,150), 50, 89, "Claim", true));
+				offset++;
+			}
+			okButton = new Button(new Coordinate(100*offset + 150, 150),50,89,"READY",true);
 			}
 			catch (Exception e) {}
 		}
 		
+	
+		
 		
 		gameStatus.currentScreen = GameStatus.COLLABORATIVE_SCREEN;
 	}
+	
 	
 	public void decisionLoop() {
 		if (toDecide == DecisionType.NONE) {
 		gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 		inputHandler.removeInput(this);
 		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
+		for (Tuple<Item,Hero> combo : items) {
+			combo.second.items.add(combo.first);
 		}
-		
+		}
+		int remainingSlots = items.size();
 		for (int i = 0; i < items.size(); i++) {
-			Item item = items.get(i);
+			Item item = items.get(i).first;
+			Hero hero = items.get(i).second;
 			Button button = itemButtons.get(i);
 			
+			if (hero != null) {
+				screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				remainingSlots--;
+
+			}
+			if (remainingSlots < 1) {
+				okButton.draw();
+				
+			}
 			button.draw();
 			screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
 			
 		}
+		
 	}
 	
 	public void draw() {
@@ -73,7 +101,7 @@ public class CollaborativeDecision implements Inputtable {
 
 	@Override
 	public void handleKeyPress(int key) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -86,18 +114,32 @@ public class CollaborativeDecision implements Inputtable {
 	@Override
 	public void handleKeyType(char c) {
 		// TODO Auto-generated method stub
-		System.out.println("HERE");
+		if (c == 'a')
+    	{
+    		GameScreen.mainHero = tm.endTurn();
+    	}
 	}
 
 	@Override
 	public void handleMousePress(int x, int y, int button) {
 		// TODO Auto-generated method stub
-		System.out.println("HERE");
+		if(textBox.inputClicked(x, y) || textBox.outputClicked(x, y)) {
+			gameStatus.lastFocused = gameStatus.FOCUS_ON_COLLABORATIVE;
+            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
+            
+        }
+		int i = 0;
 		for (Button b : itemButtons) {
 			if (b.isClicked(x, y)) {
-				System.out.println(b);
+				items.get(i).second = GameScreen.mainHero;
 			}
+			i++;
 		}
+		
+		if (okButton.isClickable() && okButton.isClicked(x, y)) {
+			toDecide = DecisionType.NONE;
+		}
+		
 	}
 
 	@Override

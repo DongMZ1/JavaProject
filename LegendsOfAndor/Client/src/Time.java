@@ -27,6 +27,11 @@ public class Time {
 		x += 550;
 	}
 	
+	public boolean left() {
+		if (time < 7) return true;
+		else return false;
+	}
+	
 	public void reset() {
 		time = 0;
 		x = 6020;

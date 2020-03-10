@@ -99,7 +99,7 @@ public class TextBox implements Inputtable{
     }
     public void handleMousePress(int x, int y, int button) {
         if(!inputClicked(x, y) && !outputClicked(x, y)) {
-            gameStatus.focus = gameStatus.FOCUS_ON_GAMESCREEN;
+            gameStatus.focus = gameStatus.lastFocused;
         }
     }
     public void handleMouseRelease(int x, int y, int button) { }

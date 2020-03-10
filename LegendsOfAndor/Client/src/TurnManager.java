@@ -32,6 +32,15 @@ public class TurnManager {
 		return getHero();
 	}
 	
+	public boolean timeLeft() {
+		for (Hero hero : heroes) {
+			if (hero.time.left()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	
 	public boolean contains(TileEntity hero) {
