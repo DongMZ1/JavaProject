@@ -8,18 +8,16 @@ public class FarmerInitializer {
 	public static ArrayList<Farmer> initializeFarmers() throws MinuetoFileException {
         ArrayList<Farmer> output = new ArrayList<>();
         MinuetoImage farmerimage = new MinuetoImageFile("images/farmer.png");
-        Farmer f1 = new Farmer(farmerimage, 4);
-        Farmer f2 = new Farmer(farmerimage, 5);
-        Farmer f3 = new Farmer(farmerimage, 6);
-        Farmer f4 = new Farmer(farmerimage, 7);
+        Farmer f1 = new Farmer(farmerimage, 24);
+        Farmer f2 = new Farmer(farmerimage, 36);
+        output.add(f1);
+        output.add(f2);
+        
         for (Farmer f : output)
         {
         	GameScreen.tiles.get(f.tile).addTileEntity(f);
         }
-        output.add(f1);
-        output.add(f2);
-        output.add(f3);
-        output.add(f4);
+
         return output;
 }
 
