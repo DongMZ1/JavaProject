@@ -13,7 +13,10 @@ public class GoldInitializer {
         Item gold2 = new Gold( -1);
         Item gold3 = new Gold( -1);
         Item gold4 = new Gold(10);
-        
+        output.add((Gold) gold1);
+        output.add((Gold) gold2);
+        output.add((Gold) gold3);
+        output.add((Gold) gold4);       
        
         for (Gold gd : output)
         {
@@ -21,10 +24,7 @@ public class GoldInitializer {
         	GameScreen.tiles.get(gd.tile).addTileEntity(gd);
         }
         }
-        output.add((Gold) gold1);
-        output.add((Gold) gold2);
-        output.add((Gold) gold3);
-        output.add((Gold) gold4);
+
 	}
 
 }

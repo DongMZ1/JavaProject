@@ -16,6 +16,7 @@ public class GameScreen implements Inputtable{
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
     private ArrayList<Well> wells;
+    private ArrayList<Farmer> farmers;
     private DwarfMine mine;
     private Castle castle = new Castle(1);
     static Hero mainHero;
@@ -47,8 +48,8 @@ public class GameScreen implements Inputtable{
         	tile.setScreen(screen);
         
         monsters = MonsterInitializer.initializeMonsters();
+        farmers = FarmerInitializer.initializeFarmers();
         wells = WellInitializer.initializeWells();
-        
         mine = DwarfMineInitializer.initializemine();
         
         
