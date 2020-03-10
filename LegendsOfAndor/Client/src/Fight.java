@@ -71,11 +71,6 @@ public class Fight implements Inputtable{
 				
 			}
 			
-			//TODO check if the hero is archer and if there's monster on adjacent tile 
-//			else if(tm.contains(entity) && entity instanceof Archer && this.fightTile.getTileEntities().contains(entity.getTile())) {
-//				
-//			}
-			
 			//member is a Monster
 			else {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(900, monsterOffset)));
@@ -84,10 +79,46 @@ public class Fight implements Inputtable{
 			}
 			
 		}
+		
 		herosLeft = fightHeroes.size();
 		gameStatus.fight = FightStatus.ROLLPROMPT;
 		
 	}
+	
+	//fight monster on adjacent tile
+	public void startAdjacent(Tile fightTile, Hero hero) {
+		fightMembers = new ArrayList<>();
+		fightHeroes = new ArrayList<>();
+		fightMonsters = new ArrayList<>();
+		this.fightTile = fightTile;
+		isHappening = true;
+		int monsterOffset = 1;
+		
+		fightMembers.add(new Tuple<Character,Coordinate>(hero,new Coordinate(600, tm.indexOf(hero) + 1)));
+		fightHeroes.add(hero);		
+		
+		for (Character entity : fightTile.getTileCharacters()) {
+			//member is a Hero
+			
+			if (tm.contains(entity)) {
+				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
+				fightHeroes.add((Hero) entity);
+				
+			}
+			
+			//member is a Monster
+			else {
+				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(900, monsterOffset)));
+				monsterOffset++;
+				fightMonsters.add((Monster) entity);
+			}
+			
+		}	
+		herosLeft = fightHeroes.size();
+		gameStatus.fight = FightStatus.ROLLPROMPT;
+		
+	}	
+	
 	
 	public void draw() {
 		this.screen.draw(background, 0, 0);
