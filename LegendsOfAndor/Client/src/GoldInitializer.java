@@ -6,7 +6,8 @@ import org.minueto.image.MinuetoImageFile;
 
 public class GoldInitializer {
 	//freeGoldList is that there are some gold has no regions
-        ArrayList<Gold> freeGoldList = new ArrayList<>();
+	public GoldInitializer() throws MinuetoFileException {
+        ArrayList<Gold> output = new ArrayList<>();
         MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
         Item gold1 = new Gold( -1);
         Item gold2 = new Gold( -1);
@@ -19,9 +20,10 @@ public class GoldInitializer {
         	GameScreen.tiles.get(gd.tile).addTileEntity(gd);
         }
         }
-        output.add(gold1);
-        output.add(gold2);
-        output.add(gold3);
-        output.add(gold4);
+        output.add((Gold) gold1);
+        output.add((Gold) gold2);
+        output.add((Gold) gold3);
+        output.add((Gold) gold4);
+	}
 
 }
