@@ -188,6 +188,9 @@ public class GameScreen implements Inputtable{
     	{
     		mainHero = currentHero;
     	}
+    	else if(c == 'm') {
+    		playerBoard.toggleFlag();
+    	}	    
     }
     public void handleMousePress(int x, int y, int button) {
  /*   	Coordinate coords = camera.getPosOnScreen(x, y);
