@@ -249,11 +249,13 @@ public class GameScreen implements Inputtable{
         	mainHero.replenishWP();
         	mainHero.pickupFarmer();
         	mainHero.pickupGold();
+        	gameStatus.ui = UIStatus.NONE;
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
         	mainHero.dropFarmer();
         	mainHero.dropGold();
+        	gameStatus.ui = UIStatus.NONE;
         }
 	    
     }
