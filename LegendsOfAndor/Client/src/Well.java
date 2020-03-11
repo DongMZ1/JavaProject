@@ -8,7 +8,6 @@ public class Well implements TileEntity{
 
 	MinuetoImage wellImage;
 	private int tile;
-	GameStatus gameStatus;
 	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
