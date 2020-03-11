@@ -6,6 +6,7 @@ import org.minueto.handlers.MinuetoMouseWheelHandler;
 import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoMouseWheelHandler {
@@ -15,7 +16,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 	private static GameStatus gameStatus;
 	private ArrayList<Inputtable> inputs;
 	private MinuetoEventQueue queue;
-	private InputHandler() throws MinuetoFileException {
+	private InputHandler() throws IOException {
 		inputs = new ArrayList<>();
 		queue = new MinuetoEventQueue();
 		gameStatus = GameStatus.getInstance();
@@ -25,7 +26,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 		gameStatus.screen.registerMouseWheelHandler(this, queue);
 	}
 
-	public static InputHandler getInputHandler() throws MinuetoFileException {
+	public static InputHandler getInputHandler() throws IOException {
 		if(inputHandler == null)
 			inputHandler = new InputHandler();
 		return inputHandler;

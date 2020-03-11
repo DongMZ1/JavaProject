@@ -7,6 +7,8 @@ import org.minueto.image.MinuetoImageFile;
 import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoWindow;
 
+import java.io.IOException;
+
 public class LobbyScreen implements Inputtable {
     //TODO Clean LobbyScreen class
     private boolean isEasy;
@@ -31,7 +33,7 @@ public class LobbyScreen implements Inputtable {
     private int currentChar = 0;
     private static GameStatus gameStatus;
     private static TextBox textBox;
-    public LobbyScreen(MinuetoWindow screen) throws MinuetoFileException {
+    public LobbyScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
         this.isEasy = false;
         gameStatus = GameStatus.getInstance();

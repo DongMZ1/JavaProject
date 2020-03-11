@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoColor;
@@ -40,7 +41,7 @@ public class Fight implements Inputtable{
 	private Button changeRollResult;
 		
 
-	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws MinuetoFileException {
+	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws IOException {
 		
 		
 		this.screen = screen;

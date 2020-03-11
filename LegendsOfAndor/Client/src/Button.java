@@ -5,6 +5,8 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 
+import java.io.IOException;
+
 public class Button {
 
     private Coordinate coordinate;
@@ -16,7 +18,7 @@ public class Button {
     private MinuetoFont font;
     private GameStatus gameStatus;
 
-    public Button(Coordinate coordinate, int height, int width, String label, boolean clickable) throws MinuetoFileException {
+    public Button(Coordinate coordinate, int height, int width, String label, boolean clickable) throws IOException {
         this.coordinate = coordinate;
         this.height = height;
         this.width = width;

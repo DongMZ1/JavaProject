@@ -2,6 +2,8 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
+import java.io.IOException;
+
 public class Well implements TileEntity{
 
 	MinuetoImage wellImage;
@@ -10,7 +12,7 @@ public class Well implements TileEntity{
 	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
-	public Well(MinuetoImage image, int assignedTile) throws MinuetoFileException {
+	public Well(MinuetoImage image, int assignedTile) throws IOException {
 		wellImage = image;
 		IsEmpty = false;
 		tile = assignedTile;

@@ -5,6 +5,7 @@ import org.minueto.image.*;
 import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,7 +35,7 @@ public class GameScreen implements Inputtable{
     private GameUi gameUi;
     private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
 
-    public GameScreen(MinuetoWindow screen) throws MinuetoFileException {
+    public GameScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
         this.screen.setVisible(true);
         camera = Camera.getInstance();
@@ -269,11 +270,13 @@ public class GameScreen implements Inputtable{
         	mainHero.replenishWP();
         	mainHero.pickupFarmer();
         	mainHero.pickupGold();
+        	gameStatus.ui = UIStatus.NONE;
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
         	mainHero.dropFarmer();
         	mainHero.dropGold();
+        	gameStatus.ui = UIStatus.NONE;
         }
 	    
     }

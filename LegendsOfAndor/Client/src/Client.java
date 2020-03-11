@@ -9,7 +9,33 @@ import org.w3c.dom.Text;
 
 public class Client{
 
+    /*
+    private void run() throws IOException  {
+        try {
+            Socket socket = new Socket(serverAddress, 59001);
+            in = new Scanner(socket.getInputStream());
+            out = new PrintWriter(socket.getOutputStream(), true);
+
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                if (line.startsWith("SUBMITNAME")) {
+                    out.println(getName());
+                } else if (line.startsWith("NAMEACCEPTED")) {
+                    this.frame.setTitle("Chatter - " + line.substring(13));
+                    textField.setEditable(true);
+                } else if (line.startsWith("MESSAGE")) {
+                    messageArea.append(line.substring(8) + "\n");
+                }
+            }
+        } finally {
+            frame.setVisible(false);
+            frame.dispose();
+        }
+    }
+    */
+
     public static void main(String[] args) throws Exception {
+
         GameStatus gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         LobbyScreen lobbyScreen = new LobbyScreen(gameStatus.screen);
@@ -21,6 +47,8 @@ public class Client{
         inputHandler.addInput(gameBoard.fight);
         inputHandler.addInput(gameBoard.cd);
         
+
+
 
         while(true) {
             if(gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
@@ -35,8 +63,7 @@ public class Client{
 
             gameStatus.screen.render();
             inputHandler.handleQueue();
+            gameStatus.handle();
         }
     }
-
-
 }

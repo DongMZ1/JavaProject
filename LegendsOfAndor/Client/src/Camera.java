@@ -1,5 +1,7 @@
 import org.minueto.MinuetoFileException;
 
+import java.io.IOException;
+
 public class Camera {
 
 	private static Camera camera;
@@ -8,7 +10,7 @@ public class Camera {
 	private int bottomOfBoard;
 	private int edgeOfBoard;
 	private GameStatus gameStatus;
-	private Camera() throws MinuetoFileException {
+	private Camera() throws IOException {
 		boardZoom = 4;
 		currentPos = new Coordinate(0, 0);
 		bottomOfBoard = Constants.TOP_OF_BOARD / boardZoom;
@@ -16,7 +18,7 @@ public class Camera {
 		gameStatus = GameStatus.getInstance();
 	}
 
-	public static Camera getInstance() throws MinuetoFileException {
+	public static Camera getInstance() throws IOException {
 		if(camera == null)
 			camera = new Camera();
 		return camera;

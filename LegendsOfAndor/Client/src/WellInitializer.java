@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
@@ -6,7 +7,7 @@ import org.minueto.window.MinuetoWindow;
 
 public class WellInitializer {
 
-	public static ArrayList<Well> initializeWells() throws MinuetoFileException {
+	public static ArrayList<Well> initializeWells() throws IOException {
         ArrayList<Well> output = new ArrayList<>();
         Well w1 = new Well(new MinuetoImageFile("images/Well.png"), 5);
         Well w2 = new Well(new MinuetoImageFile("images/Well.png"), 35);

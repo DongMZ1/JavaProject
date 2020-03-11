@@ -5,6 +5,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,8 +40,10 @@ public class Tile {
 		} catch (MinuetoFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-        this.nextTile = nextTile;
+		this.nextTile = nextTile;
     }
     
     public void addGrids(Grid...grids) {
