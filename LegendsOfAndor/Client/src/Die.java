@@ -75,12 +75,12 @@ abstract class Dice {
 	
 	protected PlayingDie regularDie;
 	private Optional<PlayingDie> blackDie = Optional.empty();
-	protected PlayingDie currentlyUsedDie = regularDie;
+	protected PlayingDie currentlyUsedDie;
 	
 	protected Stack<Integer> rolledNums = new Stack<>();
 	
 	protected int currentNumOfDice;
-	protected int rollsLeft = currentNumOfDice;
+	protected int rollsLeft;
 	
 	public void addBlackDie() {
 		blackDie = Optional.of(PlayingDie.blackDieInstance());
@@ -153,7 +153,9 @@ class ArcherDice extends Dice {
 	
 	public ArcherDice() {
 		currentNumOfDice = 3;
+		rollsLeft = currentNumOfDice;
 		regularDie = PlayingDie.greenDieInstance();
+		currentlyUsedDie = regularDie;
 	}
 
 	@Override
@@ -172,7 +174,9 @@ class DwarfDice extends Dice {
 	
 	public DwarfDice() {
 		currentNumOfDice = 1;
+		rollsLeft = currentNumOfDice;
 		regularDie = PlayingDie.yellowDieInstance();
+		currentlyUsedDie = regularDie;
 	}
 }
 
@@ -181,7 +185,9 @@ class MageDice extends Dice {
 	
 	public MageDice() {
 		regularDie = PlayingDie.purpleDieInstance();
+		currentlyUsedDie = regularDie;
 		currentNumOfDice = 1;
+		rollsLeft = currentNumOfDice;
 	}
 	
 	public void flipRoll(Dice target) {
@@ -210,7 +216,9 @@ class WarriorDice extends Dice {
 
 	public WarriorDice() {
 		currentNumOfDice = 2;
+		rollsLeft = currentNumOfDice;
 		regularDie = PlayingDie.blueDieInstance();
+		currentlyUsedDie=regularDie;
 	}
 }
 
@@ -219,6 +227,7 @@ class MonsterDice extends Dice {
 
 	public MonsterDice() {
 		currentNumOfDice = 2;
+		rollsLeft = currentNumOfDice;
 		regularDie = PlayingDie.redDieInstance();
 	}
 

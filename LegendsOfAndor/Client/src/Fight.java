@@ -176,6 +176,18 @@ public class Fight implements Inputtable{
 		//TODO Draw items once items are implemented
 	}
 	
+	public void heroRoll(int roll) throws MinuetoFileException {		
+		String diceFile = ("images/Heroes/Dice/" + roll + ".png");
+		System.out.println(diceFile);
+		diceRoll = new MinuetoImageFile(diceFile);				
+	}
+	
+	public void monsterRoll(int roll) throws MinuetoFileException {		
+		String diceFile = ("images/Monsters/Dice/" + roll + ".png");
+		System.out.println(diceFile);
+		diceRoll = new MinuetoImageFile(diceFile);				
+	}
+	
 	public void handleKeyPress(int key) {
 		
     }
@@ -204,12 +216,18 @@ public class Fight implements Inputtable{
 		if (mainHero instanceof Mage)
 			rollAgain.setClickable(true);
 		
-		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable() || 
-				currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			
+		if ((mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) || 
+				(currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE)) {
+			System.out.println(currentHero.dice.rollsLeft);
 			while (currentHero.dice.hasRolls()) {
+				System.out.println("HERE 2");
 				currentRoll = currentHero.dice.roll();
 				targetDice = currentHero.dice;
+				
+				try {
+					heroRoll(currentRoll);
+				}
+				catch (Exception e) {}
 				
 				//check if hero's Archer and make rollAgain button clickable
 				if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
@@ -232,7 +250,7 @@ public class Fight implements Inputtable{
 					break;	//timed out -> proceed with current roll
 				}				
 			}
-			
+			gameStatus.fight = FightStatus.ROLLRESPONSE;
 			rollAgain.setClickable(false);
 		
 		}
@@ -255,6 +273,10 @@ public class Fight implements Inputtable{
 				while (currentMonster.dice.hasRolls())
 					currentMonster.dice.roll();
 				monsterRoll = currentMonster.dice.getBattleNum();
+				try {
+					monsterRoll(monsterRoll);
+				}
+				catch (Exception e) {}
 			}
 		}
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
