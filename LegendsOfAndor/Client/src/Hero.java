@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
@@ -19,7 +20,7 @@ public class Hero implements Character {
     //get a final list of items
     public final ArrayList<Item> items = new ArrayList<Item>();
     public final boolean mainHero;
-    public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws MinuetoFileException {
+    public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         this.heroImage = heroImage;
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();

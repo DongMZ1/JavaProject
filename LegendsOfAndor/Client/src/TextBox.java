@@ -8,6 +8,7 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFullscreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TextBox implements Inputtable{
@@ -34,13 +35,13 @@ public class TextBox implements Inputtable{
     public MinuetoImage textboxOutput = new MinuetoRectangle(width, outputHeight, new MinuetoColor(0, 0, 0), true);
     public MinuetoImage textboxDivider = new MinuetoRectangle(width, 1, MinuetoColor.BLACK, true);
 
-    private TextBox() throws MinuetoFileException {
+    private TextBox() throws IOException {
         this.currentTypedText = "";
         this.pastMessages = new ArrayList<>();
         gameStatus = GameStatus.getInstance();
     }
 
-    public static TextBox getInstance() throws MinuetoFileException {
+    public static TextBox getInstance() throws IOException {
         if(textBox == null)
             textBox = new TextBox();
         return textBox;
@@ -91,6 +92,7 @@ public class TextBox implements Inputtable{
         else if(c == MinuetoKeyboard.KEY_ENTER) {
             if(!currentTypedText.equals("")) {
                 this.pastMessages.add(new Message("You", currentTypedText));
+                gameStatus.updateVariable("message", currentTypedText);
                 currentTypedText = "";
             }
         }

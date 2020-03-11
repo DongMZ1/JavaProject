@@ -2,6 +2,8 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.window.MinuetoWindow;
 
+import java.io.IOException;
+
 public class Time {
 	MinuetoImage tokenImage;
 	int time = 0;
@@ -10,7 +12,7 @@ public class Time {
 	private MinuetoWindow screen;
 	Camera camera;
 	
-	public Time(MinuetoImage tokenImage, MinuetoWindow screen) throws MinuetoFileException {
+	public Time(MinuetoImage tokenImage, MinuetoWindow screen) throws IOException {
 		this.tokenImage = tokenImage;
 		this.screen = screen;
 		this.camera = Camera.getInstance();

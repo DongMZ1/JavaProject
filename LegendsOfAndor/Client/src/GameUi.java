@@ -1,5 +1,6 @@
 import org.minueto.MinuetoFileException;
 
+import java.io.IOException;
 
 
 public class GameUi implements Inputtable {
@@ -18,7 +19,7 @@ public class GameUi implements Inputtable {
     private int turnButtonWidth = 200;
     private int turnButtonHeight = 50;
     public int uiHeight = 300;
-    private GameUi() throws MinuetoFileException {
+    private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
         playerBoard = PlayerBoard.getInstance();
@@ -36,7 +37,7 @@ public class GameUi implements Inputtable {
                 turnButtonHeight, turnButtonWidth, "Move", true);
     }
 
-    public static GameUi getInstance() throws MinuetoFileException {
+    public static GameUi getInstance() throws IOException {
         if(gameUi == null)
             gameUi = new GameUi();
         return gameUi;

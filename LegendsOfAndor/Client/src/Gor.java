@@ -1,9 +1,11 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
+import java.io.IOException;
+
 public class Gor extends Monster {
 
-	public Gor(MinuetoImage monsterImage, int tile) throws MinuetoFileException {
+	public Gor(MinuetoImage monsterImage, int tile) throws IOException {
 		super(monsterImage, tile);
 	}
 

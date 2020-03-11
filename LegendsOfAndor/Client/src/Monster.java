@@ -1,6 +1,8 @@
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
+import java.io.IOException;
+
 public class Monster implements Character
 {
 	MinuetoImage monsterImage;
@@ -8,7 +10,7 @@ public class Monster implements Character
     GameStatus gameStatus;
     int health; 
     
-    public Monster(MinuetoImage monsterImage, int tile) throws MinuetoFileException {
+    public Monster(MinuetoImage monsterImage, int tile) throws IOException {
         this.monsterImage = monsterImage;
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();

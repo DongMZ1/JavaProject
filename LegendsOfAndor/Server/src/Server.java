@@ -8,8 +8,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Server {
-    // All client names, so we can check for duplicates upon registration.
-    private static HashSet<String> names = new HashSet<>();
 
     // The set of all the print writers for all the clients, used for broadcast.
     private static HashSet<PrintWriter> writers = new HashSet<>();
@@ -28,7 +26,6 @@ public class Server {
      * The client handler task.
      */
     private static class Handler implements Runnable {
-        private String name;
         private Socket socket;
         private Scanner in;
         private PrintWriter out;
@@ -53,53 +50,21 @@ public class Server {
                 in = new Scanner(socket.getInputStream());
                 out = new PrintWriter(socket.getOutputStream(), true);
 
-                // Keep requesting a name until we get a unique one.
-                while (true) {
-                    out.println("SUBMITNAME");
-                    name = in.nextLine();
-                    if (name == null) {
-                        return;
-                    }
-                    synchronized (names) {
-                        if (!name.isEmpty() && !names.contains(name)) {
-                            names.add(name);
-                            break;
-                        }
-                    }
-                }
-
-                // Now that a successful name has been chosen, add the socket's print writer
-                // to the set of all writers so this client can receive broadcast messages.
-                // But BEFORE THAT, let everyone else know that the new person has joined!
-                out.println("NAMEACCEPTED " + name);
+                //Tell all current players that new player has joined
                 for (PrintWriter writer : writers) {
-                    writer.println("MESSAGE " + name + " has joined");
+                    writer.println("Player " + (writers.size()+1) + " has joined");
                 }
                 writers.add(out);
-
                 // Accept messages from this client and broadcast them.
                 while (true) {
                     String input = in.nextLine();
-                    if (input.toLowerCase().startsWith("/quit")) {
-                        return;
-                    }
                     for (PrintWriter writer : writers) {
-                        writer.println("MESSAGE " + name + ": " + input);
+                        writer.println(input);
                     }
                 }
             } catch (Exception e) {
                 System.out.println(e);
             } finally {
-                if (out != null) {
-                    writers.remove(out);
-                }
-                if (name != null) {
-                    System.out.println(name + " is leaving");
-                    names.remove(name);
-                    for (PrintWriter writer : writers) {
-                        writer.println("MESSAGE " + name + " has left");
-                    }
-                }
                 try {
                     socket.close();
                 } catch (IOException e) {
