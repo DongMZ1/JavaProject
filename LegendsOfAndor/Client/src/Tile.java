@@ -24,7 +24,11 @@ public class Tile {
     private int nextTile;
     private ArrayList<Grid> grids = new ArrayList<>();
     
-    private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
+    public ArrayList<Grid> getGrids() {
+		return grids;
+	}
+
+	private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
 
     public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles, int nextTile) {
         this.coords = new ArrayList<>();
@@ -57,32 +61,32 @@ public class Tile {
     }
        
     static {
-    	TILES.add(new Tile(1353, 1439, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
-    	TILES.add(new Tile(1450, 2225, 1, new int[] {0, 2, 3, 4}, 0));
-    	TILES.add(new Tile(2043, 2205, 2, new int[] {0, 1, 3, 6, 14}, 0));
-    	TILES.add(new Tile(1800, 2685, 3, new int[] {1, 2, 4, 10, 14, 19, 20}, 1));
-    	TILES.add(new Tile(994, 2408, 4, new int[] {0, 1, 3, 5, 20, 21}, 0));
-    	TILES.add(new Tile(378, 2256, 5, new int[] {0, 4, 21}, 0));
-    	TILES.add(new Tile(2725, 2079, 6, new int[] {0, 2, 11, 13, 14, 17}, 0));
-    	TILES.add(new Tile(1289, 784, 7, new int[] {0, 8, 9, 11, 15}, 0));
-    	TILES.add(new Tile(2095, 866, 8, new int[] {7, 9, 11}, 7));
-    	TILES.add(new Tile(1551, 283, 9, new int[] {7, 8, 15}, 7));
-    	TILES.add(new Tile(2028, 3074, 10, new int[] {3, 14, 18, 19}, 3));
-    	TILES.add(new Tile(1024, 620, 11, new int[] {0, 6, 7, 8, 12, 13}, 0));
-    	TILES.add(new Tile(1356, 660, 12, new int[] {11, 13}, 11));
-    	TILES.add(new Tile(1656, 848, 13, new int[] {6, 11, 12, 16, 17}, 12));
-    	TILES.add(new Tile(1112, 1236, 14, new int[] {2, 3, 6, 10, 17, 18}, 2));
-    	TILES.add(new Tile(368, 104, 15, new int[] {7, 9}, 7));
-    	TILES.add(new Tile(1872, 1176, 16, new int[] {13, 17, 36, 38, 32}, 13));
-    	TILES.add(new Tile(1516, 1244, 17, new int[] {6, 14, 14, 16, 18, 36}, 6));
-    	TILES.add(new Tile(1212, 1576, 18, new int[] {10, 14, 17, 19, 28, 36, 72}, 14));
-    	TILES.add(new Tile(668, 1440, 19, new int[] {3, 10, 18, 20, 22, 23, 72}, 3));
-    	TILES.add(new Tile(380, 1348, 20, new int[] {3, 4, 19, 21, 22}, 3));
-    	TILES.add(new Tile(108, 1328, 21, new int[] {4, 5, 20, 22, 24}, 4));   	
-    	TILES.add(new Tile(380, 1680, 22, new int[] {19, 20, 21, 23, 24, 72}, 10));
-    	TILES.add(new Tile(550, 1876, 23, new int[] {19, 22, 24, 25, 31, 34, 35, 72}, 19));
-    	TILES.add(new Tile(120, 1784, 24, new int[] {20, 21, 2, 23, 25}, 21));
-    	TILES.add(new Tile(140, 2164, 25, new int[] {23, 24, 26, 27, 31}, 24));
+    	TILES.add(new Tile(1952, 2720, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
+    	TILES.add(new Tile(2476, 2732, 1, new int[] {0, 2, 3, 4}, 0));
+    	TILES.add(new Tile(2300, 3484, 2, new int[] {0, 1, 3, 6, 14}, 0));
+    	TILES.add(new Tile(1460, 2936, 3, new int[] {1, 2, 4, 10, 14, 19, 20}, 1));
+    	TILES.add(new Tile(252, 2716, 4, new int[] {0, 1, 3, 5, 20, 21}, 0));
+    	TILES.add(new Tile(3732, 2660, 5, new int[] {0, 4, 21}, 0));
+    	TILES.add(new Tile(1432, 756, 6, new int[] {0, 2, 11, 13, 14, 17}, 0));
+    	TILES.add(new Tile(2552, 924, 7, new int[] {0, 8, 9, 11, 15}, 0));
+    	TILES.add(new Tile(2324, 260, 8, new int[] {7, 9, 11}, 7));
+    	TILES.add(new Tile(2704, 3976, 9, new int[] {7, 8, 15}, 7));
+    	TILES.add(new Tile(3108, 1636, 10, new int[] {3, 14, 18, 19}, 3));
+    	TILES.add(new Tile(4000, 1892, 11, new int[] {0, 6, 7, 8, 12, 13}, 0));
+    	TILES.add(new Tile(3976, 1848, 12, new int[] {11, 13}, 11));
+    	TILES.add(new Tile(4916, 2288, 13, new int[] {6, 11, 12, 16, 17}, 12));
+    	TILES.add(new Tile(3428, 3324, 14, new int[] {2, 3, 6, 10, 17, 18}, 2));
+    	TILES.add(new Tile(1128, 152, 15, new int[] {7, 9}, 7));
+    	TILES.add(new Tile(5552, 3216, 16, new int[] {13, 17, 36, 38, 32}, 13));
+    	TILES.add(new Tile(4344, 3436, 17, new int[] {6, 14, 14, 16, 18, 36}, 6));
+    	TILES.add(new Tile(3384, 4516, 18, new int[] {10, 14, 17, 19, 28, 36, 72}, 14));
+    	TILES.add(new Tile(1956, 4128, 19, new int[] {3, 10, 18, 20, 22, 23, 72}, 3));
+    	TILES.add(new Tile(1064, 3780, 20, new int[] {3, 4, 19, 21, 22}, 3));
+    	TILES.add(new Tile(164, 3608, 21, new int[] {4, 5, 20, 22, 24}, 4));   	
+    	TILES.add(new Tile(1032, 4788, 22, new int[] {19, 20, 21, 23, 24, 72}, 10));
+    	TILES.add(new Tile(1652, 5628, 23, new int[] {19, 22, 24, 25, 31, 34, 35, 72}, 19));
+    	TILES.add(new Tile(316, 5240, 24, new int[] {20, 21, 2, 23, 25}, 21));
+    	TILES.add(new Tile(400, 6432, 25, new int[] {23, 24, 26, 27, 31}, 24));
     	TILES.add(new Tile(72, 2596, 26, new int[] {25, 27}, 25));
     	TILES.add(new Tile(280, 2552, 27, new int[] {25, 6, 31}, 25));
     	TILES.add(new Tile(1516, 1836, 28, new int[] {18, 29, 36, 38, 72}, 18));
@@ -99,7 +103,7 @@ public class Tile {
     	TILES.add(new Tile(2428, 1908, 39, new int[] {38, 40, 42, 43}, 38));
     	TILES.add(new Tile(1932, 2060, 40, new int[] {39, 41}, 39));
     	TILES.add(new Tile(1568, 2300, 41, new int[] {37, 40}, 40)); 	
-    	TILES.add(new Tile(7632, 4840, 42, new int[] {39, 43, 44, 45}, 39));
+    	TILES.add(new Tile(2612, 1632, 42, new int[] {39, 43, 44, 45}, 39));
     	TILES.add(new Tile(2876, 1860, 43, new int[] {39, 42, 44, 45, 71}, 39));   	
     	TILES.add(new Tile(2744, 1472, 44, new int[] {42, 43, 45, 46}, 42));
     	TILES.add(new Tile(3140, 1484, 45, new int[] {43, 44, 46, 64, 65}, 43));
