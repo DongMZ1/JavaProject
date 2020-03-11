@@ -108,6 +108,7 @@ abstract class Dice {
 			rollsLeft --;
 		}
 		rolledNums.push(number);
+		
 		return number;
 	}
 	
@@ -129,12 +130,13 @@ abstract class Dice {
 	}
 	
 	public int getBattleNum() {
-		int value = 0;
+		int max = 0;
 		while (rolledNums.size() > 0) {
-			if (value < rolledNums.size())
-				value = rolledNums.pop();
+			int value = rolledNums.pop();
+			if (value > max)
+				max = value;
 		}
-		return value;
+		return max;
 	}
 	
 	public void endTurn() {
@@ -160,10 +162,15 @@ class ArcherDice extends Dice {
 
 	@Override
 	public int roll() {
+		
+		
 		if (rolledNums.isEmpty())
 			rolledNums.push(super.roll());
-		else rolledNums.pop();
-		rolledNums.push(super.roll());
+		else {
+			rolledNums.pop();
+			rolledNums.push(super.roll());
+		}
+			
 		return rolledNums.peek();
 	}
 }
@@ -229,6 +236,7 @@ class MonsterDice extends Dice {
 		currentNumOfDice = 2;
 		rollsLeft = currentNumOfDice;
 		regularDie = PlayingDie.redDieInstance();
+		currentlyUsedDie = regularDie;
 	}
 
 	public int getBattleNum() {

@@ -17,7 +17,7 @@ public class Fight implements Inputtable{
 	TurnManager tm;
 	ArrayList<Tuple<Character,Coordinate>> fightMembers;
 	ArrayList<Hero> fightHeroes;
-	ArrayList<Monster> fightMonsters;
+	
 	Hero mainHero = GameScreen.mainHero;
 	Hero currentHero = GameScreen.currentHero;
 	GameStatus gameStatus;
@@ -62,7 +62,7 @@ public class Fight implements Inputtable{
 	public void start(Tile fightTile) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
-		fightMonsters = new ArrayList<>();
+		
 		this.fightTile = fightTile;
 		isHappening = true;
 		int monsterOffset = 1;
@@ -79,7 +79,7 @@ public class Fight implements Inputtable{
 			else {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(900, monsterOffset)));
 				monsterOffset++;
-				fightMonsters.add((Monster) entity);
+				currentMonster = (Monster) entity;
 			}
 			
 		}
@@ -207,6 +207,9 @@ public class Fight implements Inputtable{
 		else if (c == 'd') {
 			gameStatus.fight = FightStatus.ROLLPROMPT;
 		}
+		else if (c == 'm') {
+			System.out.println(currentHero);
+		}
 		
 	}
 
@@ -218,9 +221,9 @@ public class Fight implements Inputtable{
 		
 		if ((mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) || 
 				(currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE)) {
-			System.out.println(currentHero.dice.rollsLeft);
+			
 			while (currentHero.dice.hasRolls()) {
-				System.out.println("HERE 2");
+				
 				currentRoll = currentHero.dice.roll();
 				targetDice = currentHero.dice;
 				
@@ -230,7 +233,7 @@ public class Fight implements Inputtable{
 				catch (Exception e) {}
 				
 				//check if hero's Archer and make rollAgain button clickable
-				if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
+				/*if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
 					rollAgain.setClickable(true);
 				}
 				else 
@@ -238,7 +241,7 @@ public class Fight implements Inputtable{
 				
 				// wait 3seconds for archer to re roll his dice or 
 				// for mage to flip any roll
-				try {
+			/*	try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -248,9 +251,10 @@ public class Fight implements Inputtable{
 				if(currentHero instanceof Archer) {
 					rollAgain.setClickable(false);
 					break;	//timed out -> proceed with current roll
-				}				
+				}*/
 			}
 			gameStatus.fight = FightStatus.ROLLRESPONSE;
+			herosLeft--;
 			rollAgain.setClickable(false);
 		
 		}
@@ -263,10 +267,14 @@ public class Fight implements Inputtable{
 		}		
 		
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			System.out.println("POOP");
+			heroRoll += currentHero.dice.getBattleNum();	// add up battle value
+			System.out.println("battle value " + heroRoll);
+			currentHero.dice.endTurn();		// reset dice state
 			if (herosLeft != 0) {
-				heroRoll += currentHero.dice.getBattleNum();	// add up battle value
+				
 				currentHero = tm.endTurn();
-				currentHero.dice.endTurn();		// reset dice state
+				
 				gameStatus.fight = FightStatus.ROLLPROMPT;
 			}
 			else {
@@ -277,6 +285,8 @@ public class Fight implements Inputtable{
 					monsterRoll(monsterRoll);
 				}
 				catch (Exception e) {}
+				System.out.println("monster rolled " + monsterRoll);
+				gameStatus.fight = FightStatus.ROLLMONSTER;
 			}
 		}
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
@@ -291,6 +301,7 @@ public class Fight implements Inputtable{
 				for (Hero h : fightHeroes) {
 					h.wp -= (monsterRoll - heroRoll);
 					damage = ("Heroes took " + (monsterRoll - heroRoll) + " damage.");
+					
 				}
 			}
 			try {
@@ -310,6 +321,8 @@ public class Fight implements Inputtable{
 			
 			isHappening = false;
 		}
+		
+		
 	}
 
 	@Override

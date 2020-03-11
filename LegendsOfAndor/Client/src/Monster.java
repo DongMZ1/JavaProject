@@ -9,11 +9,12 @@ public class Monster implements Character
     int tile;
     GameStatus gameStatus;
     int health; 
-    
+    Dice dice;
     public Monster(MinuetoImage monsterImage, int tile) throws IOException {
         this.monsterImage = monsterImage;
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();
+        dice = new MonsterDice();
     }
     public void setTile(int tile) {
         this.tile = tile;
@@ -37,6 +38,6 @@ public class Monster implements Character
     	return current.getNextTile();
     }
     
-    Dice dice = new MonsterDice();
+    
 
 }

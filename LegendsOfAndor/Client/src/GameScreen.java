@@ -57,12 +57,12 @@ public class GameScreen implements Inputtable{
         
         mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
-        hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
-        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
+//        hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
+  //      hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
         
         tm = new TurnManager(new ArrayList<Hero>());
         tm.addHero(mainHero);
-        tm.addHero(hero2);
+  //      tm.addHero(hero2);
         currentHero = mainHero;
                
         
