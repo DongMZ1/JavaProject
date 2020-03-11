@@ -20,6 +20,8 @@ public class Hero implements Character {
     //get a final list of items
     public final ArrayList<Item> items = new ArrayList<Item>();
     public final boolean mainHero;
+    Dice dice;
+    
     public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         this.heroImage = heroImage;
         this.tile = tile;

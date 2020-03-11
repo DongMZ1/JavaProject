@@ -10,9 +10,9 @@ public class Archer extends Hero{
 	
 	public Archer(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
 		super(heroImage, tile, mainHero);
+		dice = new ArcherDice();
 		
 	}
 	
-	Dice dice = new ArcherDice();
-
+	
 }

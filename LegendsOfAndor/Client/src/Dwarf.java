@@ -10,6 +10,8 @@ public class Dwarf extends Hero{
 	public Dwarf(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
 		super(heroImage, tile, mainHero);
 		// TODO Auto-generated constructor stub
+		dice = new DwarfDice();
+
 	}
 
 	public void Buy_SP_from_dwarf_mine() {		
@@ -36,5 +38,4 @@ public class Dwarf extends Hero{
 			
 	}//end of function
 	
-	Dice dice = new DwarfDice();
 }

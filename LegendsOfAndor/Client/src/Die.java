@@ -107,6 +107,10 @@ abstract class Dice {
 		rolledNums.push(number);
 		return number;
 	}
+	
+	public boolean hasRolls() {
+		return rollsLeft > 0;
+	}
 
 	protected void setCurrentNumber(int number) {
 		rolledNums.pop();
@@ -142,85 +146,3 @@ abstract class Dice {
 	void downgrade() {currentNumOfDice --; rollsLeft --;}
 }
 
-
-class MageDice extends Dice {
-	
-	public MageDice() {
-		regularDie = PlayingDie.purpleDieInstance();
-		currentNumOfDice = 1;
-	}
-	
-	public void flipRoll(Dice target) {
-		int flipIndex = 5 - target.getLastRollIndex();
-		int flipNumber = target.getCurrentDieNumbers()[flipIndex];
-		target.setCurrentNumber(flipNumber);
-	};	
-	
-	@Override
-	public int roll() {
-		if (rolledNums.isEmpty())
-			rolledNums.push(super.roll());
-		else rolledNums.pop();
-		rolledNums.push(super.roll());
-		return rolledNums.peek();
-	}
-	
-	@Override
-	void upgrade() {}
-	@Override
-	void downgrade() {}
-}
-	
-class ArcherDice extends Dice {	
-	
-	public ArcherDice() {
-		currentNumOfDice = 3;
-		regularDie = PlayingDie.greenDieInstance();
-	}
-
-	@Override
-	public int roll() {
-		if (rolledNums.isEmpty())
-			rolledNums.push(super.roll());
-		else rolledNums.pop();
-		rolledNums.push(super.roll());
-		return rolledNums.peek();
-	}
-}
-	
-
-class WarriorDice extends Dice {
-		
-	public WarriorDice() {
-		currentNumOfDice = 2;
-		regularDie = PlayingDie.blueDieInstance();
-	}
-}
-
-class DwarfDice extends Dice {
-	
-	public DwarfDice() {
-		currentNumOfDice = 1;
-		regularDie = PlayingDie.yellowDieInstance();
-	}
-}
-
-class MonsterDice extends Dice {
-	
-public MonsterDice() {
-		currentNumOfDice = 2;
-		regularDie = PlayingDie.redDieInstance();
-	}
-	
-	public int getBattleNum() {
-		int value = 0;
-		while (rolledNums.size() > 0) {
-			if (value < rolledNums.size())
-				value = rolledNums.pop();
-			else if (value == rolledNums.pop())
-				value = value * 2;
-		}
-		return value;
-	}
-	
-}
