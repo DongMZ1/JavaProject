@@ -143,8 +143,10 @@ public class Fight implements Inputtable{
 				}
 				
 				//check if the hero is Mage
-				if(currentHero instanceof Archer) {
-					rollAgain.draw();
+				if(currentHero instanceof Mage) {
+					changeRollResult.setClickable(true);
+					changeRollResult.draw();
+					
 				}
 				
 			}
