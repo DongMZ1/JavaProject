@@ -1,13 +1,16 @@
 import org.minueto.MinuetoColor;
+import org.minueto.MinuetoEventQueue;
 import org.minueto.MinuetoFileException;
 import org.minueto.handlers.*;
 import org.minueto.image.*;
+import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class GameScreen implements Inputtable{
     private MinuetoWindow screen;
@@ -16,6 +19,7 @@ public class GameScreen implements Inputtable{
     private boolean movingCam;
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
+    private ArrayList<Merchant> merchants;
     private ArrayList<Well> wells;
     private ArrayList<Farmer> farmers;
     private DwarfMine mine;
@@ -34,10 +38,6 @@ public class GameScreen implements Inputtable{
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
     private GameUi gameUi;
     private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
-    int toMove;
-    final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9};
-    final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
-    
 
     public GameScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
@@ -45,7 +45,6 @@ public class GameScreen implements Inputtable{
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
-        
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
@@ -56,18 +55,18 @@ public class GameScreen implements Inputtable{
         monsters = MonsterInitializer.initializeMonsters();
         wells = WellInitializer.initializeWells();
         mine = DwarfMineInitializer.initializemine();
-        
+        merchants = MerchantInitialer.initializeMerchants();
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
         
         mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
-//        hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
-  //      hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
+        hero2 = new Warrior(new MinuetoImageFile("images/Heroes/WarriorFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
+        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
         
         tm = new TurnManager(new ArrayList<Hero>());
         tm.addHero(mainHero);
-  //      tm.addHero(hero2);
+        tm.addHero(hero2);
         currentHero = mainHero;
                
         
@@ -187,56 +186,18 @@ public class GameScreen implements Inputtable{
     	{
     		mainHero = currentHero;
     	}
-    	else if (c == ' ') {
-    		if (mainHero.time.left()){
-    			if (toMove >= 0 && toMove <= 76) {
-	            	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
-	            		
-	            			moveTileEntity(mainHero, mainHero.getTile(),toMove);
-	    		            mainHero.time.advance();
-	    		            gameStatus.ui = UIStatus.MOVING;
-	    		            gameUi.moveButton.setLabel("End Move");
-	    	            
-	    	            
-	    	        }
-	            	else if(gameStatus.ui == UIStatus.MOVING) {
-	    	            	moveTileEntity(mainHero, mainHero.getTile(),toMove);	
-	    	            	mainHero.time.advance();	            
-	    	            }
-	    	            
-	    	            
-	    	        }
-    			
-    		}
-    		else {
-            	gameUi.moveButton.setLabel("No Time");
-
-            	}
-    		toMove = 0;
-    	}
-    	else {
-    	for (int i = 0; i <10; i++) {
-    		if (c == ASCIINUMBERS[i]) {
-    			toMove *= 10;
-    			toMove += i;
-    		}
-    	}
-    	}
-    	
-
     }
     public void handleMousePress(int x, int y, int button) {
-/*    	Coordinate coords = camera.getPosOnBoard(x, y);
-    	 
-    	System.out.println("X BOARD: " + coords.getX());
-    	System.out.println("Y BOARD: " + coords.getY()); */
+ /*   	Coordinate coords = camera.getPosOnScreen(x, y);
+    	System.out.println("X: " + x);
+    	System.out.println("Y: " + y); */
     	
         if(y > gameStatus.screenHeight - gameUi.uiHeight && x < 650)
             gameUi.handleMousePress(x, y, button);
         
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-        	/*if (mainHero.time.left()){
+        	if (mainHero.time.left()){
 	        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
 	        		
 	        			moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
@@ -256,10 +217,11 @@ public class GameScreen implements Inputtable{
         	else {
             	gameUi.moveButton.setLabel("No Time");
 
-            	}*/
+            	}
 	       }
         
     }
+    
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
         if (gameStatus.ui == UIStatus.WAITING) {
@@ -277,7 +239,6 @@ public class GameScreen implements Inputtable{
         else if (gameStatus.ui == UIStatus.FIGHTING) {
         	Tile t = tiles.get(mainHero.getTile());
         	if (mainHero.time.left()) {
-        		monsterLoop:
 	        	for (Monster monster : monsters)
 	        	{	
 	        		//normal fight
@@ -289,24 +250,15 @@ public class GameScreen implements Inputtable{
 	        		}
 	        		
 	        		//fight monter on adjacent tile
-	        		else if(mainHero instanceof Archer) {
-	        			int[] adjacentTiles = t.getAdjacentTiles();
-	        			System.out.println(t);
-	        			for (int i =0; i < adjacentTiles.length; i++) {
-//	        				System.out.println(adjacentTiles[i]);
-	        				Tile adjacentTile = Tile.get(adjacentTiles[i]);
-	        				if (adjacentTile.containsTileEntity(monster)) {
-	        					fight.startAdjacent(adjacentTile, mainHero);	    	        			
-	    	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
-	    	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
-	    	        			break monsterLoop;
-	    	        			
-	    	        		}
-	        				}
-	        			}
+	        		else if(mainHero instanceof Archer && Arrays.asList(t.getAdjacentTiles()).contains(monster.getTile())) {
 	        			
+	        			Tile monsterTile = tiles.get(monster.getTile());
+	        			fight.startAdjacent(monsterTile, mainHero);
 	        			
-	        			
+	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
+	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+	        			break;
+	        		}
 	        				
 	        	}
         	}
@@ -320,16 +272,23 @@ public class GameScreen implements Inputtable{
         }
 	    
         else if(gameStatus.ui == UIStatus.PICKING) {
-        	mainHero.replenishWP();
-        	mainHero.pickupFarmer();
-        	mainHero.pickupGold();
-        	gameStatus.ui = UIStatus.NONE;
+        	//MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
+        	PickupOption p1 = new PickupOption("Pick up choice:");
+        	p1.start();
+        	//mainHero.replenishWP();
+        	//mainHero.pickupFarmer();
+        	//mainHero.pickupGold();
+        	gameStatus.ui = UIStatus.MOVEBEGIN;
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
-        	mainHero.dropFarmer();
-        	mainHero.dropGold();
-        	gameStatus.ui = UIStatus.NONE;
+        	DropOffOption x1 = new DropOffOption("Drop off");
+        	x1.start();
+        	gameStatus.ui = UIStatus.MOVEBEGIN;
+        }
+        else if(gameStatus.ui == UIStatus.Trade ) {
+        	mainHero.Buy2WPfor2Gold();
+        	gameStatus.ui = UIStatus.MOVEBEGIN;
         }
 	    
     }
@@ -349,3 +308,9 @@ public class GameScreen implements Inputtable{
         gameBoard = defaultBoard.scale((double) 1 / camera.boardZoom, (double) 1 / camera.boardZoom);
     }
 }
+
+
+
+
+
+

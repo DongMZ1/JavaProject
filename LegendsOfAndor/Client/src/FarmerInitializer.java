@@ -8,8 +8,8 @@ public class FarmerInitializer {
 	public static ArrayList<Farmer> initializeFarmers() throws MinuetoFileException {
         ArrayList<Farmer> output = new ArrayList<>();
         MinuetoImage farmerimage = new MinuetoImageFile("images/farmer.png");
-        Farmer f1 = new Farmer(farmerimage, 24);
-        Farmer f2 = new Farmer(farmerimage, 36);
+        Farmer f1 = new Farmer(farmerimage, 5);
+        Farmer f2 = new Farmer(farmerimage, 6);
         output.add(f1);
         output.add(f2);
         
