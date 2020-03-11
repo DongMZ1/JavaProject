@@ -38,7 +38,8 @@ public class GameScreen implements Inputtable{
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
     private GameUi gameUi;
     private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
-
+    private PlayerBoard playerBoard;
+	
     public GameScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
         this.screen.setVisible(true);
@@ -74,7 +75,7 @@ public class GameScreen implements Inputtable{
         gameUi = GameUi.getInstance();
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
-        
+        playerBoard = PlayerBoard.getInstance(mainHero);
     }
     
     public void fight() {
@@ -87,6 +88,7 @@ public class GameScreen implements Inputtable{
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
+	    playerBoard.draw();
         tm.draw();
         if (gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
         	cd.draw();
