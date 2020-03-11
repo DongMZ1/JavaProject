@@ -26,7 +26,7 @@ public class Tile {
     
     private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
 
-    public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTilesn, int nextTile) {
+    public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles, int nextTile) {
         this.coords = new ArrayList<>();
         coords.add(new Coordinate(moveX, moveY));
         this.moveCoords = new Coordinate(moveX, moveY);
@@ -99,7 +99,7 @@ public class Tile {
     	TILES.add(new Tile(2428, 1908, 39, new int[] {38, 40, 42, 43}, 38));
     	TILES.add(new Tile(1932, 2060, 40, new int[] {39, 41}, 39));
     	TILES.add(new Tile(1568, 2300, 41, new int[] {37, 40}, 40)); 	
-    	TILES.add(new Tile(2612, 1632, 42, new int[] {39, 43, 44, 45}, 39));
+    	TILES.add(new Tile(7632, 4840, 42, new int[] {39, 43, 44, 45}, 39));
     	TILES.add(new Tile(2876, 1860, 43, new int[] {39, 42, 44, 45, 71}, 39));   	
     	TILES.add(new Tile(2744, 1472, 44, new int[] {42, 43, 45, 46}, 42));
     	TILES.add(new Tile(3140, 1484, 45, new int[] {43, 44, 46, 64, 65}, 43));

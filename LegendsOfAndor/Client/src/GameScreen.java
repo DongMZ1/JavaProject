@@ -34,6 +34,10 @@ public class GameScreen implements Inputtable{
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
     private GameUi gameUi;
     private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
+    int toMove;
+    final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9};
+    final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
+    
 
     public GameScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
@@ -41,6 +45,7 @@ public class GameScreen implements Inputtable{
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
+        
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
@@ -182,18 +187,56 @@ public class GameScreen implements Inputtable{
     	{
     		mainHero = currentHero;
     	}
+    	else if (c == ' ') {
+    		if (mainHero.time.left()){
+    			if (toMove >= 0 && toMove <= 76) {
+	            	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
+	            		
+	            			moveTileEntity(mainHero, mainHero.getTile(),toMove);
+	    		            mainHero.time.advance();
+	    		            gameStatus.ui = UIStatus.MOVING;
+	    		            gameUi.moveButton.setLabel("End Move");
+	    	            
+	    	            
+	    	        }
+	            	else if(gameStatus.ui == UIStatus.MOVING) {
+	    	            	moveTileEntity(mainHero, mainHero.getTile(),toMove);	
+	    	            	mainHero.time.advance();	            
+	    	            }
+	    	            
+	    	            
+	    	        }
+    			
+    		}
+    		else {
+            	gameUi.moveButton.setLabel("No Time");
+
+            	}
+    		toMove = 0;
+    	}
+    	else {
+    	for (int i = 0; i <10; i++) {
+    		if (c == ASCIINUMBERS[i]) {
+    			toMove *= 10;
+    			toMove += i;
+    		}
+    	}
+    	}
+    	
+
     }
     public void handleMousePress(int x, int y, int button) {
- /*   	Coordinate coords = camera.getPosOnScreen(x, y);
-    	System.out.println("X: " + x);
-    	System.out.println("Y: " + y); */
+/*    	Coordinate coords = camera.getPosOnBoard(x, y);
+    	 
+    	System.out.println("X BOARD: " + coords.getX());
+    	System.out.println("Y BOARD: " + coords.getY()); */
     	
         if(y > gameStatus.screenHeight - gameUi.uiHeight && x < 650)
             gameUi.handleMousePress(x, y, button);
         
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-        	if (mainHero.time.left()){
+        	/*if (mainHero.time.left()){
 	        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
 	        		
 	        			moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
@@ -213,7 +256,7 @@ public class GameScreen implements Inputtable{
         	else {
             	gameUi.moveButton.setLabel("No Time");
 
-            	}
+            	}*/
 	       }
         
     }
@@ -234,6 +277,7 @@ public class GameScreen implements Inputtable{
         else if (gameStatus.ui == UIStatus.FIGHTING) {
         	Tile t = tiles.get(mainHero.getTile());
         	if (mainHero.time.left()) {
+        		monsterLoop:
 	        	for (Monster monster : monsters)
 	        	{	
 	        		//normal fight
@@ -245,15 +289,24 @@ public class GameScreen implements Inputtable{
 	        		}
 	        		
 	        		//fight monter on adjacent tile
-	        		else if(mainHero instanceof Archer && Arrays.asList(t.getAdjacentTiles()).contains(monster.getTile())) {
+	        		else if(mainHero instanceof Archer) {
+	        			int[] adjacentTiles = t.getAdjacentTiles();
+	        			System.out.println(t);
+	        			for (int i =0; i < adjacentTiles.length; i++) {
+//	        				System.out.println(adjacentTiles[i]);
+	        				Tile adjacentTile = Tile.get(adjacentTiles[i]);
+	        				if (adjacentTile.containsTileEntity(monster)) {
+	        					fight.startAdjacent(adjacentTile, mainHero);	    	        			
+	    	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
+	    	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+	    	        			break monsterLoop;
+	    	        			
+	    	        		}
+	        				}
+	        			}
 	        			
-	        			Tile monsterTile = tiles.get(monster.getTile());
-	        			fight.startAdjacent(monsterTile, mainHero);
 	        			
-	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
-	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
-	        			break;
-	        		}
+	        			
 	        				
 	        	}
         	}
