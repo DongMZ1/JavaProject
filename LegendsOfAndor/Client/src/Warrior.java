@@ -9,12 +9,12 @@ public class Warrior extends Hero {
 	
     public Warrior(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         super(heroImage, tile, mainHero);
-        
+        dice = new WarriorDice();
     }
 
     public MinuetoImage getImage() {
         return this.heroImage;
     }
     
-    Dice dice = new WarriorDice();
+    
 }

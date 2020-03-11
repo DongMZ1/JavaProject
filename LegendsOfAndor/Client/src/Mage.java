@@ -10,8 +10,8 @@ public class Mage extends Hero{
 	public Mage(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
 		super(heroImage, tile, mainHero);
 		// TODO Auto-generated constructor stub
+		dice = new MageDice();
 	}
 	
-	Dice dice = new MageDice();
-
+	
 }

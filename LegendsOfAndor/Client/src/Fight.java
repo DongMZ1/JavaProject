@@ -24,6 +24,9 @@ public class Fight implements Inputtable{
 	int herosLeft;
 	int monsterRoll;
 	int heroRoll;
+	int currentRoll;
+	Monster currentMonster;
+	Dice targetDice;
 	
 	private Button rollButton;
 	private Button yourTurn;
@@ -90,7 +93,7 @@ public class Fight implements Inputtable{
 	public void startAdjacent(Tile fightTile, Hero hero) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
-		fightMonsters = new ArrayList<>();
+		
 		this.fightTile = fightTile;
 		isHappening = true;
 		int monsterOffset = 1;
@@ -111,10 +114,12 @@ public class Fight implements Inputtable{
 			else {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(900, monsterOffset)));
 				monsterOffset++;
-				fightMonsters.add((Monster) entity);
+				currentMonster =(Monster) entity;
 			}
 			
 		}	
+		
+		
 		herosLeft = fightHeroes.size();
 		gameStatus.fight = FightStatus.ROLLPROMPT;
 		
@@ -169,26 +174,6 @@ public class Fight implements Inputtable{
 		//TODO Draw items once items are implemented
 	}
 	
-	
-	public int heroRoll() throws MinuetoFileException {
-		int roll = ((int) (Math.random() * 6) + 1);
-		String diceFile = ("images/Heroes/Dice/" + roll + ".png");
-		System.out.println(diceFile);
-		diceRoll = new MinuetoImageFile(diceFile);
-		gameStatus.fight = FightStatus.ROLLRESPONSE;
-		herosLeft--;		
-		return roll;
-	}
-	
-	public int monsterRoll() throws MinuetoFileException{
-		int roll = ((int) (Math.random() * 6) + 1);
-		String diceFile = ("images/Monsters/Dice/" + roll + ".png");
-		System.out.println(diceFile);
-		diceRoll = new MinuetoImageFile(diceFile);
-		gameStatus.fight = FightStatus.ROLLMONSTER;
-		return roll;
-	}
-	
 	public void handleKeyPress(int key) {
 		
     }
@@ -213,76 +198,70 @@ public class Fight implements Inputtable{
 
 	@Override
 	public void handleMousePress(int x, int y, int button) {
-		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) {
-			try {
-				heroRoll += heroRoll();
+		
+		if (mainHero instanceof Mage)
+			rollAgain.setClickable(true);
+		
+		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable() || 
+				currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			
+			while (currentHero.dice.hasRolls()) {
+				currentRoll = currentHero.dice.roll();
+				targetDice = currentHero.dice;
 				
 				//check if hero's Archer and make rollAgain button clickable
-				if(currentHero instanceof Archer) {
+				if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
 					rollAgain.setClickable(true);
 				}
+				else 
+					rollAgain.setClickable(false);
 				
-				//check if hero's Archer and make change roll result button clickable
-				if(currentHero instanceof Mage) {
-					changeRollResult.setClickable(true);
+				// wait 3seconds for archer to re roll his dice or 
+				// for mage to flip any roll
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				if(currentHero instanceof Archer) {
+					rollAgain.setClickable(false);
+					break;	//timed out -> proceed with current roll
 				}				
 			}
-			catch (Exception e){
-				System.out.println(e);
-			}
-		}
-		//allow only archer class to make another roll
-		else if (mainHero == currentHero && currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			try {
-				heroRoll += heroRoll();
-			}
-			catch (Exception e){
-				System.out.println(e);
-			}
-		}
+			
+			rollAgain.setClickable(false);
 		
-		//allow only archer class to make another roll
-		else if (mainHero == currentHero && currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			try {
-				heroRoll += heroRoll();
-			}
-			catch (Exception e){
-				System.out.println(e);
-			}
 		}
-
 		
 		//allow only mage class to change roll result
 		else if (currentHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			try {
-				heroRoll = 6 - heroRoll + 1;
-			}
-			catch (Exception e){
-				System.out.println(e);
-			}
+	
+			MageDice mageDice = (MageDice) currentHero.dice;
+			mageDice.flipRoll(targetDice);	
 		}		
 		
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			if (herosLeft != 0) {
+				heroRoll += currentHero.dice.getBattleNum();	// add up battle value
 				currentHero = tm.endTurn();
+				currentHero.dice.endTurn();		// reset dice state
 				gameStatus.fight = FightStatus.ROLLPROMPT;
 			}
 			else {
-				try {
-				monsterRoll += monsterRoll();
-				}
-				catch (Exception e) {
-					System.out.println(e);
-				}
+				while (currentMonster.dice.hasRolls())
+					currentMonster.dice.roll();
+				monsterRoll = currentMonster.dice.getBattleNum();
 			}
 		}
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
 			String damage = "";
 			if (heroRoll > monsterRoll) {
-				for (Monster m : fightMonsters) {
-					m.health -= (heroRoll - monsterRoll);
-					damage = ("Monsters took " + (heroRoll - monsterRoll) + " damage.");
-				}
+				
+				currentMonster.health -= (heroRoll - monsterRoll);
+				damage = ("Monsters took " + (heroRoll - monsterRoll) + " damage.");
+				
 			}
 			else {
 				for (Hero h : fightHeroes) {
