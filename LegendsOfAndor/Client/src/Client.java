@@ -63,7 +63,7 @@ public class Client{
 
             gameStatus.screen.render();
             inputHandler.handleQueue();
-            gameStatus.handle();
+//            gameStatus.handle();
         }
     }
 }
