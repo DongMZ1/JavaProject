@@ -15,8 +15,6 @@ public class Well implements TileEntity{
 		wellImage = image;
 		IsEmpty = false;
 		tile = assignedTile;
-		gameStatus = GameStatus.getInstance();
-
 	}	
 	
 	//replenish the well in a new day
