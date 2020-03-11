@@ -61,18 +61,18 @@ public class Tile {
     }
        
     static {
-    	TILES.add(new Tile(1952, 2720, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
-    	TILES.add(new Tile(2476, 2732, 1, new int[] {0, 2, 3, 4}, 0));
-    	TILES.add(new Tile(2300, 3484, 2, new int[] {0, 1, 3, 6, 14}, 0));
-    	TILES.add(new Tile(1460, 2936, 3, new int[] {1, 2, 4, 10, 14, 19, 20}, 1));
-    	TILES.add(new Tile(252, 2716, 4, new int[] {0, 1, 3, 5, 20, 21}, 0));
-    	TILES.add(new Tile(3732, 2660, 5, new int[] {0, 4, 21}, 0));
-    	TILES.add(new Tile(1432, 756, 6, new int[] {0, 2, 11, 13, 14, 17}, 0));
-    	TILES.add(new Tile(2552, 924, 7, new int[] {0, 8, 9, 11, 15}, 0));
-    	TILES.add(new Tile(2324, 260, 8, new int[] {7, 9, 11}, 7));
-    	TILES.add(new Tile(2704, 3976, 9, new int[] {7, 8, 15}, 7));
-    	TILES.add(new Tile(3108, 1636, 10, new int[] {3, 14, 18, 19}, 3));
-    	TILES.add(new Tile(4000, 1892, 11, new int[] {0, 6, 7, 8, 12, 13}, 0));
+    	TILES.add(new Tile(1480, 1836, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
+    	TILES.add(new Tile(1952, 2720, 1, new int[] {0, 2, 3, 4}, 0));
+    	TILES.add(new Tile(2476, 2732, 2, new int[] {0, 1, 3, 6, 14}, 0));
+    	TILES.add(new Tile(2300, 3484, 3, new int[] {1, 2, 4, 10, 14, 19, 20}, 1));
+    	TILES.add(new Tile(1460, 2936, 4, new int[] {0, 1, 3, 5, 20, 21}, 0));
+    	TILES.add(new Tile(252, 2716, 5, new int[] {0, 4, 21}, 0));
+    	TILES.add(new Tile(3732, 2660, 6, new int[] {0, 2, 11, 13, 14, 17}, 0));
+    	TILES.add(new Tile(1432, 756, 7, new int[] {0, 8, 9, 11, 15}, 0));
+    	TILES.add(new Tile(2552, 924, 8, new int[] {7, 9, 11}, 7));
+    	TILES.add(new Tile(2324, 260, 9, new int[] {7, 8, 15}, 7));
+    	TILES.add(new Tile(2704, 3976, 10, new int[] {3, 14, 18, 19}, 3));
+    	TILES.add(new Tile(3108, 1636, 11, new int[] {0, 6, 7, 8, 12, 13}, 0));
     	TILES.add(new Tile(3976, 1848, 12, new int[] {11, 13}, 11));
     	TILES.add(new Tile(4916, 2288, 13, new int[] {6, 11, 12, 16, 17}, 12));
     	TILES.add(new Tile(3428, 3324, 14, new int[] {2, 3, 6, 10, 17, 18}, 2));
