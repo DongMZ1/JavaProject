@@ -1,10 +1,35 @@
+import java.io.IOException;
+
+import org.minueto.MinuetoColor;
+import org.minueto.image.MinuetoFont;
+import org.minueto.image.MinuetoImage;
+import org.minueto.image.MinuetoRectangle;
+import org.minueto.image.MinuetoText;
+import org.minueto.window.MinuetoWindow;
 
 public class Castle {
 
-	int health;
-	public Castle(int health) {
+	private int health;
+	private MinuetoWindow screen;
+	private MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
+	private MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
+	private String message;
+	Camera camera;
+	
+	public Castle(int health, MinuetoWindow window) throws IOException {
 		this.health = health;
+		screen = window;
+		this.camera = Camera.getInstance();
+		message = "Castle Health: " + String.valueOf(health);
 	}
+	
+	public void draw() {
+		
+		Coordinate coordinates = camera.getPosOnScreen(80,400);
+		screen.draw(upperBlock, coordinates.getX(),coordinates.getY());
+        screen.draw(new MinuetoText(message, font, MinuetoColor.BLACK), coordinates.getX(), coordinates.getY());
+	}
+	
 	public void damage(Monster m) {
     	//TODO
     	// Should decrease shield count of castle
@@ -18,7 +43,7 @@ public class Castle {
 		}
 		
 		if (health == 0) {
-			System.out.println("Game Over");
+			message = "Game Over Rookies\n";
 		}
     	
     }
