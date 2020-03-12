@@ -2,7 +2,7 @@ import org.minueto.image.MinuetoImage;
 
 public class DwarfMine implements TileEntity{
 
-	MinuetoImage mineImage;
+	transient MinuetoImage mineImage;
 	int tile;
 
 	public DwarfMine(MinuetoImage Image,int newTile ) {

@@ -14,12 +14,21 @@ import java.util.ArrayList;
 
 public class TextBox implements Inputtable, Serializable{
 
-    public void addMessage(String sender, String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7198307095185935700L;
+
+	public void addMessage(String sender, String message) {
         pastMessages.add(new Message(sender, message));
     }
 
-    private class Message {
-        private String messageSender;
+    private class Message implements Serializable{
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1881949901493380348L;
+		private String messageSender;
         private String message;
         public Message(String messageSender, String message) {
             this.messageSender = messageSender;
@@ -30,15 +39,15 @@ public class TextBox implements Inputtable, Serializable{
     }
     private String currentTypedText;
     private ArrayList<Message> pastMessages;
-    private MinuetoFont font = new MinuetoFont("Helvetica",14, false, false);
+    private transient MinuetoFont font = new MinuetoFont("Helvetica",14, false, false);
     private static GameStatus gameStatus;
     private static TextBox textBox;
     private int width = 450;
     private int inputHeight = 30;
     private int outputHeight = 270;
-    public MinuetoImage textboxInput = new MinuetoRectangle(width, inputHeight, MinuetoColor.WHITE, true);
-    public MinuetoImage textboxOutput = new MinuetoRectangle(width, outputHeight, new MinuetoColor(0, 0, 0), true);
-    public MinuetoImage textboxDivider = new MinuetoRectangle(width, 1, MinuetoColor.BLACK, true);
+    public transient MinuetoImage textboxInput = new MinuetoRectangle(width, inputHeight, MinuetoColor.WHITE, true);
+    public transient MinuetoImage textboxOutput = new MinuetoRectangle(width, outputHeight, new MinuetoColor(0, 0, 0), true);
+    public transient MinuetoImage textboxDivider = new MinuetoRectangle(width, 1, MinuetoColor.BLACK, true);
 
     private TextBox() throws IOException {
         this.currentTypedText = "";

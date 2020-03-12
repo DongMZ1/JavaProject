@@ -1,4 +1,3 @@
-import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.window.MinuetoWindow;
 
@@ -6,12 +5,19 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class Time implements Serializable{
-	MinuetoImage tokenImage;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4888251730179638475L;
+	/**
+	 * 
+	 */
+	transient MinuetoImage tokenImage;
 	int time = 0;
 	int x = 6020;
 	int y = 240;
-	private MinuetoWindow screen;
-	Camera camera;
+	private transient MinuetoWindow screen;
+	transient Camera camera;
 	
 	public Time(MinuetoImage tokenImage, MinuetoWindow screen) throws IOException {
 		this.tokenImage = tokenImage;

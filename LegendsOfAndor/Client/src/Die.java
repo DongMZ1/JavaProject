@@ -72,10 +72,14 @@ class PlayingDie implements Die {
 }
 
 
-abstract class Dice {
+abstract class Dice implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3798079818286425916L;
 	protected PlayingDie regularDie;
-	private Optional<PlayingDie> blackDie = Optional.empty();
+	private transient Optional<PlayingDie> blackDie = Optional.empty();
 	protected PlayingDie currentlyUsedDie;
 	
 	protected Stack<Integer> rolledNums = new Stack<>();

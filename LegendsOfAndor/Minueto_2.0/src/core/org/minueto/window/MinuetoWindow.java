@@ -1,5 +1,6 @@
 package org.minueto.window;
 
+
 import org.minueto.MinuetoEventQueue;
 import org.minueto.handlers.MinuetoFocusHandler;
 import org.minueto.handlers.MinuetoKeyboardHandler;

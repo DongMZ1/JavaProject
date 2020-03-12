@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Well implements TileEntity{
 
-	MinuetoImage wellImage;
+	transient MinuetoImage wellImage;
 	private int tile;
 	
 

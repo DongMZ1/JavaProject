@@ -3,7 +3,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Gold implements Item{
-	private MinuetoImage goldImage; 
+	private transient MinuetoImage goldImage; 
 	private int tile;
 	
 	public Gold(int tile) throws MinuetoFileException {

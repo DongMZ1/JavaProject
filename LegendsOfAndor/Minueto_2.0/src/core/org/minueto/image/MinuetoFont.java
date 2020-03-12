@@ -50,6 +50,9 @@ import org.minueto.MinuetoZeroNegativeException;
  **/
 public class MinuetoFont
 {
+	/**
+	 * 
+	 */
 	private Font fontInformation;
 	private int fontSize;
 

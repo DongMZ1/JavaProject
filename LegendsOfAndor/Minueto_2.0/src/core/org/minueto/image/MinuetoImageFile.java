@@ -26,6 +26,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -42,9 +43,14 @@ import org.minueto.MinuetoFileException;
  * @since  Minueto 0.4
  * @see  MinuetoImage
  **/
-public class MinuetoImageFile extends MinuetoImage {
+public class MinuetoImageFile extends MinuetoImage implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1858249665154472401L;
+
+	/**
      * Build a <code>MinuetoImageFile</code> by loading the specified file.
      *
      * @param filename <code>String</code> denoting which file should be loaded.

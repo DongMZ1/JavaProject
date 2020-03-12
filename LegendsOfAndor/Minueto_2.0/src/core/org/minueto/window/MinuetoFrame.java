@@ -63,8 +63,11 @@ import org.minueto.image.MinuetoImage;
  * @see   org.minueto.window.MinuetoBaseWindow
  * @see   org.minueto.image.MinuetoImage
  */
-public class MinuetoFrame extends MinuetoBaseWindow implements MinuetoWindow {
+public class MinuetoFrame extends MinuetoBaseWindow implements MinuetoWindow  {
 	
+	/**
+	 * 
+	 */
 	private JFrame		  jFrame;
 	private JPanel        jPanel;
 	private Canvas        canvas;	

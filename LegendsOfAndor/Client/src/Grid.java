@@ -4,7 +4,7 @@ import org.minueto.image.MinuetoImage;
 
 public class Grid {
 
-    private MinuetoImage boardImage;
+    private transient MinuetoImage boardImage;
     private Optional<Tile> currentTile = Optional.empty();
     
     public void setTile(Tile tile) {

@@ -4,7 +4,7 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Farmer implements TileEntity{
 
-	private MinuetoImage farmerImage;
+	private transient MinuetoImage farmerImage;
 	private int tile;
 	private Hero hero = null;
 	private boolean guided = false;
