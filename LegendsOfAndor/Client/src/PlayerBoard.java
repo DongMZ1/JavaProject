@@ -35,6 +35,13 @@ public class PlayerBoard {
     	
     	sp = hero.sp;
     	wp = hero.wp;
+    	if(hero.hasGold) {
+    		gold = 1;
+    	}
+    	
+    	else {
+    		gold = 0;
+    	}
     	
     	if(hero instanceof Warrior) {
     		image = "images/Heroes/WarriorMaleBoard.png";
@@ -83,14 +90,16 @@ public class PlayerBoard {
     	wp = hero.wp;
     	
     	if(hero.hasGold) {
-    		gold = 0;
-    	}
-    	else {
     		gold = 1;
     	}
+    	
+    	else {
+    		gold = 0;
+    	}
+    	
     }
     
     public void toggleFlag() {
-        flag = !flag;
+    	flag = !flag;
     }
 }
