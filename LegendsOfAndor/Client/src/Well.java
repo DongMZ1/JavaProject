@@ -8,34 +8,34 @@ public class Well implements TileEntity{
 
 	MinuetoImage wellImage;
 	private int tile;
+	
+
 	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
 	public Well(MinuetoImage image, int assignedTile) throws IOException {
 		wellImage = image;
-		IsEmpty = false;
+		setWellEmptiness(false);
 		tile = assignedTile;
 	}	
-	
-	//replenish the well in a new day
+	//UPDATE
 	public void replenishWell() throws MinuetoFileException {
 		if(IsEmpty) {
-			IsEmpty = false;
+			setWellEmptiness(false);
 			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
-	
-	//this function's called when a hero intends to drink from the well
+	//UPDATE
 	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
 		if(!this.IsEmpty && hero instanceof Warrior) {
-			this.IsEmpty = true;
+			setWellEmptiness(true);
 			wp = 5;
 		}
 		
 		else if(!this.IsEmpty) {
-			this.IsEmpty = true;
+			setWellEmptiness(true);
 			wp = 3;			
 		}
 		
@@ -49,6 +49,11 @@ public class Well implements TileEntity{
 	
 	private void setImage(MinuetoImage image) {
 		wellImage = image;
+	}
+	
+	//UPDATE
+	public void setWellEmptiness(boolean a){
+		IsEmpty = a;
 	}
 	
 	@Override
