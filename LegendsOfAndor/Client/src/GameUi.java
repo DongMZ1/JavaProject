@@ -127,8 +127,9 @@ public class GameUi implements Inputtable, Serializable {
 	            	gameStatus.ui = UIStatus.DROPING;
 	            }
 	            	
-	            else if(tradeButton.isClickable() && tradeButton.isClicked(x, y))
-	                ; //TODO tradeButton
+	             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y)) {
+	            	gameStatus.ui = UIStatus.Trade;
+	            }//TODO tradeButton
 	            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
