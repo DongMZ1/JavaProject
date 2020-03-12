@@ -1,9 +1,8 @@
 import java.io.Serializable;
 
 import org.minueto.MinuetoColor;
-import org.minueto.image.MinuetoCircle;
-import org.minueto.image.MinuetoImage;
-import org.minueto.image.MinuetoRectangle;
+import org.minueto.MinuetoFileException;
+import org.minueto.image.*;
 
 public class Constants implements Serializable {
     //TODO Move Constants to Own Classes
@@ -26,4 +25,38 @@ public class Constants implements Serializable {
     public static final MinuetoImage chooseCharHighlight = new MinuetoRectangle(100, 100, MinuetoColor.RED, false);
 
     public static final double HERO_SCALE = 0.2;
+
+    static String lobbyName = "Hex 13";
+    static MinuetoFont toggleFont = new MinuetoFont("Times New Roman",60, true, false);
+    static MinuetoFont startFont = new MinuetoFont("Times New Roman",45, true, false);
+    static MinuetoFont playerPlateFont = new MinuetoFont("Times New Roman",20, false, false);
+    static MinuetoImage background;
+    static MinuetoImage easy = new MinuetoText("EASY", toggleFont, MinuetoColor.GREEN);
+    static MinuetoImage hard = new MinuetoText("HARD", toggleFont, MinuetoColor.RED);
+    static MinuetoImage start = new MinuetoText("Start Game", startFont, MinuetoColor.BLACK);
+    static MinuetoImage empty = new MinuetoText("EMPTY", toggleFont, MinuetoColor.BLACK);
+    static MinuetoImage player1 = new MinuetoText("Jamie", toggleFont, MinuetoColor.BLACK);
+    static MinuetoImage maleLogo;
+    static MinuetoImage femaleLogo;
+    static MinuetoImage warriorThumbnail;
+    static MinuetoImage archerThumbnail;
+    static MinuetoImage mageThumbnail;
+    static MinuetoImage dwarfThumbnail;
+    static MinuetoImage tavernName = new MinuetoText(lobbyName + " Tavern", toggleFont, MinuetoColor.BLACK);
+    static {
+        try {
+            background = new MinuetoImageFile("images/LobbyBackground.jpg").crop(0, 200, 1920, 1080);
+            dwarfThumbnail = new MinuetoImageFile("images/Heroes/DwarfMaleThumbnail.png");
+            mageThumbnail = new MinuetoImageFile("images/Heroes/MageMaleThumbnail.png");
+            archerThumbnail = new MinuetoImageFile("images/Heroes/ArcherMaleThumbnail.png");
+            warriorThumbnail = new MinuetoImageFile("images/Heroes/WarriorMaleThumbnail.png");
+            femaleLogo = new MinuetoImageFile("images/FemaleSymbol.png");
+            maleLogo = new MinuetoImageFile("images/MaleSymbol.png").scale(0.2, 0.2);
+        } catch (MinuetoFileException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Constants() throws MinuetoFileException {
+    }
 }

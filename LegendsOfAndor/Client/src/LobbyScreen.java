@@ -13,30 +13,12 @@ import java.io.Serializable;
 public class LobbyScreen implements Inputtable, Serializable {
     //TODO Clean LobbyScreen class
     private boolean isEasy;
-    private MinuetoWindow screen;
-    private String lobbyName = "Hex 13";
-    private MinuetoFont toggleFont = new MinuetoFont("Times New Roman",60, true, false);
-    private MinuetoFont startFont = new MinuetoFont("Times New Roman",45, true, false);
-    private MinuetoFont playerPlateFont = new MinuetoFont("Times New Roman",20, false, false);
-    private MinuetoImage background = new MinuetoImageFile("images/LobbyBackground.jpg").crop(0, 200, 1920, 1080);
-    private MinuetoImage tavernName = new MinuetoText(lobbyName + " Tavern", toggleFont, MinuetoColor.BLACK);
-    private MinuetoImage easy = new MinuetoText("EASY", toggleFont, MinuetoColor.GREEN);
-    private MinuetoImage hard = new MinuetoText("HARD", toggleFont, MinuetoColor.RED);
-    private MinuetoImage start = new MinuetoText("Start Game", startFont, MinuetoColor.BLACK);
-    private MinuetoImage empty = new MinuetoText("EMPTY", toggleFont, MinuetoColor.BLACK);
-    private MinuetoImage player1 = new MinuetoText("Jamie", toggleFont, MinuetoColor.BLACK);
-    private MinuetoImage maleLogo = new MinuetoImageFile("images/MaleSymbol.png").scale(0.2, 0.2);
-    private MinuetoImage femaleLogo = new MinuetoImageFile("images/FemaleSymbol.png");
-    private MinuetoImage warriorThumbnail = new MinuetoImageFile("images/Heroes/WarriorMaleThumbnail.png");
-    private MinuetoImage archerThumbnail = new MinuetoImageFile("images/Heroes/ArcherMaleThumbnail.png");
-    private MinuetoImage mageThumbnail = new MinuetoImageFile("images/Heroes/MageMaleThumbnail.png");
-    private MinuetoImage dwarfThumbnail = new MinuetoImageFile("images/Heroes/DwarfMaleThumbnail.png");
+
     private int currentChar = 0;
     private static GameStatus gameStatus;
     private static TextBox textBox;
     int ghettoText;
-    public LobbyScreen(MinuetoWindow screen) throws IOException {
-        this.screen = screen;
+    public LobbyScreen() throws IOException {
         this.isEasy = false;
         gameStatus = GameStatus.getInstance();
         textBox = TextBox.getInstance();
@@ -44,35 +26,35 @@ public class LobbyScreen implements Inputtable, Serializable {
     }
 
     public void draw() {
-    	drawScale(background, 0, 0);
-    	drawScale(tavernName, 20, 15);
+    	drawScale(Constants.background, 0, 0);
+    	drawScale(Constants.tavernName, 20, 15);
     	drawScale(Constants.difficultyToggle, gameStatus.screenWidth - Constants.DIFFICULTY_WIDTH, 0);
     	drawScale(Constants.difficultyToggle, ghettoText + 300, gameStatus.screenHeight - Constants.DIFFICULTY_HEIGHT + 50);
-    	drawScale(start, ghettoText + 325, 3*(gameStatus.screenHeight)/2 - 100);
+    	drawScale(Constants.start, ghettoText + 325, 3*(gameStatus.screenHeight)/2 - 100);
         for(int i = 0; i < 4; i++) {
         	drawScale(Constants.playerPlate, ghettoText + 75, 200 + i * (Constants.PLAYER_HEIGHT + 50));
             if(i == 0) {
-            	drawScale(player1, ghettoText + 100, 225);
+            	drawScale(Constants.player1, ghettoText + 100, 225);
             }
             else
-            	drawScale(empty, ghettoText + 100, 225 + i * (Constants.PLAYER_HEIGHT + 50));
+            	drawScale(Constants.empty, ghettoText + 100, 225 + i * (Constants.PLAYER_HEIGHT + 50));
         }
         drawScale(Constants.MaleButton, ghettoText + 500, 225);
-        drawScale(warriorThumbnail, ghettoText + 650, 225);
-        drawScale(archerThumbnail, ghettoText + 800, 225);
-        drawScale(dwarfThumbnail, ghettoText + 950, 225);
-        drawScale(mageThumbnail, ghettoText + 1100, 225);
+        drawScale(Constants.warriorThumbnail, ghettoText + 650, 225);
+        drawScale(Constants.archerThumbnail, ghettoText + 800, 225);
+        drawScale(Constants.dwarfThumbnail, ghettoText + 950, 225);
+        drawScale(Constants.mageThumbnail, ghettoText + 1100, 225);
         drawScale(Constants.chooseCharHighlight, ghettoText + 650 + (currentChar * 150), 225);
-        drawScale(maleLogo, ghettoText + 515, 240);
+        drawScale(Constants.maleLogo, ghettoText + 515, 240);
         if(isEasy)
-        	drawScale(easy, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.2), 15);
+        	drawScale(Constants.easy, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.2), 15);
         else
-        	drawScale(hard, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.15), 15);
+        	drawScale(Constants.hard, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.15), 15);
     }
     
     //Could add int scale instead of 1.5
     public void drawScale(MinuetoImage image, int x, int y) {
-    	screen.draw(image,(int) (x/1.5), (int) (y/1.5)); 
+    	Client.screen.draw(image,(int) (x/1.5), (int) (y/1.5));
     }
     
     public boolean clickedScale (int x1, int y1, int x2, int y2, int clickedX, int clickedY) {

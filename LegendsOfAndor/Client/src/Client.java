@@ -43,14 +43,14 @@ public class Client {
     static TextBox textBox;
     static Hero mainHero;
     static GameStatus gameStatus;
-
+    static MinuetoWindow screen;
     public static void main(String[] args) throws Exception {
     	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         
          gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
-        lobbyScreen = new LobbyScreen(gameStatus.screen);
-        gameBoard = new GameScreen(gameStatus.screen);
+        lobbyScreen = new LobbyScreen();
+        gameBoard = new GameScreen();
         textBox = TextBox.getInstance();
         new InputThread(gameStatus, lobbyScreen, gameBoard, textBox).start();
         inputHandler.addInput(lobbyScreen);
@@ -71,7 +71,7 @@ public class Client {
 
             textBox.draw();
 
-            gameStatus.screen.render();
+            screen.render();
             inputHandler.handleQueue();
         }
 

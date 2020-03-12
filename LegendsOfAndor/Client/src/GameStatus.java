@@ -47,7 +47,6 @@ public class GameStatus implements Serializable {
 		this.currentScreen = currentScreen;
 	}
 
-	MinuetoWindow screen;
 	UIStatus ui = UIStatus.NONE;
 	FightStatus fight = FightStatus.NONE;
 
@@ -62,7 +61,7 @@ public class GameStatus implements Serializable {
 	private GameStatus() throws IOException {
 		focus = FOCUS_ON_LOBBY;
 		currentScreen = LOBBY_SCREEN;
-		screen = new MinuetoFrame(screenWidth, screenHeight, true);
+
 
 	}
 

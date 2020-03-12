@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GameScreen implements Inputtable, Serializable{
-    private MinuetoWindow screen;
     private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
     private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
     private boolean movingCam;
@@ -44,9 +43,7 @@ public class GameScreen implements Inputtable, Serializable{
     final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9}; 
     final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57}; 
 	
-    public GameScreen(MinuetoWindow screen) throws IOException {
-        this.screen = screen;
-        this.screen.setVisible(true);
+    public GameScreen() throws IOException {
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
@@ -64,9 +61,9 @@ public class GameScreen implements Inputtable, Serializable{
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
         
-        Client.mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
+        Client.mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
         hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
-        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
+        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
         
         tm = new TurnManager(new ArrayList<Hero>());
         tm.addHero(Client.mainHero);
@@ -76,10 +73,10 @@ public class GameScreen implements Inputtable, Serializable{
         
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
-        fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
+        fight = new Fight(Client.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         playerBoard = PlayerBoard.getInstance(Client.mainHero);
-        castle = new Castle(5 - tm.getSize(), this.screen);
+        castle = new Castle(5 - tm.getSize(), Client.screen);
     }
     
     public void fight() {
@@ -87,8 +84,8 @@ public class GameScreen implements Inputtable, Serializable{
     }
 
     public void draw() {
-        this.screen.draw(background, 0, 0);
-        this.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
+        Client.screen.draw(background, 0, 0);
+        Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
