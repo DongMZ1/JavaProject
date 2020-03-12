@@ -15,29 +15,27 @@ public class Well implements TileEntity{
 	//constructor 
 	public Well(MinuetoImage image, int assignedTile) throws IOException {
 		wellImage = image;
-		IsEmpty = false;
+		setWellEmptiness(false);
 		tile = assignedTile;
 	}	
 	
-	//UPDATE
 	public void replenishWell() throws MinuetoFileException {
 		if(IsEmpty) {
-			IsEmpty = false;
+			setWellEmptiness(false);
 			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
 	
-	//UPDATE
 	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
 		if(!this.IsEmpty && hero instanceof Warrior) {
-			this.IsEmpty = true;
+			setWellEmptiness(true);
 			wp = 5;
 		}
 		
 		else if(!this.IsEmpty) {
-			this.IsEmpty = true;
+			setWellEmptiness(true);
 			wp = 3;			
 		}
 		
@@ -51,6 +49,11 @@ public class Well implements TileEntity{
 	
 	private void setImage(MinuetoImage image) {
 		wellImage = image;
+	}
+	
+	//UPDATE
+	public void setWellEmptiness(boolean a){
+		IsEmpty = a;
 	}
 	
 	@Override
