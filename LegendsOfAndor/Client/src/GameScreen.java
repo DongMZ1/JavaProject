@@ -346,8 +346,8 @@ public class GameScreen implements Inputtable, Serializable{
         	x1.start();
         	gameStatus.ui = UIStatus.NONE;
         }
-        else if(gameStatus.ui == UIStatus.Trade ) {
-        	Client.mainHero.Buy2WPfor2Gold();
+       else if(gameStatus.ui == UIStatus.Trade ) {
+        	Client.mainHero.Buy2SPfor2Gold();
         	gameStatus.ui = UIStatus.NONE;
         }
 	    
