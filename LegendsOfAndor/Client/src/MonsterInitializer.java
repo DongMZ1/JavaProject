@@ -14,11 +14,13 @@ public class MonsterInitializer {
         Monster m3 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png"), 21);
         Monster m4 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png"), 26);
         Monster m5 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png"), 48);
+        Monster m6 = new Gor(new MinuetoImageFile("images/Monsters/Skral.PNG"), 19);		
         output.add(m1);
         output.add(m2);
         output.add(m3);
         output.add(m4);
         output.add(m5);
+	output.add(m6);
         
         for (Monster monster : output)
         {
