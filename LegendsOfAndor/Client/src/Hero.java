@@ -22,7 +22,7 @@ public class Hero implements Character {
     public final ArrayList<Item> items = new ArrayList<Item>();
     public final boolean mainHero;
     Dice dice;
-    
+    //UPDATE
     public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         this.heroImage = heroImage;
         this.tile = tile;
@@ -69,7 +69,7 @@ public class Hero implements Character {
     }
 
 	
-      //replenish hero's WP from a well token
+      //UPDATE
     public void replenishWP() {
     	ArrayList<TileEntity> entities = Tile.get(tile).getTileEntities(); 	
     	if(entities != null) {
@@ -85,7 +85,7 @@ public class Hero implements Character {
 			}
     	}
     }  
-	
+//UPDATE	
   public void pickupFarmer() {
 	  if(!hasfarmer) {
 		  for(TileEntity t: Tile.get(tile).getTileEntities()) {
@@ -103,7 +103,7 @@ public class Hero implements Character {
 		  // call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
 	  }
   }
-  //remove farmer from itemlist
+  /UPDATE
   public void dropFarmer() {
 	  if(hasfarmer) {
 		  hasfarmer = false;
@@ -113,7 +113,7 @@ public class Hero implements Character {
 	  }
   }
 
- 
+ //UPDATE
   public void pickupGold() {
 	  for (TileEntity t: Tile.get(tile).getTileEntities()) {
 		  if(t instanceof Gold) {
@@ -124,7 +124,8 @@ public class Hero implements Character {
 			  break;
 		  }
   }
-  }
+  }	
+	//UPDATE
 	  public void dropGold() {
 		  for (Item i: items) {
 			  if(i instanceof Gold) {
@@ -149,7 +150,7 @@ public class Hero implements Character {
 		  return goldCount;
 	 }
 	
-
+		//UPDATE
 		  public void Buy2WPfor2Gold() {
 			  //firstly, find out if the hero has more than two gold for trade willpower
 			 if(getGoldNm() > 2) { 
