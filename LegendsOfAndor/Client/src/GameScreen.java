@@ -194,6 +194,7 @@ public class GameScreen implements Inputtable{
     		System.out.println(mainHero);
     	}
     	else if(c == 'm') {
+		playerBoard.update(mainHero);
     		playerBoard.toggleFlag();
     	}	 
     	else if (c == ' ') { 
@@ -326,22 +327,16 @@ public class GameScreen implements Inputtable{
         	//MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
         	PickupOption p1 = new PickupOption("Pick up choice:");
         	p1.start();
-        	//mainHero.replenishWP();
-        	//mainHero.pickupFarmer();
-        	//mainHero.pickupGold();
-		playerBoard.update(mainHero);
         	gameStatus.ui = UIStatus.NONE;
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
         	DropOffOption x1 = new DropOffOption("Drop off");
         	x1.start();
-		playerBoard.update(mainHero);
         	gameStatus.ui = UIStatus.NONE;
         }
         else if(gameStatus.ui == UIStatus.Trade ) {
         	mainHero.Buy2WPfor2Gold();
-		playerBoard.update(mainHero);
         	gameStatus.ui = UIStatus.NONE;
         }
 	    
