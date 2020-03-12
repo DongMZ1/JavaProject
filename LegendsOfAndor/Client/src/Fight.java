@@ -51,34 +51,21 @@ public class Fight implements Inputtable, Serializable{
 	int currentRoll;
 	Monster currentMonster;
 	Dice targetDice;
-	
-	private Button rollButton;
-	private Button yourTurn;
-	private Button notYourTurn;
-	private Button confirm;
-	private Button damageButton;
-	private MinuetoImageFile diceRoll;
 
 	//button only shown to archer class
 	private Button rollAgain;
-	
-	
-	
+
+
+
 	//button only shown to mage class
 	private Button changeRollResult;
-		
+
 
 	public Fight(TurnManager tm) throws IOException {
 		
 		
 		this.tm = tm;
 		setGameStatus(GameStatus.getInstance());
-		rollButton = new Button(new Coordinate(700,600),50,50,"ROLL DICE",true);
-		yourTurn = new Button(new Coordinate(700,500),50,50,"Your Turn",false);
-		confirm = new Button(new Coordinate(760,500),50,50,"OK",true);
-		notYourTurn = new Button(new Coordinate(700,500),50,50,"Not Your Turn",false);
-		rollAgain = new Button(new Coordinate(700,500),50,50,"Roll Again",false);
-		changeRollResult = new Button(new Coordinate(690,500),50,50,"CRR",false);
 	}
 	
 	public boolean inFight(Hero h) {
@@ -164,8 +151,8 @@ public class Fight implements Inputtable, Serializable{
 		}
 		if (gameStatus.fight == FightStatus.ROLLPROMPT) {
 			if (mainHero == currentHero) {
-				yourTurn.draw();
-				rollButton.draw();
+				MinuetoFight.yourTurn.draw();
+				MinuetoFight.rollButton.draw();
 				
 				//check if the hero is Archer
 				if(currentHero instanceof Archer) {
@@ -180,7 +167,7 @@ public class Fight implements Inputtable, Serializable{
 				
 			}
 			else {
-				notYourTurn.draw();
+				MinuetoFight.notYourTurn.draw();
 			}
 		}
 		
@@ -192,8 +179,8 @@ public class Fight implements Inputtable, Serializable{
 					changeRollResult.draw();
 				}
 				if (mainHero instanceof Archer) {
-					confirm.setClickable(true);
-					confirm.draw();
+					MinuetoFight.confirm.setClickable(true);
+					MinuetoFight.confirm.draw();
 				}
 			}
 			
@@ -204,22 +191,22 @@ public class Fight implements Inputtable, Serializable{
 			}
 			else if (mainHero == currentHero) {
 				rollAgain.setClickable(false);;
-				confirm.draw();
+				MinuetoFight.confirm.draw();
 			}
 			
-			Client.screen.draw(diceRoll, 700, 600);
+			Client.screen.draw(MinuetoFight.diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.ROLLMONSTER) {
 			if (mainHero == currentHero) {
-				confirm.draw();
+				MinuetoFight.confirm.draw();
 			}
-			Client.screen.draw(diceRoll, 700, 600);
+			Client.screen.draw(MinuetoFight.diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.DAMAGE) {
 			if (mainHero == currentHero) {
-				confirm.draw();
+				MinuetoFight.confirm.draw();
 			}
-			damageButton.draw();
+			MinuetoFight.damageButton.draw();
 		}
 		//TODO Draw items once items are implemented
 	}
@@ -237,13 +224,13 @@ public class Fight implements Inputtable, Serializable{
 	public void heroRoll(int roll) throws MinuetoFileException {		
 		String diceFile = ("images/Heroes/Dice/" + roll + ".png");
 		System.out.println(diceFile);
-		diceRoll = new MinuetoImageFile(diceFile);				
+		MinuetoFight.diceRoll = new MinuetoImageFile(diceFile);
 	}
 	
 	public void monsterRoll(int roll) throws MinuetoFileException {		
 		String diceFile = ("images/Monsters/Dice/" + roll + ".png");
 		System.out.println(diceFile);
-		diceRoll = new MinuetoImageFile(diceFile);				
+		MinuetoFight.diceRoll = new MinuetoImageFile(diceFile);
 	}
 	
 	public void handleKeyPress(int key) {
@@ -277,7 +264,7 @@ public class Fight implements Inputtable, Serializable{
 		if (mainHero instanceof Mage)
 			rollAgain.setClickable(true);
 		
-		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) {
+		if (mainHero == currentHero && MinuetoFight.rollButton.isClicked(x, y) && MinuetoFight.rollButton.isClickable()) {
 			
 			if (currentHero.dice.hasRolls()) {
 				
@@ -288,13 +275,13 @@ public class Fight implements Inputtable, Serializable{
 					heroRoll(currentRoll);
 				}
 				catch (Exception e) {System.out.println("Error yo");}
-				confirm.setClickable(false);
+				MinuetoFight.confirm.setClickable(false);
 				
 			}
 			gameStatus.setFight(FightStatus.ROLLPROMPT);
 			if (!currentHero.dice.hasRolls()) {
 				rollAgain.setClickable(false);
-				confirm.setClickable(true);
+				MinuetoFight.confirm.setClickable(true);
 			}
 	//		rollAgain.setClickable(false);
 		
@@ -315,7 +302,7 @@ public class Fight implements Inputtable, Serializable{
 			gameStatus.setFight(FightStatus.ROLLPROMPT);
 		}
 		
-		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+		else if (mainHero == currentHero && MinuetoFight.confirm.isClicked(x, y) && MinuetoFight.confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			if (currentHero.dice.hasRolls() && !(currentHero instanceof Archer)) {
 				System.out.println("BADBABBAD");
 			}
@@ -343,7 +330,7 @@ public class Fight implements Inputtable, Serializable{
 				}
 			}
 		}
-		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
+		else if (mainHero == currentHero && MinuetoFight.confirm.isClicked(x, y) && MinuetoFight.confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
 			String damage = "";
 			if (heroRoll > monsterRoll) {
 				
@@ -359,7 +346,7 @@ public class Fight implements Inputtable, Serializable{
 				}
 			}
 			try {
-				damageButton = new Button(new Coordinate(700,300), 200, 50, damage, false);
+				MinuetoFight.damageButton = new Button(new Coordinate(700,300), 200, 50, damage, false);
 				gameStatus.setFight(FightStatus.DAMAGE);
 			}
 			catch (Exception e) {
@@ -367,7 +354,7 @@ public class Fight implements Inputtable, Serializable{
 			}
 					
 		}
-		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
+		else if (mainHero == currentHero && MinuetoFight.confirm.isClicked(x, y) && MinuetoFight.confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
 			gameStatus.setFocus(GameStatus.FOCUS_ON_GAMESCREEN);
 			gameStatus.setCurrentScreen(GameStatus.GAME_SCREEN);
 			GameScreen.currentHero.time.advance();
