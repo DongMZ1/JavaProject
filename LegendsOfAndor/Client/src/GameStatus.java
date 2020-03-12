@@ -59,8 +59,8 @@ public class GameStatus {
 	}
 
 	private GameStatus() throws IOException {
-		focus = FOCUS_ON_GAMESCREEN;
-		currentScreen = GAME_SCREEN;
+		focus = FOCUS_ON_LOBBY;
+		currentScreen = LOBBY_SCREEN;
 		screen = new MinuetoFrame(screenWidth, screenHeight, true);
 
 	}

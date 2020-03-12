@@ -14,8 +14,8 @@ public class LobbyScreen implements Inputtable {
     private boolean isEasy;
     private MinuetoWindow screen;
     private String lobbyName = "Hex 13";
-    private MinuetoFont toggleFont = new MinuetoFont("Times New Roman",100, true, false);
-    private MinuetoFont startFont = new MinuetoFont("Times New Roman",70, true, false);
+    private MinuetoFont toggleFont = new MinuetoFont("Times New Roman",60, true, false);
+    private MinuetoFont startFont = new MinuetoFont("Times New Roman",45, true, false);
     private MinuetoFont playerPlateFont = new MinuetoFont("Times New Roman",20, false, false);
     private MinuetoImage background = new MinuetoImageFile("images/LobbyBackground.jpg").crop(0, 200, 1920, 1080);
     private MinuetoImage tavernName = new MinuetoText(lobbyName + " Tavern", toggleFont, MinuetoColor.BLACK);
@@ -33,38 +33,49 @@ public class LobbyScreen implements Inputtable {
     private int currentChar = 0;
     private static GameStatus gameStatus;
     private static TextBox textBox;
+    int ghettoText;
     public LobbyScreen(MinuetoWindow screen) throws IOException {
         this.screen = screen;
         this.isEasy = false;
         gameStatus = GameStatus.getInstance();
         textBox = TextBox.getInstance();
+        ghettoText = (int) (textBox.getWidth()*1.5);
     }
 
     public void draw() {
-        screen.draw(background, 0, 0);
-        screen.draw(tavernName, 20, 15);
-        screen.draw(Constants.difficultyToggle, gameStatus.screenWidth - Constants.DIFFICULTY_WIDTH, 0);
-        screen.draw(Constants.difficultyToggle, textBox.getWidth() + 300, gameStatus.screenHeight - Constants.DIFFICULTY_HEIGHT + 50);
-        screen.draw(start, textBox.getWidth() + 325, gameStatus.screenHeight - Constants.DIFFICULTY_HEIGHT + 60);
+    	drawScale(background, 0, 0);
+    	drawScale(tavernName, 20, 15);
+    	drawScale(Constants.difficultyToggle, gameStatus.screenWidth - Constants.DIFFICULTY_WIDTH, 0);
+    	drawScale(Constants.difficultyToggle, ghettoText + 300, gameStatus.screenHeight - Constants.DIFFICULTY_HEIGHT + 50);
+    	drawScale(start, ghettoText + 325, 3*(gameStatus.screenHeight)/2 - 100);
         for(int i = 0; i < 4; i++) {
-            screen.draw(Constants.playerPlate, textBox.getWidth() + 50, 200 + i * (Constants.PLAYER_HEIGHT + 50));
+        	drawScale(Constants.playerPlate, ghettoText + 75, 200 + i * (Constants.PLAYER_HEIGHT + 50));
             if(i == 0) {
-                screen.draw(player1, textBox.getWidth() + 75, 225);
+            	drawScale(player1, ghettoText + 100, 225);
             }
             else
-                screen.draw(empty, textBox.getWidth() + 75, 225 + i * (Constants.PLAYER_HEIGHT + 50));
+            	drawScale(empty, ghettoText + 100, 225 + i * (Constants.PLAYER_HEIGHT + 50));
         }
-        screen.draw(Constants.MaleButton, textBox.getWidth() + 500, 225);
-        screen.draw(warriorThumbnail, textBox.getWidth() + 650, 225);
-        screen.draw(archerThumbnail, textBox.getWidth() + 800, 225);
-        screen.draw(dwarfThumbnail, textBox.getWidth() + 950, 225);
-        screen.draw(mageThumbnail, textBox.getWidth() + 1100, 225);
-        screen.draw(Constants.chooseCharHighlight, textBox.getWidth() + 650 + (currentChar * 150), 225);
-        screen.draw(maleLogo, textBox.getWidth() + 515, 240);
+        drawScale(Constants.MaleButton, ghettoText + 500, 225);
+        drawScale(warriorThumbnail, ghettoText + 650, 225);
+        drawScale(archerThumbnail, ghettoText + 800, 225);
+        drawScale(dwarfThumbnail, ghettoText + 950, 225);
+        drawScale(mageThumbnail, ghettoText + 1100, 225);
+        drawScale(Constants.chooseCharHighlight, ghettoText + 650 + (currentChar * 150), 225);
+        drawScale(maleLogo, ghettoText + 515, 240);
         if(isEasy)
-            screen.draw(easy, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.2), 15);
+        	drawScale(easy, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.2), 15);
         else
-            screen.draw(hard, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.15), 15);
+        	drawScale(hard, gameStatus.screenWidth - (int) (Constants.DIFFICULTY_WIDTH / 1.15), 15);
+    }
+    
+    //Could add int scale instead of 1.5
+    public void drawScale(MinuetoImage image, int x, int y) {
+    	screen.draw(image,(int) (x/1.5), (int) (y/1.5)); 
+    }
+    
+    public boolean clickedScale (int x1, int y1, int x2, int y2, int clickedX, int clickedY) {
+    	return isClicked((int) (x1/1.5), (int) (y1/1.5), (int) (x2/1.5), (int) (y2/1.5), clickedX, clickedY);
     }
 
     /**
@@ -86,28 +97,28 @@ public class LobbyScreen implements Inputtable {
 
     }
     public void handleMousePress(int x, int y, int button) {
-        if(isClicked(textBox.getWidth() + 325, gameStatus.screenHeight, textBox.getWidth() + 325 + Constants.DIFFICULTY_WIDTH,
-                        gameStatus.screenHeight - Constants.DIFFICULTY_HEIGHT + 60, x, y)) {
+    	System.out.println("X: " + x + "Y: " + y);
+        if(isClicked(660,700,900,650, x, y)) {
             gameStatus.focus = gameStatus.FOCUS_ON_GAMESCREEN;
             gameStatus.currentScreen = gameStatus.GAME_SCREEN;
         }
         else if(isClicked(0, gameStatus.screenHeight, textBox.getWidth(), gameStatus.screenHeight - textBox.getHeight(), x, y)) {
             gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
         }
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && isClicked(gameStatus.screenWidth - Constants.DIFFICULTY_WIDTH,
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(gameStatus.screenWidth - Constants.DIFFICULTY_WIDTH,
                 Constants.DIFFICULTY_HEIGHT, gameStatus.screenWidth, 0, x, y))
         isEasy = !isEasy;
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && isClicked(textBox.getWidth() + 650,
-                325, textBox.getWidth() + 750, 225, x, y))
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 650,
+                325, ghettoText + 750, 225, x, y))
             currentChar = 0;
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && isClicked(textBox.getWidth() + 800,
-                325, textBox.getWidth() + 900, 225, x, y))
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 800,
+                325, ghettoText + 900, 225, x, y))
             currentChar = 1;
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && isClicked(textBox.getWidth() + 950,
-                325, textBox.getWidth() + 1050, 225, x, y))
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 950,
+                325, ghettoText + 1050, 225, x, y))
             currentChar = 2;
-        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && isClicked(textBox.getWidth() + 1100,
-                325, textBox.getWidth() + 1200, 225, x, y))
+        else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 1100,
+                325, ghettoText + 1200, 225, x, y))
             currentChar = 3;
     }
     public void handleMouseRelease(int x, int y, int button) {

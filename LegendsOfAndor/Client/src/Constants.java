@@ -17,8 +17,8 @@ public class Constants {
     public static final int DIFFICULTY_HEIGHT = 150;
     public static final MinuetoImage difficultyToggle = new MinuetoRectangle(DIFFICULTY_WIDTH, DIFFICULTY_HEIGHT, new MinuetoColor(230, 230, 230), true);
 
-    public static final int PLAYER_WIDTH = 1200;
-    public static final int PLAYER_HEIGHT = 150;
+    public static final int PLAYER_WIDTH = (2*1200)/3;
+    public static final int PLAYER_HEIGHT = (2*150)/3;
     public static final MinuetoImage playerPlate = new MinuetoRectangle(PLAYER_WIDTH, PLAYER_HEIGHT, new MinuetoColor(230, 230, 230), true);
     public static final MinuetoImage MaleButton = new MinuetoRectangle(100, 100, new MinuetoColor(50, 50, 255), true);
     public static final MinuetoImage chooseCharHighlight = new MinuetoRectangle(100, 100, MinuetoColor.RED, false);

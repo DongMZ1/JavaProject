@@ -57,6 +57,8 @@ public class TextBox implements Inputtable{
     public int getHeight() {
         return inputHeight + outputHeight;
     }
+    
+    
 
     public void draw() {
         this.gameStatus.screen.draw(textboxInput, 0, gameStatus.screenHeight - inputHeight);
