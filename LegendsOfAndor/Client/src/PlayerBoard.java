@@ -83,20 +83,14 @@ public class PlayerBoard {
     	wp = hero.wp;
     	
     	if(hero.hasGold) {
-    		gold = 1;
+    		gold = 0;
     	}
     	else {
-    		gold = 0;
+    		gold = 1;
     	}
     }
     
     public void toggleFlag() {
-    	if(flag == true) {
-    		flag = false;
-    	}
-    	
-    	else {
-    		flag = true;
-    	}
+        flag = !flag;
     }
 }
