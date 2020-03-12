@@ -60,6 +60,22 @@ public class Client {
         lobbyScreen = new LobbyScreen();
         gameScreen = new GameScreen();
         textBox = TextBox.getInstance();
+        if(lobbyScreen.getHero() == "Warrior") {
+        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        }
+        
+        else if(lobbyScreen.getHero() == "Archer") {
+        	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        }
+
+        else if(lobbyScreen.getHero() == "Dwarf") {
+        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/DwarfMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        }       
+        
+        else {
+        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/MageMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        } 	    
+	    
         new InputThread(gameStatus, lobbyScreen, gameScreen, textBox).start();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreen);
