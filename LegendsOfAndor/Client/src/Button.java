@@ -16,22 +16,22 @@ public class Button implements Serializable{
 	private static final long serialVersionUID = 3950552043413552193L;
 	private Coordinate coordinate;
     private int height, width;
-    private transient MinuetoText label;
+    private static MinuetoText label;
     private boolean clickable;
-    private transient MinuetoRectangle clickableButtonBackground;
-    private transient MinuetoRectangle unclickableButtonBackground;
-    private transient MinuetoFont font;
+    private static MinuetoRectangle clickableButtonBackground;
+    private static MinuetoRectangle unclickableButtonBackground;
+    private static MinuetoFont font;
     private GameStatus gameStatus;
 
-    public Button(Coordinate coordinate, int height, int width, String label, boolean clickable) throws IOException {
+    public Button(Coordinate coordinate, int height, int width, String plabel, boolean clickable) throws IOException {
         this.coordinate = coordinate;
         this.height = height;
         this.width = width;
-        this.font = new MinuetoFont("Arial",20, true, false);
-        this.label = new MinuetoText(label, font, MinuetoColor.BLACK);
+        font = new MinuetoFont("Arial",20, true, false);
+        label = new MinuetoText(plabel, font, MinuetoColor.BLACK);
         this.clickable = clickable;
-        this.clickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(211, 211, 211), true);
-        this.unclickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(225, 225, 225), true);
+        clickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(211, 211, 211), true);
+        unclickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(225, 225, 225), true);
         this.gameStatus = GameStatus.getInstance();
     }
 
@@ -46,7 +46,7 @@ public class Button implements Serializable{
         return this.width;
     }
     public void setLabel(String newLabel) {
-        this.label = new MinuetoText(newLabel, font, MinuetoColor.BLACK);
+        label = new MinuetoText(newLabel, font, MinuetoColor.BLACK);
     }
 
     public void draw() {

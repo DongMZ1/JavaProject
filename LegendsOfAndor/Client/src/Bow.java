@@ -4,7 +4,7 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Bow implements Item{
 	int Tile;
-	transient MinuetoImage image;
+	static MinuetoImage image;
 	
 	public void Bowin(int tile) throws MinuetoFileException{
 		Tile = tile;

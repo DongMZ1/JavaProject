@@ -11,9 +11,9 @@ import org.minueto.window.MinuetoWindow;
 public class Castle implements Serializable{
 
 	private int health;
-	private transient MinuetoWindow screen;
-	private transient MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
-	private transient MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
+	private static MinuetoWindow screen;
+	private static MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
+	private static MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
 	private String message;
 	Camera camera;
 	

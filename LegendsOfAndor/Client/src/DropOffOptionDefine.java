@@ -16,8 +16,8 @@ public class DropOffOptionDefine implements MinuetoKeyboardHandler, Serializable
 MinuetoMouseHandler,
 MinuetoWindowHandler{
 
-	transient MinuetoFrame window;			// The Minueto window		
-	transient MinuetoEventQueue eventQueue;			// The Minueto queue that will hold
+	static MinuetoFrame window;			// The Minueto window		
+	static MinuetoEventQueue eventQueue;			// The Minueto queue that will hold
 	// the events.
 	boolean closing;
 

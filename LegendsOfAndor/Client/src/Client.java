@@ -152,7 +152,15 @@ class InputThread extends Thread{
         try {
         while (true) {
             Object input = in.readObject();
-            System.out.println(input);
+            if (input instanceof GameScreen) {
+            	Client.gameScreen = (GameScreen) input;
+            }
+            else if (input instanceof LobbyScreen) {
+            	Client.lobbyScreen = (LobbyScreen) input;
+            }
+            else if (input instanceof GameStatus) {
+            	Client.gameStatus = (GameStatus) input;
+            }
         }
         } catch(Exception e) {}
     }

@@ -12,23 +12,23 @@ public class Time implements Serializable{
 	/**
 	 * 
 	 */
-	transient MinuetoImage tokenImage;
+	static MinuetoImage tokenImage;
 	int time = 0;
 	int x = 6020;
 	int y = 240;
-	private transient MinuetoWindow screen;
-	transient Camera camera;
+	private static MinuetoWindow screen;
+	static Camera camera;
 	
-	public Time(MinuetoImage tokenImage, MinuetoWindow screen) throws IOException {
-		this.tokenImage = tokenImage;
-		this.screen = screen;
-		this.camera = Camera.getInstance();
+	public Time(MinuetoImage ptokenImage, MinuetoWindow pscreen) throws IOException {
+		tokenImage = ptokenImage;
+		screen = pscreen;
+		camera = Camera.getInstance();
 		
 	}
 	
 	public void draw() {
 		Coordinate coordinates = camera.getPosOnScreen(x,y);
-		this.screen.draw(tokenImage,coordinates.getX(),coordinates.getY());
+		screen.draw(tokenImage,coordinates.getX(),coordinates.getY());
 	}
 	
 	public void advance() {
