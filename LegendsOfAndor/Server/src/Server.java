@@ -15,7 +15,7 @@ public class Server {
     private static HashSet<PrintWriter> writers = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
-        System.out.println("The chat server is running...");
+        System.out.println("The game server is running...");
         Executor pool = Executors.newFixedThreadPool(4);
         InetAddress addr = InetAddress.getByName("10.121.175.40");
         try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
