@@ -50,11 +50,8 @@ public class Server {
                 in = new Scanner(socket.getInputStream());
                 out = new PrintWriter(socket.getOutputStream(), true);
 
-                //Tell all current players that new player has joined
-                for (PrintWriter writer : writers) {
-                    writer.println("Player " + (writers.size()+1) + " has joined");
-                }
                 writers.add(out);
+                out.println("1,newPlayer,"+ writers.size());
                 // Accept messages from this client and broadcast them.
                 while (true) {
                     String input = in.nextLine();

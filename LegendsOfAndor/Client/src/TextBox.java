@@ -13,6 +13,10 @@ import java.util.ArrayList;
 
 public class TextBox implements Inputtable{
 
+    public void addMessage(String sender, String message) {
+        pastMessages.add(new Message(sender, message));
+    }
+
     private class Message {
         private String messageSender;
         private String message;
@@ -92,7 +96,7 @@ public class TextBox implements Inputtable{
         else if(c == MinuetoKeyboard.KEY_ENTER) {
             if(!currentTypedText.equals("")) {
                 this.pastMessages.add(new Message("You", currentTypedText));
-                Client.updateVariable("message", currentTypedText);
+                InputThread.updateVariable("message", currentTypedText);
                 currentTypedText = "";
             }
         }
