@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Inet6Address;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
@@ -15,7 +17,8 @@ public class Server {
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running...");
         Executor pool = Executors.newFixedThreadPool(4);
-        try (ServerSocket listener = new ServerSocket(59001)) {
+        InetAddress addr = InetAddress.getByName("0.0.0.0");
+        try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
             while (true) {
                 pool.execute(new Handler(listener.accept()));
             }
@@ -55,6 +58,7 @@ public class Server {
                 // Accept messages from this client and broadcast them.
                 while (true) {
                     String input = in.nextLine();
+                    System.out.println(input);
                     for (PrintWriter writer : writers) {
                         writer.println(input);
                     }

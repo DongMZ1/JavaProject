@@ -77,7 +77,7 @@ class InputThread extends Thread{
     private TextBox textBox;
     private static int playerNumber;
     //Basic network code init
-    static String serverAddress = "127.0.0.1";
+    static String serverAddress = "0.0.0.0";
 
     static Socket socket;
     static Scanner in;
@@ -115,7 +115,6 @@ class InputThread extends Thread{
             if(sender != playerNumber) {
                 switch (variable) {
                     case "message":
-                        System.out.println(value);
                         textBox.addMessage("Player " + playerNumber, value);
                         break;
                     case "":
