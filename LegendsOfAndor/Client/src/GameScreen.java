@@ -254,6 +254,7 @@ public class GameScreen implements Inputtable{
 		            
 		        }
 	        	else if(gameStatus.ui == UIStatus.MOVING) {
+				//UPDATE
 		            	moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));	
 		            	mainHero.time.advance();	            
 		            }
