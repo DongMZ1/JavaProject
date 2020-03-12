@@ -104,6 +104,7 @@ abstract class Dice {
 	public int roll() {	
 		int number = 5;
 		if (rollsLeft > 0) {
+			
 			number = currentlyUsedDie.roll();
 			rollsLeft --;
 		}
@@ -116,7 +117,8 @@ abstract class Dice {
 		return rollsLeft > 0;
 	}
 
-	protected void setCurrentNumber(int number) {
+	public void setCurrentNumber(int number) {
+		rolledNums.pop();
 		rolledNums.pop();
 		rolledNums.push(number);
 	}
@@ -203,10 +205,11 @@ class MageDice extends Dice {
 		rollsLeft = currentNumOfDice;
 	}
 	
-	public void flipRoll(Dice target) {
-		int flipIndex = 5 - target.getLastRollIndex();
-		int flipNumber = target.getCurrentDieNumbers()[flipIndex];
-		target.setCurrentNumber(flipNumber);
+	public int flipRoll(int i) {
+		
+		int flipNumber = 7 - i;
+		System.out.println("Flip number" + flipNumber);
+		return flipNumber;
 	};	
 	
 	@Override

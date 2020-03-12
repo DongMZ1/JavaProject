@@ -56,7 +56,7 @@ public class Fight implements Inputtable{
 		confirm = new Button(new Coordinate(760,500),50,50,"OK",true);
 		notYourTurn = new Button(new Coordinate(700,500),50,50,"Not Your Turn",false);
 		rollAgain = new Button(new Coordinate(700,500),50,50,"Roll Again",false);
-		changeRollResult = new Button(new Coordinate(700,500),50,50,"Change Roll Result",false);
+		changeRollResult = new Button(new Coordinate(690,500),50,50,"CRR",false);
 	}
 	
 	public void start(Tile fightTile) {
@@ -194,6 +194,16 @@ public class Fight implements Inputtable{
 		//TODO Draw items once items are implemented
 	}
 	
+	public int flipRoll(int i) {
+		
+		int flipNumber = 7 - i;
+		targetDice.setCurrentNumber(flipNumber);
+		System.out.println(targetDice);
+		System.out.println(targetDice.rolledNums);
+		
+		return flipNumber;
+	}
+	
 	public void heroRoll(int roll) throws MinuetoFileException {		
 		String diceFile = ("images/Heroes/Dice/" + roll + ".png");
 		System.out.println(diceFile);
@@ -220,7 +230,7 @@ public class Fight implements Inputtable{
 	public void handleKeyType(char c) {
 		// TODO Auto-generated method stub
 		if (c == 'a') {
-			mainHero = currentHero;
+			mainHero = tm.endTurn();
 			}
 		else if (c == 'd') {
 			gameStatus.fight = FightStatus.ROLLPROMPT;
@@ -261,10 +271,14 @@ public class Fight implements Inputtable{
 		}
 		
 		//allow only mage class to change roll result
-		else if (currentHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-	
-//			MageDice mageDice = (MageDice) currentHero.dice;
-//			mageDice.flipRoll(targetDice);	
+		else if (mainHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			System.out.println("MAGE BUTTON PRESSED");
+			
+			try {
+			heroRoll(flipRoll(currentRoll));	
+			}
+			catch (Exception e) {System.out.println("ian is cool");}
+			
 		}	
 		
 		else if (mainHero == currentHero && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
