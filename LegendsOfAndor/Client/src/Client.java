@@ -59,21 +59,8 @@ public class Client {
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
 
-        if(lobbyScreen.getHero() == "Warrior") {
-        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        }
-        
-        else if(lobbyScreen.getHero() == "Archer") {
-        	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        }
-
-        else if(lobbyScreen.getHero() == "Dwarf") {
-        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/DwarfMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        }       
-        
-        else {
-        	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/MageMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        } 	    
+       
+        Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);	    
 
         gameScreen = new GameScreen();
         textBox = TextBox.getInstance();	    
