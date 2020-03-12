@@ -18,14 +18,14 @@ public class Well implements TileEntity{
 		setWellEmptiness(false);
 		tile = assignedTile;
 	}	
-	
+	//UPDATE
 	public void replenishWell() throws MinuetoFileException {
 		if(IsEmpty) {
 			setWellEmptiness(false);
 			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
-	
+	//UPDATE
 	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
