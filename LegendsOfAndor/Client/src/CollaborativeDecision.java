@@ -7,11 +7,9 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.window.MinuetoWindow;
 
 public class CollaborativeDecision implements Inputtable, Serializable {
-	private MinuetoWindow screen;
 	DecisionType toDecide = DecisionType.NONE;
 	GameStatus gameStatus;
 	InputHandler inputHandler;
-	MinuetoImage background;
 	TurnManager tm;
 	ArrayList<Tuple<Item,Hero>> items;
 	ArrayList<Button> itemButtons;
@@ -19,7 +17,7 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 	TextBox textBox;
 	
 	
-	public CollaborativeDecision(DecisionType d, MinuetoWindow screen, TurnManager tm){
+	public CollaborativeDecision(DecisionType d, TurnManager tm){
 		toDecide = d;		
 		try {
 		 gameStatus = GameStatus.getInstance();
@@ -33,9 +31,9 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 		gameStatus.focus = GameStatus.FOCUS_ON_COLLABORATIVE;
 		
 		
-		this.screen = screen;
+
 		this.tm = tm;
-		background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
+		Constants.background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
 		
 		items = new ArrayList<>();
 		itemButtons = new ArrayList<>();
@@ -80,7 +78,7 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 			Button button = itemButtons.get(i);
 			
 			if (hero != null) {
-				screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				Client.screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
 				remainingSlots--;
 
 			}
@@ -89,14 +87,14 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 				
 			}
 			button.draw();
-			screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
+			Client.screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
 			
 		}
 		
 	}
 	
 	public void draw() {
-		screen.draw(background, 0, 0);
+		Client.screen.draw(Constants.background, 0, 0);
 		decisionLoop();
 	}
 
