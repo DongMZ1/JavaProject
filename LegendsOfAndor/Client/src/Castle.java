@@ -26,6 +26,7 @@ public class Castle {
 		// if the farmer was dropped at tile 0, then farmer will appear at the tileentities list, heath++ then remove the farmer
 		for(TileEntity t: Tile.get(0).getTileEntities()) {
 			if(t instanceof Farmer) {
+				//UPDATE
 				health++;
 				Tile.get(0).getTileEntities().remove(t);
 			}
