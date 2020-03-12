@@ -59,6 +59,11 @@ public class Fight implements Inputtable{
 		changeRollResult = new Button(new Coordinate(690,500),50,50,"CRR",false);
 	}
 	
+	public boolean inFight(Hero h) {
+		if (fightHeroes.contains(h)) return true;
+		else return false;
+	}
+	
 	public void start(Tile fightTile) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
@@ -159,15 +164,18 @@ public class Fight implements Inputtable{
 		
 		else if (gameStatus.fight == FightStatus.ROLLRESPONSE) {
 			
+			if (inFight(mainHero)) {
+				if (mainHero instanceof Mage) {
+					changeRollResult.setClickable(true);
+					changeRollResult.draw();
+				}
+				if (mainHero instanceof Archer) {
+					confirm.setClickable(true);
+					confirm.draw();
+				}
+			}
 			
-			if (mainHero instanceof Mage) {
-				changeRollResult.setClickable(true);
-				changeRollResult.draw();
-			}
-			if (mainHero instanceof Archer) {
-				confirm.setClickable(true);
-				confirm.draw();
-			}
+			
 			if (mainHero == currentHero && mainHero.dice.hasRolls()) {
 				rollAgain.setClickable(true);
 				rollAgain.draw();
