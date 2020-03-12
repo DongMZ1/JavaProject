@@ -19,7 +19,7 @@ public class Well implements TileEntity{
 	
 	//replenish the well in a new day
 	public void replenishWell() throws MinuetoFileException {
-		if(!IsEmpty) {
+		if(IsEmpty) {
 			IsEmpty = false;
 			setImage(new MinuetoImageFile("images/Well.png"));
 		}
