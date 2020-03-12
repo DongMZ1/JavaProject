@@ -14,6 +14,7 @@ public class Hero implements Character {
     Time time;
     Farmer farmer = null;
     boolean hasfarmer = false;
+	boolean hasGold = false;
     boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
     //set it true before move, so that timer will not increase if this attribute is true
     //get a final list of items
@@ -119,6 +120,7 @@ public class Hero implements Character {
 			  this.items.add((Gold)t);
 			  Tile.get(tile).getTileEntities().remove(t);
 			  //only pick up 1 gold(one gold object represents one gold) each time
+			  hasGold = true;
 			  break;
 		  }
   }
@@ -129,6 +131,9 @@ public class Hero implements Character {
 				  this.items.remove(i);
 				  Tile.get(tile).getTileEntities().add(i);
 				  //only pick up 1 gold(one gold object represents one gold) each time
+				  if(getGoldNm() == 0){
+				  	hasGold = false;
+				  }
 				  break;
 			  }
 	  }
