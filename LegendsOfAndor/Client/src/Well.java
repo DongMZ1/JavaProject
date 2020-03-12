@@ -9,7 +9,7 @@ public class Well implements TileEntity{
 	MinuetoImage wellImage;
 	private int tile;
 	
-	//UPDATE
+
 	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
@@ -19,7 +19,7 @@ public class Well implements TileEntity{
 		tile = assignedTile;
 	}	
 	
-	//replenish the well in a new day
+	//UPDATE
 	public void replenishWell() throws MinuetoFileException {
 		if(IsEmpty) {
 			IsEmpty = false;
@@ -27,7 +27,7 @@ public class Well implements TileEntity{
 		}
 	}
 	
-	//this function's called when a hero intends to drink from the well
+	//UPDATE
 	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
