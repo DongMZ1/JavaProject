@@ -23,7 +23,7 @@ public class GameScreen implements Inputtable{
     private ArrayList<Well> wells;
     private ArrayList<Farmer> farmers;
     private DwarfMine mine;
-    private Castle castle = new Castle(1);
+    private Castle castle;
     static Hero mainHero;
     static Hero currentHero;
     private Hero hero2;
@@ -80,6 +80,7 @@ public class GameScreen implements Inputtable{
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         playerBoard = PlayerBoard.getInstance(mainHero);
+	    castle = new Castle(1, this.screen);
     }
     
     public void fight() {
@@ -97,6 +98,7 @@ public class GameScreen implements Inputtable{
         if (gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
         	cd.draw();
         }
+	    castle.draw();
     }
 
     public static boolean isValidMove(int currentInt, int destInt) {
