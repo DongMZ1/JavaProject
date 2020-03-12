@@ -8,6 +8,8 @@ public class Well implements TileEntity{
 
 	MinuetoImage wellImage;
 	private int tile;
+	
+	//UPDATE
 	private boolean IsEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
