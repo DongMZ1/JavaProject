@@ -57,41 +57,10 @@ public class Hero implements Character {
         this.wp = 7;
            }
     
-    public void setTile(int tile) {
-        this.tile = tile;
-    }
-    public int getTile() {
-        return this.tile;
-    }
-    public MinuetoImage getImage() {
-        return this.heroImage;
-    }
+    
   
     
-     public void addWineSkin() throws MinuetoFileException {
-    	//
-    	int wineSkinCount = 0;
-		  for(Item i: items) {
-			  if(i instanceof Wineskin) {
-				  wineSkinCount ++;
-			  }
-		  }
-		  if(wineSkinCount < 2) {
-			  this.items.add(new Wineskin(this.tile));
-		  }
-    }
-    
-    public void ReadytoUseWineskin() {
-    	if(holdWineSkinForUse == false) {
-    	for(Item i: items) {
-			  if(i instanceof Wineskin) {
-				  holdWineSkinForUse = true;
-				  items.remove(i);
-				  break; //use a wineskin, remove the wine skin item from items list, set holdWineSkinForUse = false
-			  }
-		  }
-    }
-    }
+     
 
 	//UPDATE
 	public void setTile(int tile) {
@@ -176,17 +145,8 @@ public class Hero implements Character {
 
 
 			// call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
-		}
-	}
-	//UPDATE
-	public void dropFarmer() {
-		if(hasfarmer) {
-			hasfarmer = false;
-			Tile.get(tile).getTileEntities().add(this.farmer);	  
-			farmer.isDropped();
-			this.farmer = null;
-		}
-	}
+		
+	
 
 	//UPDATE
 	public void pickupGold() {
