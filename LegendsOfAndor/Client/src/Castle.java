@@ -9,6 +9,7 @@ public class Castle {
     	//TODO
     	// Should decrease shield count of castle
 		if (m.getClass() == Gor.class) {
+			//UPDATE
 			System.out.println("Damaged castle by Gor");
 			health--;
 		}
