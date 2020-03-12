@@ -34,7 +34,7 @@ public class GameUi implements Inputtable {
     private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
-        playerBoard = PlayerBoard.getInstance();
+       
         waitButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight- turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Wait", true);
         tradeButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
@@ -73,6 +73,7 @@ public class GameUi implements Inputtable {
         dropButton.draw();
         tradeButton.draw();
         waitButton.draw();
+
         textBox.draw();
     }
 

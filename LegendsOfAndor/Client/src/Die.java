@@ -102,7 +102,7 @@ abstract class Dice {
 	}
 		
 	public int roll() {	
-		int number = 0;
+		int number = 5;
 		if (rollsLeft > 0) {
 			number = currentlyUsedDie.roll();
 			rollsLeft --;

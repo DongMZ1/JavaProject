@@ -19,7 +19,7 @@ public class Fight implements Inputtable{
 	ArrayList<Hero> fightHeroes;
 	
 	Hero mainHero = GameScreen.mainHero;
-	Hero currentHero = GameScreen.currentHero;
+	Hero currentHero = GameScreen.mainHero;
 	GameStatus gameStatus;
 	int herosLeft;
 	int monsterRoll;
@@ -62,6 +62,10 @@ public class Fight implements Inputtable{
 	public void start(Tile fightTile) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
+		heroRoll = 0;
+		monsterRoll = 0;
+		currentHero = GameScreen.currentHero;;
+		mainHero = GameScreen.mainHero;
 		
 		this.fightTile = fightTile;
 		isHappening = true;
@@ -169,6 +173,7 @@ public class Fight implements Inputtable{
 				rollAgain.draw();
 			}
 			else if (mainHero == currentHero) {
+				rollAgain.setClickable(false);;
 				confirm.draw();
 			}
 			
@@ -215,8 +220,8 @@ public class Fight implements Inputtable{
 	public void handleKeyType(char c) {
 		// TODO Auto-generated method stub
 		if (c == 'a') {
-			currentHero = tm.endTurn();
-		}
+			mainHero = currentHero;
+			}
 		else if (c == 'd') {
 			gameStatus.fight = FightStatus.ROLLPROMPT;
 		}
@@ -242,29 +247,9 @@ public class Fight implements Inputtable{
 				try {
 					heroRoll(currentRoll);
 				}
-				catch (Exception e) {}
+				catch (Exception e) {System.out.println("Error yo");}
 				confirm.setClickable(false);
 				
-				//check if hero's Archer and make rollAgain button clickable
-				/*if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
-					rollAgain.setClickable(true);
-				}
-				else 
-					rollAgain.setClickable(false);
-				
-				// wait 3seconds for archer to re roll his dice or 
-				// for mage to flip any roll
-			/*	try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				if(currentHero instanceof Archer) {
-					rollAgain.setClickable(false);
-					break;	//timed out -> proceed with current roll
-				}*/
 			}
 			gameStatus.fight = FightStatus.ROLLRESPONSE;
 			if (!currentHero.dice.hasRolls()) {
@@ -278,8 +263,8 @@ public class Fight implements Inputtable{
 		//allow only mage class to change roll result
 		else if (currentHero instanceof Mage && changeRollResult.isClicked(x, y) && changeRollResult.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
 	
-			MageDice mageDice = (MageDice) currentHero.dice;
-			mageDice.flipRoll(targetDice);	
+//			MageDice mageDice = (MageDice) currentHero.dice;
+//			mageDice.flipRoll(targetDice);	
 		}	
 		
 		else if (mainHero == currentHero && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {

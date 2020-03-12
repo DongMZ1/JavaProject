@@ -14,3 +14,8 @@
 /Grid.class
 /GridMap.class
 /Wineskin.class
+/DropOffOption.class
+/DropOffOptionDefine.class
+/MerchantInitialer.class
+/PickupOption.class
+/PickupOptionDefine.class
