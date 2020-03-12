@@ -84,7 +84,7 @@ public class Client{
 
             gameStatus.screen.render();
             inputHandler.handleQueue();
-             handle();
+            //handle();
         }
 
     }

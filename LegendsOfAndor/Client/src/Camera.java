@@ -13,8 +13,8 @@ public class Camera {
 	private Camera() throws IOException {
 		boardZoom = 4;
 		currentPos = new Coordinate(0, 0);
-		bottomOfBoard = Constants.TOP_OF_BOARD / boardZoom;
-		edgeOfBoard = Constants.SIDE_OF_BOARD / boardZoom;
+		bottomOfBoard = Constants.TOP_OF_BOARD / (boardZoom-1);
+		edgeOfBoard = Constants.SIDE_OF_BOARD / (boardZoom-1);
 		gameStatus = GameStatus.getInstance();
 	}
 

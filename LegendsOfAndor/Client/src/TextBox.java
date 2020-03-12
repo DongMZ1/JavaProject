@@ -92,7 +92,7 @@ public class TextBox implements Inputtable{
         else if(c == MinuetoKeyboard.KEY_ENTER) {
             if(!currentTypedText.equals("")) {
                 this.pastMessages.add(new Message("You", currentTypedText));
-                gameStatus.updateVariable("message", currentTypedText);
+                Client.updateVariable("message", currentTypedText);
                 currentTypedText = "";
             }
         }
