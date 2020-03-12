@@ -87,19 +87,19 @@ System.out.println(this.name + ": Keyboard key " + value + " was pressed.");
 
 switch(value) {
 case MinuetoKeyboard.KEY_1:
-	GameScreen.mainHero.pickupFarmer();
+	Client.mainHero.pickupFarmer();
 	this.closing = true;
 	window.close();
 	break;
 
 case MinuetoKeyboard.KEY_2:
-	GameScreen.mainHero.pickupGold();
+	Client.mainHero.pickupGold();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_3:
-	GameScreen.mainHero.replenishWP();
+	Client.mainHero.replenishWP();
 this.closing = true;
 window.close();
 break;

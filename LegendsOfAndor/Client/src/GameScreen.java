@@ -24,7 +24,6 @@ public class GameScreen implements Inputtable{
     private ArrayList<Farmer> farmers;
     private DwarfMine mine;
     private Castle castle;
-    static Hero mainHero;
     static Hero currentHero;
     private Hero hero2;
     private TurnManager tm;
@@ -64,22 +63,21 @@ public class GameScreen implements Inputtable{
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
         
-        mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
+        Client.mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);
         hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
         hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),this.screen);       
         
         tm = new TurnManager(new ArrayList<Hero>());
-        tm.addHero(mainHero);
+        tm.addHero(Client.mainHero);
         tm.addHero(hero2);
-        currentHero = mainHero;
+        currentHero = Client.mainHero;
                
         
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
-        playerBoard = PlayerBoard.getInstance(mainHero);
+        playerBoard = PlayerBoard.getInstance(Client.mainHero);
         castle = new Castle(5 - tm.getSize(), this.screen);
     }
     
@@ -203,29 +201,29 @@ public class GameScreen implements Inputtable{
     	}
     	else if (c == 'a')
     	{
-    		mainHero = currentHero;
-    		System.out.println(mainHero);
+    		Client.mainHero = currentHero;
+    		System.out.println(Client.mainHero);
     	}
     	else if(c == 'm') {
-		playerBoard.update(mainHero);
+		playerBoard.update(Client.mainHero);
     		playerBoard.toggleFlag();
     	}	 
     	else if (c == ' ') { 
-    		if (mainHero.time.left()){ 
+    		if (Client.mainHero.time.left()){ 
     			if (toMove >= 0 && toMove <= 76) { 
 	            	if(gameStatus.ui == UIStatus.MOVEBEGIN) { 
-	            		 if (isValidMove(mainHero.getTile(),toMove)) {
-	            			moveTileEntity(mainHero, mainHero.getTile(),toMove); 
-	    		            mainHero.time.advance(); 
+	            		 if (isValidMove(Client.mainHero.getTile(),toMove)) {
+	            			moveTileEntity(Client.mainHero, Client.mainHero.getTile(),toMove); 
+	    		            Client.mainHero.time.advance(); 
 	    		            gameStatus.ui = UIStatus.MOVING; 
 	    		            gameUi.moveButton.setLabel("End Move"); 
 	            		 }
 	    	             
 	    	        } 
 	            	else if(gameStatus.ui == UIStatus.MOVING) { 
-	            		if (isValidMove(mainHero.getTile(),toMove)) {
-	    	            	moveTileEntity(mainHero, mainHero.getTile(),toMove);	 
-	    	            	mainHero.time.advance();
+	            		if (isValidMove(Client.mainHero.getTile(),toMove)) {
+	    	            	moveTileEntity(Client.mainHero, Client.mainHero.getTile(),toMove);	 
+	    	            	Client.mainHero.time.advance();
 	            		}
 	    	            } 
 	    	             
@@ -287,7 +285,7 @@ public class GameScreen implements Inputtable{
     public void handleMouseRelease(int x, int y, int button) {
         if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
         if (gameStatus.ui == UIStatus.WAITING) {
-        	if(mainHero.time.left()) {currentHero.time.advance();}
+        	if(Client.mainHero.time.left()) {currentHero.time.advance();}
         	
         	endTurn();
         	
@@ -299,8 +297,8 @@ public class GameScreen implements Inputtable{
         	gameUi.moveButton.setLabel("Move");
         }
         else if (gameStatus.ui == UIStatus.FIGHTING) {
-        	Tile t = tiles.get(mainHero.getTile());
-        	if (mainHero.time.left()) {
+        	Tile t = tiles.get(Client.mainHero.getTile());
+        	if (Client.mainHero.time.left()) {
         		monsterLoop:
 	        	for (Monster monster : monsters)
 	        	{	
@@ -313,14 +311,14 @@ public class GameScreen implements Inputtable{
 	        		}
 	        		
 	        		//fight monter on adjacent tile
-	        		else if(mainHero instanceof Archer) {
+	        		else if(Client.mainHero instanceof Archer) {
 	        			int[] adjacentTiles = t.getAdjacentTiles();
 //	        			System.out.println(t);
 	        			for (int i =0; i < adjacentTiles.length; i++) {
 //	        				System.out.println(adjacentTiles[i]);
 	        				Tile adjacentTile = Tile.get(adjacentTiles[i]);
 	        				if (adjacentTile.containsTileEntity(monster)) {
-	        					fight.startAdjacent(adjacentTile, mainHero);	    	        			
+	        					fight.startAdjacent(adjacentTile, Client.mainHero);	    	        			
 	    	        			gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 	    	        			gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 	    	        			break monsterLoop;
@@ -352,7 +350,7 @@ public class GameScreen implements Inputtable{
         	gameStatus.ui = UIStatus.NONE;
         }
         else if(gameStatus.ui == UIStatus.Trade ) {
-        	mainHero.Buy2WPfor2Gold();
+        	Client.mainHero.Buy2WPfor2Gold();
         	gameStatus.ui = UIStatus.NONE;
         }
 	    

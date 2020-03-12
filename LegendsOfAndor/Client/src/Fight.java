@@ -18,8 +18,8 @@ public class Fight implements Inputtable{
 	ArrayList<Tuple<Character,Coordinate>> fightMembers;
 	ArrayList<Hero> fightHeroes;
 	
-	Hero mainHero = GameScreen.mainHero;
-	private Hero currentHero = GameScreen.mainHero;
+	Hero mainHero = Client.mainHero;
+	private Hero currentHero = Client.mainHero;
 	public Hero getCurrentHero() {
 		return currentHero;
 	}
@@ -95,7 +95,7 @@ public class Fight implements Inputtable{
 		heroRoll = 0;
 		monsterRoll = 0;
 		setCurrentHero(GameScreen.currentHero);
-		mainHero = GameScreen.mainHero;
+		mainHero = Client.mainHero;
 		
 		this.fightTile = fightTile;
 		isHappening = true;

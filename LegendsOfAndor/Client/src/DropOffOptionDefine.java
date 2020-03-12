@@ -87,13 +87,13 @@ System.out.println(this.name + ": Keyboard key " + value + " was pressed.");
 
 switch(value) {
 case MinuetoKeyboard.KEY_F:
-GameScreen.mainHero.dropFarmer();
+Client.mainHero.dropFarmer();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_G:
-GameScreen.mainHero.dropGold();
+Client.mainHero.dropGold();
 this.closing = true;
 window.close();
 break;

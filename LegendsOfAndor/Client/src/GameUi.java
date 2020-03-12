@@ -99,7 +99,7 @@ public class GameUi implements Inputtable {
 	            
 	        }
 	        else {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && GameScreen.currentHero == GameScreen.mainHero) {
+	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && GameScreen.currentHero == Client.mainHero) {
 	                if (gameStatus.ui == UIStatus.NONE) {
 	                    gameStatus.ui = UIStatus.MOVEBEGIN;
 	                    moveButton.setLabel("Cancel Move");
@@ -135,7 +135,7 @@ public class GameUi implements Inputtable {
         }
     }
     private boolean verify() {
-    	if (gameStatus.ui == UIStatus.NONE && GameScreen.currentHero == GameScreen.mainHero) {
+    	if (gameStatus.ui == UIStatus.NONE && GameScreen.currentHero == Client.mainHero) {
     		return true;
     	}
     	else {

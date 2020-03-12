@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.util.Scanner;
 import org.minueto.*;
 import org.minueto.handlers.*;
+import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.*;
 
 public class Client {
@@ -36,9 +37,11 @@ public class Client {
     static LobbyScreen lobbyScreen;
     static GameScreen gameBoard;
     static TextBox textBox;
+    static Hero mainHero;
 
     public static void main(String[] args) throws Exception {
-
+    	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
+        
         GameStatus gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen(gameStatus.screen);
@@ -50,7 +53,7 @@ public class Client {
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameBoard.fight);
         inputHandler.addInput(gameBoard.cd);
-
+        
 
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
@@ -68,6 +71,8 @@ public class Client {
         }
 
     }
+
+	
 }
 
 class InputThread extends Thread{

@@ -116,7 +116,7 @@ public class CollaborativeDecision implements Inputtable {
 		// TODO Auto-generated method stub
 		if (c == 'a')
     	{
-    		GameScreen.mainHero = tm.endTurn();
+    		Client.mainHero = tm.endTurn();
     	}
 	}
 
@@ -131,7 +131,7 @@ public class CollaborativeDecision implements Inputtable {
 		int i = 0;
 		for (Button b : itemButtons) {
 			if (b.isClicked(x, y)) {
-				items.get(i).second = GameScreen.mainHero;
+				items.get(i).second = Client.mainHero;
 			}
 			i++;
 		}
