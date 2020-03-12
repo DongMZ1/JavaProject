@@ -11,8 +11,6 @@ import org.minueto.window.MinuetoWindow;
 
 public class Fight implements Inputtable, Serializable{
 
-	private MinuetoWindow screen;
-	MinuetoImage background;
 	private Tile fightTile;
 	boolean isHappening = false;
 	TurnManager tm;
@@ -70,12 +68,10 @@ public class Fight implements Inputtable, Serializable{
 	private Button changeRollResult;
 		
 
-	public Fight(MinuetoWindow screen, int x, int y, TurnManager tm) throws IOException {
+	public Fight(TurnManager tm) throws IOException {
 		
 		
-		this.screen = screen;
 		this.tm = tm;
-		background = new MinuetoRectangle(x, y, MinuetoColor.RED, true);
 		setGameStatus(GameStatus.getInstance());
 		rollButton = new Button(new Coordinate(700,600),50,50,"ROLL DICE",true);
 		yourTurn = new Button(new Coordinate(700,500),50,50,"Your Turn",false);
@@ -162,9 +158,9 @@ public class Fight implements Inputtable, Serializable{
 	
 	
 	public void draw() {
-		this.screen.draw(background, 0, 0);
+		Client.screen.draw(MinuetoFight.background, 0, 0);
 		for (Tuple<Character, Coordinate> member : fightMembers) {
-			this.screen.draw(member.first.getImage(), member.second.getX(), member.second.getY()*200);
+			Client.screen.draw(member.first.getImage(), member.second.getX(), member.second.getY()*200);
 		}
 		if (gameStatus.fight == FightStatus.ROLLPROMPT) {
 			if (mainHero == currentHero) {
@@ -211,13 +207,13 @@ public class Fight implements Inputtable, Serializable{
 				confirm.draw();
 			}
 			
-			this.screen.draw(diceRoll, 700, 600);
+			Client.screen.draw(diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.ROLLMONSTER) {
 			if (mainHero == currentHero) {
 				confirm.draw();
 			}
-			this.screen.draw(diceRoll, 700, 600);
+			Client.screen.draw(diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.DAMAGE) {
 			if (mainHero == currentHero) {
