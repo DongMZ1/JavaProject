@@ -23,6 +23,31 @@ public class Hero implements Character {
     public final boolean mainHero;
     Dice dice;
     //UPDATE
+ 
+    public void setholdWineSkinForUse(boolean holdWineSkinForUse) {
+    	this.holdWineSkinForUse = holdWineSkinForUse;
+    }
+    public void sethasGold(boolean hasGold) {
+    	this.hasGold = hasGold;
+    }
+    public void sethasfarmer(boolean hasfarmer) {
+    	this.hasfarmer = hasfarmer;
+    }
+    public void setFarmer(Farmer farmer) {
+    	this.farmer = farmer;
+    }
+    public void setTime(Time time) {
+    	this.time = time;
+    }
+    public void setgameStatus(GameStatus gameStatus) {
+    	this.gameStatus = gameStatus;
+    }
+    public void setsp(int sp) {
+    	this.sp = sp;
+    }
+    public void setwp(int wp) {
+    	this.wp = wp;
+    }
     public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         this.heroImage = heroImage;
         this.tile = tile;
@@ -103,7 +128,7 @@ public class Hero implements Character {
 		  // call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
 	  }
   }
-  /UPDATE
+  //UPDATE
   public void dropFarmer() {
 	  if(hasfarmer) {
 		  hasfarmer = false;
