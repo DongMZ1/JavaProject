@@ -9,6 +9,23 @@ import org.w3c.dom.Text;
 
 public class Client{
 
+    //Basic network code init
+    static String serverAddress = "127.0.0.1";
+
+    static Socket socket;
+    static Scanner in;
+    static PrintWriter out;
+
+    static {
+        try {
+            socket = new Socket(serverAddress, 59001);
+            in = new Scanner(socket.getInputStream());
+            out = new PrintWriter(socket.getOutputStream(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /*
     private void run() throws IOException  {
         try {
@@ -34,13 +51,17 @@ public class Client{
     }
     */
 
+    static LobbyScreen lobbyScreen;
+    static GameScreen gameBoard;
+    static TextBox textBox;
+
     public static void main(String[] args) throws Exception {
 
         GameStatus gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
-        LobbyScreen lobbyScreen = new LobbyScreen(gameStatus.screen);
-        GameScreen gameBoard = new GameScreen(gameStatus.screen);
-        TextBox textBox = TextBox.getInstance();
+        lobbyScreen = new LobbyScreen(gameStatus.screen);
+        gameBoard = new GameScreen(gameStatus.screen);
+        textBox = TextBox.getInstance();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameBoard);
         inputHandler.addInput(textBox);
@@ -63,7 +84,26 @@ public class Client{
 
             gameStatus.screen.render();
             inputHandler.handleQueue();
-//            gameStatus.handle();
+             handle();
         }
+
+    }
+
+    public static void handle() {
+        String input;
+        String variable;
+        String value;
+        while(in.hasNextLine()) {
+            input = in.nextLine();
+            variable = input.split(",")[0];
+            value = input.split(",")[1];
+            switch(variable){
+                case "message": System.out.println(value);
+            }
+        }
+    }
+
+    public static void updateVariable(String variable, String value) {
+        out.println(variable + "," + value);
     }
 }

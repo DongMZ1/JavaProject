@@ -11,13 +11,6 @@ import java.util.Scanner;
 
 public class GameStatus {
 
-	//Basic network code init
-	String serverAddress = "127.0.0.1";
-
-	Socket socket = new Socket(serverAddress, 59001);
-	Scanner in = new Scanner(socket.getInputStream());
-	PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
 	private static GameStatus gameStatus;
 
     public static final int FOCUS_ON_LOBBY = 0;
@@ -54,21 +47,4 @@ public class GameStatus {
 		return gameStatus;
 	}
 
-	public void handle() {
-		String input;
-		String variable;
-		String value;
-		while(in.hasNextLine()) {
-			input = in.nextLine();
-			variable = input.split(",")[0];
-			value = input.split(",")[1];
-			switch(variable){
-				case "message": System.out.println(value);
-			}
-		}
-	}
-
-	public void updateVariable(String variable, String value) {
-		out.println(variable + "," + value);
-	}
 }
