@@ -72,7 +72,7 @@ public class GameScreen implements Inputtable, Serializable{
         
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
-        fight = new Fight(Client.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
+        fight = new Fight(this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         playerBoard = PlayerBoard.getInstance(Client.mainHero);
         castle = new Castle(5 - tm.getSize(), Client.screen);

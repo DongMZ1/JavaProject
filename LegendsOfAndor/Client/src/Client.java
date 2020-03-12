@@ -161,7 +161,7 @@ class InputThread extends Thread{
         try {
 			out.writeObject(Client.gameScreen);
 			out.writeObject(Client.lobbyScreen);
-			out.writeObject(Client.gameStatus);
+            out.writeObject(Client.gameStatus);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
