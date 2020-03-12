@@ -186,27 +186,28 @@ public class Hero implements Character {
 	}
 
 	//UPDATE
-	public void Buy2WPfor2Gold() {
+	public void Buy2SPfor2Gold() {
 		//firstly, find out if the hero has more than two gold for trade willpower
-		if(getGoldNm() > 2) { 
-			//Second check if there is a merchant
-			for(TileEntity t: Tile.get(tile).getTileEntities()) {
-				if(t instanceof Merchant) {
-					//if there is a merchant then trade, set a counter to remove two gold from items list of hero
-					int counter = 0;
-					for(Item i: items) {
-
-						//if we already remove two gold, then add two wp, otherwise continue remove gold object of items list
-						if(counter == 2) {this.wp = this.wp +2; break;}
-						if(i instanceof Gold) {
-							this.items.remove(i);
-							counter++;
-						}
-					}
-
-				}
+		System.out.println("gold: "+ this.getGoldNm());
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
 			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				wp = wp+2;
 		}
+		System.out.println("gold: "+ this.getGoldNm());
 	}
 
 	// TODO Move HeroDraw to Hero
