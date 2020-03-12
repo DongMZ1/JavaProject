@@ -51,7 +51,7 @@ public class Well implements TileEntity{
 		wellImage = image;
 	}
 	
-
+	//UPDATE
 	public void setWellEmptiness(boolean a){
 		IsEmpty = a;
 	}
