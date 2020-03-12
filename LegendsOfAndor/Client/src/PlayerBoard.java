@@ -13,19 +13,21 @@ public class PlayerBoard {
     private static GameStatus gameStatus;
     private boolean flag = false;
     
-    private int[] spX = {620};
     int sp;
+    private int[] spX = {620, 665, 695, 725, 760, 785, 825, 855, 885, 915, 945, 975, 1005, 1035};
     
     int wp;
-    private int[] wpX = {730};
-    private int[] wpY = {260};
+    private int[] wpX = {730, 795, 825, 895, 935, 965, 1075, 730, 795, 825, 895, 935, 965, 1075, 730, 795, 825, 895, 935, 965, 1075};
+    private int[] wpY = {260, 260, 260, 260, 260, 260, 260, 310, 310, 310, 310, 310, 310, 310, 360, 360, 360, 360, 360, 360, 360};
+    
+    int gold;
+    private int[] goldX = {9000, 700};
     
     private String image;
-    //private MinuetoImage playerBoardImage = new MinuetoRectangle(width, height, MinuetoColor.BLACK, true);
     private MinuetoImage playerBoardImage;
     private MinuetoImage spImage = new MinuetoImageFile("images/tokenWarrior.png");
     private MinuetoImage wpImage = new MinuetoImageFile("images/tokenWarrior.png");
-    
+    private MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
    
     
     private PlayerBoard(Hero hero) throws IOException {
@@ -66,10 +68,9 @@ public class PlayerBoard {
     public void draw() {
     	if(flag) {
     		gameStatus.screen.draw(playerBoardImage, 300, 100);
-    		gameStatus.screen.draw(spImage, 665, 205);
-    		gameStatus.screen.draw(wpImage, 795, 260);
-//            gameStatus.screen.draw(new MinuetoText("Strength Point: " + sp , font, MinuetoColor.WHITE), , 510);
-//            gameStatus.screen.draw(new MinuetoText("Will Power: " + wp , font, MinuetoColor.WHITE), 910, 530);
+    		gameStatus.screen.draw(spImage, spX[sp - 1], 205);
+    		gameStatus.screen.draw(wpImage, wpX[wp], wpY[wp]);
+    		gameStatus.screen.draw(goldImage, goldX[gold], 130);  		
     	}
     	
     	else {
@@ -78,7 +79,15 @@ public class PlayerBoard {
     }
     
     public void update(Hero hero) {
-    	draw();
+    	sp = hero.sp;
+    	wp = hero.wp;
+    	
+    	if(hero.hasGold) {
+    		gold = 1;
+    	}
+    	else {
+    		gold = 0;
+    	}
     }
     
     public void toggleFlag() {
