@@ -103,7 +103,7 @@ public class Hero implements Character {
 					try {
 						wp += ((Well) t).emptiedByHero(this);
 					} catch (MinuetoFileException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}

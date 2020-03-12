@@ -15,7 +15,7 @@ public class FarmerInitializer {
         
         for (Farmer f : output)
         {
-        	GameScreen.tiles.get(f.tile).addTileEntity(f);
+        	GameScreen.tiles.get(f.getTile()).addTileEntity(f);
         }
 
         return output;

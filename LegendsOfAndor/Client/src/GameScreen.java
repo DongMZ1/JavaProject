@@ -99,6 +99,17 @@ public class GameScreen implements Inputtable{
         }
     }
 
+    public static boolean isValidMove(int currentInt, int destInt) {
+    	Tile currentTile = Tile.get(currentInt);
+    	int[] adjacentTiles = currentTile.getAdjacentTiles();
+//		System.out.println(t);
+		for (int i =0; i < adjacentTiles.length; i++) {
+//			System.out.println(adjacentTiles[i]);
+			if (destInt == adjacentTiles[i]) return true;
+    		}
+		return false;
+    }
+    
     public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
         assert(tiles.get(currentTile).containsTileEntity(tileEntity));
         tiles.get(currentTile).removeTileEntity(tileEntity);
@@ -201,17 +212,19 @@ public class GameScreen implements Inputtable{
     		if (mainHero.time.left()){ 
     			if (toMove >= 0 && toMove <= 76) { 
 	            	if(gameStatus.ui == UIStatus.MOVEBEGIN) { 
-	            		 
+	            		 if (isValidMove(mainHero.getTile(),toMove)) {
 	            			moveTileEntity(mainHero, mainHero.getTile(),toMove); 
 	    		            mainHero.time.advance(); 
 	    		            gameStatus.ui = UIStatus.MOVING; 
 	    		            gameUi.moveButton.setLabel("End Move"); 
-	    	             
+	            		 }
 	    	             
 	    	        } 
 	            	else if(gameStatus.ui == UIStatus.MOVING) { 
+	            		if (isValidMove(mainHero.getTile(),toMove)) {
 	    	            	moveTileEntity(mainHero, mainHero.getTile(),toMove);	 
-	    	            	mainHero.time.advance();	             
+	    	            	mainHero.time.advance();
+	            		}
 	    	            } 
 	    	             
 	    	             
@@ -243,7 +256,7 @@ public class GameScreen implements Inputtable{
         
         else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-        	if (mainHero.time.left()){
+/*        	if (mainHero.time.left()){
 	        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
 	        		
 	        			moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
@@ -264,8 +277,8 @@ public class GameScreen implements Inputtable{
         	else {
             	gameUi.moveButton.setLabel("No Time");
 
-            	}
-	       }
+            	}*/
+	       } 
         
     }
     
@@ -300,7 +313,7 @@ public class GameScreen implements Inputtable{
 	        		//fight monter on adjacent tile
 	        		else if(mainHero instanceof Archer) {
 	        			int[] adjacentTiles = t.getAdjacentTiles();
-	        			System.out.println(t);
+//	        			System.out.println(t);
 	        			for (int i =0; i < adjacentTiles.length; i++) {
 //	        				System.out.println(adjacentTiles[i]);
 	        				Tile adjacentTile = Tile.get(adjacentTiles[i]);
