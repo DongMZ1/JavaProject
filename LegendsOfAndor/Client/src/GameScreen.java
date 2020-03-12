@@ -80,7 +80,7 @@ public class GameScreen implements Inputtable{
         fight = new Fight(this.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         playerBoard = PlayerBoard.getInstance(mainHero);
-	castle = new Castle(tm.getSize(), this.screen);
+        castle = new Castle(5 - tm.getSize(), this.screen);
     }
     
     public void fight() {
