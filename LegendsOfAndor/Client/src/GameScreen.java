@@ -330,19 +330,19 @@ public class GameScreen implements Inputtable{
         	//mainHero.pickupFarmer();
         	//mainHero.pickupGold();
 		playerBoard.update(mainHero);
-        	gameStatus.ui = UIStatus.MOVEBEGIN;
+        	gameStatus.ui = UIStatus.NONE;
         }
         
         else if(gameStatus.ui == UIStatus.DROPING) {
         	DropOffOption x1 = new DropOffOption("Drop off");
         	x1.start();
 		playerBoard.update(mainHero);
-        	gameStatus.ui = UIStatus.MOVEBEGIN;
+        	gameStatus.ui = UIStatus.NONE;
         }
         else if(gameStatus.ui == UIStatus.Trade ) {
         	mainHero.Buy2WPfor2Gold();
 		playerBoard.update(mainHero);
-        	gameStatus.ui = UIStatus.MOVEBEGIN;
+        	gameStatus.ui = UIStatus.NONE;
         }
 	    
     }
