@@ -58,8 +58,7 @@ public class Client {
          gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
-        gameScreen = new GameScreen();
-        textBox = TextBox.getInstance();
+
         if(lobbyScreen.getHero() == "Warrior") {
         	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         }
@@ -75,7 +74,9 @@ public class Client {
         else {
         	Client.mainHero = new Warrior(new MinuetoImageFile("images/Heroes/MageMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         } 	    
-	    
+
+        gameScreen = new GameScreen();
+        textBox = TextBox.getInstance();	    
         new InputThread(gameStatus, lobbyScreen, gameScreen, textBox).start();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreen);
