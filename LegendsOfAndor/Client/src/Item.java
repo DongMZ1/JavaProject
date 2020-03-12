@@ -4,5 +4,6 @@ public interface Item extends TileEntity {
 	 public MinuetoImage getImage();
 
 	    public int getTile();
+	    //UPDATE
 	    public void setTile(int tile);
 }
