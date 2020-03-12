@@ -19,10 +19,35 @@ public class Fight implements Inputtable{
 	ArrayList<Hero> fightHeroes;
 	
 	Hero mainHero = GameScreen.mainHero;
-	Hero currentHero = GameScreen.mainHero;
+	private Hero currentHero = GameScreen.mainHero;
+	public Hero getCurrentHero() {
+		return currentHero;
+	}
+	//UPDATE
+	public void setCurrentHero(Hero currentHero) {
+		this.currentHero = currentHero;
+	}
+
 	GameStatus gameStatus;
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+	//UPDATE
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+
 	int herosLeft;
 	int monsterRoll;
+	
+	public int getMonsterRoll() {
+		return monsterRoll;
+	}
+	//UPDATE
+	public void setMonsterRoll(int monsterRoll) {
+		this.monsterRoll = monsterRoll;
+	}
+
 	int heroRoll;
 	int currentRoll;
 	Monster currentMonster;
@@ -50,7 +75,7 @@ public class Fight implements Inputtable{
 		this.screen = screen;
 		this.tm = tm;
 		background = new MinuetoRectangle(x, y, MinuetoColor.RED, true);
-		gameStatus = GameStatus.getInstance();
+		setGameStatus(GameStatus.getInstance());
 		rollButton = new Button(new Coordinate(700,600),50,50,"ROLL DICE",true);
 		yourTurn = new Button(new Coordinate(700,500),50,50,"Your Turn",false);
 		confirm = new Button(new Coordinate(760,500),50,50,"OK",true);
@@ -64,7 +89,7 @@ public class Fight implements Inputtable{
 		fightHeroes = new ArrayList<>();
 		heroRoll = 0;
 		monsterRoll = 0;
-		currentHero = GameScreen.currentHero;;
+		setCurrentHero(GameScreen.currentHero);
 		mainHero = GameScreen.mainHero;
 		
 		this.fightTile = fightTile;
@@ -89,7 +114,7 @@ public class Fight implements Inputtable{
 		}
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.fight = FightStatus.ROLLPROMPT;
+		gameStatus.setFight(FightStatus.ROLLPROMPT);
 		
 	}
 	
@@ -125,7 +150,7 @@ public class Fight implements Inputtable{
 		
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.fight = FightStatus.ROLLPROMPT;
+		gameStatus.setFight(FightStatus.ROLLPROMPT);
 		
 	}	
 	
@@ -233,7 +258,7 @@ public class Fight implements Inputtable{
 			mainHero = tm.endTurn();
 			}
 		else if (c == 'd') {
-			gameStatus.fight = FightStatus.ROLLPROMPT;
+			gameStatus.setFight(FightStatus.ROLLPROMPT);
 		}
 		else if (c == 'm') {
 			System.out.println(currentHero);
@@ -261,7 +286,7 @@ public class Fight implements Inputtable{
 				confirm.setClickable(false);
 				
 			}
-			gameStatus.fight = FightStatus.ROLLRESPONSE;
+			gameStatus.setFight(FightStatus.ROLLPROMPT);
 			if (!currentHero.dice.hasRolls()) {
 				rollAgain.setClickable(false);
 				confirm.setClickable(true);
@@ -282,7 +307,7 @@ public class Fight implements Inputtable{
 		}	
 		
 		else if (mainHero == currentHero && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			gameStatus.fight = FightStatus.ROLLPROMPT;
+			gameStatus.setFight(FightStatus.ROLLPROMPT);
 		}
 		
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
@@ -298,8 +323,7 @@ public class Fight implements Inputtable{
 				if (herosLeft != 0) {
 					
 					currentHero = tm.endTurn();
-					
-					gameStatus.fight = FightStatus.ROLLPROMPT;
+					gameStatus.setFight(FightStatus.ROLLPROMPT);
 				}
 				else {
 					while (currentMonster.dice.hasRolls())
@@ -310,7 +334,7 @@ public class Fight implements Inputtable{
 					}
 					catch (Exception e) {}
 					System.out.println("monster rolled " + monsterRoll);
-					gameStatus.fight = FightStatus.ROLLMONSTER;
+					gameStatus.setFight(FightStatus.ROLLMONSTER);
 				}
 			}
 		}
@@ -331,7 +355,7 @@ public class Fight implements Inputtable{
 			}
 			try {
 				damageButton = new Button(new Coordinate(700,300), 200, 50, damage, false);
-				gameStatus.fight = FightStatus.DAMAGE;
+				gameStatus.setFight(FightStatus.DAMAGE);
 			}
 			catch (Exception e) {
 				System.out.println(e);
@@ -339,8 +363,8 @@ public class Fight implements Inputtable{
 					
 		}
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
-			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
-			gameStatus.currentScreen = GameStatus.GAME_SCREEN;
+			gameStatus.setFocus(GameStatus.FOCUS_ON_GAMESCREEN);
+			gameStatus.setCurrentScreen(GameStatus.GAME_SCREEN);
 			GameScreen.currentHero.time.advance();
 			GameScreen.currentHero = tm.endTurn();
 			

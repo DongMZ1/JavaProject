@@ -29,10 +29,34 @@ public class GameStatus {
 	int screenWidth = 1280;
 	int screenHeight = 720;
 	int focus;
+	public int getFocus() {
+		return focus;
+	}
+	//UPDATE
+	public void setFocus(int focus) {
+		this.focus = focus;
+	}
+
 	int currentScreen;
+	public int getCurrentScreen() {
+		return currentScreen;
+	}
+	//UPDATE
+	public void setCurrentScreen(int currentScreen) {
+		this.currentScreen = currentScreen;
+	}
+
 	MinuetoWindow screen;
 	UIStatus ui = UIStatus.NONE;
 	FightStatus fight = FightStatus.NONE;
+
+	public FightStatus getFight() {
+		return fight;
+	}
+	//UPDATE
+	public void setFight(FightStatus fight) {
+		this.fight = fight;
+	}
 
 	private GameStatus() throws IOException {
 		focus = FOCUS_ON_GAMESCREEN;
