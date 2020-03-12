@@ -92,17 +92,28 @@ public class LobbyScreen implements Inputtable, Serializable {
                 Constants.DIFFICULTY_HEIGHT, gameStatus.screenWidth, 0, x, y))
         isEasy = !isEasy;
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 650,
-                325, ghettoText + 750, 225, x, y))
-            currentChar = 0;
+                325, ghettoText + 750, 225, x, y)) {
+        	chosenHero = "Warrior";
+        	currentChar = 0;
+        }
+            
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 800,
-                325, ghettoText + 900, 225, x, y))
-            currentChar = 1;
+                325, ghettoText + 900, 225, x, y)) {
+        	currentChar = 1;
+        	chosenHero = "Archer";
+        }
+            
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 950,
-                325, ghettoText + 1050, 225, x, y))
-            currentChar = 2;
+                325, ghettoText + 1050, 225, x, y)) {
+        	chosenHero = "Dwarf";
+        	currentChar = 2;
+        }
+            
         else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && clickedScale(ghettoText + 1100,
-                325, ghettoText + 1200, 225, x, y))
-            currentChar = 3;
+                325, ghettoText + 1200, 225, x, y)) {
+        	chosenHero = "Mage";
+        	currentChar = 3;
+        }
     }
     public void handleMouseRelease(int x, int y, int button) {
 
