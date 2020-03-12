@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Random;
 
 import org.minueto.MinuetoColor;
@@ -11,7 +12,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 
-public class DropOffOptionDefine implements MinuetoKeyboardHandler,
+public class DropOffOptionDefine implements MinuetoKeyboardHandler, Serializable,
 MinuetoMouseHandler,
 MinuetoWindowHandler{
 

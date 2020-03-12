@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.minueto.MinuetoColor;
 import org.minueto.image.MinuetoFont;
@@ -7,7 +8,7 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoWindow;
 
-public class Castle {
+public class Castle implements Serializable{
 
 	private int health;
 	private MinuetoWindow screen;

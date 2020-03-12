@@ -8,9 +8,10 @@ import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 
-public class GameUi implements Inputtable {
+public class GameUi implements Inputtable, Serializable {
     private static GameUi gameUi;
 
     public Button moveButton;

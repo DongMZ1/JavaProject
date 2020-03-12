@@ -1,11 +1,12 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.MinuetoWindow;
 
-public class MonsterInitializer {
+public class MonsterInitializer implements Serializable{
 
 	public static ArrayList<Monster> initializeMonsters() throws IOException {
         ArrayList<Monster> output = new ArrayList<>();

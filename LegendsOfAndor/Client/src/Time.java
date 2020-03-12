@@ -3,8 +3,9 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Time {
+public class Time implements Serializable{
 	MinuetoImage tokenImage;
 	int time = 0;
 	int x = 6020;

@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class GoldInitializer {
+public class GoldInitializer implements Serializable{
 	//freeGoldList is that there are some gold has no regions
 	public static ArrayList<Gold> GoldIntializer() throws MinuetoFileException {
         ArrayList<Gold> output = new ArrayList<>();

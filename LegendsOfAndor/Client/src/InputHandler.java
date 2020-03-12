@@ -7,9 +7,10 @@ import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoMouseWheelHandler {
+public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoMouseWheelHandler, Serializable {
 
 	private static InputHandler inputHandler;
 

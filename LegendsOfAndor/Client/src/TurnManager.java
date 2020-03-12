@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TurnManager {
+public class TurnManager implements Serializable{
 	/**
 	 * 
 	 */

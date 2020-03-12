@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -12,7 +14,7 @@ import java.util.concurrent.Executors;
 public class Server {
 
     // The set of all the print writers for all the clients, used for broadcast.
-    private static HashSet<PrintWriter> writers = new HashSet<>();
+    private static HashSet<ObjectOutputStream> writers = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         System.out.println("The game server is running...");
@@ -30,8 +32,8 @@ public class Server {
      */
     private static class Handler implements Runnable {
         private Socket socket;
-        private Scanner in;
-        private PrintWriter out;
+        private ObjectInputStream in;
+        private ObjectOutputStream out;
 
         /**
          * Constructs a handler thread, squirreling away the socket. All the interesting
@@ -50,17 +52,17 @@ public class Server {
          */
         public void run() {
             try {
-                in = new Scanner(socket.getInputStream());
-                out = new PrintWriter(socket.getOutputStream(), true);
+                in = new ObjectInputStream(socket.getInputStream());
+                out = new ObjectOutputStream(socket.getOutputStream());
 
                 writers.add(out);
-                out.println("1,newPlayer,"+ writers.size());
+   //             out.println("1,newPlayer,"+ writers.size());
                 // Accept messages from this client and broadcast them.
                 while (true) {
-                    String input = in.nextLine();
+                    Object input = in.readObject();
                     System.out.println(input);
-                    for (PrintWriter writer : writers) {
-                        writer.println(input);
+                    for (ObjectOutputStream writer : writers) {
+                        writer.writeObject(input);
                     }
                 }
             } catch (Exception e) {

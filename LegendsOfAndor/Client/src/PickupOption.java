@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Random;
 
 import org.minueto.MinuetoColor;
@@ -11,7 +12,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 
-public class PickupOption extends Thread {
+public class PickupOption extends Thread implements Serializable{
 	String name;
 	public PickupOption(String name) {
 		this.name = name; 

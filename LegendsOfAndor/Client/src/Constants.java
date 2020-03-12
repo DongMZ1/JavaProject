@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 import org.minueto.MinuetoColor;
 import org.minueto.image.MinuetoCircle;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoRectangle;
 
-public class Constants {
+public class Constants implements Serializable {
     //TODO Move Constants to Own Classes
     public static final int TOP_OF_BOARD = -6476;
     public static final int SIDE_OF_BOARD = -9861;

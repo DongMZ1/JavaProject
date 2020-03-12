@@ -1,11 +1,12 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.MinuetoWindow;
 
-public class WellInitializer {
+public class WellInitializer implements Serializable{
 
 	public static ArrayList<Well> initializeWells() throws IOException {
         ArrayList<Well> output = new ArrayList<>();

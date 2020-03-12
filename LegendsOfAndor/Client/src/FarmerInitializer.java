@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class FarmerInitializer {
+public class FarmerInitializer implements Serializable{
 	public static ArrayList<Farmer> initializeFarmers() throws MinuetoFileException {
         ArrayList<Farmer> output = new ArrayList<>();
         MinuetoImage farmerimage = new MinuetoImageFile("images/farmer.png");

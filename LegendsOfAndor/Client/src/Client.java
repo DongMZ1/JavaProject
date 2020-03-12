@@ -1,4 +1,8 @@
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -38,11 +42,12 @@ public class Client {
     static GameScreen gameBoard;
     static TextBox textBox;
     static Hero mainHero;
+    static GameStatus gameStatus;
 
     public static void main(String[] args) throws Exception {
     	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         
-        GameStatus gameStatus = GameStatus.getInstance();
+         gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen(gameStatus.screen);
         gameBoard = new GameScreen(gameStatus.screen);
@@ -85,14 +90,19 @@ class InputThread extends Thread{
     static String serverAddress = "10.121.175.40";
 
     static Socket socket;
-    static Scanner in;
-    static PrintWriter out;
+    static ObjectInputStream in;
+    static ObjectOutputStream out;
+    Object o;
 
     static {
         try {
             socket = new Socket(serverAddress, 59001);
-            in = new Scanner(socket.getInputStream());
-            out = new PrintWriter(socket.getOutputStream(), true);
+            OutputStream pee = socket.getOutputStream();
+            out = new ObjectOutputStream(pee);
+            InputStream poop = socket.getInputStream();
+            in = new ObjectInputStream(poop);
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,14 +114,14 @@ class InputThread extends Thread{
         this.lobbyScreen = lobbyScreen;
         this.gameBoard = gameBoard;
         this.textBox = textBox;
-        this.playerNumber = Integer.parseInt(in.nextLine().split(",")[2]);
+//        this.playerNumber = Integer.parseInt(in.nextLine().split(",")[2]);
     }
 
     public void run() {
-        String input;
+ //       String input;
         String variable;
         String value;
-        int sender;
+        int sender;/*
         while(in.hasNextLine()) {
             input = in.nextLine();
             sender = Integer.parseInt(input.split(",")[0]);
@@ -129,10 +139,23 @@ class InputThread extends Thread{
                         System.out.println("Invalid Message Sent Over Network");
                 }
             }
+        }*/
+        try {
+        while (true) {
+            Object input = in.readObject();
+            System.out.println(input);
         }
+        } catch(Exception e) {}
     }
 
-    public static void updateVariable(String variable, String value) {
-        out.println(playerNumber + "," + variable + "," + value);
+    public static void updateVariable() {
+        try {
+			out.writeObject(Client.gameBoard);
+			out.writeObject(Client.lobbyScreen);
+			out.writeObject(Client.gameStatus);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

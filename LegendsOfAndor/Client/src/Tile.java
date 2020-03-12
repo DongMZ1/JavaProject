@@ -6,11 +6,12 @@ import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Tile {
+public class Tile implements Serializable{
     // TODO Make Tile Class Flyweight
     // TODO Make accessor to get tile from index
     private static MinuetoWindow screen;

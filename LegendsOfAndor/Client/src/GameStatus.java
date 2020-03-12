@@ -5,11 +5,12 @@ import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GameStatus {
+public class GameStatus implements Serializable {
 
 	private static GameStatus gameStatus;
 

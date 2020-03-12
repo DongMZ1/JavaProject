@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoColor;
@@ -5,7 +6,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoRectangle;
 import org.minueto.window.MinuetoWindow;
 
-public class CollaborativeDecision implements Inputtable {
+public class CollaborativeDecision implements Inputtable, Serializable {
 	private MinuetoWindow screen;
 	DecisionType toDecide = DecisionType.NONE;
 	GameStatus gameStatus;

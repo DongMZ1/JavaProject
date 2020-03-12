@@ -9,9 +9,10 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFullscreen;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TextBox implements Inputtable{
+public class TextBox implements Inputtable, Serializable{
 
     public void addMessage(String sender, String message) {
         pastMessages.add(new Message(sender, message));
@@ -98,7 +99,8 @@ public class TextBox implements Inputtable{
         else if(c == MinuetoKeyboard.KEY_ENTER) {
             if(!currentTypedText.equals("")) {
                 this.pastMessages.add(new Message("You", currentTypedText));
-                InputThread.updateVariable("message", currentTypedText);
+//                InputThread.updateVariable("message", currentTypedText);
+                InputThread.updateVariable();
                 currentTypedText = "";
             }
         }

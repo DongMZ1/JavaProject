@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoColor;
@@ -8,7 +9,7 @@ import org.minueto.image.MinuetoImageFile;
 import org.minueto.image.MinuetoRectangle;
 import org.minueto.window.MinuetoWindow;
 
-public class Fight implements Inputtable{
+public class Fight implements Inputtable, Serializable{
 
 	private MinuetoWindow screen;
 	MinuetoImage background;

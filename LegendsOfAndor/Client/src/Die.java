@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Stack;
@@ -10,7 +11,7 @@ enum DieColor {
 	BLUE, GREEN, YELLOW, PURPLE, RED, BLACK
 }
 
-public interface Die {
+public interface Die extends Serializable{
 	int roll();
 	int getLastRollIndex();
 }

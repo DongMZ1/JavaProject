@@ -8,8 +8,9 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class LobbyScreen implements Inputtable {
+public class LobbyScreen implements Inputtable, Serializable {
     //TODO Clean LobbyScreen class
     private boolean isEasy;
     private MinuetoWindow screen;

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Random;
 
 import org.minueto.MinuetoColor;
@@ -13,7 +14,7 @@ import org.minueto.window.MinuetoFrame;
 
 public class PickupOptionDefine implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
-MinuetoWindowHandler {
+MinuetoWindowHandler, Serializable {
 
 MinuetoFrame window;			// The Minueto window		
 MinuetoEventQueue eventQueue;			// The Minueto queue that will hold

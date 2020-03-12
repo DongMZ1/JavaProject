@@ -6,8 +6,9 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Button {
+public class Button implements Serializable{
 
     private Coordinate coordinate;
     private int height, width;

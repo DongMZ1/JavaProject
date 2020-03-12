@@ -1,8 +1,9 @@
 import org.minueto.MinuetoFileException;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Camera {
+public class Camera implements Serializable {
 
 	private static Camera camera;
 	public int boardZoom;

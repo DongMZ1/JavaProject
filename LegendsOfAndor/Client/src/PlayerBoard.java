@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoFileException;
@@ -8,7 +9,7 @@ import org.minueto.image.MinuetoImageFile;
 import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 
-public class PlayerBoard {
+public class PlayerBoard implements Serializable{
     private static PlayerBoard playerBoard;
     private static GameStatus gameStatus;
     private boolean flag = false;

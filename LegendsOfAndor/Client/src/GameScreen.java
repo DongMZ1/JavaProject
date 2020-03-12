@@ -8,11 +8,12 @@ import org.minueto.window.MinuetoFullscreen;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class GameScreen implements Inputtable{
+public class GameScreen implements Inputtable, Serializable{
     private MinuetoWindow screen;
     private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
     private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);

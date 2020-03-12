@@ -1,6 +1,8 @@
+import java.io.Serializable;
+
 import org.minueto.image.MinuetoImage;
 
-public interface TileEntity {
+public interface TileEntity extends Serializable{
     public MinuetoImage getImage();
 
     public int getTile();
