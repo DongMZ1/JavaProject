@@ -65,4 +65,7 @@ public class TurnManager {
 			hero.time.draw();
 		}
 	}
+	public int getSize() {
+		return heroes.size();
+	}	
 }
