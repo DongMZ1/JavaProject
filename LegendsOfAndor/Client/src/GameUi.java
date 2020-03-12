@@ -22,12 +22,11 @@ public class GameUi implements Inputtable {
 
     private GameStatus gameStatus;
     private TextBox textBox;
-    private PlayerBoard playerBoard;
+
     private int turnButtonWidth = 200;
     private int turnButtonHeight = 50;
     public int uiHeight = 300;
-    
-    //private MinuetoWindow Pickupscreen = new MinuetoFrame(1000, 1000, true);
+   
     public Button cancel;
     public Button pickupFarmer;
     public Button pickupWP;
@@ -74,7 +73,6 @@ public class GameUi implements Inputtable {
         dropButton.draw();
         tradeButton.draw();
         waitButton.draw();
-        playerBoard.draw();
         textBox.draw();
     }
 
