@@ -20,7 +20,10 @@ public class Server {
         System.out.println("The game server is running...");
         Executor pool = Executors.newFixedThreadPool(4);
         InetAddress addr = InetAddress.getByName("10.121.175.40");
+<<<<<<< Updated upstream
     //    InetAddress addr = InetAddress.getByName("0.0.0.0");
+=======
+>>>>>>> Stashed changes
         try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
             while (true) {
                 pool.execute(new Handler(listener.accept()));

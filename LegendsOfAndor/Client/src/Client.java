@@ -95,8 +95,7 @@ class InputThread extends Thread{
     private TextBox textBox;
     private static int playerNumber;
     //Basic network code init
-    //static String serverAddress = "10.121.175.40";
-    static String serverAddress = "0.0.0.0";
+    static String serverAddress = "10.121.175.40";
 
     static Socket socket;
     static ObjectInputStream in;

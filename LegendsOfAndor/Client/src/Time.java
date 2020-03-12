@@ -16,7 +16,11 @@ public class Time implements Serializable{
 	int time = 0;
 	int x = 6020;
 	int y = 240;
+<<<<<<< Updated upstream
 	private static MinuetoWindow screen;
+=======
+	static MinuetoWindow screen;
+>>>>>>> Stashed changes
 	static Camera camera;
 	
 	public Time(MinuetoImage ptokenImage, MinuetoWindow pscreen) throws IOException {

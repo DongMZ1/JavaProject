@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Monster implements Character
 {
-	transient MinuetoImage monsterImage;
+	static MinuetoImage monsterImage;
     int tile;
     GameStatus gameStatus;
     int health; 

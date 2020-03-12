@@ -25,10 +25,10 @@ public class PlayerBoard implements Serializable{
     private int[] goldX = {9000, 700};
     
     private String image;
-    private transient MinuetoImage playerBoardImage;
-    private transient MinuetoImage spImage = new MinuetoImageFile("images/tokenWarrior.png");
-    private transient MinuetoImage wpImage = new MinuetoImageFile("images/tokenWarrior.png");
-    private transient MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
+    private static MinuetoImage playerBoardImage;
+    private static MinuetoImage spImage;
+    private static MinuetoImage wpImage;
+    private static MinuetoImage goldImage;
    
     
     private PlayerBoard(Hero hero) throws IOException {
@@ -62,6 +62,9 @@ public class PlayerBoard implements Serializable{
     	
     	
     	playerBoardImage = new MinuetoImageFile(image).scale(300/ 671.0, 300/ 671.0);
+    	spImage = new MinuetoImageFile("images/tokenWarrior.png");
+        wpImage = new MinuetoImageFile("images/tokenWarrior.png");
+        goldImage = new MinuetoImageFile("images/gold.png");
     }
 
     public static PlayerBoard getInstance(Hero hero) throws IOException {

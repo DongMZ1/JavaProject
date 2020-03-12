@@ -4,7 +4,7 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Wineskin implements Item {
 
-	transient MinuetoImage wineskin; 
+	static MinuetoImage wineskin; 
 	int tile;
 	
 	public Wineskin(int tile) throws MinuetoFileException {
@@ -18,6 +18,7 @@ public class Wineskin implements Item {
 	    public int getTile() {
 	        return this.tile;
 	    }
+	    
 	public MinuetoImage getImage() {
      return this.wineskin;
  }

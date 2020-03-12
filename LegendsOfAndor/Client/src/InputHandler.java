@@ -16,7 +16,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 
 	private static GameStatus gameStatus;
 	private ArrayList<Inputtable> inputs;
-	transient private MinuetoEventQueue queue;
+	private static MinuetoEventQueue queue;
 	private InputHandler() throws IOException {
 		inputs = new ArrayList<>();
 		queue = new MinuetoEventQueue();

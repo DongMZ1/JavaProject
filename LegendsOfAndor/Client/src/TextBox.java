@@ -39,15 +39,15 @@ public class TextBox implements Inputtable, Serializable{
     }
     private String currentTypedText;
     private ArrayList<Message> pastMessages;
-    private transient MinuetoFont font = new MinuetoFont("Helvetica",14, false, false);
+    private static MinuetoFont font = new MinuetoFont("Helvetica",14, false, false);
     private static GameStatus gameStatus;
     private static TextBox textBox;
-    private int width = 450;
-    private int inputHeight = 30;
-    private int outputHeight = 270;
-    public transient MinuetoImage textboxInput = new MinuetoRectangle(width, inputHeight, MinuetoColor.WHITE, true);
-    public transient MinuetoImage textboxOutput = new MinuetoRectangle(width, outputHeight, new MinuetoColor(0, 0, 0), true);
-    public transient MinuetoImage textboxDivider = new MinuetoRectangle(width, 1, MinuetoColor.BLACK, true);
+    private static int width = 450;
+    private static int inputHeight = 30;
+    private static int outputHeight = 270;
+    public static MinuetoImage textboxInput = new MinuetoRectangle(width, inputHeight, MinuetoColor.WHITE, true);
+    public static MinuetoImage textboxOutput = new MinuetoRectangle(width, outputHeight, new MinuetoColor(0, 0, 0), true);
+    public static MinuetoImage textboxDivider = new MinuetoRectangle(width, 1, MinuetoColor.BLACK, true);
 
     private TextBox() throws IOException {
         this.currentTypedText = "";

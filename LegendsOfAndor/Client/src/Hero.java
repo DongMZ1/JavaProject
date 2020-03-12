@@ -6,7 +6,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Hero implements Character {
-	transient MinuetoImage heroImage;
+	static MinuetoImage heroImage;
 	int tile;
 	int wp;
 	int sp;

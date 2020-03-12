@@ -29,7 +29,7 @@ public class GameScreen implements Inputtable, Serializable{
     private InputHandler inputHandler;
     Fight fight;
     CollaborativeDecision cd;
-    private TextBox textBox = TextBox.getInstance();
+    private static TextBox textBox;
     private static GameStatus gameStatus;
     private static Camera camera;
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
@@ -42,7 +42,7 @@ public class GameScreen implements Inputtable, Serializable{
 	
     public GameScreen() throws IOException {
     	
-    	
+    	textBox = TextBox.getInstance();
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
