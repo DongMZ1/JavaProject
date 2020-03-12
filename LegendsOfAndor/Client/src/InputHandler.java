@@ -22,9 +22,9 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 		queue = new MinuetoEventQueue();
 		gameStatus = GameStatus.getInstance();
 
-		gameStatus.screen.registerKeyboardHandler(this, queue);
-		gameStatus.screen.registerMouseHandler(this, queue);
-		gameStatus.screen.registerMouseWheelHandler(this, queue);
+		Client.screen.registerKeyboardHandler(this, queue);
+		Client.screen.registerMouseHandler(this, queue);
+		Client.screen.registerMouseWheelHandler(this, queue);
 	}
 
 	public static InputHandler getInputHandler() throws IOException {

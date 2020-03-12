@@ -62,7 +62,6 @@ public class GameStatus implements Serializable {
 		focus = FOCUS_ON_LOBBY;
 		currentScreen = LOBBY_SCREEN;
 
-
 	}
 
 	public static GameStatus getInstance() throws IOException {

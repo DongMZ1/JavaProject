@@ -62,15 +62,15 @@ public class TextBox implements Inputtable, Serializable{
     
 
     public void draw() {
-        this.gameStatus.screen.draw(textboxInput, 0, gameStatus.screenHeight - inputHeight);
-        this.gameStatus.screen.draw(textboxDivider, 0, gameStatus.screenHeight - inputHeight);
-        this.gameStatus.screen.draw(textboxOutput, 0, gameStatus.screenHeight - inputHeight - outputHeight);
-        this.gameStatus.screen.draw(new MinuetoText(this.currentTypedText , font, MinuetoColor.BLACK), 10,
+        Client.screen.draw(textboxInput, 0, gameStatus.screenHeight - inputHeight);
+        Client.screen.draw(textboxDivider, 0, gameStatus.screenHeight - inputHeight);
+        Client.screen.draw(textboxOutput, 0, gameStatus.screenHeight - inputHeight - outputHeight);
+        Client.screen.draw(new MinuetoText(this.currentTypedText , font, MinuetoColor.BLACK), 10,
                 gameStatus.screenHeight - inputHeight + 10);
         int counter = 0;
         for(int i = pastMessages.size() - 1; i >= 0 && counter < 10; i--) {
             counter++;
-            this.gameStatus.screen.draw(new MinuetoText(pastMessages.get(i).getSender() + ": " + pastMessages.get(i).getMessage(),
+            Client.screen.draw(new MinuetoText(pastMessages.get(i).getSender() + ": " + pastMessages.get(i).getMessage(),
                             font, MinuetoColor.WHITE), 10, gameStatus.screenHeight - inputHeight - (counter * 20));
         }
     }

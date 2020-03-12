@@ -52,7 +52,7 @@ public class GameScreen implements Inputtable, Serializable{
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
         tiles = Tile.getAll();
         for (Tile tile : tiles)
-        	tile.setScreen(screen);
+        	tile.setScreen(Client.screen);
         
         monsters = MonsterInitializer.initializeMonsters();
         wells = WellInitializer.initializeWells();

@@ -47,10 +47,10 @@ public class Button implements Serializable{
 
     public void draw() {
         if(clickable)
-            gameStatus.screen.draw(clickableButtonBackground, coordinate.getX(), coordinate.getY());
+            Client.screen.draw(clickableButtonBackground, coordinate.getX(), coordinate.getY());
         else
-            gameStatus.screen.draw(unclickableButtonBackground, coordinate.getX(), coordinate.getY());
-        gameStatus.screen.draw(label, coordinate.getX() + 30, coordinate.getY() + 15);
+            Client.screen.draw(unclickableButtonBackground, coordinate.getX(), coordinate.getY());
+        Client.screen.draw(label, coordinate.getX() + 30, coordinate.getY() + 15);
     }
 
     public boolean isClickable() {

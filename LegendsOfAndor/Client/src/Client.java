@@ -43,8 +43,9 @@ public class Client {
     static TextBox textBox;
     static Hero mainHero;
     static GameStatus gameStatus;
-    static MinuetoWindow screen;
+    static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
+        screen.setVisible(true);
     	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         
          gameStatus = GameStatus.getInstance();
@@ -87,7 +88,8 @@ class InputThread extends Thread{
     private TextBox textBox;
     private static int playerNumber;
     //Basic network code init
-    static String serverAddress = "10.121.175.40";
+    //static String serverAddress = "10.121.175.40";
+    static String serverAddress = "0.0.0.0";
 
     static Socket socket;
     static ObjectInputStream in;

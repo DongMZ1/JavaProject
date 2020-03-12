@@ -75,10 +75,10 @@ public class PlayerBoard implements Serializable{
 
     public void draw() {
     	if(flag) {
-    		gameStatus.screen.draw(playerBoardImage, 300, 100);
-    		gameStatus.screen.draw(spImage, spX[sp - 1], 205);
-    		gameStatus.screen.draw(wpImage, wpX[wp], wpY[wp]);
-    		gameStatus.screen.draw(goldImage, goldX[gold], 130);  		
+    		Client.screen.draw(playerBoardImage, 300, 100);
+    		Client.screen.draw(spImage, spX[sp - 1], 205);
+    		Client.screen.draw(wpImage, wpX[wp], wpY[wp]);
+    		Client.screen.draw(goldImage, goldX[gold], 130);
     	}
     	
     	else {
