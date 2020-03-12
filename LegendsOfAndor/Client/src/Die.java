@@ -173,6 +173,12 @@ class ArcherDice extends Dice {
 			
 		return rolledNums.peek();
 	}
+	
+	@Override
+	public int getBattleNum() {
+		return rolledNums.peek();
+	}
+	
 }
 	
 
@@ -241,13 +247,20 @@ class MonsterDice extends Dice {
 
 	public int getBattleNum() {
 		int value = 0;
+		int max = 0;
+		int previous = 0;
 		while (rolledNums.size() > 0) {
-			if (value < rolledNums.size())
-				value = rolledNums.pop();
-			else if (value == rolledNums.pop())
+			value = rolledNums.pop();
+			
+			if (value == previous) {
 				value = value * 2;
+			}
+			if (value > max)
+				max = value;
+			
+			previous = value;
 		}
-		return value;
+		return max;
 	}
 
 }

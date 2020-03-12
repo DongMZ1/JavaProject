@@ -53,7 +53,7 @@ public class Fight implements Inputtable{
 		gameStatus = GameStatus.getInstance();
 		rollButton = new Button(new Coordinate(700,600),50,50,"ROLL DICE",true);
 		yourTurn = new Button(new Coordinate(700,500),50,50,"Your Turn",false);
-		confirm = new Button(new Coordinate(700,500),50,50,"OK",true);
+		confirm = new Button(new Coordinate(760,500),50,50,"OK",true);
 		notYourTurn = new Button(new Coordinate(700,500),50,50,"Not Your Turn",false);
 		rollAgain = new Button(new Coordinate(700,500),50,50,"Roll Again",false);
 		changeRollResult = new Button(new Coordinate(700,500),50,50,"Change Roll Result",false);
@@ -138,14 +138,12 @@ public class Fight implements Inputtable{
 				
 				//check if the hero is Archer
 				if(currentHero instanceof Archer) {
-					rollAgain.setClickable(true);
-					rollAgain.draw();
+					
 				}
 				
 				//check if the hero is Mage
 				if(currentHero instanceof Mage) {
-					changeRollResult.setClickable(true);
-					changeRollResult.draw();
+					
 					
 				}
 				
@@ -156,9 +154,24 @@ public class Fight implements Inputtable{
 		}
 		
 		else if (gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			if (mainHero == currentHero) {
+			
+			
+			if (mainHero instanceof Mage) {
+				changeRollResult.setClickable(true);
+				changeRollResult.draw();
+			}
+			if (mainHero instanceof Archer) {
+				confirm.setClickable(true);
 				confirm.draw();
 			}
+			if (mainHero == currentHero && mainHero.dice.hasRolls()) {
+				rollAgain.setClickable(true);
+				rollAgain.draw();
+			}
+			else if (mainHero == currentHero) {
+				confirm.draw();
+			}
+			
 			this.screen.draw(diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.ROLLMONSTER) {
@@ -219,10 +232,9 @@ public class Fight implements Inputtable{
 		if (mainHero instanceof Mage)
 			rollAgain.setClickable(true);
 		
-		if ((mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) || 
-				(currentHero instanceof Archer && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE)) {
+		if (mainHero == currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) {
 			
-			while (currentHero.dice.hasRolls()) {
+			if (currentHero.dice.hasRolls()) {
 				
 				currentRoll = currentHero.dice.roll();
 				targetDice = currentHero.dice;
@@ -231,6 +243,7 @@ public class Fight implements Inputtable{
 					heroRoll(currentRoll);
 				}
 				catch (Exception e) {}
+				confirm.setClickable(false);
 				
 				//check if hero's Archer and make rollAgain button clickable
 				/*if(currentHero instanceof Archer && currentHero.dice.hasRolls()) {
@@ -254,8 +267,11 @@ public class Fight implements Inputtable{
 				}*/
 			}
 			gameStatus.fight = FightStatus.ROLLRESPONSE;
-			herosLeft--;
-			rollAgain.setClickable(false);
+			if (!currentHero.dice.hasRolls()) {
+				rollAgain.setClickable(false);
+				confirm.setClickable(true);
+			}
+	//		rollAgain.setClickable(false);
 		
 		}
 		
@@ -264,29 +280,39 @@ public class Fight implements Inputtable{
 	
 			MageDice mageDice = (MageDice) currentHero.dice;
 			mageDice.flipRoll(targetDice);	
-		}		
+		}	
+		
+		else if (mainHero == currentHero && rollAgain.isClicked(x, y) && rollAgain.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			gameStatus.fight = FightStatus.ROLLPROMPT;
+		}
 		
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
-			System.out.println("POOP");
-			heroRoll += currentHero.dice.getBattleNum();	// add up battle value
-			System.out.println("battle value " + heroRoll);
-			currentHero.dice.endTurn();		// reset dice state
-			if (herosLeft != 0) {
-				
-				currentHero = tm.endTurn();
-				
-				gameStatus.fight = FightStatus.ROLLPROMPT;
+			if (currentHero.dice.hasRolls() && !(currentHero instanceof Archer)) {
+				System.out.println("BADBABBAD");
 			}
 			else {
-				while (currentMonster.dice.hasRolls())
-					currentMonster.dice.roll();
-				monsterRoll = currentMonster.dice.getBattleNum();
-				try {
-					monsterRoll(monsterRoll);
+				herosLeft--;
+				System.out.println(herosLeft);
+				heroRoll += currentHero.dice.getBattleNum();	// add up battle value
+				
+				currentHero.dice.endTurn();		// reset dice state
+				if (herosLeft != 0) {
+					
+					currentHero = tm.endTurn();
+					
+					gameStatus.fight = FightStatus.ROLLPROMPT;
 				}
-				catch (Exception e) {}
-				System.out.println("monster rolled " + monsterRoll);
-				gameStatus.fight = FightStatus.ROLLMONSTER;
+				else {
+					while (currentMonster.dice.hasRolls())
+						currentMonster.dice.roll();
+					monsterRoll = currentMonster.dice.getBattleNum();
+					try {
+						monsterRoll(monsterRoll);
+					}
+					catch (Exception e) {}
+					System.out.println("monster rolled " + monsterRoll);
+					gameStatus.fight = FightStatus.ROLLMONSTER;
+				}
 			}
 		}
 		else if (mainHero == currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
