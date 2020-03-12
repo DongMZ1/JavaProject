@@ -14,8 +14,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GameScreen implements Inputtable, Serializable{
-    private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
-    private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
+    
     private boolean movingCam;
     static ArrayList<Tile> tiles;
     private ArrayList<Monster> monsters;
@@ -31,12 +30,10 @@ public class GameScreen implements Inputtable, Serializable{
     Fight fight;
     CollaborativeDecision cd;
     private TextBox textBox = TextBox.getInstance();
-    private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
     private GameUi gameUi;
-    private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
     private PlayerBoard playerBoard;
     
     int toMove; 
@@ -44,6 +41,8 @@ public class GameScreen implements Inputtable, Serializable{
     final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57}; 
 	
     public GameScreen() throws IOException {
+    	
+    	
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
@@ -84,8 +83,8 @@ public class GameScreen implements Inputtable, Serializable{
     }
 
     public void draw() {
-        Client.screen.draw(background, 0, 0);
-        Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
+        Client.screen.draw(Constants.BACKGROUND, 0, 0);
+        Client.screen.draw(Client.gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
@@ -366,7 +365,7 @@ public class GameScreen implements Inputtable, Serializable{
         else if(rotation == -1) {
             camera.zoomOut();
         }
-        gameBoard = defaultBoard.scale((double) 1 / camera.boardZoom, (double) 1 / camera.boardZoom);
+        Client.gameBoard = Client.defaultBoard.scale((double) 1 / camera.boardZoom, (double) 1 / camera.boardZoom);
     }
 }
 

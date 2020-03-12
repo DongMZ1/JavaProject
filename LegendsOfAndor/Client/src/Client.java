@@ -8,10 +8,12 @@ import java.net.Socket;
 import java.util.Scanner;
 import org.minueto.*;
 import org.minueto.handlers.*;
+import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.*;
 
 public class Client {
+
 
     /*
     private void run() throws IOException  {
@@ -39,35 +41,40 @@ public class Client {
     */
 
     static LobbyScreen lobbyScreen;
-    static GameScreen gameBoard;
+    static GameScreen gameScreen;
     static TextBox textBox;
     static Hero mainHero;
     static GameStatus gameStatus;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
+    static MinuetoImageFile defaultBoard;
+    public static MinuetoImage gameBoard;
+
     public static void main(String[] args) throws Exception {
+        defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
+        gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
         screen.setVisible(true);
     	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
         
          gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
-        gameBoard = new GameScreen();
+        gameScreen = new GameScreen();
         textBox = TextBox.getInstance();
-        new InputThread(gameStatus, lobbyScreen, gameBoard, textBox).start();
+        new InputThread(gameStatus, lobbyScreen, gameScreen, textBox).start();
         inputHandler.addInput(lobbyScreen);
-        inputHandler.addInput(gameBoard);
+        inputHandler.addInput(gameScreen);
         inputHandler.addInput(textBox);
-        inputHandler.addInput(gameBoard.fight);
-        inputHandler.addInput(gameBoard.cd);
+        inputHandler.addInput(gameScreen.fight);
+        inputHandler.addInput(gameScreen.cd);
         
 
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
                 lobbyScreen.draw();
             else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN)
-                gameBoard.draw();
+                gameScreen.draw();
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
-                gameBoard.fight();
+                gameScreen.fight();
             }
 
             textBox.draw();
@@ -152,7 +159,7 @@ class InputThread extends Thread{
 
     public static void updateVariable() {
         try {
-			out.writeObject(Client.gameBoard);
+			out.writeObject(Client.gameScreen);
 			out.writeObject(Client.lobbyScreen);
 			out.writeObject(Client.gameStatus);
 		} catch (IOException e) {
