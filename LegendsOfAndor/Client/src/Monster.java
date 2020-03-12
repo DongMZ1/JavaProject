@@ -16,6 +16,7 @@ public class Monster implements Character
         this.gameStatus = GameStatus.getInstance();
         dice = new MonsterDice();
     }
+    //UPDATE
     public void setTile(int tile) {
         this.tile = tile;
     }
