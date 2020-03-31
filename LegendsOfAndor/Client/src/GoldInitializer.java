@@ -10,13 +10,14 @@ public class GoldInitializer implements Serializable{
 	public static ArrayList<Gold> GoldIntializer() throws MinuetoFileException {
         ArrayList<Gold> output = new ArrayList<>();
         MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
-//        Item gold1 = new Gold( -1);
-//        Item gold2 = new Gold( -1);
-//        Item gold3 = new Gold( -1);
+    Item gold1 = new Gold(1);
+       Item gold2 = new Gold(1);
+       Item gold3 = new Gold(1);
         Item gold4 = new Gold(5);
-//        output.add((Gold) gold1);
-//        output.add((Gold) gold2);
-//        output.add((Gold) gold3);
+        
+         output.add((Gold) gold1);
+        output.add((Gold) gold2);
+       output.add((Gold) gold3);
         output.add((Gold) gold4);       
        
         for (Gold gd : output)

@@ -7,9 +7,11 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.window.MinuetoWindow;
 
 public class CollaborativeDecision implements Inputtable, Serializable {
+	private MinuetoWindow screen;
 	DecisionType toDecide = DecisionType.NONE;
 	GameStatus gameStatus;
 	InputHandler inputHandler;
+	MinuetoImage background;
 	TurnManager tm;
 	ArrayList<Tuple<Item,Hero>> items;
 	ArrayList<Button> itemButtons;
@@ -17,7 +19,7 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 	TextBox textBox;
 	
 	
-	public CollaborativeDecision(DecisionType d, TurnManager tm){
+	public CollaborativeDecision(DecisionType d, MinuetoWindow screen, TurnManager tm){
 		toDecide = d;		
 		try {
 		 gameStatus = GameStatus.getInstance();
@@ -31,9 +33,9 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 		gameStatus.focus = GameStatus.FOCUS_ON_COLLABORATIVE;
 		
 		
-
+		this.screen = screen;
 		this.tm = tm;
-		Constants.background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
+		background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
 		
 		items = new ArrayList<>();
 		itemButtons = new ArrayList<>();
@@ -78,7 +80,7 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 			Button button = itemButtons.get(i);
 			
 			if (hero != null) {
-				Client.screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
 				remainingSlots--;
 
 			}
@@ -87,14 +89,14 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 				
 			}
 			button.draw();
-			Client.screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
+			screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
 			
 		}
 		
 	}
 	
 	public void draw() {
-		Client.screen.draw(Constants.background, 0, 0);
+		screen.draw(background, 0, 0);
 		decisionLoop();
 	}
 

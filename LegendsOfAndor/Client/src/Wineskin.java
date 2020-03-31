@@ -4,11 +4,11 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Wineskin implements Item {
 
-	transient MinuetoImage wineskin; 
+	MinuetoImage wineskin; 
 	int tile;
 	
 	public Wineskin(int tile) throws MinuetoFileException {
-		this.wineskin = new MinuetoImageFile("images/wineskin.png");
+		this.wineskin = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
 		this.tile = tile;
 		// TODO Auto-generated constructor stub
 	}

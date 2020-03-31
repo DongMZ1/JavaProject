@@ -14,35 +14,41 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GameScreen implements Inputtable, Serializable{
-    
+    private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
+    private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
     private boolean movingCam;
     static ArrayList<Tile> tiles;
-    private ArrayList<Monster> monsters;
+    public ArrayList<Monster> monsters;
     private ArrayList<Merchant> merchants;
     private ArrayList<Well> wells;
     private ArrayList<Farmer> farmers;
     private DwarfMine mine;
     private Castle castle;
+    public Castle getCastle() {
+    	return this.castle;
+    }
+    public int Lengend1EventCardIndex = 1;
     static Hero currentHero;
     private Hero hero2;
-    private TurnManager tm;
+    public TurnManager tm;
     private InputHandler inputHandler;
     Fight fight;
     CollaborativeDecision cd;
     private TextBox textBox = TextBox.getInstance();
+    private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
     private static GameStatus gameStatus;
     private static Camera camera;
     private Coordinate previousMouseCoordinate = new Coordinate(0,0);
     private GameUi gameUi;
+    private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
     private PlayerBoard playerBoard;
+    private ArrayList<FogToken> fogtokens;
     
     int toMove; 
     final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9}; 
     final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57}; 
 	
     public GameScreen() throws IOException {
-    	
-    	
         camera = Camera.getInstance();
         this.movingCam = false;
         inputHandler = InputHandler.getInputHandler();
@@ -59,20 +65,20 @@ public class GameScreen implements Inputtable, Serializable{
         merchants = MerchantInitialer.initializeMerchants();
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
-        
+        fogtokens = FogTokenInitializer.InitializeFogtoken();
         Client.mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
-        hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
-        hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
+  //      hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
+  //      hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
         
         tm = new TurnManager(new ArrayList<Hero>());
         tm.addHero(Client.mainHero);
-        tm.addHero(hero2);
+  //      tm.addHero(hero2);
         currentHero = Client.mainHero;
                
         
         gameStatus = GameStatus.getInstance();
         gameUi = GameUi.getInstance();
-        fight = new Fight(this.tm);
+        fight = new Fight(Client.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         playerBoard = PlayerBoard.getInstance(Client.mainHero);
         castle = new Castle(5 - tm.getSize(), Client.screen);
@@ -83,8 +89,8 @@ public class GameScreen implements Inputtable, Serializable{
     }
 
     public void draw() {
-        Client.screen.draw(Constants.BACKGROUND, 0, 0);
-        Client.screen.draw(Client.gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
+        Client.screen.draw(background, 0, 0);
+        Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
         for(Tile tile : tiles)
             tile.draw();
         gameUi.draw();
@@ -334,22 +340,34 @@ public class GameScreen implements Inputtable, Serializable{
         	gameStatus.ui = UIStatus.NONE;
         }
 	    
-        else if(gameStatus.ui == UIStatus.PICKING) {
+      //  else if(gameStatus.ui == UIStatus.PICKING) {
         	//MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
-        	PickupOption p1 = new PickupOption("Pick up choice:");
-        	p1.start();
-        	gameStatus.ui = UIStatus.NONE;
-        }
+        //	PickupOption p1 = new PickupOption("Pick up choice:");
+        //	p1.start();
+       // 	gameStatus.ui = UIStatus.NONE;
+     //   }
         
-        else if(gameStatus.ui == UIStatus.DROPING) {
-        	DropOffOption x1 = new DropOffOption("Drop off");
-        	x1.start();
-        	gameStatus.ui = UIStatus.NONE;
-        }
-       else if(gameStatus.ui == UIStatus.Trade ) {
-        	Client.mainHero.Buy2SPfor2Gold();
-        	gameStatus.ui = UIStatus.NONE;
-        }
+      //  else if(gameStatus.ui == UIStatus.DROPING) {
+       // 	DropOffOption x1 = new DropOffOption("Drop off");
+        //	x1.start();
+        //	gameStatus.ui = UIStatus.NONE;
+    //    }
+   //     else if(gameStatus.ui == UIStatus.Trade ) {
+        	//Client.mainHero.Buy2SPfor2Gold();
+        	//currentHero.Buy2SPfor2Gold();
+				
+			//	try {
+			//		Cards.drawLegend1EventCard((Lengend1EventCardIndex));
+	//	} catch (IOException e) {
+					// TODO Auto-generated catch block
+			//		e.printStackTrace();
+			//	}	
+        //	gameStatus.ui = UIStatus.NONE;
+       // }
+      //  else if(gameStatus.ui == UIStatus.UseItem) {
+       // 	useItemHander u1 = new useItemHander();
+        //	gameStatus.ui = UIStatus.NONE;
+      //  }
 	    
     }
     public void handleMouseMove(int x, int y) {
@@ -365,7 +383,7 @@ public class GameScreen implements Inputtable, Serializable{
         else if(rotation == -1) {
             camera.zoomOut();
         }
-        Client.gameBoard = Client.defaultBoard.scale((double) 1 / camera.boardZoom, (double) 1 / camera.boardZoom);
+        gameBoard = defaultBoard.scale((double) 1 / camera.boardZoom, (double) 1 / camera.boardZoom);
     }
 }
 

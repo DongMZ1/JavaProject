@@ -1,9 +1,10 @@
+import java.io.Serializable;
 
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoFileException;
 import org.minueto.image.*;
 
-public class Constants {
+public class Constants implements Serializable {
     //TODO Move Constants to Own Classes
     public static final int TOP_OF_BOARD = -6476;
     public static final int SIDE_OF_BOARD = -9861;
@@ -22,10 +23,8 @@ public class Constants {
     public static final MinuetoImage playerPlate = new MinuetoRectangle(PLAYER_WIDTH, PLAYER_HEIGHT, new MinuetoColor(230, 230, 230), true);
     public static final MinuetoImage MaleButton = new MinuetoRectangle(100, 100, new MinuetoColor(50, 50, 255), true);
     public static final MinuetoImage chooseCharHighlight = new MinuetoRectangle(100, 100, MinuetoColor.RED, false);
-    public static final double HERO_SCALE = 0.2;
-    public static final MinuetoFont FONT = new MinuetoFont("Arial",20, true, false);
-    public static final MinuetoImage BACKGROUND = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
 
+    public static final double HERO_SCALE = 0.2;
 
     static String lobbyName = "Hex 13";
     static MinuetoFont toggleFont = new MinuetoFont("Times New Roman",60, true, false);

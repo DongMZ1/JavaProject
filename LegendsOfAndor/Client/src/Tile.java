@@ -75,7 +75,7 @@ public class Tile implements Serializable{
     	TILES.add(new Tile(2704, 3976, 10, new int[] {3, 14, 18, 19}, 3));
     	TILES.add(new Tile(3108, 1636, 11, new int[] {0, 6, 7, 8, 12, 13}, 0));
     	TILES.add(new Tile(3976, 1848, 12, new int[] {11, 13}, 11));
-    	TILES.add(new Tile(4916, 2288, 13, new int[] {6, 11, 12, 16, 17}, 12));
+    	TILES.add(new Tile(4916, 2288, 13, new int[] {6, 11, 12, 16, 17}, 6));
     	TILES.add(new Tile(3428, 3324, 14, new int[] {2, 3, 6, 10, 17, 18}, 2));
     	TILES.add(new Tile(1128, 152, 15, new int[] {7, 9}, 7));
     	TILES.add(new Tile(5552, 3216, 16, new int[] {13, 17, 36, 38, 32, 48}, 13));

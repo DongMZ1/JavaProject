@@ -10,17 +10,13 @@ import java.io.Serializable;
 
 public class Button implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3950552043413552193L;
-	private Coordinate coordinate;
+    private Coordinate coordinate;
     private int height, width;
-    private transient MinuetoText label;
+    private MinuetoText label;
     private boolean clickable;
-    private transient MinuetoRectangle clickableButtonBackground;
-    private transient MinuetoRectangle unclickableButtonBackground;
-    private transient MinuetoFont font;
+    private MinuetoRectangle clickableButtonBackground;
+    private MinuetoRectangle unclickableButtonBackground;
+    private MinuetoFont font;
     private GameStatus gameStatus;
 
     public Button(Coordinate coordinate, int height, int width, String label, boolean clickable) throws IOException {

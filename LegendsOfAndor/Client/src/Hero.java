@@ -6,7 +6,7 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Hero implements Character {
-	transient MinuetoImage heroImage;
+	MinuetoImage heroImage;
 	int tile;
 	int wp;
 	int sp;
@@ -72,7 +72,25 @@ public class Hero implements Character {
 	public MinuetoImage getImage() {
 		return this.heroImage;
 	}
-
+   public void UseWineSkinForMove() {
+	   int wineSkinCount = 0;
+		for(Item i: items) {
+			if(i instanceof Wineskin) {
+				wineSkinCount ++;
+			}
+		}
+		if(wineSkinCount > 0) {
+			for(Item i: items) {
+				if(i instanceof Wineskin) {
+					this.items.remove(i);
+					break;
+				}
+			}
+			this.time.time --;
+			this.time.x = this.time.x - 550;
+			this.time.draw();
+		}
+   }
 	//UPDATE
 	public void addWineSkin() throws MinuetoFileException {
 		int wineSkinCount = 0;
@@ -134,13 +152,32 @@ public class Hero implements Character {
 	  }
   }
   //UPDATE
+  public boolean CheckHasCreature() {
+	  for(TileEntity t: Tile.get(tile).getTileEntities()) {
+		  if(t instanceof Monster) {
+			  return true;
+		  }
+	  }
+	  return false;
+  }
   public void dropFarmer() {
+	  if(!CheckHasCreature()) {
+		  if(hasfarmer && this.tile == 0) {
+			  hasfarmer = false;  
+			  farmer.isDropped();
+			  this.farmer = null;
+			  //we need castle health increase.
+			  Client.gameBoard.getCastle().health++;
+			  System.out.println("Health:  " + Client.gameBoard.getCastle().health);
+			 Client.gameBoard.getCastle().draw();
+		  }
 	  if(hasfarmer) {
 		  hasfarmer = false;
 		  Tile.get(tile).getTileEntities().add(this.farmer);	  
 		  farmer.isDropped();
 		  this.farmer = null;
 	  }
+  }
   }
 
 
@@ -184,7 +221,34 @@ public class Hero implements Character {
 		}
 		return goldCount;
 	}
+	
+	public int getWineskin() {
+		int WineskinCount = 0;
+		for(Item i: items) {
+			if(i instanceof Wineskin) {
+				WineskinCount ++;
+			}
+		}
+		return WineskinCount;
+	}
 
+    public boolean hasMerchant() {
+    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
+    		if(t instanceof Merchant) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public boolean hasMonster() {
+    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
+    		if(t instanceof Monster) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 	//UPDATE
 	public void Buy2SPfor2Gold() {
 		//firstly, find out if the hero has more than two gold for trade willpower
@@ -205,9 +269,112 @@ public class Hero implements Character {
 			}
 				}
 				items.remove(count);
-				wp = wp+2;
+				sp = sp+2;
 		}
 		System.out.println("gold: "+ this.getGoldNm());
+		if(this.getGoldNm() == 0) {
+			hasGold = false;
+		}
+	}
+	public void FilpFogTokenForPreviewOnly(int tileNB) {
+		for (TileEntity f: Tile.get(tileNB).getTileEntities()) {
+			if(f instanceof FogToken) {
+				if(((FogToken)f).tokenNumber == 1) {
+					Cards card1 = new Cards(Client.gameBoard.Lengend1EventCardIndex);
+			}
+				if(((FogToken)f).tokenNumber == 2) {Cards c1 = new Cards(1000);}
+				if(((FogToken)f).tokenNumber == 3) {Cards c1 = new Cards(1001);}
+				if(((FogToken)f).tokenNumber == 4) {Cards c1 = new Cards(1002);}
+				if(((FogToken)f).tokenNumber == 5) {Cards c1 = new Cards(1003);}
+				if(((FogToken)f).tokenNumber == 6) {Cards c1 = new Cards(1004);}
+				if(((FogToken)f).tokenNumber == 7) {Cards c1 = new Cards(1005);}
+				if(((FogToken)f).tokenNumber == 8) {Cards c1 = new Cards(1006);}
+		}
+	}
+	}
+	public void RevealFogToken() {
+			for (TileEntity f: Tile.get(tile).getTileEntities()) {
+				if(f instanceof FogToken) {
+				//1 is draw a event card	
+if(((FogToken)f).tokenNumber == 1) {
+				try {
+					Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	 
+				 }
+ // 2 is to increasing a point of strength
+if(((FogToken)f).tokenNumber == 2) {
+	Cards c1 = new Cards(1000);
+	 this.sp ++;
+}
+
+if(((FogToken)f).tokenNumber == 3) {
+	Cards c1 = new Cards(1001);
+	 this.wp = this.wp + 2;
+}
+
+if(((FogToken)f).tokenNumber == 4) {
+	Cards c1 = new Cards(1002);
+	this.wp = this.wp + 3;
+}
+
+if(((FogToken)f).tokenNumber == 5) {
+	Cards c1 = new Cards(1003);
+	 try {
+		Item g = new Gold(this.tile);
+		Tile.get(tile).getTileEntities().add(g);
+		this.pickupGold();
+	} catch (MinuetoFileException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+}
+
+if(((FogToken)f).tokenNumber == 6) {
+	Cards c1 = new Cards(1004);
+	 try {
+		if(hasMonster()) {
+		int nexttile =	GameScreen.tiles.get(this.tile).getNextTile();
+		Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), nexttile);
+		Client.gameBoard.tiles.get(nexttile).addTileEntity(MM1);
+		Client.gameBoard.monsters.add(MM1);
+		}else{
+			Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), this.tile);
+			Client.gameBoard.tiles.get(this.tile).addTileEntity(MM1);
+			Client.gameBoard.monsters.add(MM1);}
+	} catch (MinuetoFileException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+if(((FogToken)f).tokenNumber == 7) {
+	Cards c1 = new Cards(1005);
+	 try {
+		this.addWineSkin();
+		this.addWineSkin();
+	} catch (MinuetoFileException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+if(((FogToken)f).tokenNumber == 8) {
+	Cards c1 = new Cards(1006);
+	//Witch's brew;;
+}
+				 
+					Tile.get(tile).getTileEntities().remove(f);
+					break;
+				}
+			
+		}	
 	}
 
 	// TODO Move HeroDraw to Hero

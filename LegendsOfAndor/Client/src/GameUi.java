@@ -20,35 +20,35 @@ public class GameUi implements Inputtable, Serializable {
     public Button dropButton;
     public Button tradeButton;
     public Button waitButton;
-
+    public Button useItemButton;
+    public Button informationButton;
     private GameStatus gameStatus;
     private TextBox textBox;
 
     private int turnButtonWidth = 200;
-    private int turnButtonHeight = 50;
+    private int turnButtonHeight = 37;
     public int uiHeight = 300;
    
-    public Button cancel;
-    public Button pickupFarmer;
-    public Button pickupWP;
-    public Button pickupGold;
+
     private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
-       
-        waitButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight- turnButtonHeight),
+        informationButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - turnButtonHeight),
+                turnButtonHeight, turnButtonWidth, "ItemInformation", true);
+        useItemButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
+                turnButtonHeight, turnButtonWidth, "Useitem", true);
+        waitButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight- 3*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Wait", true);
-        tradeButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
+        tradeButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 4*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Trade", true);
-        dropButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 3*turnButtonHeight),
+        dropButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 5*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Drop", true);
-        pickupButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 4*turnButtonHeight),
+        pickupButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 6*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Pickup", true);
-        fightButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 5*turnButtonHeight),
+        fightButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 7*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Fight", true);
-        moveButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 6*turnButtonHeight),
+        moveButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 8*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Move", true);
-        
  //       cancel = new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - turnButtonHeight),
   //              turnButtonHeight, turnButtonWidth, "cancel", true);
 //        pickupFarmer =  new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - 2*turnButtonHeight),
@@ -74,8 +74,9 @@ public class GameUi implements Inputtable, Serializable {
         dropButton.draw();
         tradeButton.draw();
         waitButton.draw();
-
+        useItemButton.draw();
         textBox.draw();
+        informationButton.draw();
     }
 
    // public void drawPickup() {
@@ -120,19 +121,37 @@ public class GameUi implements Inputtable, Serializable {
 	            	gameStatus.ui = UIStatus.FIGHTING;
 	            }
 	            else if(pickupButton.isClickable() && pickupButton.isClicked(x, y)) {
-	            	gameStatus.ui = UIStatus.PICKING;
+	            	PickupOption p1 = new PickupOption("Pick up choice:");
+	            	p1.start();
+	            	//gameStatus.ui = UIStatus.PICKING;
 	            	//this.drawPickup();
 	            }
 	            else if(dropButton.isClickable() && dropButton.isClicked(x, y)) {
-	            	gameStatus.ui = UIStatus.DROPING;
+	            	DropOffOption x1 = new DropOffOption("Drop off");
+	            	x1.start();
 	            }
 	            	
-	             else if(tradeButton.isClickable() && tradeButton.isClicked(x, y)) {
-	            	gameStatus.ui = UIStatus.Trade;
-	            }//TODO tradeButton
+	            else if(tradeButton.isClickable() && tradeButton.isClicked(x, y)) {
+	            	
+                 //   TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
+					try {
+						Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex+7);
+			} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}	
+	            }
+	            else if(useItemButton.isClickable() && useItemButton.isClicked(x, y)) {
+	            	useItemHander u1 = new useItemHander();
+	            }
+	            else if(informationButton.isClickable() && informationButton.isClicked(x, y)) {
+	            	Cards.showHeroInformationBoard();
+	            }
+	                //TODO tradeButton
 	            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
+	            
 	        }
         }
     }

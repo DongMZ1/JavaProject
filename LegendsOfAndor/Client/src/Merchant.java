@@ -1,7 +1,7 @@
 import org.minueto.image.MinuetoImage;
 
 public class Merchant implements TileEntity {
-	transient MinuetoImage merchantImage;
+	MinuetoImage merchantImage;
 	int tile;
 	
 	public Merchant(MinuetoImage merchantImage,int tile ) {

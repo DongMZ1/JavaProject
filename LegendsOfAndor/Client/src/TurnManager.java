@@ -6,7 +6,7 @@ public class TurnManager implements Serializable{
 	 * 
 	 */
 	private static TurnManager tm;
-	private ArrayList<Hero> heroes;
+	public ArrayList<Hero> heroes;
 	private int index = 0;
 	
 	public TurnManager(ArrayList<Hero> heroes)

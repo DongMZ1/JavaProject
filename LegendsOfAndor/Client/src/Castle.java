@@ -10,22 +10,25 @@ import org.minueto.window.MinuetoWindow;
 
 public class Castle implements Serializable{
 
-	private int health;
-	private transient MinuetoWindow screen;
-	private transient MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
-	private transient MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
-	private String message;
+	public int health;
+	private MinuetoWindow screen;
+	private MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
+	private MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
+	public String message;
 	Camera camera;
-	
+	 
 	public Castle(int health, MinuetoWindow window) throws IOException {
 		this.health = health;
 		screen = window;
 		this.camera = Camera.getInstance();
-		message = "Castle Health: " + String.valueOf(health);
 	}
 	
 	public void draw() {
-		
+		if(this.health <= 0) {
+			message = "Game Over Rookies\n";
+		}else {
+			message = "Castle Health: " + String.valueOf(this.health);
+		}
 		Coordinate coordinates = camera.getPosOnScreen(80,400);
 		screen.draw(upperBlock, coordinates.getX(),coordinates.getY());
         screen.draw(new MinuetoText(message, font, MinuetoColor.BLACK), coordinates.getX(), coordinates.getY());
@@ -43,21 +46,12 @@ public class Castle implements Serializable{
 			
 		}
 		
-		if (health == 0) {
+		if (health <= 0) {
 			message = "Game Over Rookies\n";
 		}
     	
     }
 	public void IncreaseHealthIfThereIsFarmer() {
-		// assume tile 0 is the place of castle
-		// if the farmer was dropped at tile 0, then farmer will appear at the tileentities list, heath++ then remove the farmer
-		for(TileEntity t: Tile.get(0).getTileEntities()) {
-			if(t instanceof Farmer) {
-				//UPDATE
-				health++;
-				Tile.get(0).getTileEntities().remove(t);
-			}
-			
-		}
-	}
+	
+}
 }

@@ -26,7 +26,7 @@ String name;
 public PickupOptionDefine(String name) {
 
 MinuetoFont fontArial19;				// Font used to draw on the screen.
-MinuetoImage imageText2;		// Instructions drawn on the screen.		// Background for this demo		
+MinuetoImage imageText2, exitText;		// Instructions drawn on the screen.		// Background for this demo		
 Random random = new Random();		
 this.name = name;		
 this.closing = false;
@@ -48,7 +48,7 @@ fontArial19 = new MinuetoFont("Arial",19,false, false);
 
 // Build images of the demo instructions.
 imageText2 = new MinuetoText("press '1' to pickup Farmer, '2' to pickup Gold, '3' to pickup Willpower" ,fontArial19,MinuetoColor.BLUE);
-
+exitText = new MinuetoText(" '4' to reveal a token, press Q to exit" ,fontArial19,MinuetoColor.BLUE);
 // Show the game window.
 window.setVisible(true);
 
@@ -63,7 +63,7 @@ window.clear();
 
 // Draw the background.
 window.draw(imageText2, 0, 0);
-
+window.draw(exitText, 0, 30);
 // Handle all the events in the event queue.
 while (eventQueue.hasNext()) {
 eventQueue.handle();
@@ -84,7 +84,6 @@ Thread.yield();
 **/
 public void handleKeyPress(int value) {
 
-System.out.println(this.name + ": Keyboard key " + value + " was pressed.");
 
 switch(value) {
 case MinuetoKeyboard.KEY_1:
@@ -101,6 +100,12 @@ break;
 
 case MinuetoKeyboard.KEY_3:
 	Client.mainHero.replenishWP();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_4:
+Client.mainHero.RevealFogToken();
 this.closing = true;
 window.close();
 break;
