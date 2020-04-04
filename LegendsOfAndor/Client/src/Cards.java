@@ -36,10 +36,10 @@ MinuetoWindowHandler{
 		        GameScreen.tiles.get(m2.tile).addTileEntity(m2);
 		        GameScreen.tiles.get(m3.tile).addTileEntity(m3);
 		        GameScreen.tiles.get(m4.tile).addTileEntity(m4);
-		        Client.gameBoard.monsters.add(m1);
-		        Client.gameBoard.monsters.add(m2);
-		        Client.gameBoard.monsters.add(m3);
-		        Client.gameBoard.monsters.add(m4);
+		        Client.gameScreenDrawer.gameScreen.monsters.add(m1);
+		        Client.gameScreenDrawer.gameScreen.monsters.add(m2);
+		        Client.gameScreenDrawer.gameScreen.monsters.add(m3);
+		        Client.gameScreenDrawer.gameScreen.monsters.add(m4);
 		   break;
 	   case 2:
 		   @SuppressWarnings("unused") Cards card2 = new Cards(2);
@@ -61,7 +61,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 4:
 		   @SuppressWarnings("unused") Cards card4 = new Cards(4);
-		   for(Hero h: Client.gameBoard.tm.heroes) {
+		   for(Hero h: Client.gameScreenDrawer.gameScreen.tm.heroes) {
 			   if(h.tile >= 0 && h.tile <= 9) {
 				   h.wp = h.wp +2 ;
 			   }
@@ -69,7 +69,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 5:
 		   @SuppressWarnings("unused") Cards card5 = new Cards(5);
-		   for(Hero h: Client.gameBoard.tm.heroes) {
+		   for(Hero h: Client.gameScreenDrawer.gameScreen.tm.heroes) {
 			   if(h instanceof Warrior && h.wp > 12) {
 				  h.wp = 12;
 			   }
@@ -95,7 +95,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 9: 
 		   @SuppressWarnings("unused") Cards card9 = new Cards(9);
-		   for(Hero h: Client.gameBoard.tm.heroes) {
+		   for(Hero h: Client.gameScreenDrawer.gameScreen.tm.heroes) {
 			   if(h instanceof Wizard && h.wp > 12) {
 				  h.wp = 12;
 			   }
@@ -106,7 +106,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 10: 
 		   @SuppressWarnings("unused") Cards card10 = new Cards(10);
-		   for(Hero h: Client.gameBoard.tm.heroes) {
+		   for(Hero h: Client.gameScreenDrawer.gameScreen.tm.heroes) {
 			  if(h.wp <= 10) {
 				  h.wp = h.wp +2;
 			  }
@@ -114,7 +114,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 11: 
 		   @SuppressWarnings("unused") Cards card11 = new Cards(11);
-		   for(Hero h: Client.gameBoard.tm.heroes) {
+		   for(Hero h: Client.gameScreenDrawer.gameScreen.tm.heroes) {
 				  if(h.sp > 1) {
 					  h.sp = h.sp -1;
 				  }
@@ -122,7 +122,7 @@ MinuetoWindowHandler{
 		   break;
 	   }
 	   //after each extraction, event card index ++;
-	   Client.gameBoard.Lengend1EventCardIndex ++;
+	   Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex ++;
    }
    
    

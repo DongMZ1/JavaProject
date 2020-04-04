@@ -167,9 +167,9 @@ public class Hero implements Character {
 			  farmer.isDropped();
 			  this.farmer = null;
 			  //we need castle health increase.
-			  Client.gameBoard.getCastle().health++;
-			  System.out.println("Health:  " + Client.gameBoard.getCastle().health);
-			 Client.gameBoard.getCastle().draw();
+			  Client.gameScreenDrawer.gameScreen.getCastle().health++;
+			  System.out.println("Health:  " + Client.gameScreenDrawer.gameScreen.getCastle().health);
+			 Client.gameScreenDrawer.gameScreen.getCastle().draw();
 		  }
 	  if(hasfarmer) {
 		  hasfarmer = false;
@@ -280,7 +280,7 @@ public class Hero implements Character {
 		for (TileEntity f: Tile.get(tileNB).getTileEntities()) {
 			if(f instanceof FogToken) {
 				if(((FogToken)f).tokenNumber == 1) {
-					Cards card1 = new Cards(Client.gameBoard.Lengend1EventCardIndex);
+					Cards card1 = new Cards(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
 			}
 				if(((FogToken)f).tokenNumber == 2) {Cards c1 = new Cards(1000);}
 				if(((FogToken)f).tokenNumber == 3) {Cards c1 = new Cards(1001);}
@@ -298,7 +298,7 @@ public class Hero implements Character {
 				//1 is draw a event card	
 if(((FogToken)f).tokenNumber == 1) {
 				try {
-					Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex);
+					Cards.drawLegend1EventCard(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -339,12 +339,12 @@ if(((FogToken)f).tokenNumber == 6) {
 		if(hasMonster()) {
 		int nexttile =	GameScreen.tiles.get(this.tile).getNextTile();
 		Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), nexttile);
-		Client.gameBoard.tiles.get(nexttile).addTileEntity(MM1);
-		Client.gameBoard.monsters.add(MM1);
+		Client.gameScreenDrawer.gameScreen.tiles.get(nexttile).addTileEntity(MM1);
+		Client.gameScreenDrawer.gameScreen.monsters.add(MM1);
 		}else{
 			Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), this.tile);
-			Client.gameBoard.tiles.get(this.tile).addTileEntity(MM1);
-			Client.gameBoard.monsters.add(MM1);}
+			Client.gameScreenDrawer.gameScreen.tiles.get(this.tile).addTileEntity(MM1);
+			Client.gameScreenDrawer.gameScreen.monsters.add(MM1);}
 	} catch (MinuetoFileException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

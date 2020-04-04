@@ -77,28 +77,28 @@ MinuetoWindowHandler{
 	public void handleKeyPress(int value) {
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
-			try{Client.gameBoard.tm.heroes.get(0).wp = Client.gameBoard.tm.heroes.get(0).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
+			try{Client.gameScreenDrawer.gameScreen.tm.heroes.get(0).wp = Client.gameScreenDrawer.gameScreen.tm.heroes.get(0).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
 			    
 			}
 			this.closing = true;
 			window.close();
 			break;
 		case  MinuetoKeyboard.KEY_2:
-try{Client.gameBoard.tm.heroes.get(1).wp = Client.gameBoard.tm.heroes.get(1).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
+try{Client.gameScreenDrawer.gameScreen.tm.heroes.get(1).wp = Client.gameScreenDrawer.gameScreen.tm.heroes.get(1).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
 			    
 			}
 			this.closing = true;
 			window.close();
 			break;
 		case  MinuetoKeyboard.KEY_3:
-try{Client.gameBoard.tm.heroes.get(2).wp = Client.gameBoard.tm.heroes.get(2).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
+try{Client.gameScreenDrawer.gameScreen.tm.heroes.get(2).wp = Client.gameScreenDrawer.gameScreen.tm.heroes.get(2).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
 			    
 			}
 			this.closing = true;
 			window.close();
 			break;
 		case  MinuetoKeyboard.KEY_4:
-try{Client.gameBoard.tm.heroes.get(3).wp = Client.gameBoard.tm.heroes.get(3).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
+try{Client.gameScreenDrawer.gameScreen.tm.heroes.get(3).wp = Client.gameScreenDrawer.gameScreen.tm.heroes.get(3).wp -1;}catch(ArrayIndexOutOfBoundsException exception) {
 			    
 			}
 			this.closing = true;

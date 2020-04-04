@@ -80,23 +80,23 @@ MinuetoWindowHandler{
 	public void handleKeyPress(int value) {
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
-			if(Client.gameBoard.currentHero.getGoldNm() >= 2) { 
+			if(Client.gameScreenDrawer.gameScreen.currentHero.getGoldNm() >= 2) {
 				int count = 0;
-					for(Item i: Client.gameBoard.currentHero.items) {
+					for(Item i: Client.gameScreenDrawer.gameScreen.currentHero.items) {
 						if(i instanceof Gold) {
-						count = Client.gameBoard.currentHero.items.indexOf(i);
+						count = Client.gameScreenDrawer.gameScreen.currentHero.items.indexOf(i);
 				}
 					}
-					Client.gameBoard.currentHero.items.remove(count);
+					Client.gameScreenDrawer.gameScreen.currentHero.items.remove(count);
 					
 					count = 0;
-					for(Item i: Client.gameBoard.currentHero.items) {
+					for(Item i: Client.gameScreenDrawer.gameScreen.currentHero.items) {
 						if(i instanceof Gold) {
-						count = Client.gameBoard.currentHero.items.indexOf(i);
+						count = Client.gameScreenDrawer.gameScreen.currentHero.items.indexOf(i);
 				}
 					}
-					Client.gameBoard.currentHero.items.remove(count);
-					Client.gameBoard.currentHero.wp = Client.gameBoard.currentHero.wp+5;
+					Client.gameScreenDrawer.gameScreen.currentHero.items.remove(count);
+					Client.gameScreenDrawer.gameScreen.currentHero.wp = Client.gameScreenDrawer.gameScreen.currentHero.wp+5;
 			}
 			//GameScreen.currentHero.Buy2SPfor2Gold();
 			this.closing = true;

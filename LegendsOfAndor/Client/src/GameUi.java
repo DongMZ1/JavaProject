@@ -135,7 +135,7 @@ public class GameUi implements Inputtable, Serializable {
 	            	
                  //   TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
 					try {
-						Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex+7);
+						Cards.drawLegend1EventCard(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex+7);
 			} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

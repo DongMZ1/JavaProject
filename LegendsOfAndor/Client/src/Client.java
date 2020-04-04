@@ -13,33 +13,8 @@ import org.minueto.window.*;
 
 public class Client {
 
-    /*
-    private void run() throws IOException  {
-        try {
-            Socket socket = new Socket(serverAddress, 59001);
-            in = new Scanner(socket.getInputStream());
-            out = new PrintWriter(socket.getOutputStream(), true);
-
-            while (in.hasNextLine()) {
-                String line = in.nextLine();
-                if (line.startsWith("SUBMITNAME")) {
-                    out.println(getName());
-                } else if (line.startsWith("NAMEACCEPTED")) {
-                    this.frame.setTitle("Chatter - " + line.substring(13));
-                    textField.setEditable(true);
-                } else if (line.startsWith("MESSAGE")) {
-                    messageArea.append(line.substring(8) + "\n");
-                }
-            }
-        } finally {
-            frame.setVisible(false);
-            frame.dispose();
-        }
-    }
-    */
-
     static LobbyScreen lobbyScreen;
-    static GameScreen gameBoard;
+    static GameScreenDrawer gameScreenDrawer;
     static TextBox textBox;
     public static Hero mainHero;
     static GameStatus gameStatus;
@@ -51,23 +26,23 @@ public class Client {
          gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
-        gameBoard = new GameScreen();
+        gameScreenDrawer = GameScreenDrawer.getInstance();
         textBox = TextBox.getInstance();
-        new InputThread(gameStatus, lobbyScreen, gameBoard, textBox).start();
+        new InputThread(gameStatus, lobbyScreen, gameScreenDrawer, textBox).start();
         inputHandler.addInput(lobbyScreen);
-        inputHandler.addInput(gameBoard);
+        inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
-        inputHandler.addInput(gameBoard.fight);
-        inputHandler.addInput(gameBoard.cd);
+        inputHandler.addInput(gameScreenDrawer.gameScreen.fight);
+        inputHandler.addInput(gameScreenDrawer.gameScreen.cd);
         
 
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
                 lobbyScreen.draw();
             else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN)
-                gameBoard.draw();
+                gameScreenDrawer.draw();
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
-                gameBoard.fight();
+                gameScreenDrawer.gameScreen.fight();
             }
 
             textBox.draw();
@@ -84,7 +59,7 @@ public class Client {
 class InputThread extends Thread{
     private GameStatus gameStatus;
     private LobbyScreen lobbyScreen;
-    private GameScreen gameBoard;
+    private GameScreenDrawer gameScreenDrawer;
     private TextBox textBox;
     private static int playerNumber;
     //Basic network code init
@@ -111,10 +86,10 @@ class InputThread extends Thread{
     }
 
 
-    public InputThread(GameStatus gameStatus, LobbyScreen lobbyScreen, GameScreen gameBoard, TextBox textBox) {
+    public InputThread(GameStatus gameStatus, LobbyScreen lobbyScreen, GameScreenDrawer gameScreenDrawer, TextBox textBox) {
         this.gameStatus = gameStatus;
         this.lobbyScreen = lobbyScreen;
-        this.gameBoard = gameBoard;
+        this.gameScreenDrawer = gameScreenDrawer;
         this.textBox = textBox;
 //        this.playerNumber = Integer.parseInt(in.nextLine().split(",")[2]);
     }
@@ -152,7 +127,7 @@ class InputThread extends Thread{
 
     public static void updateVariable() {
         try {
-			out.writeObject(Client.gameBoard);
+			out.writeObject(Client.gameScreenDrawer);
 			out.writeObject(Client.lobbyScreen);
 			out.writeObject(Client.gameStatus);
 		} catch (IOException e) {
