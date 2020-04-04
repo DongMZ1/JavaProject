@@ -28,12 +28,15 @@ public class GameScreenDrawer implements Inputtable{
 	private Coordinate previousMouseCoordinate = new Coordinate(0,0);
 	int toMove;
 
+	private TileDrawer tileDrawer;
+
 	private GameScreenDrawer() throws IOException {
 		gameScreen = new GameScreen();
 		gameUi = GameUi.getInstance();
 		camera = Camera.getInstance();
 		this.movingCam = false;
 		playerBoard = PlayerBoard.getInstance(Client.mainHero);
+		tileDrawer = TileDrawer.getInstance();
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -46,7 +49,7 @@ public class GameScreenDrawer implements Inputtable{
 		Client.screen.draw(background, 0, 0);
 		Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
 		for(Tile tile : gameScreen.tiles)
-			tile.draw();
+			tileDrawer.draw(tile);
 		gameUi.draw();
 		playerBoard.draw();
 		gameScreen.tm.draw();

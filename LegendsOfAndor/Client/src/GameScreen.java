@@ -40,8 +40,6 @@ public class GameScreen implements Serializable{
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
         tiles = Tile.getAll();
-        for (Tile tile : tiles)
-        	tile.setScreen(Client.screen);
         
         monsters = MonsterInitializer.initializeMonsters();
         wells = WellInitializer.initializeWells();

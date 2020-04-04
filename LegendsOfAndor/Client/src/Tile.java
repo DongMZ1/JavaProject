@@ -14,14 +14,12 @@ import java.util.HashMap;
 public class Tile implements Serializable{
     // TODO Make Tile Class Flyweight
     // TODO Make accessor to get tile from index
-    private static MinuetoWindow screen;
-    private ArrayList<Coordinate> coords;
-    private ArrayList<TileEntity> tileEntities;
-    private ArrayList<Character> tileCharacters;
+    public ArrayList<Coordinate> coords;
+    public ArrayList<TileEntity> tileEntities;
+    public ArrayList<Character> tileCharacters;
     private Coordinate moveCoords;
     private int[] adjacentTiles;
     private int tileNumber;
-    private static Camera camera;
     private int nextTile;
     private ArrayList<Grid> grids = new ArrayList<>();
     
@@ -35,19 +33,10 @@ public class Tile implements Serializable{
         this.coords = new ArrayList<>();
         coords.add(new Coordinate(moveX, moveY));
         this.moveCoords = new Coordinate(moveX, moveY);
-//        this.screen = screen;
         this.tileEntities = new ArrayList<>();
         this.tileCharacters = new ArrayList<>();
         this.adjacentTiles = adjacentTiles;
         this.tileNumber = tileNumber;
-        try {
-			camera = Camera.getInstance();
-		} catch (MinuetoFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		this.nextTile = nextTile;
     }
     
@@ -151,10 +140,6 @@ public class Tile implements Serializable{
     	return TILES;
     }
     
-    public void setScreen(MinuetoWindow screen) {
-    	Tile.screen = screen;
-    }
-    
     public void setup(int x, int y, int next) {
         coords.add(new Coordinate(x, y));
         this.nextTile = next;
@@ -187,13 +172,6 @@ public class Tile implements Serializable{
     	return tileCharacters;
     }
 
-    public void draw() {
-        Coordinate coordinates;
-        for(int i = 0; i < tileEntities.size(); i++) {
-            coordinates = camera.getPosOnScreen(coords.get(0));
-            Tile.screen.draw(tileEntities.get(i).getImage(), coordinates.getX(), coordinates.getY());
-        }
-    }
     public boolean isAdjacent(int adjacentTile) {
         for(int tileNum : adjacentTiles)
             if(adjacentTile == tileNum)
