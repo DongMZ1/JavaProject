@@ -6,8 +6,10 @@ public class TileDrawer {
 
 	private static TileDrawer tileDrawer;
 	private static Camera camera;
+	private static TileEntityDrawer tileEntityDrawer;
 	private TileDrawer() throws IOException {
 		camera = Camera.getInstance();
+		tileEntityDrawer = TileEntityDrawer.getInstance();
 	}
 
 	public static TileDrawer getInstance() throws IOException {
@@ -20,7 +22,7 @@ public class TileDrawer {
 		Coordinate coordinates;
 		for(int i = 0; i < tile.tileEntities.size(); i++) {
 			coordinates = camera.getPosOnScreen(tile.coords.get(0));
-			Client.screen.draw(tile.tileEntities.get(i).getImage(), coordinates.getX(), coordinates.getY());
+			tileEntityDrawer.draw(tile.tileEntities.get(i), coordinates.getX(), coordinates.getY());
 		}
 	}
 }

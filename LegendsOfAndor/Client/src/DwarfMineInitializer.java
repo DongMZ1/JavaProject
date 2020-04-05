@@ -6,7 +6,7 @@ import org.minueto.image.MinuetoImageFile;
 
 public class DwarfMineInitializer implements Serializable{
 	public static DwarfMine initializemine() throws MinuetoFileException {
-        DwarfMine m = new DwarfMine(new MinuetoImageFile("images/DwarfMine.png"), 71); 
+        DwarfMine m = new DwarfMine(71);
         GameScreen.tiles.get(m.getTile()).addTileEntity(m);
         return m;
     }

@@ -10,7 +10,7 @@ public class MonsterInitializer implements Serializable{
 
 	public static ArrayList<Monster> initializeMonsters() throws IOException {
         ArrayList<Monster> output = new ArrayList<>();
-        Monster m1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 8);
+        Monster m1 = new Gor(8);
        // Monster m2 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 20);
        // Monster m3 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 21);
        // Monster m4 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 26);

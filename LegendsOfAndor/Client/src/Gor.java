@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class Gor extends Monster {
 
-	public Gor(MinuetoImage monsterImage, int tile) throws IOException {
-		super(monsterImage, tile);
+	public Gor(int tile) throws IOException {
+		super(tile);
 	}
 
 }

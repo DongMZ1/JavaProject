@@ -2,16 +2,15 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Monster implements Character
+public class Monster implements Character, Serializable
 {
-	MinuetoImage monsterImage;
     int tile;
     GameStatus gameStatus;
     int health; 
     Dice dice;
-    public Monster(MinuetoImage monsterImage, int tile) throws IOException {
-        this.monsterImage = monsterImage;
+    public Monster(int tile) throws IOException {
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();
         dice = new MonsterDice();
@@ -23,10 +22,7 @@ public class Monster implements Character
     public int getTile() {
         return this.tile;
     }
-    public MinuetoImage getImage() {
-        return this.monsterImage;
-    }
-    
+
 //    @Return the tile that the monster advances to
     public int advance()
     {

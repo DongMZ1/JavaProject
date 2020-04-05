@@ -4,14 +4,8 @@ public class Merchant implements TileEntity {
 	MinuetoImage merchantImage;
 	int tile;
 	
-	public Merchant(MinuetoImage merchantImage,int tile ) {
-		this.merchantImage = merchantImage;
+	public Merchant(int tile) {
 		this.tile = tile ;
-	}
-	@Override
-	public MinuetoImage getImage() {
-		// TODO Auto-generated method stub
-		return this.merchantImage;
 	}
 
 	@Override
@@ -24,7 +18,7 @@ public class Merchant implements TileEntity {
 	public void setTile(int tile) {
 		this.tile = tile;
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 

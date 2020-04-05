@@ -4,8 +4,8 @@ import org.minueto.image.MinuetoImage;
 
 public class Wizard extends Hero{
 
-	public Wizard(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-		super(heroImage, tile, mainHero);
+	public Wizard(int tile, boolean mainHero) throws IOException {
+		super(tile, mainHero);
 		// TODO Auto-generated constructor stub
 	}
 

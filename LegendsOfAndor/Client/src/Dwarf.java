@@ -2,13 +2,14 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Dwarf extends Hero{
+public class Dwarf extends Hero implements Serializable {
 
 	// dwarfs can buy SP in dwarf mine for one gold each
 		
-	public Dwarf(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-		super(heroImage, tile, mainHero);
+	public Dwarf(int tile, boolean mainHero) throws IOException {
+		super(tile, mainHero);
 		// TODO Auto-generated constructor stub
 		dice = new DwarfDice();
 

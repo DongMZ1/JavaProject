@@ -28,10 +28,10 @@ MinuetoWindowHandler{
 	   switch(cardNB) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards card1 = new Cards(1);
-			   Monster m1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 16);
-		        Monster m2 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 22);
-		        Monster m3 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 23);
-		        Monster m4 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 24);
+			   Monster m1 = new Gor(16);
+		        Monster m2 = new Gor(22);
+		        Monster m3 = new Gor(23);
+		        Monster m4 = new Gor(24);
 		        GameScreen.tiles.get(m1.tile).addTileEntity(m1);
 		        GameScreen.tiles.get(m2.tile).addTileEntity(m2);
 		        GameScreen.tiles.get(m3.tile).addTileEntity(m3);

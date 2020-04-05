@@ -21,9 +21,8 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	Client.mainHero = new Archer(new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 0, true);
-        
-         gameStatus = GameStatus.getInstance();
+    	Client.mainHero = new Archer(0, true);
+    	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
         gameScreenDrawer = GameScreenDrawer.getInstance();
@@ -32,7 +31,7 @@ public class Client {
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
-        inputHandler.addInput(gameScreenDrawer.gameScreen.fight);
+        inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.gameScreen.cd);
         
 
@@ -42,7 +41,7 @@ public class Client {
             else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN)
                 gameScreenDrawer.draw();
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
-                gameScreenDrawer.gameScreen.fight();
+                gameScreenDrawer.fightDrawer.draw();
             }
 
             textBox.draw();

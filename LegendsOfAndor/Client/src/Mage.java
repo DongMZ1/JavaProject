@@ -7,9 +7,8 @@ public class Mage extends Hero{
 
 	//special ability: change dice result, implemented in fight class
 	
-	public Mage(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-		super(heroImage, tile, mainHero);
-		// TODO Auto-generated constructor stub
+	public Mage(int tile, boolean mainHero) throws IOException {
+		super(tile, mainHero);
 		dice = new MageDice();
 	}
 	

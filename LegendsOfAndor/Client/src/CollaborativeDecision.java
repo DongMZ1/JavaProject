@@ -17,6 +17,10 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 	ArrayList<Button> itemButtons;
 	Button okButton;
 	TextBox textBox;
+	private MinuetoImage archerImage;
+	private MinuetoImage warriorImage;
+	private MinuetoImage dwarfImage;
+	private MinuetoImage mageImage;
 	
 	
 	public CollaborativeDecision(DecisionType d, MinuetoWindow screen, TurnManager tm){
@@ -80,7 +84,14 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 			Button button = itemButtons.get(i);
 			
 			if (hero != null) {
-				screen.draw(hero.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				if(hero instanceof Warrior)
+					screen.draw(warriorImage, button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				else if(hero instanceof Dwarf)
+					screen.draw(dwarfImage, button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				else if(hero instanceof Mage)
+					screen.draw(mageImage, button.getCoordinate().getX(), button.getCoordinate().getY()+100);
+				else if(hero instanceof Archer)
+					screen.draw(archerImage, button.getCoordinate().getX(), button.getCoordinate().getY()+100);
 				remainingSlots--;
 
 			}

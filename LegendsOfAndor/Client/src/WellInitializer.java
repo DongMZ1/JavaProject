@@ -10,10 +10,10 @@ public class WellInitializer implements Serializable{
 
 	public static ArrayList<Well> initializeWells() throws IOException {
         ArrayList<Well> output = new ArrayList<>();
-        Well w1 = new Well(new MinuetoImageFile("images/Well.png").scale(0.5, 0.5), 5);
-        Well w2 = new Well(new MinuetoImageFile("images/Well.png").scale(0.5, 0.5), 35);
-        Well w3 = new Well(new MinuetoImageFile("images/Well.png").scale(0.5, 0.5), 45);
-        Well w4 = new Well(new MinuetoImageFile("images/Well.png").scale(0.5, 0.5), 55);
+        Well w1 = new Well(5);
+        Well w2 = new Well(35);
+        Well w3 = new Well(45);
+        Well w4 = new Well(55);
         output.add(w1);
         output.add(w2);
         output.add(w3);

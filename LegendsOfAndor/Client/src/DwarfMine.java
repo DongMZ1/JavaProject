@@ -2,18 +2,10 @@ import org.minueto.image.MinuetoImage;
 
 public class DwarfMine implements TileEntity{
 
-	MinuetoImage mineImage;
 	int tile;
 
-	public DwarfMine(MinuetoImage Image,int newTile ) {
-		mineImage = Image;
+	public DwarfMine(int newTile ) {
 		tile = newTile ;
-	}
-	
-	@Override
-	public MinuetoImage getImage() {
-		// TODO Auto-generated method stub
-		return mineImage;
 	}
 
 	@Override

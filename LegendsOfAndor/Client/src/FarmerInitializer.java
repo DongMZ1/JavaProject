@@ -8,9 +8,8 @@ import org.minueto.image.MinuetoImageFile;
 public class FarmerInitializer implements Serializable{
 	public static ArrayList<Farmer> initializeFarmers() throws MinuetoFileException {
         ArrayList<Farmer> output = new ArrayList<>();
-        MinuetoImage farmerimage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
-        Farmer f1 = new Farmer(farmerimage, 5);
-        Farmer f2 = new Farmer(farmerimage, 6);
+        Farmer f1 = new Farmer(5);
+        Farmer f2 = new Farmer(6);
         output.add(f1);
         output.add(f2);
         

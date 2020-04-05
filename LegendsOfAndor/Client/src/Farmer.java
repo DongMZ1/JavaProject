@@ -4,7 +4,6 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Farmer implements TileEntity{
 
-	private MinuetoImage farmerImage;
 	private int tile;
 	private Hero hero = null;
 	private boolean guided = false;
@@ -19,8 +18,7 @@ public class Farmer implements TileEntity{
 	}
 
 
-	public Farmer(MinuetoImage farmerImage, int tile) throws MinuetoFileException {
-		this.farmerImage = farmerImage;
+	public Farmer(int tile) {
 		this.tile = tile;
 	}
 
@@ -31,9 +29,6 @@ public class Farmer implements TileEntity{
 
 	public int getTile() {
 		return this.tile;
-	}
-	public MinuetoImage getImage() {
-		return this.farmerImage;
 	}
 
 	public void isGuidedBy(Hero hero) {

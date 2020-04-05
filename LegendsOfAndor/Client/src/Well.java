@@ -6,35 +6,32 @@ import java.io.IOException;
 
 public class Well implements TileEntity{
 
-	MinuetoImage wellImage;
 	private int tile;
 	
 
-	private boolean IsEmpty; //Boolean shows whether the well is empty
+	private boolean isEmpty; //Boolean shows whether the well is empty
 	
 	//constructor 
-	public Well(MinuetoImage image, int assignedTile) throws IOException {
-		wellImage = image;
+	public Well(int assignedTile) throws IOException {
 		setWellEmptiness(false);
 		tile = assignedTile;
 	}	
 
 	public void replenishWell() throws MinuetoFileException {
-		if(IsEmpty) {
+		if(isEmpty) {
 			setWellEmptiness(false);
-			setImage(new MinuetoImageFile("images/Well.png"));
 		}
 	}
 
 	public int emptiedByHero(Hero hero) throws MinuetoFileException {
 		//will point returned to specific hero class 
 		int wp;
-		if(!this.IsEmpty && hero instanceof Warrior) {
+		if(!this.isEmpty && hero instanceof Warrior) {
 			setWellEmptiness(true);
 			wp = 5;
 		}
 		
-		else if(!this.IsEmpty) {
+		else if(!this.isEmpty) {
 			setWellEmptiness(true);
 			wp = 3;			
 		}
@@ -42,24 +39,16 @@ public class Well implements TileEntity{
 		else {
 			wp = 0;
 		}
-		
-		setImage(new MinuetoImageFile("images/emptyWell.png"));
 		return wp;
 	}
-	
-	private void setImage(MinuetoImage image) {
-		wellImage = image;
-	}
-	
+
 	//UPDATE
 	public void setWellEmptiness(boolean a){
-		IsEmpty = a;
+		isEmpty = a;
 	}
-	
-	@Override
-	public MinuetoImage getImage() {
-		
-		return wellImage;
+
+	public boolean isEmpty() {
+		return this.isEmpty;
 	}
 
 	@Override

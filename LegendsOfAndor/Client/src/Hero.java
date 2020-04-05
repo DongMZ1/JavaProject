@@ -6,7 +6,6 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Hero implements Character {
-	MinuetoImage heroImage;
 	int tile;
 	int wp;
 	int sp;
@@ -48,8 +47,7 @@ public class Hero implements Character {
     public void setwp(int wp) {
     	this.wp = wp;
     }
-    public Hero(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-        this.heroImage = heroImage;
+    public Hero(int tile, boolean mainHero) throws IOException {
         this.tile = tile;
         this.gameStatus = GameStatus.getInstance();
         this.mainHero = mainHero;
@@ -68,9 +66,6 @@ public class Hero implements Character {
 	}
 	public int getTile() {
 		return this.tile;
-	}
-	public MinuetoImage getImage() {
-		return this.heroImage;
 	}
    public void UseWineSkinForMove() {
 	   int wineSkinCount = 0;
@@ -338,11 +333,11 @@ if(((FogToken)f).tokenNumber == 6) {
 	 try {
 		if(hasMonster()) {
 		int nexttile =	GameScreen.tiles.get(this.tile).getNextTile();
-		Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), nexttile);
+		Monster MM1 = new Gor(nexttile);
 		Client.gameScreenDrawer.gameScreen.tiles.get(nexttile).addTileEntity(MM1);
 		Client.gameScreenDrawer.gameScreen.monsters.add(MM1);
 		}else{
-			Monster MM1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), this.tile);
+			Monster MM1 = new Gor(this.tile);
 			Client.gameScreenDrawer.gameScreen.tiles.get(this.tile).addTileEntity(MM1);
 			Client.gameScreenDrawer.gameScreen.monsters.add(MM1);}
 	} catch (MinuetoFileException e) {

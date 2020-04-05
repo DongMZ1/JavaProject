@@ -8,8 +8,8 @@ public class Archer extends Hero{
 	//the features mentioned above are implemented in fight class
 	
 	
-	public Archer(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-		super(heroImage, tile, mainHero);
+	public Archer(int tile, boolean mainHero) throws IOException {
+		super(tile, mainHero);
 		dice = new ArcherDice();
 		
 	}

@@ -29,7 +29,6 @@ public class GameScreen implements Serializable{
     static Hero currentHero;
     private Hero hero2;
     public TurnManager tm;
-    Fight fight;
 	CollaborativeDecision cd;
 
     public static GameStatus gameStatus;
@@ -59,13 +58,8 @@ public class GameScreen implements Serializable{
                
         
         gameStatus = GameStatus.getInstance();
-        fight = new Fight(Client.screen,gameStatus.screenWidth, gameStatus.screenHeight, this.tm);
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         castle = new Castle(5 - tm.getSize(), Client.screen);
-    }
-    
-    public void fight() {
-    	fight.draw();
     }
 
     public int findTileClicked(Coordinate clickedCoord) {

@@ -8,13 +8,8 @@ public class Warrior extends Hero {
     //special ability: warrior gets 5 wp instead of 3 while emptying well, this feature is implemented in a function in well class
 	
     public Warrior(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
-        super(heroImage, tile, mainHero);
+        super(tile, mainHero);
         dice = new WarriorDice();
     }
-
-    public MinuetoImage getImage() {
-        return this.heroImage;
-    }
-    
     
 }
