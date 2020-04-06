@@ -90,7 +90,7 @@ public class ClientV2 {
 			public void handleRestoreWindow() {
 			}
 		}, eventQueue);
-
+		//Register anonymous mouse wheel handle with the event queue. 
 		window.registerMouseWheelHandler(new MinuetoMouseWheelHandler() {
 
 			@Override
@@ -122,6 +122,7 @@ public class ClientV2 {
 				}
 			}
 		}, eventQueue);
+		
 		// event the game window.
 		window.setVisible(true);
 
