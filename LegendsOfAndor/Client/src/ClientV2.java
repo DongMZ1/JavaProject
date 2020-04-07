@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import org.minueto.MinuetoColor;
 import org.minueto.MinuetoEventQueue;
 import org.minueto.handlers.MinuetoKeyboardHandler;
 import org.minueto.handlers.MinuetoMouseHandler;
@@ -25,16 +26,19 @@ public class ClientV2 {
 	static double scaleFactorX;				// required to scale down board
 	static double scaleFactorY;
 	static int rotation = 0;				// to control sensitivity of mouse wheel
-
-
+	
+	
 	public static void main(String[] args) throws Exception {
 
-
+		
 		// new fixed 1280*720 window (or maybe user input width and height?)
 		window = new MinuetoFrame(1280, 720, false);
-
+//		MapStore.initData();
+		
+		
 		// load board image file
 		board = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
+		
 
 		// base scale factors (to fit board in 1280 * 720 window)
 		scaleFactorX = (double) window.getWidth()/board.getWidth();
@@ -61,6 +65,10 @@ public class ClientV2 {
 		window.registerMouseHandler(new MinuetoMouseHandler() {
 			@Override
 			public void handleMousePress(int x, int y, int button) {
+				if (button == 1) {
+		//			System.out.println(x + " " + y);
+					System.out.println("clicked on tile " + MapStore.MAPDATA[(int) (x / 26.6)][(int) (y / 22.5)]);
+				}
 			}
 			@Override
 			public void handleMouseRelease(int x, int y, int button) {
@@ -149,6 +157,7 @@ public class ClientV2 {
 
 }
 
+
 class InputThread extends Thread{
 //	private GameStatus gameStatus;
 //	private LobbyScreen lobbyScreen;
@@ -191,3 +200,6 @@ class InputThread extends Thread{
 	}
 
 }
+
+
+
