@@ -25,7 +25,7 @@ public class GameScreen implements Serializable{
     public Castle getCastle() {
     	return this.castle;
     }
-    public int Lengend1EventCardIndex = 1;
+    public int Lengend2EventCardIndex = 1;
     static Hero currentHero;
     private Hero hero2;
     public TurnManager tm;
@@ -33,7 +33,8 @@ public class GameScreen implements Serializable{
 
     public static GameStatus gameStatus;
     private ArrayList<FogToken> fogtokens;
-	
+    public boolean Legend2ModeIsEasy = false;
+    public Narrator narrator;
     public GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
