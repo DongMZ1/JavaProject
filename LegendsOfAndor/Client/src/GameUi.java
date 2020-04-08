@@ -20,23 +20,24 @@ public class GameUi implements Inputtable, Serializable {
     public Button dropButton;
     public Button tradeButton;
     public Button waitButton;
-    public Button useItemButton;
+    public Button actionButton;
     public Button informationButton;
+    public Button currentLegendCard;
     private GameStatus gameStatus;
     private TextBox textBox;
 
     private int turnButtonWidth = 200;
-    private int turnButtonHeight = 37;
-    public int uiHeight = 300;
+    private int turnButtonHeight = 40;
+    public int uiHeight = 360;
    
 
     private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
         informationButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - turnButtonHeight),
-                turnButtonHeight, turnButtonWidth, "ItemInformation", true);
-        useItemButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
-                turnButtonHeight, turnButtonWidth, "Useitem", true);
+                turnButtonHeight, turnButtonWidth, "Information", true);
+        actionButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
+                turnButtonHeight, turnButtonWidth, "Action", true);
         waitButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight- 3*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Wait", true);
         tradeButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 4*turnButtonHeight),
@@ -49,6 +50,8 @@ public class GameUi implements Inputtable, Serializable {
                 turnButtonHeight, turnButtonWidth, "Fight", true);
         moveButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 8*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Move", true);
+        currentLegendCard = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 9*turnButtonHeight),
+                turnButtonHeight, turnButtonWidth, "LegendCard", true);
  //       cancel = new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - turnButtonHeight),
   //              turnButtonHeight, turnButtonWidth, "cancel", true);
 //        pickupFarmer =  new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - 2*turnButtonHeight),
@@ -74,9 +77,10 @@ public class GameUi implements Inputtable, Serializable {
         dropButton.draw();
         tradeButton.draw();
         waitButton.draw();
-        useItemButton.draw();
+        actionButton.draw();
         textBox.draw();
         informationButton.draw();
+        currentLegendCard.draw();
     }
 
    // public void drawPickup() {
@@ -135,14 +139,14 @@ public class GameUi implements Inputtable, Serializable {
 	            	
                  //   TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
 					try {
-						Cards.drawLegend1EventCard(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex+7);
+						Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex+7);
 			} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}	
 	            }
-	            else if(useItemButton.isClickable() && useItemButton.isClicked(x, y)) {
-	            	useItemHander u1 = new useItemHander();
+	            else if(actionButton.isClickable() && actionButton.isClicked(x, y)) {
+	            	ActionHander u1 = new ActionHander();
 	            }
 	            else if(informationButton.isClickable() && informationButton.isClicked(x, y)) {
 	            	Cards.showHeroInformationBoard();
@@ -150,6 +154,9 @@ public class GameUi implements Inputtable, Serializable {
 	                //TODO tradeButton
 	            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.WAITING;
+	            }
+	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y) && verify()) {
+	            		Cards.showLegend2Card(Client.gameBoard.LegendCard2Index);
 	            }
 	            
 	        }
