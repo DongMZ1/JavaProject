@@ -35,7 +35,7 @@ public class TurnManager implements Serializable{
 	
 	public boolean timeLeft() {
 		for (Hero hero : heroes) {
-			if (hero.time.left()) {
+			if (hero.time.getTime() < 10) {
 				return true;
 			}
 		}

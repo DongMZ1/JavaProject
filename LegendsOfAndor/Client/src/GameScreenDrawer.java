@@ -17,11 +17,11 @@ public class GameScreenDrawer implements Inputtable{
 	private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
 	private TextBox textBox = TextBox.getInstance();
 	private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
-	private GameUi gameUi;
+	public GameUi gameUi;
 	private static final MinuetoImage background = new MinuetoRectangle(9000, 9000, MinuetoColor.BLACK, true);
 	public GameScreen gameScreen;
 	private static GameScreenDrawer gameScreenDrawer;
-	private PlayerBoard playerBoard;
+	public PlayerBoard playerBoard;
 	private static Camera camera;
 	private boolean movingCam;
 	private Coordinate previousMouseCoordinate = new Coordinate(0,0);
@@ -40,6 +40,13 @@ public class GameScreenDrawer implements Inputtable{
 		tileDrawer = TileDrawer.getInstance();
 		fightDrawer = new FightDrawer(new Fight(gameScreen.tm));
 		castleDrawer = CastleDrawer.getInstance();
+	}
+
+	public void updateGameScreen(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
+	}
+	public void updateGameStatus(GameStatus gameStatus) {
+		this.gameUi.gameStatus = gameStatus;
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -73,11 +80,12 @@ public class GameScreenDrawer implements Inputtable{
 		return false;
 	}
 
-	public void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
+	public void moveTileEntity(TileEntity tileEntity, int currentTile, int destination) {
 		assert(gameScreen.tiles.get(currentTile).containsTileEntity(tileEntity));
 		gameScreen.tiles.get(currentTile).removeTileEntity(tileEntity);
 		gameScreen.tiles.get(destination).addTileEntity(tileEntity);
 		tileEntity.setTile(destination);
+		InputThread.updateVariable();
 	}
 
 	public void handleKeyPress(int key) {
@@ -100,8 +108,7 @@ public class GameScreenDrawer implements Inputtable{
 			playerBoard.toggleFlag();
 		}
 		else if (c == ' ') {
-			InputThread.updateVariable();
-			if (Client.mainHero.time.left()){
+			if (Client.mainHero.time.getTime() < 7 || Client.mainHero.time.getTime() < 10){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {
 						if (isValidMove(Client.mainHero.getTile(),toMove)) {
@@ -110,7 +117,6 @@ public class GameScreenDrawer implements Inputtable{
 							gameScreen.gameStatus.ui = UIStatus.MOVING;
 							gameUi.moveButton.setLabel("End Move");
 						}
-
 					}
 					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
 						if (isValidMove(Client.mainHero.getTile(),toMove)) {
@@ -118,14 +124,10 @@ public class GameScreenDrawer implements Inputtable{
 							Client.mainHero.time.advance();
 						}
 					}
-
-
 				}
-
 			}
 			else {
 				gameUi.moveButton.setLabel("No Time");
-
 			}
 			toMove = 0;
 		}
@@ -177,7 +179,7 @@ public class GameScreenDrawer implements Inputtable{
 	public void handleMouseRelease(int x, int y, int button) {
 		if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
 		if (gameScreen.gameStatus.ui == UIStatus.WAITING) {
-			if(Client.mainHero.time.left()) {gameScreen.currentHero.time.advance();}
+			if(Client.mainHero.time.getTime() <= 10) {gameScreen.currentHero.time.advance();}
 
 			gameScreen.endTurn();
 
@@ -190,7 +192,7 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
 			Tile t = gameScreen.tiles.get(Client.mainHero.getTile());
-			if (Client.mainHero.time.left()) {
+			if (Client.mainHero.time.getTime() <= 10) {
 				monsterLoop:
 				for (Monster monster : gameScreen.monsters)
 				{

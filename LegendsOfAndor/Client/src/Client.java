@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import org.minueto.*;
 import org.minueto.handlers.*;
@@ -27,7 +29,7 @@ public class Client {
         lobbyScreen = new LobbyScreen();
         gameScreenDrawer = GameScreenDrawer.getInstance();
         textBox = TextBox.getInstance();
-        new InputThread(gameStatus, lobbyScreen, gameScreenDrawer, textBox).start();
+        new InputThread().start();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
@@ -56,11 +58,6 @@ public class Client {
 }
 
 class InputThread extends Thread{
-    private GameStatus gameStatus;
-    private LobbyScreen lobbyScreen;
-    private GameScreenDrawer gameScreenDrawer;
-    private TextBox textBox;
-    private static int playerNumber;
     //Basic network code init
     static String serverAddress = "192.168.1.84";
     //static String serverAddress = "0.0.0.0";
@@ -68,7 +65,6 @@ class InputThread extends Thread{
     static Socket socket;
     static ObjectInputStream in;
     static ObjectOutputStream out;
-    Object o;
 
     static {
         try {
@@ -85,22 +81,24 @@ class InputThread extends Thread{
     }
 
 
-    public InputThread(GameStatus gameStatus, LobbyScreen lobbyScreen, GameScreenDrawer gameScreenDrawer, TextBox textBox) {
-        this.gameStatus = gameStatus;
-        this.lobbyScreen = lobbyScreen;
-        this.gameScreenDrawer = gameScreenDrawer;
-        this.textBox = textBox;
+    public InputThread() {
+
     }
 
     public void run() {
         try {
         while (true) {
             Object input = in.readObject();
-            System.out.println(input);
-            if(input instanceof GameStatus)
+            if(input instanceof GameStatus) {
                 Client.gameStatus = (GameStatus) input;
-            else if(input instanceof GameScreen)
-                Client.gameScreenDrawer.gameScreen = (GameScreen) input;
+                Client.gameScreenDrawer.updateGameStatus((GameStatus) input);
+            }
+            else if(input instanceof GameScreen) {
+                Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
+            }
+            else if(input instanceof Tile[]) {
+                Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
+            }
             else
                 System.out.print("Whoops");
         }
@@ -111,6 +109,7 @@ class InputThread extends Thread{
         try {
             out.writeObject(Client.gameStatus);
 			out.writeObject(Client.gameScreenDrawer.gameScreen);
+			out.writeObject(Client.gameScreenDrawer.gameScreen.tiles.toArray());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

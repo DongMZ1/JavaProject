@@ -18,10 +18,8 @@ public class Time implements Serializable{
 		x += 550;
 	}
 	}	
-	public boolean left() {
-		//if(time >= 7 && Client.mainHero.wp < 2) {return false;}
-		if (time < 10) return true;
-		else return false;
+	public int getTime() {
+		return this.time;
 	}
 	
 	public void reset() {

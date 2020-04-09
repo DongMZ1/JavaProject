@@ -25,7 +25,7 @@ public class GameScreen implements Serializable{
     public Castle getCastle() {
     	return this.castle;
     }
-    static Hero currentHero;
+	static Hero currentHero;
     private Hero hero2;
     public TurnManager tm;
 	CollaborativeDecision cd;
@@ -33,7 +33,7 @@ public class GameScreen implements Serializable{
     public static GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
-    private static GameScreen gameScreen;
+    public static GameScreen gameScreen;
 
     public static GameScreen getInstance() throws IOException {
     	if(gameScreen == null)

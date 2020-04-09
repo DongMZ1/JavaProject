@@ -26,7 +26,7 @@ public class GameUi implements Inputtable {
     public Button actionButton;
     public Button informationButton;
     public Button currentLegendCard;
-    private GameStatus gameStatus;
+    public GameStatus gameStatus;
     private TextBox textBox;
 
     private int turnButtonWidth = 200;

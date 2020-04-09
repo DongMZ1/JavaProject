@@ -10,7 +10,6 @@ public class Hero implements Character, Serializable {
 	int tile;
 	int wp;
 	int sp;
-	GameStatus gameStatus;
 	Time time;
 	Farmer farmer = null;
 	boolean hasfarmer = false;
@@ -27,7 +26,6 @@ public class Hero implements Character, Serializable {
 
     public Hero(int tile, boolean mainHero) throws IOException {
         this.tile = tile;
-        this.gameStatus = GameStatus.getInstance();
         this.mainHero = mainHero;
         this.sp = 1;
         this.wp = 7;
