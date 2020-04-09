@@ -43,7 +43,7 @@ public class GridMap {
 			}
 		}
 	}
-	
+	/*
 	public void mapGridsToTiles() {
 		
 		for(int i = 2; i < 6; i++)
@@ -327,6 +327,7 @@ public class GridMap {
 			Tile.get(84).addGrids(gridMap[i][27], gridMap[i][28], gridMap[i][29]);
 			
 	}
+	 */
 }
 
 

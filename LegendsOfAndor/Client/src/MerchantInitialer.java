@@ -13,7 +13,7 @@ public class MerchantInitialer implements Serializable{
         output.add(m2);
         for (Merchant m : output)
         {
-        	GameScreen.tiles.get(m.tile).addTileEntity(m);
+                Tile.get(m.tile).addTileEntity(m);
         }
         
 

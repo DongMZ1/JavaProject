@@ -19,43 +19,20 @@ public class Fight implements Serializable{
 	
 	Hero mainHero = Client.mainHero;
 	public Hero currentHero = Client.mainHero;
-	public Hero getCurrentHero() {
-		return currentHero;
-	}
-	//UPDATE
-	public void setCurrentHero(Hero currentHero) {
-		this.currentHero = currentHero;
-	}
-
 	GameStatus gameStatus;
-	public GameStatus getGameStatus() {
-		return gameStatus;
-	}
-	//UPDATE
-	public void setGameStatus(GameStatus gameStatus) {
-		this.gameStatus = gameStatus;
-	}
 
 	int herosLeft;
 	int monsterRoll;
-	
-	public int getMonsterRoll() {
-		return monsterRoll;
-	}
-	//UPDATE
-	public void setMonsterRoll(int monsterRoll) {
-		this.monsterRoll = monsterRoll;
-	}
 
 	int heroRoll;
 	int currentRoll;
 	Monster currentMonster;
 	Dice targetDice;
-
+	private int diceRolled;
 	public Fight(TurnManager tm) throws IOException {
 		
 		this.tm = tm;
-		setGameStatus(GameStatus.getInstance());
+		gameStatus = GameStatus.getInstance();
 	}
 	
 	public boolean inFight(Hero h) {
@@ -68,7 +45,7 @@ public class Fight implements Serializable{
 		fightHeroes = new ArrayList<>();
 		heroRoll = 0;
 		monsterRoll = 0;
-		setCurrentHero(GameScreen.currentHero);
+		currentHero = GameScreen.currentHero;
 		mainHero = Client.mainHero;
 		
 		this.fightTile = fightTile;
@@ -76,11 +53,9 @@ public class Fight implements Serializable{
 		int monsterOffset = 1;
 		for (Character entity : fightTile.getTileCharacters()) {
 			//member is a Hero
-			
 			if (tm.contains(entity)) {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
 				fightHeroes.add((Hero) entity);
-				
 			}
 			
 			//member is a Monster
@@ -136,10 +111,6 @@ public class Fight implements Serializable{
 	public int flipRoll(int i) {
 		
 		int flipNumber = 7 - i;
-		targetDice.setCurrentNumber(flipNumber);
-		System.out.println(targetDice);
-		System.out.println(targetDice.rolledNums);
-		
 		return flipNumber;
 	}
 	

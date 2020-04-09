@@ -62,8 +62,8 @@ class InputThread extends Thread{
     private TextBox textBox;
     private static int playerNumber;
     //Basic network code init
-    //static String serverAddress = "10.121.175.40";
-    static String serverAddress = "0.0.0.0";
+    static String serverAddress = "192.168.1.84";
+    //static String serverAddress = "0.0.0.0";
 
     static Socket socket;
     static ObjectInputStream in;
@@ -90,44 +90,27 @@ class InputThread extends Thread{
         this.lobbyScreen = lobbyScreen;
         this.gameScreenDrawer = gameScreenDrawer;
         this.textBox = textBox;
-//        this.playerNumber = Integer.parseInt(in.nextLine().split(",")[2]);
     }
 
     public void run() {
- //       String input;
-        String variable;
-        String value;
-        int sender;/*
-        while(in.hasNextLine()) {
-            input = in.nextLine();
-            sender = Integer.parseInt(input.split(",")[0]);
-            variable = input.split(",")[1];
-            value = input.split(",")[2];
-            if(sender != playerNumber) {
-                switch (variable) {
-                    case "message":
-                        textBox.addMessage("Player " + sender, value);
-                        break;
-                    case "":
-                        break;
-
-                    default:
-                        System.out.println("Invalid Message Sent Over Network");
-                }
-            }
-        }*/
         try {
         while (true) {
             Object input = in.readObject();
             System.out.println(input);
+            if(input instanceof GameStatus)
+                Client.gameStatus = (GameStatus) input;
+            else if(input instanceof GameScreen)
+                Client.gameScreenDrawer.gameScreen = (GameScreen) input;
+            else
+                System.out.print("Whoops");
         }
         } catch(Exception e) {}
     }
 
     public static void updateVariable() {
         try {
+            out.writeObject(Client.gameStatus);
 			out.writeObject(Client.gameScreenDrawer.gameScreen);
-			out.writeObject(Client.gameStatus);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

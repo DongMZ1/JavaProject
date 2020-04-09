@@ -7,16 +7,16 @@ import java.util.Stack;
 import org.minueto.image.MinuetoImage;
 
 
-enum DieColor implements Serializable{
+enum DieColor{
 	BLUE, GREEN, YELLOW, PURPLE, RED, BLACK
 }
 
-public interface Die extends Serializable{
+public interface Die{
 	int roll();
 	int getLastRollIndex();
 }
 
-class PlayingDie implements Die, Serializable {
+class PlayingDie implements Die{
 
 	private final DieColor dieColor;
 	private int[] dieNumbers;
@@ -72,7 +72,7 @@ class PlayingDie implements Die, Serializable {
 }
 
 
-abstract class Dice implements Serializable{
+abstract class DiceOld{
 	
 	protected PlayingDie regularDie;
 	private Optional<PlayingDie> blackDie = Optional.empty();
@@ -154,7 +154,7 @@ abstract class Dice implements Serializable{
 	void downgrade() {currentNumOfDice --; rollsLeft --;}
 }
 
-class ArcherDice extends Dice implements Serializable{
+class ArcherDice extends DiceOld{
 	
 	public ArcherDice() {
 		currentNumOfDice = 3;
@@ -186,7 +186,7 @@ class ArcherDice extends Dice implements Serializable{
 	
 
 
-class DwarfDice extends Dice implements Serializable{
+class DwarfDice extends DiceOld{
 	
 	public DwarfDice() {
 		currentNumOfDice = 1;
@@ -197,7 +197,7 @@ class DwarfDice extends Dice implements Serializable{
 }
 
 
-class MageDice extends Dice implements Serializable{
+class MageDice extends DiceOld{
 	
 	public MageDice() {
 		regularDie = PlayingDie.purpleDieInstance();
@@ -229,7 +229,7 @@ class MageDice extends Dice implements Serializable{
 }
 	
 
-class WarriorDice extends Dice implements Serializable{
+class WarriorDice extends DiceOld{
 
 	public WarriorDice() {
 		currentNumOfDice = 2;
@@ -240,7 +240,7 @@ class WarriorDice extends Dice implements Serializable{
 }
 
 
-class MonsterDice extends Dice implements Serializable{
+class MonsterDice extends DiceOld{
 
 	public MonsterDice() {
 		currentNumOfDice = 2;

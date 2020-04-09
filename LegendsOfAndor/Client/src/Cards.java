@@ -33,27 +33,27 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		Cards show = new Cards(-1);
 	}
 	public static void drawLegend1EventCard(int cardNB) throws IOException{
-	   switch(cardNB) {
-	   case 1:
-		   @SuppressWarnings("unused") Cards card1 = new Cards(1);
-			   Monster m1 = new Gor(16);
-		        Monster m2 = new Gor(22);
-		        Monster m3 = new Gor(23);
-		        Monster m4 = new Gor(24);
-		        GameScreen.tiles.get(m1.tile).addTileEntity(m1);
-		        GameScreen.tiles.get(m2.tile).addTileEntity(m2);
-		        GameScreen.tiles.get(m3.tile).addTileEntity(m3);
-		        GameScreen.tiles.get(m4.tile).addTileEntity(m4);
-		        //Client.gameBoard.monsters.add(m1);
-		        //Client.gameBoard.monsters.add(m2);
-		        //Client.gameBoard.monsters.add(m3);
-		        //Client.gameBoard.monsters.add(m4);
+	   	switch(cardNB) {
+	   	case 1:
+		   	@SuppressWarnings("unused") Cards card1 = new Cards(1);
+		   	Monster m1 = new Gor(16);
+			Monster m2 = new Gor(22);
+			Monster m3 = new Gor(23);
+			Monster m4 = new Gor(24);
+			Tile.get(m1.tile).addTileEntity(m1);
+			Tile.get(m2.tile).addTileEntity(m2);
+			Tile.get(m3.tile).addTileEntity(m3);
+			Tile.get(m4.tile).addTileEntity(m4);
+			//Client.gameBoard.monsters.add(m1);
+			//Client.gameBoard.monsters.add(m2);
+			//Client.gameBoard.monsters.add(m3);
+			//Client.gameBoard.monsters.add(m4);
 		   break;
 	   case 2:
 		   @SuppressWarnings("unused") Cards card2 = new Cards(2);
-		   for(TileEntity t: GameScreen.tiles.get(55).getTileEntities()) {
+		   for(TileEntity t: Tile.get(55).getTileEntities()) {
 			   if(t instanceof Well) {
-				   GameScreen.tiles.get(55).removeTileEntity(t);
+				   Tile.get(55).removeTileEntity(t);
 				   break;
 			   }
 		   }
@@ -63,9 +63,9 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   Item g1 = new Gold(26);
 	       Item g2 = new Gold(26);
 	       Item g3 = new Gold(26);
-	       GameScreen.tiles.get(g1.getTile()).addTileEntity(g1);
-	        GameScreen.tiles.get(g2.getTile()).addTileEntity(g2);
-	        GameScreen.tiles.get(g3.getTile()).addTileEntity(g3);
+		   Tile.get(g1.getTile()).addTileEntity(g1);
+		   Tile.get(g2.getTile()).addTileEntity(g2);
+		   Tile.get(g3.getTile()).addTileEntity(g3);
 		   break;
 	   case 4:
 		   @SuppressWarnings("unused") Cards card4 = new Cards(4);

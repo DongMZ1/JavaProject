@@ -1,15 +1,5 @@
-import org.minueto.MinuetoColor;
-import org.minueto.MinuetoFileException;
-import org.minueto.image.MinuetoCircle;
-import org.minueto.image.MinuetoImage;
-import org.minueto.window.MinuetoFullscreen;
-import org.minueto.window.MinuetoWindow;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class Tile implements Serializable{
     // TODO Make Tile Class Flyweight
@@ -21,16 +11,14 @@ public class Tile implements Serializable{
     private int[] adjacentTiles;
     private int tileNumber;
     private int nextTile;
-    private ArrayList<Grid> grids = new ArrayList<>();
+    //private ArrayList<Grid> grids = new ArrayList<>();
     
-    public ArrayList<Grid> getGrids() {
-		return grids;
-	}
+    //public ArrayList<Grid> getGrids() {return grids;}
 
 	private static final ArrayList<Tile> TILES = new ArrayList<Tile>();
 
     public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles, int nextTile) {
-        this.coords = new ArrayList<>();
+    	this.coords = new ArrayList<>();
         coords.add(new Coordinate(moveX, moveY));
         this.moveCoords = new Coordinate(moveX, moveY);
         this.tileEntities = new ArrayList<>();
@@ -39,7 +27,7 @@ public class Tile implements Serializable{
         this.tileNumber = tileNumber;
 		this.nextTile = nextTile;
     }
-    
+    /*
     public void addGrids(Grid...grids) {
     	this.grids.addAll(Arrays.asList(grids));
     }
@@ -49,7 +37,7 @@ public class Tile implements Serializable{
     		grid.setTile(this);
     	
     }
-       
+      */
     static {
     	TILES.add(new Tile(1480, 1836, 0, new int[] {1, 2, 4, 5, 6, 7, 11}, 0));
     	TILES.add(new Tile(1952, 2720, 1, new int[] {0, 2, 3, 4}, 0));
@@ -149,7 +137,7 @@ public class Tile implements Serializable{
         tileEntities.add(tileEntity);
         if (tileEntity instanceof Character) {
         	tileCharacters.add((Character) tileEntity);
-        	        }
+        }
     }
 
     public boolean containsTileEntity(TileEntity tileEntity) {

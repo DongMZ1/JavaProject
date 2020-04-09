@@ -1,10 +1,14 @@
-import org.minueto.image.MinuetoImage;
+import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class FogToken implements TileEntity{
+public class FogToken implements TileEntity, Serializable {
 		
 	public int tile;
     public int tokenNumber; // this number indicate what will this token do.
+	public FogToken() {
+		tile = 0;
+		tokenNumber = 0;
+	}
 	public FogToken(int tile, int tokenNumber){
 		this.tile = tile;
 		this.tokenNumber = tokenNumber;
@@ -12,13 +16,11 @@ public class FogToken implements TileEntity{
 
 	@Override
 	public int getTile() {
-		// TODO Auto-generated method stub
-		return this.getTile();
+		return this.tile;
 	}
 
 	@Override
 	public void setTile(int tile) {
-		// TODO Auto-generated method stub
 		this.tile = tile;
 	}
 	

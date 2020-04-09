@@ -15,12 +15,12 @@ import java.util.Random;
 
 public class GameScreen implements Serializable{
 
-    static ArrayList<Tile> tiles;
+    public ArrayList<Tile> tiles;
 	public ArrayList<Monster> monsters;
-	private ArrayList<Merchant> merchants;
-	private ArrayList<Well> wells;
-	private ArrayList<Farmer> farmers;
-	private DwarfMine mine;
+	public ArrayList<Merchant> merchants;
+	public ArrayList<Well> wells;
+	public ArrayList<Farmer> farmers;
+	public DwarfMine mine;
 	public Castle castle;
     public Castle getCastle() {
     	return this.castle;
@@ -31,7 +31,7 @@ public class GameScreen implements Serializable{
 	CollaborativeDecision cd;
 
     public static GameStatus gameStatus;
-    private ArrayList<FogToken> fogtokens;
+    public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
     private static GameScreen gameScreen;
 
@@ -48,13 +48,19 @@ public class GameScreen implements Serializable{
         tiles = Tile.getAll();
         
         monsters = MonsterInitializer.initializeMonsters();
-        wells = WellInitializer.initializeWells();
+        wells = new ArrayList<>();
+        wells.add(new Well(5));
+		wells.add(new Well(35));
+		wells.add(new Well(45));
+		wells.add(new Well(55));
+		for (Well well : wells)
+			tiles.get(well.getTile()).addTileEntity(well);
         mine = DwarfMineInitializer.initializemine();
         merchants = MerchantInitialer.initializeMerchants();
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
-        Client.mainHero.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
+        Client.mainHero.time = new Time();
   //      hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
   //      hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
         
@@ -87,7 +93,7 @@ public class GameScreen implements Serializable{
         return closestNum;
     }
 
-	public static void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
+	public void moveTileEntity(TileEntity tileEntity, int currentTile, int destination){
 		assert(tiles.get(currentTile).containsTileEntity(tileEntity));
 		tiles.get(currentTile).removeTileEntity(tileEntity);
 		tiles.get(destination).addTileEntity(tileEntity);
@@ -126,12 +132,7 @@ public class GameScreen implements Serializable{
     	
     	//replenish all wells on map
     	for(Well w: wells) {
-    		try {
-				w.replenishWell();
-			} catch (MinuetoFileException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    		w.replenishWell();
     	}
     	
     	tm.newDay();

@@ -18,9 +18,8 @@ public class GameScreenDrawer implements Inputtable{
 	private TextBox textBox = TextBox.getInstance();
 	private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
 	private GameUi gameUi;
-	private static final MinuetoImage background = new MinuetoRectangle(12000, 9000, MinuetoColor.BLACK, true);
+	private static final MinuetoImage background = new MinuetoRectangle(9000, 9000, MinuetoColor.BLACK, true);
 	public GameScreen gameScreen;
-	private InputHandler inputHandler;
 	private static GameScreenDrawer gameScreenDrawer;
 	private PlayerBoard playerBoard;
 	private static Camera camera;
@@ -56,7 +55,7 @@ public class GameScreenDrawer implements Inputtable{
 			tileDrawer.draw(tile);
 		gameUi.draw();
 		playerBoard.draw();
-		gameScreen.tm.draw();
+		//gameScreen.tm.draw();
 		if (gameScreen.gameStatus.currentScreen == gameScreen.gameStatus.COLLABORATIVE_SCREEN) {
 			gameScreen.cd.draw();
 		}

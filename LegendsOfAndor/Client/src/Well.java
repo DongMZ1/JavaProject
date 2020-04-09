@@ -17,13 +17,13 @@ public class Well implements TileEntity{
 		tile = assignedTile;
 	}	
 
-	public void replenishWell() throws MinuetoFileException {
+	public void replenishWell() {
 		if(isEmpty) {
 			setWellEmptiness(false);
 		}
 	}
 
-	public int emptiedByHero(Hero hero) throws MinuetoFileException {
+	public int emptiedByHero(Hero hero) {
 		//will point returned to specific hero class 
 		int wp;
 		if(!this.isEmpty && hero instanceof Warrior) {

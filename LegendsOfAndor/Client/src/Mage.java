@@ -9,7 +9,7 @@ public class Mage extends Hero{
 	
 	public Mage(int tile, boolean mainHero) throws IOException {
 		super(tile, mainHero);
-		dice = new MageDice();
+		diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
 	}
 	
 	

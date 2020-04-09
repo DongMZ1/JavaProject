@@ -19,8 +19,8 @@ public class Server {
     public static void main(String[] args) throws Exception {
         System.out.println("The game server is running...");
         Executor pool = Executors.newFixedThreadPool(4);
-        //InetAddress addr = InetAddress.getByName("10.121.175.40");
-        InetAddress addr = InetAddress.getByName("0.0.0.0");
+        InetAddress addr = InetAddress.getByName("192.168.1.84");
+        //InetAddress addr = InetAddress.getByName("0.0.0.0");
         try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
             while (true) {
                 pool.execute(new Handler(listener.accept()));
@@ -57,7 +57,6 @@ public class Server {
                 out = new ObjectOutputStream(socket.getOutputStream());
 
                 writers.add(out);
-   //             out.println("1,newPlayer,"+ writers.size());
                 // Accept messages from this client and broadcast them.
                 while (true) {
                     Object input = in.readObject();

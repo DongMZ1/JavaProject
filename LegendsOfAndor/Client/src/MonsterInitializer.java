@@ -25,7 +25,7 @@ public class MonsterInitializer implements Serializable{
         
         for (Monster monster : output)
         {
-        	GameScreen.tiles.get(monster.tile).addTileEntity(monster);
+			Tile.get(monster.tile).addTileEntity(monster);
         }
         
 

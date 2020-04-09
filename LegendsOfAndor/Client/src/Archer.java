@@ -10,8 +10,10 @@ public class Archer extends Hero{
 	
 	public Archer(int tile, boolean mainHero) throws IOException {
 		super(tile, mainHero);
-		dice = new ArcherDice();
-		
+		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
+		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
+		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
+		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
 	}
 	
 	

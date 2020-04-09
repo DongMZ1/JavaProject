@@ -15,7 +15,7 @@ public class FarmerInitializer implements Serializable{
         
         for (Farmer f : output)
         {
-        	GameScreen.tiles.get(f.getTile()).addTileEntity(f);
+                Tile.get(f.getTile()).addTileEntity(f);
         }
 
         return output;

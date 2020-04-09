@@ -13,13 +13,13 @@ public class TurnManager implements Serializable{
 	{
 		this.heroes = heroes;
 		for (Hero hero : heroes) {
-			GameScreen.tiles.get(hero.tile).addTileEntity(hero);
+			Tile.get(hero.tile).addTileEntity(hero);
 		}
 	}
 	
 	public void addHero(Hero hero) {
 		heroes.add(hero);
-		GameScreen.tiles.get(hero.tile).addTileEntity(hero);
+		Tile.get(hero.tile).addTileEntity(hero);
 	}
 	
 	public void newDay() {
@@ -61,11 +61,7 @@ public class TurnManager implements Serializable{
 		}
 		return heroes.get(index);
 	}
-	public void draw() {
-		for (Hero hero : heroes) {
-			hero.time.draw();
-		}
-	}
+
 	public int getSize() {
 		return heroes.size();
 	}	

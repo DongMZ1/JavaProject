@@ -3,6 +3,7 @@ import org.minueto.MinuetoEventQueue;
 import org.minueto.MinuetoFileException;
 import org.minueto.handlers.MinuetoMouse;
 import org.minueto.image.MinuetoImage;
+import org.minueto.image.MinuetoImageFile;
 import org.minueto.image.MinuetoRectangle;
 import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
@@ -11,8 +12,10 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
-public class GameUi implements Inputtable, Serializable {
+public class GameUi implements Inputtable {
     private static GameUi gameUi;
+
+	MinuetoImage timeTokenImage;
 
     public Button moveButton;
     public Button fightButton;
@@ -60,6 +63,8 @@ public class GameUi implements Inputtable, Serializable {
 //                turnButtonHeight, turnButtonWidth, "pickup Will Power", true);
 //        pickupGold = new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - 4*turnButtonHeight),
 //                turnButtonHeight, turnButtonWidth, "pickup Gold", true);
+
+		timeTokenImage = new MinuetoImageFile("images/tokenWarrior.png");
     }
 
     public static GameUi getInstance() throws IOException {
@@ -81,6 +86,8 @@ public class GameUi implements Inputtable, Serializable {
         textBox.draw();
         informationButton.draw();
         currentLegendCard.draw();
+
+        Client.screen.draw(timeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
     }
 
    // public void drawPickup() {

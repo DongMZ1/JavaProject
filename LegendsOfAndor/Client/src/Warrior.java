@@ -9,7 +9,9 @@ public class Warrior extends Hero {
 	
     public Warrior(MinuetoImage heroImage, int tile, boolean mainHero) throws IOException {
         super(tile, mainHero);
-        dice = new WarriorDice();
+        diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
+        diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
+        diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
     }
     
 }

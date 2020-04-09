@@ -26,7 +26,6 @@ public class FightDrawer implements Inputtable{
 	private MinuetoImageFile diceRoll;
 	private Button rollAgain;			//button only shown to archer class
 	private Button changeRollResult;	//button only shown to mage class
-
 	public FightDrawer(Fight fight) throws IOException {
 		gameStatus = GameStatus.getInstance();
 		background = new MinuetoRectangle(gameStatus.screenWidth, gameStatus.screenHeight, MinuetoColor.RED, true);
@@ -66,9 +65,7 @@ public class FightDrawer implements Inputtable{
 				//check if the hero is Mage
 				if(fight.currentHero instanceof Mage) {
 
-
 				}
-
 			}
 			else {
 				notYourTurn.draw();
@@ -88,7 +85,7 @@ public class FightDrawer implements Inputtable{
 				}
 			}
 
-
+			/*
 			if (fight.mainHero == fight.currentHero && fight.mainHero.dice.hasRolls()) {
 				rollAgain.setClickable(true);
 				rollAgain.draw();
@@ -97,7 +94,7 @@ public class FightDrawer implements Inputtable{
 				rollAgain.setClickable(false);;
 				confirm.draw();
 			}
-
+			*/
 			Client.screen.draw(diceRoll, 700, 600);
 		}
 		else if (gameStatus.fight == FightStatus.ROLLMONSTER) {
@@ -133,13 +130,11 @@ public class FightDrawer implements Inputtable{
 
 	@Override
 	public void handleKeyRelease(int key) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void handleKeyType(char c) {
-		// TODO Auto-generated method stub
 		if (c == 'a') {
 			fight.mainHero = fight.tm.endTurn();
 		}
@@ -159,7 +154,7 @@ public class FightDrawer implements Inputtable{
 			rollAgain.setClickable(true);
 
 		if (fight.mainHero == fight.currentHero && rollButton.isClicked(x, y) && rollButton.isClickable()) {
-
+			/*
 			if (fight.currentHero.dice.hasRolls()) {
 
 				fight.currentRoll = fight.currentHero.dice.roll();
@@ -178,7 +173,7 @@ public class FightDrawer implements Inputtable{
 				confirm.setClickable(true);
 			}
 			//		rollAgain.setClickable(false);
-
+			*/
 		}
 
 		//allow only mage class to change roll result
@@ -197,6 +192,7 @@ public class FightDrawer implements Inputtable{
 		}
 
 		else if (fight.mainHero == fight.currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLRESPONSE) {
+			/*
 			if (fight.currentHero.dice.hasRolls() && !(fight.currentHero instanceof Archer)) {
 				System.out.println("BADBABBAD");
 			}
@@ -223,6 +219,7 @@ public class FightDrawer implements Inputtable{
 					gameStatus.setFight(FightStatus.ROLLMONSTER);
 				}
 			}
+			 */
 		}
 		else if (fight.mainHero == fight.currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.ROLLMONSTER) {
 			String damage = "";

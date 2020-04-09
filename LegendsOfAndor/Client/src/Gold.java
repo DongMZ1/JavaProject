@@ -1,13 +1,11 @@
-import org.minueto.MinuetoFileException;
-import org.minueto.image.MinuetoImage;
-import org.minueto.image.MinuetoImageFile;
+import java.io.Serializable;
 
-public class Gold implements Item{
-	private MinuetoImage goldImage; 
+public class Gold implements Item, Serializable {
+	//private MinuetoImage goldImage;
 	private int tile;
 	
-	public Gold(int tile) throws MinuetoFileException {
-		this.goldImage = new MinuetoImageFile("images/gold.png");
+	public Gold(int tile) {
+		//this.goldImage = new MinuetoImageFile("images/gold.png");
 		this.tile = tile;
 	}
 	
@@ -18,8 +16,6 @@ public class Gold implements Item{
 	public int getTile() {
 		return this.tile;
 	}
-	public MinuetoImage getImage() {
-		return this.goldImage;
-	}
+	//public MinuetoImage getImage() {return this.goldImage;}
 
 }

@@ -23,7 +23,7 @@ public class GoldInitializer implements Serializable{
         for (Gold gd : output)
         {
         	if(gd.getTile() >0) {
-        	GameScreen.tiles.get(gd.getTile()).addTileEntity(gd);
+				Tile.get(gd.getTile()).addTileEntity(gd);
         }
         }
 		return output;

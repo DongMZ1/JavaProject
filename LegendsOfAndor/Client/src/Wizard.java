@@ -6,7 +6,7 @@ public class Wizard extends Hero{
 
 	public Wizard(int tile, boolean mainHero) throws IOException {
 		super(tile, mainHero);
-		// TODO Auto-generated constructor stub
+		diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
 	}
 
 }

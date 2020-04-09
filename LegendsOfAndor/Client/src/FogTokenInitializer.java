@@ -41,7 +41,7 @@ public class FogTokenInitializer{
         
         for (FogToken f : output)
         {
-        	GameScreen.tiles.get(f.tile).addTileEntity(f);
+                Tile.get(f.tile).addTileEntity(f);
         }
         
 
