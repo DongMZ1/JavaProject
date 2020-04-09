@@ -13,6 +13,8 @@ public class TileEntityDrawer {
 	private MinuetoImage archerImage;
 	private MinuetoImage farmerImage;
 	private MinuetoImage goldImage;
+	private MinuetoImage wineskinImage;
+	private MinuetoImage bowImage;
 
 	private static TileEntityDrawer tileEntityDrawer;
 
@@ -26,6 +28,9 @@ public class TileEntityDrawer {
 		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
 		goldImage = new MinuetoImageFile("images/gold.png");
+		wineskinImage = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
+		//TODO: Set proper Bow image
+		bowImage = new MinuetoImageFile("images/wineskin.png");
 	}
 
 	public static TileEntityDrawer getInstance() throws MinuetoFileException {
@@ -49,6 +54,8 @@ public class TileEntityDrawer {
 			Client.screen.draw(farmerImage, xCoord, yCoord);
 		else if(tileEntity instanceof Gold)
 			Client.screen.draw(goldImage, xCoord, yCoord);
+		else if(tileEntity instanceof Wineskin)
+			Client.screen.draw(wineskinImage, xCoord, yCoord);
 		else if(tileEntity instanceof Well) {
 			if (((Well) tileEntity).isEmpty())
 				Client.screen.draw(emptyWellImage, xCoord, yCoord);

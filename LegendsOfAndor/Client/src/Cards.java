@@ -15,31 +15,39 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
-public class Cards implements MinuetoKeyboardHandler,
-MinuetoMouseHandler,
-MinuetoWindowHandler{
+public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoWindowHandler{
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;
+	private static GameStatus gameStatus;
+
+	static {
+		try {
+			gameStatus = GameStatus.getInstance();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void showHeroInformationBoard() {
 		Cards show = new Cards(-1);
 	}
-   public static void drawLegend1EventCard(int cardNB) throws MinuetoFileException, IOException{
+	public static void drawLegend1EventCard(int cardNB) throws IOException{
 	   switch(cardNB) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards card1 = new Cards(1);
-			   Monster m1 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 16);
-		        Monster m2 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 22);
-		        Monster m3 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 23);
-		        Monster m4 = new Gor(new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4), 24);
+			   Monster m1 = new Gor(16);
+		        Monster m2 = new Gor(22);
+		        Monster m3 = new Gor(23);
+		        Monster m4 = new Gor(24);
 		        GameScreen.tiles.get(m1.tile).addTileEntity(m1);
 		        GameScreen.tiles.get(m2.tile).addTileEntity(m2);
 		        GameScreen.tiles.get(m3.tile).addTileEntity(m3);
 		        GameScreen.tiles.get(m4.tile).addTileEntity(m4);
-		        Client.gameBoard.monsters.add(m1);
-		        Client.gameBoard.monsters.add(m2);
-		        Client.gameBoard.monsters.add(m3);
-		        Client.gameBoard.monsters.add(m4);
+		        //Client.gameBoard.monsters.add(m1);
+		        //Client.gameBoard.monsters.add(m2);
+		        //Client.gameBoard.monsters.add(m3);
+		        //Client.gameBoard.monsters.add(m4);
 		   break;
 	   case 2:
 		   @SuppressWarnings("unused") Cards card2 = new Cards(2);
@@ -61,14 +69,17 @@ MinuetoWindowHandler{
 		   break;
 	   case 4:
 		   @SuppressWarnings("unused") Cards card4 = new Cards(4);
+		   /*
 		   for(Hero h: Client.gameBoard.tm.heroes) {
 			   if(h.tile >= 0 && h.tile <= 9) {
 				   h.wp = h.wp +2 ;
 			   }
 		   }
+		   */
 		   break;
 	   case 5:
 		   @SuppressWarnings("unused") Cards card5 = new Cards(5);
+		   /*
 		   for(Hero h: Client.gameBoard.tm.heroes) {
 			   if(h instanceof Warrior && h.wp > 12) {
 				  h.wp = 12;
@@ -77,6 +88,7 @@ MinuetoWindowHandler{
 				   h.wp = 12;
 			   }
 		   }
+		    */
 		   break;
 	   case 6: 
 		   @SuppressWarnings("unused") Cards card6 = new Cards(6);
@@ -95,6 +107,7 @@ MinuetoWindowHandler{
 		   break;
 	   case 9: 
 		   @SuppressWarnings("unused") Cards card9 = new Cards(9);
+		   /*
 		   for(Hero h: Client.gameBoard.tm.heroes) {
 			   if(h instanceof Mage && h.wp > 12) {
 				  h.wp = 12;
@@ -103,26 +116,31 @@ MinuetoWindowHandler{
 				   h.wp = 12;
 			   }
 		   }
+		    */
 		   break;
 	   case 10: 
 		   @SuppressWarnings("unused") Cards card10 = new Cards(10);
+		   /*
 		   for(Hero h: Client.gameBoard.tm.heroes) {
 			  if(h.wp <= 10) {
 				  h.wp = h.wp +2;
 			  }
 		   }
+		    */
 		   break;
 	   case 11: 
 		   @SuppressWarnings("unused") Cards card11 = new Cards(11);
+		   /*
 		   for(Hero h: Client.gameBoard.tm.heroes) {
 				  if(h.sp > 1) {
 					  h.sp = h.sp -1;
 				  }
 			   }
+		    */
 		   break;
 	   }
 	   //after each extraction, event card index ++;
-	   Client.gameBoard.Lengend1EventCardIndex ++;
+	   //Client.gameBoard.Lengend1EventCardIndex ++;
    }
    
    
@@ -130,7 +148,7 @@ MinuetoWindowHandler{
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(Client.gameBoard.Legend2ModeIsEasy) {
+		   if(gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
@@ -139,7 +157,7 @@ MinuetoWindowHandler{
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
 		   break;
 	   case 2:
-		   if(Client.gameBoard.Legend2ModeIsEasy) {
+		   if(gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
@@ -160,7 +178,7 @@ MinuetoWindowHandler{
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(Client.gameBoard.Legend2ModeIsEasy) {
+		   if(gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
@@ -169,7 +187,7 @@ MinuetoWindowHandler{
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
 		   break;
 	   case 2:
-		   if(Client.gameBoard.Legend2ModeIsEasy) {
+		   if(gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);

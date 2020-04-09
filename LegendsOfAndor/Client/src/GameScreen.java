@@ -16,16 +16,15 @@ import java.util.Random;
 public class GameScreen implements Serializable{
 
     static ArrayList<Tile> tiles;
-    public ArrayList<Monster> monsters;
-    private ArrayList<Merchant> merchants;
-    private ArrayList<Well> wells;
-    private ArrayList<Farmer> farmers;
-    private DwarfMine mine;
-    public Castle castle;
+	public ArrayList<Monster> monsters;
+	private ArrayList<Merchant> merchants;
+	private ArrayList<Well> wells;
+	private ArrayList<Farmer> farmers;
+	private DwarfMine mine;
+	public Castle castle;
     public Castle getCastle() {
     	return this.castle;
     }
-    public int Lengend2EventCardIndex = 1;
     static Hero currentHero;
     private Hero hero2;
     public TurnManager tm;
@@ -33,9 +32,16 @@ public class GameScreen implements Serializable{
 
     public static GameStatus gameStatus;
     private ArrayList<FogToken> fogtokens;
-    public boolean Legend2ModeIsEasy = false;
     public Narrator narrator;
-    public GameScreen() throws IOException {
+    private static GameScreen gameScreen;
+
+    public static GameScreen getInstance() throws IOException {
+    	if(gameScreen == null)
+    		gameScreen = new GameScreen();
+    	return gameScreen;
+	}
+
+    private GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
@@ -60,7 +66,7 @@ public class GameScreen implements Serializable{
         
         gameStatus = GameStatus.getInstance();
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
-        castle = new Castle(5 - tm.getSize(), Client.screen);
+        castle = new Castle(5 - tm.getSize());
     }
 
     public int findTileClicked(Coordinate clickedCoord) {

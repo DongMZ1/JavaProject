@@ -164,7 +164,6 @@ public class Hero implements Character {
 			  //we need castle health increase.
 			  Client.gameScreenDrawer.gameScreen.getCastle().health++;
 			  System.out.println("Health:  " + Client.gameScreenDrawer.gameScreen.getCastle().health);
-			 Client.gameScreenDrawer.gameScreen.getCastle().draw();
 		  }
 	  if(hasfarmer) {
 		  hasfarmer = false;
@@ -275,7 +274,7 @@ public class Hero implements Character {
 		for (TileEntity f: Tile.get(tileNB).getTileEntities()) {
 			if(f instanceof FogToken) {
 				if(((FogToken)f).tokenNumber == 1) {
-					Cards card1 = new Cards(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
+					//Cards card1 = new Cards(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
 			}
 				if(((FogToken)f).tokenNumber == 2) {Cards c1 = new Cards(1000);}
 				if(((FogToken)f).tokenNumber == 3) {Cards c1 = new Cards(1001);}
@@ -292,12 +291,12 @@ public class Hero implements Character {
 				if(f instanceof FogToken) {
 				//1 is draw a event card	
 if(((FogToken)f).tokenNumber == 1) {
-				try {
+				/*try {
 					Cards.drawLegend1EventCard(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}	 
+				}*/
 				 }
  // 2 is to increasing a point of strength
 if(((FogToken)f).tokenNumber == 2) {

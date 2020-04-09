@@ -11,27 +11,10 @@ import org.minueto.window.MinuetoWindow;
 public class Castle implements Serializable{
 
 	public int health;
-	private MinuetoWindow screen;
-	private MinuetoImage upperBlock = new MinuetoRectangle(270, 500, MinuetoColor.WHITE, true);
-	private MinuetoFont font = new MinuetoFont("Helvetica",28, false, false);
 	public String message;
-	Camera camera;
-	 
-	public Castle(int health, MinuetoWindow window) throws IOException {
+
+	public Castle(int health) throws IOException {
 		this.health = health;
-		screen = window;
-		this.camera = Camera.getInstance();
-	}
-	
-	public void draw() {
-		if(this.health <= 0) {
-			message = "Game Over Rookies\n";
-		}else {
-			message = "Castle Health: " + String.valueOf(this.health);
-		}
-		Coordinate coordinates = camera.getPosOnScreen(80,400);
-		screen.draw(upperBlock, coordinates.getX(),coordinates.getY());
-        screen.draw(new MinuetoText(message, font, MinuetoColor.BLACK), coordinates.getX(), coordinates.getY());
 	}
 	
 	public void damage(Monster m) {

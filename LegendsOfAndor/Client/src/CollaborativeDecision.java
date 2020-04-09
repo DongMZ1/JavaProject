@@ -8,7 +8,7 @@ import org.minueto.window.MinuetoWindow;
 
 public class CollaborativeDecision implements Inputtable, Serializable {
 	private MinuetoWindow screen;
-	DecisionType toDecide = DecisionType.NONE;
+	DecisionType toDecide;
 	GameStatus gameStatus;
 	InputHandler inputHandler;
 	MinuetoImage background;
@@ -100,7 +100,7 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 				
 			}
 			button.draw();
-			screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
+			//screen.draw(item.getImage(), button.getCoordinate().getX(), button.getCoordinate().getY());
 			
 		}
 		

@@ -14,7 +14,7 @@ import org.minueto.handlers.MinuetoWindowHandler;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.*;
-
+/*
 public class ClientV2 {
 
 	static MinuetoWindow window;			// main window (1280 x 720), everything goes in here
@@ -200,6 +200,4 @@ class InputThread extends Thread{
 	}
 
 }
-
-
-
+*/

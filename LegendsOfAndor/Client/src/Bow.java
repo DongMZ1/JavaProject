@@ -2,20 +2,13 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class Bow implements Item{
+import java.io.Serializable;
+
+public class Bow implements Item, Serializable {
 	int Tile;
-	MinuetoImage image;
-	
-	public void Bowin(int tile) throws MinuetoFileException{
+
+	public void Bow(int tile) throws MinuetoFileException{
 		Tile = tile;
-		image = new MinuetoImageFile("images/wineskin.png");
-	}
-	
-	
-	@Override
-	public MinuetoImage getImage() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

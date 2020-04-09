@@ -1,6 +1,8 @@
 import org.minueto.image.MinuetoImage;
 
-public class Merchant implements TileEntity {
+import java.io.Serializable;
+
+public class Merchant implements TileEntity, Serializable {
 	MinuetoImage merchantImage;
 	int tile;
 	

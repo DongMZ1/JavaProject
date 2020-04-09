@@ -26,6 +26,9 @@ public class GameStatus implements Serializable {
     public static final int COLLABORATIVE_SCREEN = 4;
 
     public static int lastFocused = 0;
+
+	public int legend2CardIndex = 1;
+	public boolean Legend2ModeIsEasy = false;
     
 	int screenWidth = 1280;
 	int screenHeight = 720;

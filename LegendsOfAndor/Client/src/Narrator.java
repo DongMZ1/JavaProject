@@ -13,11 +13,13 @@ public class Narrator implements Serializable{
 	int y = 8200;
 	private MinuetoWindow screen;
 	Camera camera;
+	private GameStatus gameStatus;
 	
 	public Narrator(MinuetoImage tokenImage, MinuetoWindow screen) throws IOException {
 		this.tokenImage = tokenImage;
 		this.screen = screen;
 		this.camera = Camera.getInstance();
+		gameStatus = GameStatus.getInstance();
 		
 	}
 	
@@ -35,17 +37,17 @@ public class Narrator implements Serializable{
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
-			Client.gameBoard.LegendCard2Index = 2;
+			gameStatus.legend2CardIndex = 2;
 		}
 
 		if(narrartorTrack == 7) {
 			Cards.DrawLegend2Card(3);
-			Client.gameBoard.LegendCard2Index = 3;
+			gameStatus.legend2CardIndex = 3;
 		}
 		
 		if(narrartorTrack == 14) {
 			Cards.DrawLegend2Card(4);
-			Client.gameBoard.LegendCard2Index = 4;
+			gameStatus.legend2CardIndex = 4;
 		}
 	}	
 

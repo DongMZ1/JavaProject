@@ -126,11 +126,9 @@ class InputThread extends Thread{
 
     public static void updateVariable() {
         try {
-			out.writeObject(Client.gameScreenDrawer);
-			out.writeObject(Client.lobbyScreen);
+			out.writeObject(Client.gameScreenDrawer.gameScreen);
 			out.writeObject(Client.gameStatus);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

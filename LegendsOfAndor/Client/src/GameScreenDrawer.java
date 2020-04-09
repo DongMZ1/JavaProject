@@ -27,18 +27,20 @@ public class GameScreenDrawer implements Inputtable{
 	private boolean movingCam;
 	private Coordinate previousMouseCoordinate = new Coordinate(0,0);
 	int toMove;
+	private CastleDrawer castleDrawer;
 
 	public FightDrawer fightDrawer;
 	public TileDrawer tileDrawer;
 
 	private GameScreenDrawer() throws IOException {
-		gameScreen = new GameScreen();
+		gameScreen = GameScreen.getInstance();
 		gameUi = GameUi.getInstance();
 		camera = Camera.getInstance();
 		this.movingCam = false;
 		playerBoard = PlayerBoard.getInstance(Client.mainHero);
 		tileDrawer = TileDrawer.getInstance();
 		fightDrawer = new FightDrawer(new Fight(gameScreen.tm));
+		castleDrawer = CastleDrawer.getInstance();
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -58,7 +60,7 @@ public class GameScreenDrawer implements Inputtable{
 		if (gameScreen.gameStatus.currentScreen == gameScreen.gameStatus.COLLABORATIVE_SCREEN) {
 			gameScreen.cd.draw();
 		}
-		gameScreen.castle.draw();
+		castleDrawer.draw(gameScreen.castle);
 	}
 
 	public static boolean isValidMove(int currentInt, int destInt) {
@@ -99,6 +101,7 @@ public class GameScreenDrawer implements Inputtable{
 			playerBoard.toggleFlag();
 		}
 		else if (c == ' ') {
+			InputThread.updateVariable();
 			if (Client.mainHero.time.left()){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {

@@ -138,12 +138,12 @@ public class GameUi implements Inputtable, Serializable {
 	            else if(tradeButton.isClickable() && tradeButton.isClicked(x, y)) {
 	            	
                  //   TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
-					try {
+					/*try {
 						Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex+7);
 			} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}	
+					}*/
 	            }
 	            else if(actionButton.isClickable() && actionButton.isClicked(x, y)) {
 	            	ActionHander u1 = new ActionHander();
@@ -156,7 +156,7 @@ public class GameUi implements Inputtable, Serializable {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
 	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y) && verify()) {
-	            		Cards.showLegend2Card(Client.gameBoard.LegendCard2Index);
+	            		//Cards.showLegend2Card(Client.gameBoard.LegendCard2Index);
 	            }
 	            
 	        }
