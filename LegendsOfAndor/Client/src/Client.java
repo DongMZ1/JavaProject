@@ -109,7 +109,6 @@ class InputThread extends Thread{
         try {
             out.writeObject(Client.gameStatus);
 			out.writeObject(Client.gameScreenDrawer.gameScreen);
-			out.writeObject(Client.gameScreenDrawer.gameScreen.tiles.toArray());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
