@@ -29,7 +29,7 @@ public class GameStatus implements Serializable {
 
 	public int legend2CardIndex = 1;
 	public boolean Legend2ModeIsEasy = false;
-    
+    public int EventCardIndex = 1;
 	int screenWidth = 1280;
 	int screenHeight = 720;
 	int focus;
