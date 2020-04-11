@@ -22,26 +22,28 @@ public class Client {
     static GameStatus gameStatus;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
+        new InputThread().start();
         screen.setVisible(true);
-    	mainHero = new Archer(0, true);
+    	mainHero = new Archer(0);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
         gameScreenDrawer = GameScreenDrawer.getInstance();
         textBox = TextBox.getInstance();
-        new InputThread().start();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.gameScreen.cd);
         
-
+        gameScreenDrawer.gameScreen.addHero(mainHero);
+        InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
                 lobbyScreen.draw();
-            else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN)
+            else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
                 gameScreenDrawer.draw();
+            }
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
                 gameScreenDrawer.fightDrawer.draw();
             }

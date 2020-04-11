@@ -7,8 +7,8 @@ public class Mage extends Hero{
 
 	//special ability: change dice result, implemented in fight class
 	
-	public Mage(int tile, boolean mainHero) throws IOException {
-		super(tile, mainHero);
+	public Mage(int tile) throws IOException {
+		super(tile);
 		diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
 	}
 	

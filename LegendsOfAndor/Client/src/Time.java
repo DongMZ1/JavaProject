@@ -1,11 +1,14 @@
 import java.io.Serializable;
 
 public class Time implements Serializable{
-	int time = 0;
-	int x = 6020;
-	int y = 240;
+	int time;
+	int x;
+	int y;
 
 	public Time() {
+		time = 0;
+		x = 6020;
+		y = 240;
 	}
 	
 	public void advance() {

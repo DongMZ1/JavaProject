@@ -18,19 +18,18 @@ public class Hero implements Character, Serializable {
     //set it true before move, so that timer will not increase if this attribute is true
     //get a final list of items
     public final ArrayList<Item> items = new ArrayList<Item>();
-    public final boolean mainHero;
     ArrayList<Dice> diceList;
     boolean isFinishedForDay;
     public void setTime(Time time) {
     	this.time = time;
     }
 
-    public Hero(int tile, boolean mainHero) throws IOException {
+    public Hero(int tile) throws IOException {
         this.tile = tile;
-        this.mainHero = mainHero;
         this.sp = 1;
         this.wp = 7;
         this.diceList = new ArrayList<>();
+        this.time = new Time();
         isFinishedForDay = false;
     }
 

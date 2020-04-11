@@ -88,7 +88,6 @@ public class GameUi implements Inputtable {
         textBox.draw();
         informationButton.draw();
         currentLegendCard.draw();
-
         Client.screen.draw(timeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
     }
 

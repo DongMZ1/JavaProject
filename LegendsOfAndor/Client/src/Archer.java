@@ -8,8 +8,8 @@ public class Archer extends Hero{
 	//the features mentioned above are implemented in fight class
 	
 	
-	public Archer(int tile, boolean mainHero) throws IOException {
-		super(tile, mainHero);
+	public Archer(int tile) throws IOException {
+		super(tile);
 		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
 		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
 		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));
