@@ -116,7 +116,15 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   Cards G = new Cards(309);
 	   case 4:
 		   Cards N = new Cards(310);
+	   case 100:
+		   if(gameStatus.Legend2ModeIsEasy) {
+			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
+			   
+		   }else {
+			   @SuppressWarnings("unused") Cards RuneStoneHard = new Cards(-4);
+		   }
 	   }
+	  Client.gameStatus.legend2CardIndex++;
    }
    
    
@@ -461,11 +469,11 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 		}
 		if(CardNumber == -3) {
-		eventcardindexText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+		eventcardindexText = new MinuetoText("Rune stone easy: Place a gor on 43, and a skral on 39" ,fontArial19,MinuetoColor.BLUE);
+		imageText = new MinuetoText("Now let a roll of the dice determine the position of 5 of 6 rune hidden rune stone. One hero roll" ,fontArial19,MinuetoColor.BLUE);
+		imageText1 = new MinuetoText("Red dice determine indicates the tens place of the number and the hero die indicates one's place." ,fontArial19,MinuetoColor.BLUE);
+		imageText2 = new MinuetoText("For example: red 4 green 2 = rune stone on space 42, they can be uncovered with the help of telescope." ,fontArial19,MinuetoColor.BLUE);
+		imageText3 = new MinuetoText("If hero has 3 different rune stone, then he gets a black dice." ,fontArial19,MinuetoColor.BLUE);
 		imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 		imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 		imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -473,11 +481,11 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		}
 		
 		if(CardNumber == -4) {
-			eventcardindexText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			eventcardindexText = new MinuetoText("Rune stone Hard: Place a gor on 32 and 43, and a skral on 39" ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Now let a roll of the dice determine the position of 5 of 6 rune hidden rune stone. One hero roll" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("Red dice determine indicates the tens place of the number and the hero die indicates one's place." ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("For example: red 4 green 2 = rune stone on space 42, they can be uncovered with the help of telescope." ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("If hero has 3 different rune stone, then he gets a black dice." ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
