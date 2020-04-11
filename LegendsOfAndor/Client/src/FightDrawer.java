@@ -136,7 +136,8 @@ public class FightDrawer implements Inputtable{
 	@Override
 	public void handleKeyType(char c) {
 		if (c == 'a') {
-			fight.mainHero = fight.tm.endTurn();
+			fight.tm.endTurn();
+			fight.mainHero = fight.tm.getHero();
 		}
 		else if (c == 'd') {
 			gameStatus.setFight(FightStatus.ROLLPROMPT);
@@ -248,8 +249,8 @@ public class FightDrawer implements Inputtable{
 		else if (fight.mainHero == fight.currentHero && confirm.isClicked(x, y) && confirm.isClickable() && gameStatus.fight == FightStatus.DAMAGE) {
 			gameStatus.setFocus(GameStatus.FOCUS_ON_GAMESCREEN);
 			gameStatus.setCurrentScreen(GameStatus.GAME_SCREEN);
-			GameScreen.currentHero.time.advance();
-			GameScreen.currentHero = fight.tm.endTurn();
+			//GameScreen.currentHero.time.advance();
+			//GameScreen.currentHero = fight.tm.endTurn();
 
 			fight.isHappening = false;
 		}

@@ -27,6 +27,7 @@ public class GameUi implements Inputtable {
     public Button informationButton;
     public Button currentLegendCard;
     public GameStatus gameStatus;
+    public GameScreen gameScreen;
     private TextBox textBox;
 
     private int turnButtonWidth = 200;
@@ -37,6 +38,7 @@ public class GameUi implements Inputtable {
     private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
+        gameScreen = GameScreen.getInstance();
         informationButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "Information", true);
         actionButton = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 2*turnButtonHeight),
@@ -109,10 +111,9 @@ public class GameUi implements Inputtable {
 	        if(textBox.inputClicked(x, y) || textBox.outputClicked(x, y)) {
 	        	gameStatus.lastFocused=gameStatus.FOCUS_ON_GAMESCREEN;
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
-	            
 	        }
 	        else {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && GameScreen.currentHero == Client.mainHero) {
+	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero() == Client.mainHero) {
 	                if (gameStatus.ui == UIStatus.NONE) {
 	                    gameStatus.ui = UIStatus.MOVEBEGIN;
 	                    moveButton.setLabel("Cancel Move");
@@ -170,7 +171,7 @@ public class GameUi implements Inputtable {
         }
     }
     private boolean verify() {
-    	if (gameStatus.ui == UIStatus.NONE && GameScreen.currentHero == Client.mainHero) {
+    	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero() == Client.mainHero) {
     		return true;
     	}
     	else {

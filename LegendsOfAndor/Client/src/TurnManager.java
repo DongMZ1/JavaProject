@@ -29,8 +29,10 @@ public class TurnManager implements Serializable{
     	}
 	}
 	
-	public Hero endTurn() {
-		return getHero();
+	public void endTurn() {
+		index++;
+		if (index == heroes.size())
+			index = 0;
 	}
 	
 	public boolean timeLeft() {
@@ -54,11 +56,6 @@ public class TurnManager implements Serializable{
 	
 	//Circular array getHero
 	public Hero getHero() {
-		index++;
-		if (index == heroes.size())
-		{
-			index = 0;
-		}
 		return heroes.get(index);
 	}
 

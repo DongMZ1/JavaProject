@@ -25,20 +25,18 @@ public class GameScreen implements Serializable{
     public Castle getCastle() {
     	return this.castle;
     }
-	static Hero currentHero;
-    private Hero hero2;
     public TurnManager tm;
 	CollaborativeDecision cd;
 
-    public static GameStatus gameStatus;
+    public GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
     public static GameScreen gameScreen;
 
-    public static GameScreen getInstance() throws IOException {
-    	if(gameScreen == null)
-    		gameScreen = new GameScreen();
-    	return gameScreen;
+	public static GameScreen getInstance() throws IOException {
+		if(gameScreen == null)
+			gameScreen = new GameScreen();
+		return gameScreen;
 	}
 
     private GameScreen() throws IOException {
@@ -60,20 +58,17 @@ public class GameScreen implements Serializable{
         FarmerInitializer.initializeFarmers();
         GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
-        Client.mainHero.time = new Time();
-  //      hero2 = new Mage(new MinuetoImageFile("images/Heroes/MageFemaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE), 1, false);
-  //      hero2.time = new Time(new MinuetoImageFile("images/tokenWarrior.png"),Client.screen);
         
         tm = new TurnManager(new ArrayList<Hero>());
-        tm.addHero(Client.mainHero);
-  //      tm.addHero(hero2);
-        currentHero = Client.mainHero;
-               
-        
+
         gameStatus = GameStatus.getInstance();
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         castle = new Castle(5 - tm.getSize());
     }
+
+    public void addHero(Hero hero) {
+		tm.addHero(hero);
+	}
 
     public int findTileClicked(Coordinate clickedCoord) {
         int closestDist = Integer.MAX_VALUE;
@@ -137,13 +132,6 @@ public class GameScreen implements Serializable{
     	
     	tm.newDay();
     	
-    }
-    
-    public void endTurn() {
-    	currentHero = tm.endTurn();
-    	if (!tm.timeLeft()) {
-    		newDay();
-    	}
     }
 }
 

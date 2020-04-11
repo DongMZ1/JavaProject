@@ -40,12 +40,12 @@ public class Fight implements Serializable{
 		else return false;
 	}
 	
-	public void start(Tile fightTile) {
+	public void start(Tile fightTile, Hero initiator) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		heroRoll = 0;
 		monsterRoll = 0;
-		currentHero = GameScreen.currentHero;
+		currentHero = initiator;
 		mainHero = Client.mainHero;
 		
 		this.fightTile = fightTile;

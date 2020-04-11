@@ -20,6 +20,7 @@ public class Hero implements Character, Serializable {
     public final ArrayList<Item> items = new ArrayList<Item>();
     public final boolean mainHero;
     ArrayList<Dice> diceList;
+    boolean isFinishedForDay;
     public void setTime(Time time) {
     	this.time = time;
     }
@@ -30,6 +31,7 @@ public class Hero implements Character, Serializable {
         this.sp = 1;
         this.wp = 7;
         this.diceList = new ArrayList<>();
+        isFinishedForDay = false;
     }
 
 	//UPDATE
@@ -334,5 +336,10 @@ public class Hero implements Character, Serializable {
     	for(int i = 0; i < diceList.size(); i++)
     		values[i] = diceList.get(i).roll();
     	return values;
+	}
+
+	public void endDay() {
+    	isFinishedForDay = true;
+    	time.reset();
 	}
 }

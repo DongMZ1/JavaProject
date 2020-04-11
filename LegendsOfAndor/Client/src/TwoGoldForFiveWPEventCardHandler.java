@@ -80,23 +80,23 @@ MinuetoWindowHandler{
 	public void handleKeyPress(int value) {
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
-			if(Client.gameScreenDrawer.gameScreen.currentHero.getGoldNm() >= 2) {
+			if(Client.gameScreenDrawer.gameScreen.tm.getHero().getGoldNm() >= 2) {
 				int count = 0;
-					for(Item i: Client.gameScreenDrawer.gameScreen.currentHero.items) {
+					for(Item i: Client.gameScreenDrawer.gameScreen.tm.getHero().items) {
 						if(i instanceof Gold) {
-						count = Client.gameScreenDrawer.gameScreen.currentHero.items.indexOf(i);
+						count = Client.gameScreenDrawer.gameScreen.tm.getHero().items.indexOf(i);
 				}
 					}
-					Client.gameScreenDrawer.gameScreen.currentHero.items.remove(count);
+					Client.gameScreenDrawer.gameScreen.tm.getHero().items.remove(count);
 					
 					count = 0;
-					for(Item i: Client.gameScreenDrawer.gameScreen.currentHero.items) {
+					for(Item i: Client.gameScreenDrawer.gameScreen.tm.getHero().items) {
 						if(i instanceof Gold) {
-						count = Client.gameScreenDrawer.gameScreen.currentHero.items.indexOf(i);
+						count = Client.gameScreenDrawer.gameScreen.tm.getHero().items.indexOf(i);
 				}
 					}
-					Client.gameScreenDrawer.gameScreen.currentHero.items.remove(count);
-					Client.gameScreenDrawer.gameScreen.currentHero.wp = Client.gameScreenDrawer.gameScreen.currentHero.wp+5;
+					Client.gameScreenDrawer.gameScreen.tm.getHero().items.remove(count);
+					Client.gameScreenDrawer.gameScreen.tm.getHero().wp = Client.gameScreenDrawer.gameScreen.tm.getHero().wp+5;
 			}
 			//GameScreen.currentHero.Buy2SPfor2Gold();
 			this.closing = true;

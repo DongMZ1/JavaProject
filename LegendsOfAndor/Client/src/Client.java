@@ -23,7 +23,7 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	Client.mainHero = new Archer(0, true);
+    	mainHero = new Archer(0, true);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
@@ -89,6 +89,7 @@ class InputThread extends Thread{
         try {
         while (true) {
             Object input = in.readObject();
+            System.out.println(input.getClass());
             if(input instanceof GameStatus) {
                 Client.gameStatus = (GameStatus) input;
                 Client.gameScreenDrawer.updateGameStatus((GameStatus) input);

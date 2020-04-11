@@ -1,13 +1,10 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -15,9 +12,16 @@ public class Server {
 
     // The set of all the print writers for all the clients, used for broadcast.
     private static HashSet<ObjectOutputStream> writers = new HashSet<>();
+    private static GameScreen gameScreen;
+    private static GameStatus gameStatus;
+
+    public Server() throws IOException {
+    }
 
     public static void main(String[] args) throws Exception {
         System.out.println("The game server is running...");
+        gameScreen = GameScreen.getInstance();
+        gameStatus = GameStatus.getInstance();
         Executor pool = Executors.newFixedThreadPool(4);
         InetAddress addr = InetAddress.getByName("192.168.1.84");
         //InetAddress addr = InetAddress.getByName("0.0.0.0");
@@ -55,7 +59,8 @@ public class Server {
             try {
                 in = new ObjectInputStream(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
-
+                out.writeObject(Server.gameScreen);
+                out.writeObject(Server.gameStatus);
                 writers.add(out);
                 // Accept messages from this client and broadcast them.
                 while (true) {

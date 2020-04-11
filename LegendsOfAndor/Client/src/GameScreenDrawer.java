@@ -46,6 +46,7 @@ public class GameScreenDrawer implements Inputtable{
 		this.gameScreen = gameScreen;
 		this.gameScreen.gameScreen = gameScreen;
 		Tile.TILES = gameScreen.tiles;
+		this.gameUi.gameScreen = gameScreen;
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
@@ -92,11 +93,8 @@ public class GameScreenDrawer implements Inputtable{
 
 	public void moveHero(int currentTile, int destination) {
 		for(int i = 0; i < gameScreen.tiles.get(currentTile).tileEntities.size(); i++) {
-			System.out.println(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass());
-			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.mainHero.getClass().toString())) {
+			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.mainHero.getClass().toString()))
 				gameScreen.tiles.get(currentTile).tileEntities.remove(i);
-				System.out.println("Moved");
-			}
 		}
 		Client.mainHero.setTile(destination);
 		gameScreen.tiles.get(destination).tileEntities.add(Client.mainHero);
@@ -115,7 +113,6 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == 'a')
 		{
-			Client.mainHero = gameScreen.currentHero;
 			System.out.println(Client.mainHero);
 		}
 		else if(c == 'm') {
@@ -195,15 +192,15 @@ public class GameScreenDrawer implements Inputtable{
 	public void handleMouseRelease(int x, int y, int button) {
 		if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
 		if (gameScreen.gameStatus.ui == UIStatus.WAITING) {
-			if(Client.mainHero.time.getTime() <= 10) {gameScreen.currentHero.time.advance();}
+			if(Client.mainHero.time.getTime() <= 10) {Client.mainHero.time.advance();}
 
-			gameScreen.endTurn();
+			gameScreen.tm.endTurn();
 
 			gameScreen.gameStatus.ui = UIStatus.NONE;
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.MOVED) {
 			gameScreen.gameStatus.ui = UIStatus.NONE;
-			gameScreen.endTurn();
+			gameScreen.tm.endTurn();
 			gameUi.moveButton.setLabel("Move");
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
@@ -214,7 +211,7 @@ public class GameScreenDrawer implements Inputtable{
 				{
 					//normal fight
 					if(t.containsTileEntity(monster)) {
-						fightDrawer.fight.start(t);
+						fightDrawer.fight.start(t, gameScreen.tm.getHero());
 						gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 						gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 						break;

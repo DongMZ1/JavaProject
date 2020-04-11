@@ -128,7 +128,8 @@ public class CollaborativeDecision implements Inputtable, Serializable {
 		// TODO Auto-generated method stub
 		if (c == 'a')
     	{
-    		Client.mainHero = tm.endTurn();
+    		tm.endTurn();
+    		Client.mainHero = tm.getHero();
     	}
 	}
 
