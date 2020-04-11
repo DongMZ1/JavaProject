@@ -44,6 +44,8 @@ public class GameScreenDrawer implements Inputtable{
 
 	public void updateGameScreen(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
+		this.gameScreen.gameScreen = gameScreen;
+		Tile.TILES = gameScreen.tiles;
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
@@ -88,6 +90,19 @@ public class GameScreenDrawer implements Inputtable{
 		InputThread.updateVariable();
 	}
 
+	public void moveHero(int currentTile, int destination) {
+		for(int i = 0; i < gameScreen.tiles.get(currentTile).tileEntities.size(); i++) {
+			System.out.println(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass());
+			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.mainHero.getClass().toString())) {
+				gameScreen.tiles.get(currentTile).tileEntities.remove(i);
+				System.out.println("Moved");
+			}
+		}
+		Client.mainHero.setTile(destination);
+		gameScreen.tiles.get(destination).tileEntities.add(Client.mainHero);
+		InputThread.updateVariable();
+	}
+
 	public void handleKeyPress(int key) {
 	}
 	public void handleKeyRelease(int key) {
@@ -108,11 +123,12 @@ public class GameScreenDrawer implements Inputtable{
 			playerBoard.toggleFlag();
 		}
 		else if (c == ' ') {
+			System.out.println(toMove);
 			if (Client.mainHero.time.getTime() < 7 || Client.mainHero.time.getTime() < 10){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {
 						if (isValidMove(Client.mainHero.getTile(),toMove)) {
-							moveTileEntity(Client.mainHero, Client.mainHero.getTile(),toMove);
+							moveHero(Client.mainHero.getTile(),toMove);
 							Client.mainHero.time.advance();
 							gameScreen.gameStatus.ui = UIStatus.MOVING;
 							gameUi.moveButton.setLabel("End Move");
@@ -120,7 +136,7 @@ public class GameScreenDrawer implements Inputtable{
 					}
 					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
 						if (isValidMove(Client.mainHero.getTile(),toMove)) {
-							moveTileEntity(Client.mainHero, Client.mainHero.getTile(),toMove);
+							moveHero(Client.mainHero.getTile(),toMove);
 							Client.mainHero.time.advance();
 						}
 					}

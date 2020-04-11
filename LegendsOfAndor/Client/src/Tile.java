@@ -15,7 +15,7 @@ public class Tile implements Serializable{
     
     //public ArrayList<Grid> getGrids() {return grids;}
 
-	private static final ArrayList<Tile> TILES = new ArrayList<>();
+	public static ArrayList<Tile> TILES = new ArrayList<>();
 
 
     public Tile(int moveX, int moveY, int tileNumber, int[] adjacentTiles, int nextTile) {
@@ -126,6 +126,7 @@ public class Tile implements Serializable{
     }
     
     public static ArrayList<Tile> getAll () {
+
     	return TILES;
     }
     

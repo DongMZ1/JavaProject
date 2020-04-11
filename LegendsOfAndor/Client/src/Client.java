@@ -96,9 +96,6 @@ class InputThread extends Thread{
             else if(input instanceof GameScreen) {
                 Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
             }
-            else if(input instanceof Tile[]) {
-                Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
-            }
             else
                 System.out.print("Whoops");
         }
