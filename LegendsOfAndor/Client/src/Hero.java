@@ -341,4 +341,16 @@ public class Hero implements Character, Serializable {
     	isFinishedForDay = true;
     	time.reset();
 	}
+
+	/**
+	 * @return If this Hero has the time/WP to make a move
+	 */
+	public boolean canMakeMove() {
+		if(time.getTime() < 7)
+			return true;
+		else if(time.getTime() < 10 && this.wp > 2)
+			return true;
+		else
+			return false;
+	}
 }

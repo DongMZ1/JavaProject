@@ -30,5 +30,5 @@ public class Time implements Serializable{
 		x = 6020;
 		y = 240;
 	}
-	
+
 }

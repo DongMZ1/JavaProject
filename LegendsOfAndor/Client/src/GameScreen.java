@@ -55,8 +55,8 @@ public class GameScreen implements Serializable{
 			tiles.get(well.getTile()).addTileEntity(well);
         mine = DwarfMineInitializer.initializemine();
         merchants = MerchantInitialer.initializeMerchants();
-        FarmerInitializer.initializeFarmers();
-        GoldInitializer.GoldIntializer();
+        farmers = FarmerInitializer.initializeFarmers();
+        //GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
         
         tm = new TurnManager(new ArrayList<>());
@@ -94,8 +94,7 @@ public class GameScreen implements Serializable{
 		tiles.get(destination).addTileEntity(tileEntity);
 		tileEntity.setTile(destination);
 	}
-    
-    
+
     public void newDay() {
     	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
     	ArrayList<Integer> occupiedSpaces = new ArrayList<>();
@@ -116,7 +115,6 @@ public class GameScreen implements Serializable{
     			occupiedSpaces.add(mTile);
     		}
     	}
-    	
     	//These are monsters that reached castle
     	for (Monster rMonster : toRemove)
     	{
@@ -124,15 +122,13 @@ public class GameScreen implements Serializable{
     		castle.damage(rMonster);
     		
     	}
-    	
     	//replenish all wells on map
     	for(Well w: wells) {
     		w.replenishWell();
     	}
-    	
     	tm.newDay();
-    	
     }
+
 }
 
 

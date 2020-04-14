@@ -8,12 +8,10 @@ import java.util.ArrayList;
 public class Monster implements Character, Serializable
 {
     int tile;
-    GameStatus gameStatus;
     int health;
     ArrayList<Dice> diceList;
     public Monster(int tile) throws IOException {
         this.tile = tile;
-        this.gameStatus = GameStatus.getInstance();
     }
     //UPDATE
     public void setTile(int tile) {
@@ -23,7 +21,6 @@ public class Monster implements Character, Serializable
         return this.tile;
     }
 
-//    @Return the tile that the monster advances to
     public int advance() {
 		return 0;
     	/*

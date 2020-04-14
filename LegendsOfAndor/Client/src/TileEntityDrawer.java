@@ -6,6 +6,7 @@ public class TileEntityDrawer {
 
 	private MinuetoImage merchantImage;
 	private MinuetoImage gorImage;
+	private MinuetoImage skralImage;
 	private MinuetoImage mineImage;
 	private MinuetoImage fullWellImage;
 	private MinuetoImage emptyWellImage;
@@ -21,6 +22,7 @@ public class TileEntityDrawer {
 	private TileEntityDrawer() throws MinuetoFileException {
 		merchantImage = new MinuetoImageFile("images/Merchant.jpg").scale(0.5, 0.5);
 		gorImage = new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4);
+		skralImage = new MinuetoImageFile("images/Monsters/Skral.png");
 		fullWellImage = new MinuetoImageFile("images/Well.png").scale(0.5, 0.5);
 		emptyWellImage = new MinuetoImageFile("images/emptyWell.png").scale(0.5, 0.5);
 		mineImage = new MinuetoImageFile("images/DwarfMine.png");
@@ -44,6 +46,8 @@ public class TileEntityDrawer {
 			Client.screen.draw(merchantImage, xCoord, yCoord);
 		else if(tileEntity instanceof Gor)
 			Client.screen.draw(gorImage, xCoord, yCoord);
+		else if(tileEntity instanceof Skral)
+			Client.screen.draw(skralImage, xCoord, yCoord);
 		else if(tileEntity instanceof DwarfMine)
 			Client.screen.draw(mineImage, xCoord, yCoord);
 		else if(tileEntity instanceof FogToken)

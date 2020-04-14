@@ -17,6 +17,7 @@ public class FightDrawer implements Inputtable{
 	private MinuetoImage archerImage;
 	private MinuetoImage dwarfImage;
 	private MinuetoImage gorImage;
+	private MinuetoImage skralImage;
 
 	private Button rollButton;
 	private Button yourTurn;

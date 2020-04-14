@@ -9,7 +9,6 @@ public class GoldInitializer implements Serializable{
 	//freeGoldList is that there are some gold has no regions
 	public static ArrayList<Gold> GoldIntializer() throws MinuetoFileException {
         ArrayList<Gold> output = new ArrayList<>();
-        MinuetoImage goldImage = new MinuetoImageFile("images/gold.png");
     Item gold1 = new Gold(1);
        Item gold2 = new Gold(1);
        Item gold3 = new Gold(1);

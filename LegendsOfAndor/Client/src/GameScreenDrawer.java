@@ -110,6 +110,7 @@ public class GameScreenDrawer implements Inputtable{
 	public void handleKeyType(char c) {
 		if (c == 'd') {
 			gameScreen.newDay();
+			InputThread.updateVariable();
 		}
 		else if (c == 'a')
 		{
@@ -154,39 +155,24 @@ public class GameScreenDrawer implements Inputtable{
 		}
 	}
 	public void handleMousePress(int x, int y, int button) {
- /*   	Coordinate coords = camera.getPosOnScreen(x, y);
-    	System.out.println("X: " + x);
-    	System.out.println("Y: " + y); */
-
 		if(y > gameScreen.gameStatus.screenHeight - gameUi.uiHeight && x < 650)
 			gameUi.handleMousePress(x, y, button);
-
-		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = true;
+		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT)
+			this.movingCam = true;
 		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-/*        	if (mainHero.time.left()){
-	        	if(gameStatus.ui == UIStatus.MOVEBEGIN) {
-
-	        			moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-			            mainHero.time.advance();
-			            gameStatus.ui = UIStatus.MOVING;
-			            gameUi.moveButton.setLabel("End Move");
-
-
-		        }
-	        	else if(gameStatus.ui == UIStatus.MOVING) {
-				//UPDATE
-		            	moveTileEntity(mainHero, mainHero.getTile(), findTileClicked(camera.getPosOnBoard(x, y)));
-		            	mainHero.time.advance();
-		            }
-
-
-		        }
-        	else {
-            	gameUi.moveButton.setLabel("No Time");
-
-            	}*/
+			if (Client.mainHero.canMakeMove()) {
+				if (Client.gameStatus.ui == UIStatus.MOVEBEGIN) {
+					moveTileEntity(Client.mainHero, Client.mainHero.getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
+					Client.mainHero.time.advance();
+					Client.gameStatus.ui = UIStatus.MOVING;
+					gameUi.moveButton.setLabel("End Move");
+				} else if (Client.gameStatus.ui == UIStatus.MOVING) {
+					moveTileEntity(Client.mainHero, Client.mainHero.getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
+					Client.mainHero.time.advance();
+				}
+			} else
+				gameUi.moveButton.setLabel("No Time");
 		}
-
 	}
 
 	public void handleMouseRelease(int x, int y, int button) {
