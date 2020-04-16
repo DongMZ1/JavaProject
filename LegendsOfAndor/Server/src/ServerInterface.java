@@ -33,7 +33,9 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 	private static final MinuetoText ipAddressMessage = new MinuetoText("The game server is now running on the following ip address:", font, MinuetoColor.BLACK);
 	private MinuetoText ipAddress;
 
-	private static final MinuetoImage saveNameTextBox = new MinuetoRectangle(1080, 100, new MinuetoColor(211, 211, 211), true);
+	private static final MinuetoImage saveNameBackground = new MinuetoRectangle(1080, 60, new MinuetoColor(211, 211, 211), true);
+	private static final MinuetoImage saveNameTextBox = new MinuetoRectangle(780, 40, MinuetoColor.WHITE, true);
+	private static final MinuetoText saveNameMessage = new MinuetoText("Save File Name:", font, MinuetoColor.BLACK);
 	private String saveName;
 
 
@@ -82,7 +84,9 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 			screen.draw(ipAddressMessageBackground2, 440, 190);
 			screen.draw(ipAddressMessage, 150, 125);
 			screen.draw(ipAddress, 460, 195);
-
+			screen.draw(saveNameBackground, 100, 400);
+			screen.draw(saveNameMessage, 110, 410);
+			screen.draw(saveNameTextBox, 380, 410);
 
 		}
 		screen.render();
@@ -95,13 +99,10 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 		}
 	}
 
-	@Override
 	public void handleGetFocus() { isFocused = true; }
 
-	@Override
 	public void handleLostFocus() { isFocused = false; }
 
-	@Override
 	public void handleMousePress(int x, int y, int button) {
 		try {
 			if (isFocused) {
@@ -123,8 +124,6 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 			}
 		} catch (IOException e) {}
 	}
-	@Override
 	public void handleMouseRelease(int i, int i1, int i2) { }
-	@Override
 	public void handleMouseMove(int i, int i1) { }
 }
