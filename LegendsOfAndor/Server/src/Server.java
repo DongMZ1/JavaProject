@@ -1,37 +1,62 @@
+import org.minueto.window.MinuetoFrame;
+import org.minueto.window.MinuetoWindow;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashSet;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Server {
 
+    public static boolean readyToBegin = false;
+
     // The set of all the print writers for all the clients, used for broadcast.
     private static HashSet<ObjectOutputStream> writers = new HashSet<>();
     private static GameScreen gameScreen;
     private static GameStatus gameStatus;
-
-    public Server() throws IOException {
+    public static InetAddress addr;
+    public static Executor pool;
+    public Server() {
     }
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("The game server is running...");
+    public static void main(String[] args) throws IOException {
+        readyToBegin = false;
+        addr = InetAddress.getLocalHost();
+        pool = Executors.newFixedThreadPool(4);
+        ServerInterface serverInterface = new ServerInterface(addr.getHostAddress());
+        serverInterface.start();
+
+        while(true);
+    }
+
+
+    public static void createNewGame() throws IOException {
         gameScreen = GameScreen.getInstance();
         gameStatus = GameStatus.getInstance();
-        Executor pool = Executors.newFixedThreadPool(4);
-        InetAddress addr = InetAddress.getByName("192.168.1.84");
-        //InetAddress addr = InetAddress.getByName("0.0.0.0");
-        try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
-            while (true) {
-                pool.execute(new Handler(listener.accept()));
+    }
+
+    public static void loadGame(String saveFileToLoad) {
+
+    }
+
+    public static class ServerRunner extends Thread {
+
+        public void run() {
+            try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
+                while (true) {
+                    pool.execute(new Handler(listener.accept()));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
-
     /**
      * The client handler task.
      */
@@ -77,6 +102,8 @@ public class Server {
                 System.out.println(e);
             } finally {
                 try {
+                    System.out.println("Player has left the server");
+                    writers.remove(out);
                     socket.close();
                 } catch (IOException e) {
                 }
