@@ -15,7 +15,11 @@ import java.util.Random;
 
 public class GameScreen implements Serializable{
 
-    public ArrayList<Tile> tiles;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5042704601663764773L;
+	public ArrayList<Tile> tiles;
 	public ArrayList<Monster> monsters;
 	public ArrayList<Merchant> merchants;
 	public ArrayList<Well> wells;
