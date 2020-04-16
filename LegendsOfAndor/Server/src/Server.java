@@ -1,32 +1,33 @@
 import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Server {
 
-    public static boolean readyToBegin = false;
+    public static File savesFolder = new File("./saves");
 
-    // The set of all the print writers for all the clients, used for broadcast.
     private static HashSet<ObjectOutputStream> writers = new HashSet<>();
+    public static Executor pool;
+
     private static GameScreen gameScreen;
     private static GameStatus gameStatus;
+
     public static InetAddress addr;
-    public static Executor pool;
     public Server() {
     }
 
     public static void main(String[] args) throws IOException {
-        readyToBegin = false;
+        savesFolder.mkdir();
         addr = InetAddress.getLocalHost();
         pool = Executors.newFixedThreadPool(4);
         ServerInterface serverInterface = new ServerInterface(addr.getHostAddress());
@@ -41,8 +42,39 @@ public class Server {
         gameStatus = GameStatus.getInstance();
     }
 
-    public static void loadGame(String saveFileToLoad) {
+    public static void loadGame(String nameOfSaveFile) throws IOException, ClassNotFoundException {
+        File saveDirectory = new File("./saves/" + nameOfSaveFile);
+        saveDirectory.mkdir();
 
+        //Save GameScreen
+        ObjectInputStream saveGame = new ObjectInputStream(new FileInputStream(new File("./saves/"+nameOfSaveFile+"/gameScreen")));
+        gameScreen = (GameScreen) saveGame.readObject();
+        saveGame.close();
+
+        //Save GameStatus
+        saveGame = new ObjectInputStream(new FileInputStream(new File("./saves/"+nameOfSaveFile+"/gameStatus")));
+        gameStatus = (GameStatus) saveGame.readObject();
+        saveGame.close();
+
+    }
+
+    public static String[] getSaveFiles() {
+        return savesFolder.list();
+    }
+
+    public static void saveGame(String nameOfSaveFile) throws IOException {
+        File saveDirectory = new File("./saves/" + nameOfSaveFile);
+        saveDirectory.mkdir();
+
+        //Save GameScreen
+        ObjectOutputStream saveGame = new ObjectOutputStream(new FileOutputStream(new File("./saves/"+nameOfSaveFile+"/gameScreen")));
+        saveGame.writeObject(gameScreen);
+        saveGame.close();
+
+        //Save GameStatus
+        saveGame = new ObjectOutputStream(new FileOutputStream(new File("./saves/"+nameOfSaveFile+"/gameStatus")));
+        saveGame.writeObject(gameStatus);
+        saveGame.close();
     }
 
     public static class ServerRunner extends Thread {

@@ -11,10 +11,12 @@ import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ServerInterface extends Thread implements MinuetoFocusHandler, MinuetoMouseHandler {
 
 	private boolean isFocused;
+	private boolean isTyping;
 
 	private static final int UI_SAVE_LOAD = 0;
 	private static final int UI_SELECT_SAVE = 1;
@@ -25,27 +27,36 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 	private static final MinuetoFont font = new MinuetoFont("Arial",35, true, false);
 	private static final MinuetoFont ipFont = new MinuetoFont("Arial",60, true, false);
 	private static final MinuetoImage background = new MinuetoRectangle(SCREEN_WIDTH, SCREEN_HEIGHT, MinuetoColor.BLACK, true);
+
 	private static final MinuetoImage ipAddressMessageBackground = new MinuetoRectangle(1080, 200, new MinuetoColor(211, 211, 211), true);
 	private static final MinuetoImage ipAddressMessageBackground2 = new MinuetoRectangle(400, 80, MinuetoColor.WHITE, true);
 	private static final MinuetoText ipAddressMessage = new MinuetoText("The game server is now running on the following ip address:", font, MinuetoColor.BLACK);
 	private MinuetoText ipAddress;
+
+	private static final MinuetoImage saveNameTextBox = new MinuetoRectangle(1080, 100, new MinuetoColor(211, 211, 211), true);
+	private String saveName;
+
 
 	private MinuetoWindow screen;
 	private ServerButton newGameButton;
 	private ServerButton loadGameButton;
 	private ServerButton saveGameButton;
 
+	private ArrayList<ServerButton> saveFiles;
+
 	private int currentScreen;
 	private MinuetoEventQueue queue;
 
 	public ServerInterface(String ipAddress) throws IOException {
 		isFocused = true;
+		isTyping = false;
+		saveName = "";
 		screen = new MinuetoFrame(SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		screen.setVisible(true);
 		currentScreen = UI_SAVE_LOAD;
-		newGameButton = new ServerButton(250, 300, 300, 120, "New Game", 50, screen);
-		loadGameButton = new ServerButton(730, 300, 300, 120, "Load Game", 50, screen);
-		saveGameButton = new ServerButton(730, 300, 300, 120, "Save Game", 50, screen);
+		newGameButton = new ServerButton(250, 310, 300, 100, "New Game", 50, screen);
+		loadGameButton = new ServerButton(730, 310, 300, 100, "Load Game", 50, screen);
+		saveGameButton = new ServerButton(730, 310, 300, 100, "Save Game", 50, screen);
 		this.ipAddress = new MinuetoText(ipAddress, ipFont, MinuetoColor.BLACK);
 
 		queue = new MinuetoEventQueue();
@@ -67,10 +78,12 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 
 		}
 		else if(currentScreen == UI_RUNNING) {
-			screen.draw(ipAddressMessageBackground, 100, 150);
-			screen.draw(ipAddressMessageBackground2, 440, 240);
-			screen.draw(ipAddressMessage, 150, 175);
-			screen.draw(ipAddress, 460, 245);
+			screen.draw(ipAddressMessageBackground, 100, 100);
+			screen.draw(ipAddressMessageBackground2, 440, 190);
+			screen.draw(ipAddressMessage, 150, 125);
+			screen.draw(ipAddress, 460, 195);
+
+
 		}
 		screen.render();
 	}

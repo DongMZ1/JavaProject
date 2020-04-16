@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import org.minueto.*;
 import org.minueto.handlers.*;
+import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.*;
 
