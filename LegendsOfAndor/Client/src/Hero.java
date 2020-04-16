@@ -315,6 +315,7 @@ public class Hero implements Character, Serializable {
 
 				if(((FogToken)f).tokenNumber == 8) {
 					Cards c1 = new Cards(1006);
+					//GameScreen.gameScreen
 					//Witch's brew;;
 				}
 				 

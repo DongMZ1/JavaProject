@@ -14,6 +14,7 @@ public class GameScreenDrawer implements Inputtable{
 	final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
 
 	private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
+	private MinuetoImageFile timeImage = new MinuetoImageFile("images/tokenWP.png");
 	private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
 	private TextBox textBox = TextBox.getInstance();
 	private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
@@ -27,10 +28,8 @@ public class GameScreenDrawer implements Inputtable{
 	private Coordinate previousMouseCoordinate = new Coordinate(0,0);
 	int toMove;
 	private CastleDrawer castleDrawer;
-
 	public FightDrawer fightDrawer;
 	public TileDrawer tileDrawer;
-
 	private GameScreenDrawer() throws IOException {
 		gameScreen = GameScreen.getInstance();
 		gameUi = GameUi.getInstance();
@@ -59,6 +58,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 
 	public void draw() {
+		Client.screen.draw(timeImage, gameScreen.time.x, gameScreen.time.y);
 		Client.screen.draw(background, 0, 0);
 		Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
 		for(Tile tile : gameScreen.tiles)
@@ -70,6 +70,9 @@ public class GameScreenDrawer implements Inputtable{
 			gameScreen.cd.draw();
 		}
 		castleDrawer.draw(gameScreen.castle);
+		Coordinate timeCoordinate = this.camera.getPosOnScreen(gameScreen.time.x, gameScreen.time.y);
+		Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
+		
 	}
 
 	public static boolean isValidMove(int currentInt, int destInt) {

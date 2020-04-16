@@ -16,7 +16,7 @@ public class TileEntityDrawer {
 	private MinuetoImage goldImage;
 	private MinuetoImage wineskinImage;
 	private MinuetoImage bowImage;
-
+    //private MinuetoImage witchImage;
 	private static TileEntityDrawer tileEntityDrawer;
 
 	private TileEntityDrawer() throws MinuetoFileException {
@@ -27,6 +27,7 @@ public class TileEntityDrawer {
 		emptyWellImage = new MinuetoImageFile("images/emptyWell.png").scale(0.5, 0.5);
 		mineImage = new MinuetoImageFile("images/DwarfMine.png");
 		fogTokenImage = new MinuetoImageFile("images/fogtoken.jpg").scale(0.2, 0.2);
+		//witchImage = new MinuetoImageFile("images/witch.jpg").scale(0.1, 0.1);
 		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
 		goldImage = new MinuetoImageFile("images/gold.png");
@@ -60,6 +61,8 @@ public class TileEntityDrawer {
 			Client.screen.draw(goldImage, xCoord, yCoord);
 		else if(tileEntity instanceof Wineskin)
 			Client.screen.draw(wineskinImage, xCoord, yCoord);
+		//else if(tileEntity instanceof Witch)
+			//Client.screen.draw(witchImage, xCoord, yCoord);
 		else if(tileEntity instanceof Well) {
 			if (((Well) tileEntity).isEmpty())
 				Client.screen.draw(emptyWellImage, xCoord, yCoord);

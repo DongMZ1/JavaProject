@@ -1,9 +1,9 @@
 import java.io.Serializable;
 
 public class Time implements Serializable{
-	int time;
-	int x;
-	int y;
+	public int time;
+	public int x;
+	public int y;
 
 	public Time() {
 		time = 0;
@@ -12,14 +12,15 @@ public class Time implements Serializable{
 	}
 	
 	public void advance() {
+		if(time < 10) {
 		if(time >= 7) {
-			//Client.mainHero.wp = Client.mainHero.wp - 2;
 			time++;
 			x+= 650;
 		}else {
 		time++;
 		x += 550;
 	}
+		}
 	}	
 	public int getTime() {
 		return this.time;
