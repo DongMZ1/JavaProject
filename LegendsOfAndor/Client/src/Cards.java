@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.minueto.MinuetoColor;
@@ -15,24 +16,24 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
-public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoWindowHandler{
+public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoWindowHandler, Serializable{
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;
-	private static GameStatus gameStatus;
+	//public static GameStatus gameStatus;
 
-	static {
-		try {
-			gameStatus = GameStatus.getInstance();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	//static {
+	//	try {
+	//		gameStatus = GameStatus.getInstance();
+	//	} catch (IOException e) {
+	//		e.printStackTrace();
+	//	}
+	//}
 
 	public static void showHeroInformationBoard() {
 		Cards show = new Cards(-1);
 	}
-	public static void drawEventCard(int cardNB) throws IOException{
+	public static void drawEventCard(int cardNB){
 	   	switch(cardNB) {
 	   	case 1:
 		   	@SuppressWarnings("unused") Cards card1 = new Cards(1);
@@ -66,7 +67,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(gameStatus.Legend2ModeIsEasy) {
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
@@ -75,37 +76,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
 		   break;
 	   case 2:
-		   if(gameStatus.Legend2ModeIsEasy) {
-			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
-			   }else {
-				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
-			   }
-		   Cards C2 = new Cards(308);
-		   break;
-	   case 3: 
-		   Cards G = new Cards(309);
-	   case 4:
-		   Cards N = new Cards(310);
-	   }
-		   
-   }
-   
-
-   
-   public static void DrawLegend2Card(int legend2cardindex) {
-	   switch(legend2cardindex) {
-	   case 1:
-		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(gameStatus.Legend2ModeIsEasy) {
-			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
-			   }else {
-				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
-			   }
-		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
-		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
-		   break;
-	   case 2:
-		   if(gameStatus.Legend2ModeIsEasy) {
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
@@ -117,7 +88,44 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   case 4:
 		   Cards N = new Cards(310);
 	   case 100:
-		   if(gameStatus.Legend2ModeIsEasy) {
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
+			   
+		   }else {
+			   @SuppressWarnings("unused") Cards RuneStoneHard = new Cards(-4);
+		   }
+	   }
+		   
+   }
+   
+
+   
+   public static void DrawLegend2Card(int legend2cardindex) {
+	   switch(legend2cardindex) {
+	   case 1:
+		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
+			   }else {
+				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
+			   }
+		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
+		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
+		   break;
+	   case 2:
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
+			   }else {
+				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
+			   }
+		   Cards C2 = new Cards(308);
+		   break;
+	   case 3: 
+		   Cards G = new Cards(309);
+	   case 4:
+		   Cards N = new Cards(310);
+	   case 100:
+		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
 			   
 		   }else {

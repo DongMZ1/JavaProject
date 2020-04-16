@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class GameStatus implements Serializable {
 
-	private static GameStatus gameStatus;
+	public static GameStatus gameStatus;
 
     public static final int FOCUS_ON_LOBBY = 0;
     public static final int FOCUS_ON_GAMESCREEN = 1;

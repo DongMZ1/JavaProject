@@ -35,6 +35,7 @@ public class GameUi implements Inputtable {
     public int uiHeight = 360;
    
 
+
     private GameUi() throws IOException {
         textBox = TextBox.getInstance();
         gameStatus = GameStatus.getInstance();
@@ -144,13 +145,7 @@ public class GameUi implements Inputtable {
 	            	
 	            else if(tradeButton.isClickable() && tradeButton.isClicked(x, y)) {
 	            	
-                 //   TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
-					/*try {
-						Cards.drawLegend1EventCard(Client.gameBoard.Lengend1EventCardIndex+7);
-			} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
+                    TradeWithMerChantHandler h1 = new TradeWithMerChantHandler();
 	            }
 	            else if(actionButton.isClickable() && actionButton.isClicked(x, y)) {
 	            	ActionHander u1 = new ActionHander();
@@ -163,7 +158,7 @@ public class GameUi implements Inputtable {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
 	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y) && verify()) {
-	            		//Cards.showLegend2Card(Client.gameBoard.LegendCard2Index);
+	            		Cards.showLegend2Card(GameStatus.gameStatus.legend2CardIndex);
 	            }
 	            
 	        }

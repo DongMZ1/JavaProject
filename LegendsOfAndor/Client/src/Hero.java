@@ -259,14 +259,8 @@ public class Hero implements Character, Serializable {
 			if(f instanceof FogToken) {
 				//1 is draw a event card
 				if(((FogToken)f).tokenNumber == 1) {
-								/*try {
-									Cards.drawLegend1EventCard(Client.gameScreenDrawer.gameScreen.Lengend1EventCardIndex);
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}*/
-								 }
-				 // 2 is to increasing a point of strength
+								Cards.drawEventCard(GameStatus.gameStatus.EventCardIndex);
+				}
 				if(((FogToken)f).tokenNumber == 2) {
 					Cards c1 = new Cards(1000);
 					 this.sp ++;
