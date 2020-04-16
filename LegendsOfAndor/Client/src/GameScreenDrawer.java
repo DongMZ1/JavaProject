@@ -30,6 +30,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	public FightDrawer fightDrawer;
 	public TileDrawer tileDrawer;
+	public CollaborativeDecisionDrawer collabDrawer;
 
 	private GameScreenDrawer() throws IOException {
 		gameScreen = GameScreen.getInstance();
@@ -40,6 +41,7 @@ public class GameScreenDrawer implements Inputtable{
 		tileDrawer = TileDrawer.getInstance();
 		fightDrawer = new FightDrawer(new Fight(gameScreen.tm));
 		castleDrawer = CastleDrawer.getInstance();
+		collabDrawer = CollaborativeDecisionDrawer.getInstance();
 	}
 
 	public void updateGameScreen(GameScreen gameScreen) {
@@ -67,7 +69,8 @@ public class GameScreenDrawer implements Inputtable{
 		playerBoard.draw();
 		//gameScreen.tm.draw();
 		if (gameScreen.gameStatus.currentScreen == gameScreen.gameStatus.COLLABORATIVE_SCREEN) {
-			gameScreen.cd.draw();
+			collabDrawer.decisionLoop();
+			gameScreen.cd.decisionLoop();
 		}
 		castleDrawer.draw(gameScreen.castle);
 	}

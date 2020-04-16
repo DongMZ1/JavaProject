@@ -36,6 +36,9 @@ public class FightDrawer implements Inputtable{
 		notYourTurn = new Button(new Coordinate(700,500),50,50,"Not Your Turn",false);
 		rollAgain = new Button(new Coordinate(700,500),50,50,"Roll Again",false);
 		changeRollResult = new Button(new Coordinate(690,500),50,50,"CRR",false);
+		
+		gorImage = new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4);
+		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		this.fight = fight;
 	}
 

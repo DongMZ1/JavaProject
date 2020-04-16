@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public interface Inputtable extends Serializable{
+public interface Inputtable{
 
 	void handleKeyPress(int key);
 	void handleKeyRelease(int key);
