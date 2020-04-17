@@ -1,0 +1,5 @@
+
+public enum FightStatus {
+
+	ROLLPROMPT, ROLLRESPONSE, ROLLMONSTER, DAMAGE, NONE;
+}
