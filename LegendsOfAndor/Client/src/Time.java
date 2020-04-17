@@ -12,10 +12,11 @@ public class Time implements Serializable{
 	}
 	
 	public void advance() {
-		if(time < 10) {
+		if(time < 10 && Client.mainHero.wp > 2) {
 		if(time >= 7) {
 			time++;
 			x+= 650;
+			Client.mainHero.wp = Client.mainHero.wp -2;
 		}else {
 		time++;
 		x += 550;

@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class Farmer implements TileEntity{
+public class Farmer implements TileEntity, Serializable{
 
 	private int tile;
 	private Hero hero = null;

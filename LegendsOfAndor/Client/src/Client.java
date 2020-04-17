@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 import org.minueto.*;
 import org.minueto.handlers.*;
-import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 import org.minueto.window.*;
 
@@ -62,7 +61,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.84";
+    static String serverAddress = "192.168.2.138";
 
     static Socket socket;
     static ObjectInputStream in;

@@ -28,7 +28,6 @@ public class GameScreen implements Serializable{
     }
     public TurnManager tm;
 	CollaborativeDecision cd;
-
     public GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
@@ -61,6 +60,7 @@ public class GameScreen implements Serializable{
         fogtokens = FogTokenInitializer.InitializeFogtoken();
         tm = new TurnManager(new ArrayList<>());
         time = new Time();
+        narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
         castle = new Castle(5 - tm.getSize());
@@ -128,6 +128,7 @@ public class GameScreen implements Serializable{
     	}
     	tm.newDay();
     	this.time.advance();
+    	this.narrator.advance();
     }
 
 }

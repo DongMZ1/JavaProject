@@ -15,6 +15,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
 	private MinuetoImageFile timeImage = new MinuetoImageFile("images/tokenWP.png");
+	private MinuetoImageFile narratorImage = new MinuetoImageFile("images/tokenWP.png");
 	private MinuetoImage gameBoard = defaultBoard.scale((double) 1 / 3, (double) 1 / 3);
 	private TextBox textBox = TextBox.getInstance();
 	private MinuetoFont font = new MinuetoFont("Arial",20, true, false);
@@ -70,8 +71,12 @@ public class GameScreenDrawer implements Inputtable{
 			gameScreen.cd.draw();
 		}
 		castleDrawer.draw(gameScreen.castle);
+		//draw time
 		Coordinate timeCoordinate = this.camera.getPosOnScreen(gameScreen.time.x, gameScreen.time.y);
 		Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
+		//draw narrator
+		Coordinate narratorCoordinate = this.camera.getPosOnScreen(gameScreen.narrator.x, gameScreen.narrator.y);
+		Client.screen.draw(timeImage, narratorCoordinate.getX(), narratorCoordinate.getY());
 		
 	}
 

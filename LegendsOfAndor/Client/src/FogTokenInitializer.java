@@ -8,7 +8,7 @@ import org.minueto.image.MinuetoImageFile;
 public class FogTokenInitializer{
 	public static ArrayList<FogToken> InitializeFogtoken() throws IOException {
         ArrayList<FogToken> output = new ArrayList<>();
-        FogToken f1 = new FogToken(8, 7);
+        FogToken f1 = new FogToken(8, 8);
         FogToken f2 = new FogToken(11, 2);
         FogToken f3 = new FogToken(12, 1);
         FogToken f4 = new FogToken(13, 3);
@@ -22,7 +22,7 @@ public class FogTokenInitializer{
         FogToken f12 = new FogToken(47, 5);
         FogToken f13 = new FogToken(56, 1);
         FogToken f14 = new FogToken(63, 5);
-        FogToken f15 = new FogToken(64, 8);
+        FogToken f15 = new FogToken(64, 7);
         output.add(f1);
         output.add(f2);
         output.add(f3);

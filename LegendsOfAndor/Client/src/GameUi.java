@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class GameUi implements Inputtable {
     private static GameUi gameUi;
 
-	private MinuetoImage warriorTimeTokenImage;
+	MinuetoImage timeTokenImage;
 
     public Button moveButton;
     public Button fightButton;
@@ -67,7 +67,7 @@ public class GameUi implements Inputtable {
 //        pickupGold = new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - 4*turnButtonHeight),
 //                turnButtonHeight, turnButtonWidth, "pickup Gold", true);
 
-		warriorTimeTokenImage = new MinuetoImageFile("images/tokenWarrior.png");
+		timeTokenImage = new MinuetoImageFile("images/tokenWarrior.png");
     }
 
     public static GameUi getInstance() throws IOException {
@@ -89,7 +89,7 @@ public class GameUi implements Inputtable {
         textBox.draw();
         informationButton.draw();
         currentLegendCard.draw();
-        Client.screen.draw(warriorTimeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
+        Client.screen.draw(timeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
     }
 
    // public void drawPickup() {
