@@ -15,7 +15,7 @@ public class LobbyScreen implements Inputtable, Serializable {
     private boolean isEasy;
 
     private int currentChar = 0;
-    private static GameStatus gameStatus;
+    public static GameStatus gameStatus;
     private static TextBox textBox;
     int ghettoText;
     public LobbyScreen() throws IOException {

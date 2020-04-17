@@ -17,7 +17,6 @@ public class Button implements Serializable{
     private MinuetoRectangle clickableButtonBackground;
     private MinuetoRectangle unclickableButtonBackground;
     private MinuetoFont font;
-    private GameStatus gameStatus;
 
     public Button(Coordinate coordinate, int height, int width, String label, boolean clickable) throws IOException {
         this.coordinate = coordinate;
@@ -28,7 +27,6 @@ public class Button implements Serializable{
         this.clickable = clickable;
         this.clickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(211, 211, 211), true);
         this.unclickableButtonBackground = new MinuetoRectangle(width, height, new MinuetoColor(225, 225, 225), true);
-        this.gameStatus = GameStatus.getInstance();
     }
 
     public Coordinate getCoordinate() {

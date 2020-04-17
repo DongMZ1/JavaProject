@@ -17,18 +17,23 @@ public class Client {
 
     static LobbyScreen lobbyScreen;
     static GameScreenDrawer gameScreenDrawer;
-    static TextBox textBox;
-    public static Hero mainHero;
     static GameStatus gameStatus;
+    public static Hero mainHero;
+    static {
+        try {
+            mainHero = new Archer(0);
+            gameScreenDrawer = GameScreenDrawer.getInstance();
+            gameStatus = GameStatus.getInstance();
+        } catch (IOException e) { e.printStackTrace();}
+    }
+    static InputHandler inputHandler;
+    static TextBox textBox;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         new InputThread().start();
         screen.setVisible(true);
-    	mainHero = new Archer(0);
-    	gameStatus = GameStatus.getInstance();
-        InputHandler inputHandler = InputHandler.getInputHandler();
+        inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
-        gameScreenDrawer = GameScreenDrawer.getInstance();
         textBox = TextBox.getInstance();
         inputHandler.addInput(lobbyScreen);
         inputHandler.addInput(gameScreenDrawer);
@@ -94,6 +99,8 @@ class InputThread extends Thread{
             if(input instanceof GameStatus) {
                 Client.gameStatus = (GameStatus) input;
                 Client.gameScreenDrawer.updateGameStatus((GameStatus) input);
+                Client.lobbyScreen.gameStatus = (GameStatus) input;
+                Client.inputHandler.gameStatus = (GameStatus) input;
             }
             else if(input instanceof GameScreen) {
                 Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
@@ -101,7 +108,7 @@ class InputThread extends Thread{
             else
                 System.out.print("Whoops");
         }
-        } catch(Exception e) {}
+        } catch(Exception e) { System.out.println("Goodbye!"); }
     }
 
     public static void updateVariable() {

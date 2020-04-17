@@ -50,6 +50,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
+		this.gameScreen.gameStatus = gameStatus;
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {

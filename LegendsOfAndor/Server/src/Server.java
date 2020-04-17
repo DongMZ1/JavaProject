@@ -127,6 +127,7 @@ public class Server {
                     else if(input instanceof GameStatus)
                         gameStatus = (GameStatus) input;
                     for (ObjectOutputStream writer : writers) {
+                        System.out.println(input.getClass());
                         writer.writeObject(input);
                     }
                 }
