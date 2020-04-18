@@ -40,6 +40,46 @@ public class Hero implements Character, Serializable {
 	public int getTile() {
 		return this.tile;
 	}
+	///////////////general///////////////////////////////////////////////////////////
+	 public boolean hasMerchant() {
+	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
+	    		if(t instanceof Merchant) {
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    }
+	 
+	 public boolean hasWitch() {
+	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
+	    		if(t instanceof Witch) {
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    }
+	 
+	    public boolean hasMonster() {
+	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
+	    		if(t instanceof Monster) {
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    }
+	    
+	  	public boolean CheckHasCreature() {
+		  	for(TileEntity t: Tile.get(tile).getTileEntities()) {
+			  	if(t instanceof Monster) {
+				  	return true;
+			  	}
+		  	}
+		  	return false;
+	  	}
+	 
+	 
+	 
+	//Wineskin//////////////////////////////////////////////////////////////////////
    	public void UseWineSkinForMove() {
 	   	int wineSkinCount = 0;
 	   	for(Item i: items) {
@@ -58,8 +98,7 @@ public class Hero implements Character, Serializable {
 			this.time.x = this.time.x - 550;
 		}
    }
-	//UPDATE
-	public void addWineSkin() throws MinuetoFileException {
+	public void addWineSkin(){
 		int wineSkinCount = 0;
 		for(Item i: items) {
 			if(i instanceof Wineskin) {
@@ -68,6 +107,42 @@ public class Hero implements Character, Serializable {
 		}
 		if(wineSkinCount < 2) {
 			this.items.add(new Wineskin(this.tile));
+		}
+	}
+	
+	public void BuyWineskinFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int WineskinCount = 0;
+		for(Item i: items) {
+			if(i instanceof Wineskin) {
+				WineskinCount ++;
+			}
+		}
+		if(WineskinCount < 2) {
+			this.items.add(new Wineskin(this.tile));
+		}
+		if(WineskinCount < 2) {
+			this.items.add(new Wineskin(this.tile));
+		}
 		}
 	}
 
@@ -83,8 +158,442 @@ public class Hero implements Character, Serializable {
 		}
 	}
 
+	public int getWineskin() {
+		int WineskinCount = 0;
+		for(Item i: items) {
+			if(i instanceof Wineskin) {
+				WineskinCount ++;
+			}
+		}
+		return WineskinCount;
+	}
+	
+	public void dropWineskin() {
+		for (Item t: this.items) {
+			if(t instanceof Wineskin) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void pickupWineskin() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Wineskin && this.getWineskin() < 2) {
+				this.items.add((Wineskin)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+////////////Bow///////////////////////////////////////////////////////////////////
+	public void BuyBowFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int BowCount = 0;
+		for(Item i: items) {
+			if(i instanceof Bow) {
+				BowCount ++;
+			}
+		}
+		if(BowCount < 2) {
+			this.items.add(new Bow(this.tile));
+		}
+		if(BowCount < 2) {
+			this.items.add(new Bow(this.tile));
+		}
+		}
+	}
+	
+	public int getBow() {
+		int BowCount = 0;
+		for(Item i: items) {
+			if(i instanceof Bow) {
+				BowCount ++;
+			}
+		}
+		return BowCount;
+	}
+	
+	public void pickupBow() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Bow && this.getBow() < 2) {
+				this.items.add((Bow)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropBow() {
+		for (Item t: this.items) {
+			if(t instanceof Bow) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	
+	
+	
+	
+	//Falcon//////////////////////////////////////////////////////////////////////////////
+	public void BuyFalconFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int falconCount = 0;
+		for(Item i: items) {
+			if(i instanceof Falcon) {
+				falconCount ++;
+			}
+		}
+		if(falconCount < 2) {
+			this.items.add(new Falcon(this.tile));
+		}
+		if(falconCount < 2) {
+			this.items.add(new Falcon(this.tile));
+		}
+		}
+	}
+	
+	public int getFalcon() {
+		int FalconCount = 0;
+		for(Item i: items) {
+			if(i instanceof Falcon) {
+				FalconCount ++;
+			}
+		}
+		return FalconCount;
+	}
+	
+	public void pickupFalcon() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Falcon && this.getFalcon() < 2) {
+				this.items.add((Falcon)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropFalcon() {
+		for (Item t: this.items) {
+			if(t instanceof Falcon) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	
+	
+	
+	//Helm///////////////////////////////////////////////////////////////////////////////////
+	public void BuyHelmFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int HelmCount = 0;
+		for(Item i: items) {
+			if(i instanceof Helm) {
+				HelmCount ++;
+			}
+		}
+		if(HelmCount < 2) {
+			this.items.add(new Helm(this.tile));
+		}
+		if(HelmCount < 2) {
+			this.items.add(new Helm(this.tile));
+		}
+		}
+	}
+	
+	public int getHelm() {
+		int HelmCount = 0;
+		for(Item i: items) {
+			if(i instanceof Helm) {
+				HelmCount ++;
+			}
+		}
+		return HelmCount;
+	}
+	
+	public void pickupHelm() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Helm && this.getBow() < 2) {
+				this.items.add((Helm)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropHelm() {
+		for (Item t: this.items) {
+			if(t instanceof Helm) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	//Shield/////////////////////////////////////////////////////////////////////////////
+	public void BuyShieldFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int ShieldCount = 0;
+		for(Item i: items) {
+			if(i instanceof Shield) {
+				ShieldCount ++;
+			}
+		}
+		if(ShieldCount < 2) {
+			this.items.add(new Shield(this.tile));
+		}
+		if(ShieldCount < 2) {
+			this.items.add(new Shield(this.tile));
+		}
+		}
+	}
+	
+	public int getShield() {
+		int ShieldCount = 0;
+		for(Item i: items) {
+			if(i instanceof Shield) {
+				ShieldCount ++;
+			}
+		}
+		return ShieldCount;
+	}
+	
+	public void pickupShield() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Shield && this.getShield() < 2) {
+				this.items.add((Shield)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropShield() {
+		for (Item t: this.items) {
+			if(t instanceof Shield) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	//Telescope//////////////////////////////////////////////////////////////////////////
+	public void BuyTelescopeFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+			//remove gold first
+			int count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+				
+				count = 0;
+				for(Item i: this.items) {
+					if(i instanceof Gold) {
+					count = items.indexOf(i);
+			}
+				}
+				items.remove(count);
+		
+		//add wine skin
+		int TelescopeCount = 0;
+		for(Item i: items) {
+			if(i instanceof Telescope) {
+				TelescopeCount ++;
+			}
+		}
+		if(TelescopeCount < 2) {
+			this.items.add(new Telescope(this.tile));
+		}
+		if(TelescopeCount < 2) {
+			this.items.add(new Telescope(this.tile));
+		}
+		}
+	}
+	
+	public int getTelescope() {
+		int TelescopeCount = 0;
+		for(Item i: items) {
+			if(i instanceof Telescope) {
+				TelescopeCount ++;
+			}
+		}
+		return TelescopeCount;
+	}
+	
+	public void pickupTelescope() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof Telescope && this.getTelescope() < 2) {
+				this.items.add((Telescope)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropTelescope() {
+		for (Item t: this.items) {
+			if(t instanceof Telescope) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	
+	
+	
+	//Witchbrew//////////////////////////////////////////////////////////////////////////
+	
+	public void BuyWitchBrewForGold(){
+		//if have money/witch
+		if(this.getGoldNm() >= (GameScreen.gameScreen.tm.getSize()+1) && this.hasWitch()) { 
+			//remove gold first
+			for(int i = 0; i < (GameScreen.gameScreen.tm.getSize()+1); i++ ) {
+			int count = 0;
+				for(Item item: this.items) {
+					if(item instanceof Gold) {
+					count = items.indexOf(item);
+			}
+				}
+				items.remove(count);
+			}
+		//add wine skin
+		int WitchbrewCount = 0;
+		for(Item i: items) {
+			if(i instanceof Shield) {
+				WitchbrewCount ++;
+			}
+		}
+		if(WitchbrewCount < 2) {
+			this.items.add(new WitchBrew(this.tile));
+		}
+		if(WitchbrewCount < 2) {
+			this.items.add(new WitchBrew(this.tile));
+		}
+		}
+	}
+	
+	public int getWitchBrew() {
+		int WitchBrewCount = 0;
+		for(Item i: items) {
+			if(i instanceof WitchBrew) {
+				WitchBrewCount ++;
+			}
+		}
+		return WitchBrewCount;
+	}
+	
+	public void pickupWitchBrew() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof WitchBrew && this.getWitchBrew() < 2) {
+				this.items.add((WitchBrew)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	public void dropWitchBrew() {
+		for (Item t: this.items) {
+			if(t instanceof WitchBrew) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}	
+	
+	//Well///////////////////////////////////////////////////////////////////////////////
 
-	//UPDATE
 	public void replenishWP() {
 		ArrayList<TileEntity> entities = Tile.get(tile).getTileEntities(); 	
 		if(entities != null) {
@@ -96,6 +605,10 @@ public class Hero implements Character, Serializable {
     	}
     }  
 	//UPDATE
+	
+	
+	
+	//Farmer/////////////////////////////////////////////////////////////////////////////////
   	public void pickupFarmer() {
 	  	if(!hasfarmer) {
 		  	for(TileEntity t: Tile.get(tile).getTileEntities()) {
@@ -114,14 +627,7 @@ public class Hero implements Character, Serializable {
 	  	}
   	}
   //UPDATE
-  	public boolean CheckHasCreature() {
-	  	for(TileEntity t: Tile.get(tile).getTileEntities()) {
-		  	if(t instanceof Monster) {
-			  	return true;
-		  	}
-	  	}
-	  	return false;
-  	}
+
   	public void dropFarmer() {
 	  	if(!CheckHasCreature()) {
 		 	if(hasfarmer && this.tile == 0) {
@@ -144,8 +650,9 @@ public class Hero implements Character, Serializable {
 
 			// call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
 		
-	
 
+    
+//Gold///////////////////////////////////////////////////////////////////   
 	//UPDATE
 	public void pickupGold() {
 		for (TileEntity t: Tile.get(tile).getTileEntities()) {
@@ -158,7 +665,8 @@ public class Hero implements Character, Serializable {
 			}
 		}
 	}	
-	//UPDATE
+
+    
 	public void dropGold() {
 		for (Item i: items) {
 			if(i instanceof Gold) {
@@ -172,7 +680,7 @@ public class Hero implements Character, Serializable {
 			}
 		}
 	}
-
+    
 	public int getGoldNm() {
 		int goldCount = 0;
 		for(Item i: items) {
@@ -183,34 +691,6 @@ public class Hero implements Character, Serializable {
 		return goldCount;
 	}
 	
-	public int getWineskin() {
-		int WineskinCount = 0;
-		for(Item i: items) {
-			if(i instanceof Wineskin) {
-				WineskinCount ++;
-			}
-		}
-		return WineskinCount;
-	}
-
-    public boolean hasMerchant() {
-    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
-    		if(t instanceof Merchant) {
-    			return true;
-    		}
-    	}
-    	return false;
-    }
-    
-    public boolean hasMonster() {
-    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
-    		if(t instanceof Monster) {
-    			return true;
-    		}
-    	}
-    	return false;
-    }
-	//UPDATE
 	public void Buy2SPfor2Gold() {
 		//firstly, find out if the hero has more than two gold for trade willpower
 		System.out.println("gold: "+ this.getGoldNm());
@@ -237,6 +717,12 @@ public class Hero implements Character, Serializable {
 			hasGold = false;
 		}
 	}
+	
+	
+	//fog token/////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	public void FilpFogTokenForPreviewOnly(int tileNB) {
 		for (TileEntity f: Tile.get(tileNB).getTileEntities()) {
 			if(f instanceof FogToken) {
@@ -253,6 +739,8 @@ public class Hero implements Character, Serializable {
 			}
 		}
 	}
+	
+	
 
 	public void RevealFogToken() {
     	for (TileEntity f: Tile.get(tile).getTileEntities()) {
@@ -304,19 +792,22 @@ public class Hero implements Character, Serializable {
 
 				if(((FogToken)f).tokenNumber == 7) {
 					Cards c1 = new Cards(1005);
-					 try {
 						this.addWineSkin();
 						this.addWineSkin();
-					} catch (MinuetoFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-				}
+				
 
 				if(((FogToken)f).tokenNumber == 8) {
 					Cards c1 = new Cards(1006);
 					GameScreen.gameScreen.witch = new Witch(this.tile);
 					GameScreen.gameScreen.tiles.get(this.tile).addTileEntity(GameScreen.gameScreen.witch);
+					if(this.getWitchBrew() < 2) {
+						this.items.add(new WitchBrew(this.tile));
+					}
+					if(this.getWitchBrew() < 2) {
+						this.items.add(new WitchBrew(this.tile));
+					}
+					
 				}
 				 
 					Tile.get(tile).getTileEntities().remove(f);
@@ -325,6 +816,9 @@ public class Hero implements Character, Serializable {
 		}
     }
 
+	
+	
+	//Other things//////////////////////////////////////////////////////////////////
 	public int[] rollDice() {
     	int[] values = new int[diceList.size()];
     	for(int i = 0; i < diceList.size(); i++)
@@ -337,9 +831,6 @@ public class Hero implements Character, Serializable {
     	time.reset();
 	}
 
-	/**
-	 * @return If this Hero has the time/WP to make a move
-	 */
 	public boolean canMakeMove() {
 		if(time.getTime() < 7)
 			return true;

@@ -22,16 +22,13 @@ public class Monster implements Character, Serializable
     }
 
     public int advance() {
-		return 0;
-    	/*
-    	Tile current = gameScreen.tiles.get(tile);
-    	if (tile > 0) {
+    	Tile current = GameScreen.gameScreen.tiles.get(this.tile);
+    	if (this.tile > 0) {
     	
-    	gameScreen.moveTileEntity(this, tile, current.getNextTile());
+    	GameScreen.gameScreen.moveTileEntity(this, tile, current.getNextTile());
     	}
     	
     	return current.getNextTile();
-    */
 	}
     
     

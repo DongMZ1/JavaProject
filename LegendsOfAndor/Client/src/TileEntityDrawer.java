@@ -17,6 +17,13 @@ public class TileEntityDrawer {
 	private MinuetoImage wineskinImage;
 	private MinuetoImage bowImage;
     private MinuetoImage witchImage;
+    private MinuetoImage falconImage;
+    private MinuetoImage helmImage;
+    private MinuetoImage shieldImage;
+    private MinuetoImage witchBrewImage;
+    private MinuetoImage telescopeImage;
+    private MinuetoImage princeThoraldImage;
+    private MinuetoImage wardrakImage;
 	private static TileEntityDrawer tileEntityDrawer;
 
 	private TileEntityDrawer() throws MinuetoFileException {
@@ -30,10 +37,17 @@ public class TileEntityDrawer {
 		witchImage = new MinuetoImageFile("images/witch.jpg").scale(0.07, 0.07);
 		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
-		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.4,0.4);
+		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.2,0.2);
 		wineskinImage = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
 		//TODO: Set proper Bow image
 		bowImage = new MinuetoImageFile("images/Bow.png");
+		falconImage = new MinuetoImageFile("images/falcon.jpg").scale(0.07, 0.07);
+		helmImage = new MinuetoImageFile("images/helm.jpg").scale(0.07, 0.07);
+		shieldImage = new MinuetoImageFile("images/shield.png").scale(0.05, 0.05);
+		witchBrewImage = new MinuetoImageFile("images/witchBrew.jpg").scale(0.1, 0.1);
+		princeThoraldImage = new MinuetoImageFile("images/princeThorald.jpg").scale(0.3, 0.3);
+		wardrakImage = new MinuetoImageFile("images/wardrak.jpg").scale(0.3, 0.3);
+		telescopeImage = new MinuetoImageFile("images/telescope.jpg").scale(0.05, 0.05);
 	}
 
 	public static TileEntityDrawer getInstance() throws MinuetoFileException {
@@ -65,6 +79,20 @@ public class TileEntityDrawer {
 			Client.screen.draw(witchImage, xCoord, yCoord);
 		else if(tileEntity instanceof Bow)
 			Client.screen.draw(witchImage, xCoord, yCoord);
+		else if(tileEntity instanceof Falcon)
+			Client.screen.draw(falconImage, xCoord, yCoord);
+		else if(tileEntity instanceof Shield)
+			Client.screen.draw(shieldImage, xCoord, yCoord);
+		else if(tileEntity instanceof WitchBrew)
+			Client.screen.draw(witchBrewImage, xCoord, yCoord);
+		else if(tileEntity instanceof Helm)
+			Client.screen.draw(helmImage, xCoord, yCoord);
+		else if(tileEntity instanceof PrinceThorald)
+			Client.screen.draw(princeThoraldImage, xCoord, yCoord);
+		else if(tileEntity instanceof Telescope)
+			Client.screen.draw(telescopeImage, xCoord, yCoord);
+		else if(tileEntity instanceof Wardraks)
+			Client.screen.draw(wardrakImage, xCoord, yCoord);
 		else if(tileEntity instanceof Well) {
 			if (((Well) tileEntity).isEmpty())
 				Client.screen.draw(emptyWellImage, xCoord, yCoord);

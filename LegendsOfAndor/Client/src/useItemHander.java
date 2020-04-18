@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoEventQueue;
 import org.minueto.handlers.MinuetoKeyboard;
@@ -12,7 +14,7 @@ import org.minueto.window.MinuetoWindow;
 
 public class useItemHander implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
-MinuetoWindowHandler{
+MinuetoWindowHandler, Serializable{
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

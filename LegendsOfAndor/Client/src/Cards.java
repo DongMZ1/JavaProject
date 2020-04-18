@@ -344,10 +344,10 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			}
 		//card number -1 is to show what does the main hero have
 		if(CardNumber == -1) {
-			eventcardindexText = new MinuetoText("Gold Number:  " + Client.mainHero.getGoldNm() + "  Wineskin:  " +  Client.mainHero.getWineskin() ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			eventcardindexText = new MinuetoText("Gold Number:  " + Client.getMainHero().getGoldNm() + "  Wineskin:  " +  Client.getMainHero().getWineskin() ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Bow Number:  " + Client.getMainHero().getBow() + "  Falcon:  " + Client.getMainHero().getFalcon() ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("Helm:   " + Client.getMainHero().getHelm() + "   Shield:   " + Client.getMainHero().getShield() ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("WitchBrew:    " + Client.getMainHero().getWitchBrew() + "Telescope: " + Client.getMainHero().getTelescope()  ,fontArial19,MinuetoColor.BLUE);
 			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);

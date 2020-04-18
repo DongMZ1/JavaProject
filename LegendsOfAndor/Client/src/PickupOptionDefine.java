@@ -26,7 +26,7 @@ String name;
 public PickupOptionDefine(String name) {
 
 MinuetoFont fontArial19;				// Font used to draw on the screen.
-MinuetoImage imageText2, exitText;		// Instructions drawn on the screen.		// Background for this demo		
+MinuetoImage imageText2, exitText, imageText3, imageText4;		// Instructions drawn on the screen.		// Background for this demo		
 Random random = new Random();		
 this.name = name;		
 this.closing = false;
@@ -48,7 +48,9 @@ fontArial19 = new MinuetoFont("Arial",19,false, false);
 
 // Build images of the demo instructions.
 imageText2 = new MinuetoText("press '1' to pickup Farmer, '2' to pickup Gold, '3' to pickup Willpower" ,fontArial19,MinuetoColor.BLUE);
-exitText = new MinuetoText(" '4' to reveal a token, press Q to exit" ,fontArial19,MinuetoColor.BLUE);
+exitText = new MinuetoText(" '4' to reveal a token, '5' to pickup a Bow, '6' to pick a Wineskin;" ,fontArial19,MinuetoColor.BLUE);
+imageText3 = new MinuetoText("'7' to pick up a falcon, '8' to pick up a helm '9' to pickup Shield" ,fontArial19,MinuetoColor.BLUE);
+imageText4 = new MinuetoText("'A' to pick up WitchBrew, 'B' to pick up Telescope,  press Q to exit" ,fontArial19,MinuetoColor.BLUE);
 // Show the game window.
 window.setVisible(true);
 
@@ -64,6 +66,8 @@ window.clear();
 // Draw the background.
 window.draw(imageText2, 0, 0);
 window.draw(exitText, 0, 30);
+window.draw(imageText3, 0, 60);
+window.draw(imageText4, 0, 90);
 // Handle all the events in the event queue.
 while (eventQueue.hasNext()) {
 eventQueue.handle();
@@ -87,32 +91,76 @@ public void handleKeyPress(int value) {
 
 switch(value) {
 case MinuetoKeyboard.KEY_1:
-	Client.mainHero.pickupFarmer();
+	Client.getMainHero().pickupFarmer();
 	this.closing = true;
 	window.close();
 	break;
 
 case MinuetoKeyboard.KEY_2:
-	Client.mainHero.pickupGold();
+	Client.getMainHero().pickupGold();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_3:
-	Client.mainHero.replenishWP();
+	Client.getMainHero().replenishWP();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_4:
-Client.mainHero.RevealFogToken();
+	Client.getMainHero().RevealFogToken();
 this.closing = true;
 window.close();
 break;
 
+case MinuetoKeyboard.KEY_5:
+	Client.getMainHero().pickupBow();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_6:
+	Client.getMainHero().pickupWineskin();;
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_7:
+	Client.getMainHero().pickupFalcon();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_8:
+	Client.getMainHero().pickupHelm();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_9:
+	Client.getMainHero().pickupShield();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_A:
+	Client.getMainHero().pickupWitchBrew();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_B:
+	Client.getMainHero().pickupTelescope();
+this.closing = true;
+window.close();
+break;
+
+
 case  MinuetoKeyboard.KEY_Q:
 	this.closing = true;
 	window.close();
+	break;
 }
 
 }

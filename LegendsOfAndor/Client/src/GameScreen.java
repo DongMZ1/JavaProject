@@ -23,6 +23,7 @@ public class GameScreen implements Serializable{
 	public DwarfMine mine;
 	public Castle castle;
 	public Witch witch;
+	public ArrayList<Gold> golds;
     public Castle getCastle() {
     	return this.castle;
     }
@@ -32,7 +33,6 @@ public class GameScreen implements Serializable{
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
     public static GameScreen gameScreen;
-    public Time time;
 	public static GameScreen getInstance() throws IOException {
 		if(gameScreen == null)
 			gameScreen = new GameScreen();
@@ -44,7 +44,7 @@ public class GameScreen implements Serializable{
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
         tiles = Tile.getAll();
-        
+        golds = GoldInitializer.GoldIntializer();
         monsters = MonsterInitializer.initializeMonsters();
         wells = new ArrayList<>();
         wells.add(new Well(5));
@@ -59,7 +59,6 @@ public class GameScreen implements Serializable{
         //GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
         tm = new TurnManager(new ArrayList<>());
-        time = new Time();
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
@@ -127,7 +126,6 @@ public class GameScreen implements Serializable{
     		w.replenishWell();
     	}
     	tm.newDay();
-    	this.time.advance();
     	this.narrator.advance();
     }
 

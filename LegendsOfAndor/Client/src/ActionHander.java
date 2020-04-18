@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoEventQueue;
 import org.minueto.handlers.MinuetoKeyboard;
@@ -12,7 +14,7 @@ import org.minueto.window.MinuetoWindow;
 
 public class ActionHander implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
-MinuetoWindowHandler{
+MinuetoWindowHandler, Serializable{
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;
@@ -39,7 +41,7 @@ MinuetoWindowHandler{
 		
 		
 		
-			imageText = new MinuetoText("Press 1 to use Wineskin;" ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Press 1 to use Wineskin; Press 2 to use Telescope to reveal adjacent Fogtoken" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 
@@ -79,7 +81,12 @@ MinuetoWindowHandler{
 	public void handleKeyPress(int value) {
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
-			Client.mainHero.UseWineSkinForMove();
+			Client.getMainHero().UseWineSkinForMove();
+			this.closing = true;
+			window.close();
+			break;
+		case MinuetoKeyboard.KEY_2:
+			TelescopeForViewFogtokenHandler t1 = new TelescopeForViewFogtokenHandler();
 			this.closing = true;
 			window.close();
 			break;
@@ -163,5 +170,6 @@ MinuetoWindowHandler{
 	}
 
 }
+
 
 

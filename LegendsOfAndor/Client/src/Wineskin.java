@@ -6,9 +6,8 @@ public class Wineskin implements Item {
 
 	int tile;
 	
-	public Wineskin(int tile) throws MinuetoFileException {
+	public Wineskin(int tile){
 		this.tile = tile;
-		// TODO Auto-generated constructor stub
 	}
 	 public void setTile(int tile) {
 	        this.tile = tile;

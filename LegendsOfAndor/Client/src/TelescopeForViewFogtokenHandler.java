@@ -13,24 +13,23 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
-public class TradeWithMerChantHandler implements MinuetoKeyboardHandler,
+public class TelescopeForViewFogtokenHandler implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;
-
-   
+	final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
+    int tileToreveal;
   
-	public TradeWithMerChantHandler() {
+	public TelescopeForViewFogtokenHandler() {
 
-		
 		MinuetoFont fontArial19;				// Font used to draw on the screen.
-		MinuetoImage imageText = null, imageText1 = null, imageText2 = null, imageText3 = null, imageText4 = null, exitText;
+		MinuetoImage imageText = null, imageText1 = null, imageText2 = null, exitText;
 		
 		
 		// Create a 640 by 480 window
-		window = new MinuetoFrame(800, 800, true);
+		window = new MinuetoFrame(640, 480, true);
 		// Build the event queue.
 		eventQueue = new MinuetoEventQueue();
 		
@@ -42,11 +41,11 @@ MinuetoWindowHandler, Serializable{
 		
 		
 		
-			imageText = new MinuetoText("Press 1 to Trade two Gold for Strength point; Press 2 to Trade two Gold for A Bow;" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("Press 3 to Trade two Gold for Wineskin; Press 4 to Trade two Gold for Falcon;" ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("Press 5 to trade two Gold for Helm; Press 6 to trade two Gold for Shield;" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("Press 7 to trade (number of hero + 1) for Witchbrew at Witch;" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Press 8 to trade two Gold for Telescope;" ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Type adjancent tile + a space for review" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+
+
 		
 		
 		exitText = new MinuetoText("Press 'q' to quit." ,fontArial19,MinuetoColor.BLUE);
@@ -64,7 +63,6 @@ MinuetoWindowHandler, Serializable{
 			window.draw(imageText, 0, 0);
 			window.draw(imageText1, 0, 60);
 			window.draw(imageText2, 0, 120);
-			window.draw(imageText3, 0, 150);
 			window.draw(exitText, 0, 450);
 			
 			// Handle all the events in the event queue.
@@ -81,52 +79,7 @@ MinuetoWindowHandler, Serializable{
 
 	@Override
 	public void handleKeyPress(int value) {
-		switch(value) {
-		case MinuetoKeyboard.KEY_1:
-			Client.getMainHero().Buy2SPfor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_2:
-			Client.getMainHero().BuyBowFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_3:
-			Client.getMainHero().BuyWineskinFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_4:
-			Client.getMainHero().BuyFalconFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_5:
-			Client.getMainHero().BuyHelmFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_6:
-			Client.getMainHero().BuyShieldFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_7:
-			Client.getMainHero().BuyWitchBrewForGold();
-			this.closing = true;
-			window.close();
-			break;
-		case MinuetoKeyboard.KEY_8:
-			Client.getMainHero().BuyTelescopeFor2Gold();
-			this.closing = true;
-			window.close();
-			break;
-		case  MinuetoKeyboard.KEY_Q:
-			this.closing = true;
-			window.close();
-			break;
-		}
+		
 		
 	}
 
@@ -137,9 +90,19 @@ MinuetoWindowHandler, Serializable{
 	}
 
 	@Override
-	public void handleKeyType(char keyChar) {
+	public void handleKeyType(char c) {
 		// TODO Auto-generated method stub
-		
+		if( c == ' ') {
+			System.out.println(tileToreveal);
+			tileToreveal = 0;
+		}else {
+		for (int i = 0; i <10; i++) {
+			if (c == ASCIINUMBERS[i]) {
+				tileToreveal *= 10;
+				tileToreveal += i;
+			}
+		}
+		}
 	}
 	
 	/**
@@ -202,5 +165,3 @@ MinuetoWindowHandler, Serializable{
 	}
 
 }
-
-
