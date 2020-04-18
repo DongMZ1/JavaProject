@@ -4,6 +4,11 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.minueto.MinuetoEventQueue;
+import org.minueto.image.MinuetoFont;
+import org.minueto.image.MinuetoImage;
+import org.minueto.window.MinuetoWindow;
+
 public class DiceRoller implements Serializable {
 	
 	private int[] numbers;
@@ -13,6 +18,7 @@ public class DiceRoller implements Serializable {
 		this.numbers = new int[]{1,2,3,4,5,6};
 		random = new Random();
 	}
+
 	
 	//function for Mage to turn a roll to opposite value
 	public int getOppositeNumber(int rollValue) {
@@ -87,7 +93,7 @@ public class DiceRoller implements Serializable {
 		
 		else if(c instanceof Archer) {
 			//archerRoll() is incomplete: archer can only re-roll the die for a limited number of time (= number of dice he has)
-			diceRoll = archerRoll(((Archer) c).wp);
+			diceRoll = warriorRoll(((Archer) c).wp);
 		}
 		
 		else if(c instanceof Dwarf) {
