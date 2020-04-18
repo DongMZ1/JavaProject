@@ -81,6 +81,17 @@ public class DiceRoller implements Serializable {
 		return value;
 	}
 	
+	
+	public ArrayList<Integer> roll(int times){
+		
+		ArrayList<Integer> diceRoll = new ArrayList<Integer>();
+		for(int i = 0; i < times; i++) {
+			diceRoll.add(numbers[random.nextInt(6)]);
+		}
+		return diceRoll;
+		
+	}
+	
 	//roll a dice
 	public ArrayList<Integer> roll(Character c) {
 		//Hero needs to add his current strength points to his highest roll
@@ -93,7 +104,7 @@ public class DiceRoller implements Serializable {
 		
 		else if(c instanceof Archer) {
 			//archerRoll() is incomplete: archer can only re-roll the die for a limited number of time (= number of dice he has)
-			diceRoll = warriorRoll(((Archer) c).wp);
+			diceRoll = archerRoll(((Archer) c).wp);
 		}
 		
 		else if(c instanceof Dwarf) {
