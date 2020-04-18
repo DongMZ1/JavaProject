@@ -22,7 +22,7 @@ public class TileEntityDrawer {
 	private TileEntityDrawer() throws MinuetoFileException {
 		merchantImage = new MinuetoImageFile("images/Merchant.jpg").scale(0.5, 0.5);
 		gorImage = new MinuetoImageFile("images/Monsters/Gor.png").scale(0.4, 0.4);
-		skralImage = new MinuetoImageFile("images/Monsters/Skral.png");
+		skralImage = new MinuetoImageFile("images/Monsters/Skral.jpg");
 		fullWellImage = new MinuetoImageFile("images/Well.png").scale(0.5, 0.5);
 		emptyWellImage = new MinuetoImageFile("images/emptyWell.png").scale(0.5, 0.5);
 		mineImage = new MinuetoImageFile("images/DwarfMine.png");
@@ -30,7 +30,7 @@ public class TileEntityDrawer {
 		witchImage = new MinuetoImageFile("images/witch.jpg").scale(0.07, 0.07);
 		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
-		goldImage = new MinuetoImageFile("images/gold.png");
+		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.4,0.4);
 		wineskinImage = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
 		//TODO: Set proper Bow image
 		bowImage = new MinuetoImageFile("images/Bow.png");

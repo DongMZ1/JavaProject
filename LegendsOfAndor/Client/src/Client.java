@@ -53,15 +53,20 @@ public class Client {
             screen.render();
             inputHandler.handleQueue();
         }
-
     }
 
-	
+    public static Hero getMainHero() {
+        for(Hero hero : gameScreenDrawer.gameScreen.tm.heroes) {
+            if(hero.getClass().equals(mainHero.getClass()))
+                return hero;
+        }
+        throw new NullPointerException();
+    }
 }
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.84";
+    static String serverAddress = "127.0.1.1";
 
     static Socket socket;
     static ObjectInputStream in;
