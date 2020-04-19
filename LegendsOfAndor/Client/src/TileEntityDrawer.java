@@ -24,6 +24,7 @@ public class TileEntityDrawer {
     private MinuetoImage telescopeImage;
     private MinuetoImage princeThoraldImage;
     private MinuetoImage wardrakImage;
+    private MinuetoImage runestoneImage;
 	private static TileEntityDrawer tileEntityDrawer;
 
 	private TileEntityDrawer() throws MinuetoFileException {
@@ -48,6 +49,7 @@ public class TileEntityDrawer {
 		princeThoraldImage = new MinuetoImageFile("images/princeThorald.jpg").scale(0.3, 0.3);
 		wardrakImage = new MinuetoImageFile("images/wardrak.jpg").scale(0.3, 0.3);
 		telescopeImage = new MinuetoImageFile("images/telescope.jpg").scale(0.05, 0.05);
+		runestoneImage = new MinuetoImageFile("images/runeston.jpg").scale(0.2, 0.2);
 	}
 
 	public static TileEntityDrawer getInstance() throws MinuetoFileException {
@@ -93,6 +95,8 @@ public class TileEntityDrawer {
 			Client.screen.draw(telescopeImage, xCoord, yCoord);
 		else if(tileEntity instanceof Wardraks)
 			Client.screen.draw(wardrakImage, xCoord, yCoord);
+		else if(tileEntity instanceof RuneStone)
+			Client.screen.draw(runestoneImage, xCoord, yCoord);
 		else if(tileEntity instanceof Well) {
 			if (((Well) tileEntity).isEmpty())
 				Client.screen.draw(emptyWellImage, xCoord, yCoord);
