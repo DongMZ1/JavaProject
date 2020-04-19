@@ -94,6 +94,12 @@ MinuetoWindowHandler, Serializable{
 		// TODO Auto-generated method stub
 		if( c == ' ') {
 			System.out.println(tileToreveal);
+			int[] adjacentTile = Tile.get(Client.getMainHero().tile).getAdjacentTiles();
+			for(int i = 0; i < adjacentTile.length; i++) {
+				if(adjacentTile[i] == tileToreveal) {
+					Client.getMainHero().FilpFogTokenForPreviewOnly(tileToreveal);
+				}
+			}
 			tileToreveal = 0;
 		}else {
 		for (int i = 0; i <10; i++) {
@@ -102,6 +108,10 @@ MinuetoWindowHandler, Serializable{
 				tileToreveal += i;
 			}
 		}
+		}
+		if( c == 'q') {
+			this.closing = true;
+			window.close();
 		}
 	}
 	

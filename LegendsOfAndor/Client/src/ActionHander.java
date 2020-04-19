@@ -86,7 +86,16 @@ MinuetoWindowHandler, Serializable{
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_2:
+			// if u have telescope, then u can use it to reveal adjacent fogtoken
+			if(Client.getMainHero().getTelescope() > 0) {
+				for(Item item: Client.getMainHero().items) {
+					if(item instanceof Telescope) {
+						Client.getMainHero().items.remove(item);
+						break;
+					}
+				}
 			TelescopeForViewFogtokenHandler t1 = new TelescopeForViewFogtokenHandler();
+			}
 			this.closing = true;
 			window.close();
 			break;
