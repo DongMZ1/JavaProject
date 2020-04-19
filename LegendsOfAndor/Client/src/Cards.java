@@ -37,27 +37,58 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   	switch(cardNB) {
 	   	case 1:
 		   	@SuppressWarnings("unused") Cards card1 = new Cards(1);
+		   	for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h instanceof Archer) {
+		   			h.wp = h.wp +3;
+		   		}
+		   		if(h instanceof Dwarf) {
+		   			h.wp = h.wp +3;
+		   		}
+		   	}
 		   break;
 	   case 2:
 		   @SuppressWarnings("unused") Cards card2 = new Cards(2);
+		   GameScreen.gameScreen.tiles.get(60).addTileEntity(new Wineskin(60));
+		   GameScreen.gameScreen.tiles.get(60).addTileEntity(new Wineskin(60));
 		   break;
 	   case 3:
 		   @SuppressWarnings("unused") Cards card3 = new Cards(3);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile < 10) {
+                  h.wp = h.wp+2;
+		   	}
+			}
 		   break;
 	   case 4:
 		   @SuppressWarnings("unused") Cards card4 = new Cards(4);
+		   for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile != 0 || h.tile != 71 || h.tile != 72) {
+                 h.wp = h.wp - 2;
+		   	}
+		   }
 		   break;
 	   case 5:
 		   @SuppressWarnings("unused") Cards card5 = new Cards(5);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile < 21) {
+                 h.wp = h.wp-2;
+		   	}
+			}
 		   break;
 	   case 6: 
 		   @SuppressWarnings("unused") Cards card6 = new Cards(6);
+		   for(TileEntity t: GameScreen.gameScreen.tiles.get(60).tileEntities) {
+			   if(t instanceof Well) {
+				   GameScreen.gameScreen.tiles.get(60).tileEntities.remove(t);
+			   }
+		   }
 	   case 7: 
 		   @SuppressWarnings("unused") Cards card7 = new Cards(7);
-	   case 8: 
-		   @SuppressWarnings("unused") Cards card8 = new Cards(8);
-	   case 9: 
-		   @SuppressWarnings("unused") Cards card9 = new Cards(9);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile <= 70 || h.tile >= 37) {
+                  h.wp = h.wp-3;
+		   	}
+			}
 	   }
 	   Client.gameStatus.EventCardIndex++;
    }
@@ -161,21 +192,22 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		fontArial19 = new MinuetoFont("Arial",19,false, false);
 		
 		{
+
 		if(CardNumber == 1) {
 			eventcardindexText = new MinuetoText("Event Card 1:" ,fontArial19,MinuetoColor.BLUE);
-		imageText = new MinuetoText("One of the heros immediately loses 1 strength point, you can decide as a group which" ,fontArial19,MinuetoColor.BLUE);
-		imageText1 = new MinuetoText("hero that will be. If no hero has more than 1 strength point, nothing will happen!" ,fontArial19,MinuetoColor.BLUE);
-		imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		}
+			imageText = new MinuetoText("The wizard and the archer each immediately get 3 willpower!" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			}
 		if(CardNumber == 2) {
 			eventcardindexText = new MinuetoText("Event Card 2:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("The wizard and the arther each immediately get 3 willpower!" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Place a wineskin on the tavern space(60). A hero who enter space 60 can" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("collect the wineskin and place it on the small storage space on his board." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -185,17 +217,6 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			}
 		if(CardNumber == 3) {
 			eventcardindexText = new MinuetoText("Event Card 3:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Place a wineskin on the tavern space(72). A hero who enter space 32 can" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("collect the wineskin and place it on the small storage space on his board." ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 4) {
-			eventcardindexText = new MinuetoText("Event Card 4:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each Hero who is on a space with a number between 0 and 9" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("will now get 2 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -205,8 +226,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 5) {
-			eventcardindexText = new MinuetoText("Event Card 5:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 4) {
+			eventcardindexText = new MinuetoText("Event Card 4:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Any hero who is not in the mine(space 71), in the tavern(space 72), or in  " ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("the castle(space 0) loses 2 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -217,8 +238,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 6) {
-			eventcardindexText = new MinuetoText("Event Card 6:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 5) {
+			eventcardindexText = new MinuetoText("Event Card 5:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each hero standing on a space with number between 0 and 20 now loses 3 willpower" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("points" ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -228,8 +249,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 7) {
-			eventcardindexText = new MinuetoText("Event Card 7:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 6) {
+			eventcardindexText = new MinuetoText("Event Card 6:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("The well token on space 45 is removed from the game!" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("But a token is only triggered when a hero ends his move on that space." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -238,20 +259,9 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 8) {
-			eventcardindexText = new MinuetoText("Event Card 8:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Each hero who is standing on a space boardering the river gets a wineskin." ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("2 gold." ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 9) {
-			eventcardindexText = new MinuetoText("Event Card 9:" ,fontArial19,MinuetoColor.BLUE);
+			}	
+		if(CardNumber == 7) {
+			eventcardindexText = new MinuetoText("Event Card 7:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each hero standing on a space with a number between 37 and 70 now loses" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("3 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
