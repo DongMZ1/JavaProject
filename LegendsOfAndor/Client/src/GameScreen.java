@@ -39,6 +39,7 @@ public class GameScreen implements Serializable{
 			gameScreen = new GameScreen();
 		return gameScreen;
 	}
+	public PrinceThorald princeThorald;
 
     private GameScreen() throws IOException {
         

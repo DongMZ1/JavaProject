@@ -12,6 +12,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9};
 	final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
+	private int PrinceCost = 0;
 
 	private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
 	private MinuetoImageFile timeImage = new MinuetoImageFile("images/tokenWP.png");
@@ -125,6 +126,27 @@ public class GameScreenDrawer implements Inputtable{
 		else if(c == 'm') {
 			playerBoard.update(Client.getMainHero());
 			playerBoard.toggleFlag();
+		}
+		else if(c == 'g') {
+			//move 4 tile will cost one time
+			if(this.PrinceCost == 4) {
+				Client.mainHero.time.advance();
+				this.PrinceCost = 0;
+			}
+			if(gameScreen.gameStatus.ui == UIStatus.MovePrince && Client.getMainHero().canMakeMove() && this.gameScreen.hasPrince) {
+				//when starting move prince, it cost 1 time;
+				int[] adjacentTile = Tile.get(GameScreen.gameScreen.princeThorald.tile).getAdjacentTiles();
+				for(int i = 0; i < adjacentTile.length; i++) {
+					if(adjacentTile[i] == toMove) {
+						Tile.get(GameScreen.gameScreen.princeThorald.tile).removeTileEntity(GameScreen.gameScreen.princeThorald);
+						Tile.get(toMove).addTileEntity(GameScreen.gameScreen.princeThorald);
+						GameScreen.gameScreen.princeThorald.tile = toMove;
+						this.PrinceCost ++;
+						InputThread.updateVariable();
+					}
+				}
+			}
+			toMove = 0;
 		}
 		else if (c == ' ') {
 			System.out.println(toMove);

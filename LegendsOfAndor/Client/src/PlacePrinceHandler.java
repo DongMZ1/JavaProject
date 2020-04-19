@@ -94,8 +94,10 @@ MinuetoWindowHandler, Serializable{
 		// TODO Auto-generated method stub
 		if( c == ' ') {
 			 if(princelocation >= 24 && princelocation <= 72) {
-				 GameScreen.gameScreen.tiles.get(princelocation).addTileEntity(new PrinceThorald(princelocation));
+				 GameScreen.gameScreen.princeThorald = new PrinceThorald(princelocation);
+				 GameScreen.gameScreen.tiles.get(princelocation).addTileEntity(GameScreen.gameScreen.princeThorald);
 				 GameScreen.gameScreen.hasPrince = true;
+				 InputThread.updateVariable();
 				 this.closing = true;
 				 window.close(); 
 			 }
