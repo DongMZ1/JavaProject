@@ -49,7 +49,7 @@ public class TileEntityDrawer {
 		princeThoraldImage = new MinuetoImageFile("images/princeThorald.jpg").scale(0.3, 0.3);
 		wardrakImage = new MinuetoImageFile("images/wardrak.jpg").scale(0.3, 0.3);
 		telescopeImage = new MinuetoImageFile("images/telescope.jpg").scale(0.05, 0.05);
-		runestoneImage = new MinuetoImageFile("images/runeston.jpg").scale(0.2, 0.2);
+		runestoneImage = new MinuetoImageFile("images/runestone.jpg").scale(0.2, 0.2);
 	}
 
 	public static TileEntityDrawer getInstance() throws MinuetoFileException {
