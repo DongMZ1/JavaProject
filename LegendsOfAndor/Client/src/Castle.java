@@ -12,7 +12,7 @@ public class Castle implements Serializable{
 	
 	public void damage(Monster m) {
     	//TODO: Should decrease shield count of castle
-		if ((m instanceof Monster) {
+		if (m instanceof Monster) {
 			//UPDATE
 			System.out.println("Damaged castle by Gor");
 			health--;
