@@ -46,7 +46,7 @@ MinuetoWindowHandler, Serializable{
 			imageText1 = new MinuetoText("Press 3 to Trade two Gold for Wineskin; Press 4 to Trade two Gold for Falcon;" ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("Press 5 to trade two Gold for Helm; Press 6 to trade two Gold for Shield;" ,fontArial19,MinuetoColor.BLUE);
 			imageText3 = new MinuetoText("Press 7 to trade (number of hero + 1) for Witchbrew at Witch;" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Press 8 to trade two Gold for Telescope;" ,fontArial19,MinuetoColor.BLUE);
+			imageText4 = new MinuetoText("Press 8 to trade two Gold for Telescope;" ,fontArial19,MinuetoColor.BLUE);
 		
 		
 		exitText = new MinuetoText("Press 'q' to quit." ,fontArial19,MinuetoColor.BLUE);
@@ -64,7 +64,8 @@ MinuetoWindowHandler, Serializable{
 			window.draw(imageText, 0, 0);
 			window.draw(imageText1, 0, 60);
 			window.draw(imageText2, 0, 120);
-			window.draw(imageText3, 0, 150);
+			window.draw(imageText3, 0, 180);
+			window.draw(imageText4, 0, 210);
 			window.draw(exitText, 0, 450);
 			
 			// Handle all the events in the event queue.
