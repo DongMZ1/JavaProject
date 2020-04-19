@@ -153,6 +153,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
 			   }
 		   Cards C2 = new Cards(308);
+		   PlacePrinceHandler p1 = new PlacePrinceHandler();
 		   break;
 	   case 3: 
 		   Cards G = new Cards(309);
