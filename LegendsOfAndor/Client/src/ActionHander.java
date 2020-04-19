@@ -29,7 +29,7 @@ MinuetoWindowHandler, Serializable{
 		
 		
 		// Create a 640 by 480 window
-		window = new MinuetoFrame(640, 480, true);
+		window = new MinuetoFrame(640, 800, true);
 		// Build the event queue.
 		eventQueue = new MinuetoEventQueue();
 		
