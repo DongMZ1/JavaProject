@@ -32,6 +32,7 @@ public class GameScreen implements Serializable{
     public GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
+    public boolean hasPrince = false;
     public static GameScreen gameScreen;
 	public static GameScreen getInstance() throws IOException {
 		if(gameScreen == null)
