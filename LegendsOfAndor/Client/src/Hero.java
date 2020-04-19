@@ -112,7 +112,7 @@ public class Hero implements Character, Serializable {
 	
 	public void BuyWineskinFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getWineskin() <2) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -139,6 +139,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(WineskinCount < 2) {
 			this.items.add(new Wineskin(this.tile));
+			WineskinCount++;
 		}
 		if(WineskinCount < 2) {
 			this.items.add(new Wineskin(this.tile));
@@ -190,7 +191,7 @@ public class Hero implements Character, Serializable {
 ////////////Bow///////////////////////////////////////////////////////////////////
 	public void BuyBowFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() &&this.getBow()<2 ) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -217,6 +218,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(BowCount < 2) {
 			this.items.add(new Bow(this.tile));
+			BowCount++;
 		}
 		if(BowCount < 2) {
 			this.items.add(new Bow(this.tile));
@@ -261,7 +263,7 @@ public class Hero implements Character, Serializable {
 	//Falcon//////////////////////////////////////////////////////////////////////////////
 	public void BuyFalconFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getFalcon() < 2) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -288,6 +290,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(falconCount < 2) {
 			this.items.add(new Falcon(this.tile));
+			falconCount++;
 		}
 		if(falconCount < 2) {
 			this.items.add(new Falcon(this.tile));
@@ -331,7 +334,7 @@ public class Hero implements Character, Serializable {
 	//Helm///////////////////////////////////////////////////////////////////////////////////
 	public void BuyHelmFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getHelm() <2) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -358,6 +361,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(HelmCount < 2) {
 			this.items.add(new Helm(this.tile));
+			HelmCount++;
 		}
 		if(HelmCount < 2) {
 			this.items.add(new Helm(this.tile));
@@ -398,7 +402,7 @@ public class Hero implements Character, Serializable {
 	//Shield/////////////////////////////////////////////////////////////////////////////
 	public void BuyShieldFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getShield() < 2) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -425,6 +429,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(ShieldCount < 2) {
 			this.items.add(new Shield(this.tile));
+			ShieldCount++;
 		}
 		if(ShieldCount < 2) {
 			this.items.add(new Shield(this.tile));
@@ -464,7 +469,7 @@ public class Hero implements Character, Serializable {
 	//Telescope//////////////////////////////////////////////////////////////////////////
 	public void BuyTelescopeFor2Gold(){
 		//if have money/merchant
-		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getTelescope() < 2) { 
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -491,6 +496,7 @@ public class Hero implements Character, Serializable {
 		}
 		if(TelescopeCount < 2) {
 			this.items.add(new Telescope(this.tile));
+			TelescopeCount++;
 		}
 		if(TelescopeCount < 2) {
 			this.items.add(new Telescope(this.tile));
@@ -535,7 +541,7 @@ public class Hero implements Character, Serializable {
 	
 	public void BuyWitchBrewForGold(){
 		//if have money/witch
-		if(this.getGoldNm() >= (GameScreen.gameScreen.tm.getSize()+1) && this.hasWitch()) { 
+		if(this.getGoldNm() >= (GameScreen.gameScreen.tm.getSize()+1) && this.hasWitch() && this.getWitchBrew() < 2) { 
 			//remove gold first
 			for(int i = 0; i < (GameScreen.gameScreen.tm.getSize()+1); i++ ) {
 			int count = 0;
@@ -549,12 +555,13 @@ public class Hero implements Character, Serializable {
 		//add wine skin
 		int WitchbrewCount = 0;
 		for(Item i: items) {
-			if(i instanceof Shield) {
+			if(i instanceof WitchBrew) {
 				WitchbrewCount ++;
 			}
 		}
 		if(WitchbrewCount < 2) {
 			this.items.add(new WitchBrew(this.tile));
+			WitchbrewCount++;
 		}
 		if(WitchbrewCount < 2) {
 			this.items.add(new WitchBrew(this.tile));
