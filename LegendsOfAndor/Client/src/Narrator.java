@@ -13,8 +13,8 @@ public class Narrator implements Serializable{
 	
 	public Narrator() {
 		x = 12600;
-		y = 8200;
-		narrartorTrack = 1;
+		y = 8820;
+		narrartorTrack = 0;
 	}
 	
 
@@ -25,6 +25,10 @@ public class Narrator implements Serializable{
           narrartorTrack ++;
 		}
 		
+		if(narrartorTrack == 1) {
+			Cards.DrawLegend2Card(1);
+			GameStatus.gameStatus.legend2CardIndex = 1;
+		}
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
@@ -47,7 +51,7 @@ public class Narrator implements Serializable{
 	public void reset() {
 		narrartorTrack = 1;
 		x = 12600;
-		y = 8200;
+		y = 8820;
 	}
 	
 }

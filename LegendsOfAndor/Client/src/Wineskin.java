@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 import org.minueto.MinuetoFileException;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
-public class Wineskin implements Item {
+public class Wineskin implements Item , Serializable{
 
 	int tile;
 	
