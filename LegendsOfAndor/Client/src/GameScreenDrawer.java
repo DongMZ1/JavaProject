@@ -158,12 +158,14 @@ public class GameScreenDrawer implements Inputtable{
 							Client.getMainHero().time.advance();
 							gameScreen.gameStatus.ui = UIStatus.MOVING;
 							gameUi.moveButton.setLabel("End Move");
+							InputThread.updateVariable();
 						}
 					}
 					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
 							moveHero(Client.getMainHero().getTile(),toMove);
 							Client.getMainHero().time.advance();
+							InputThread.updateVariable();
 						}
 					}
 				}

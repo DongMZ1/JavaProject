@@ -82,6 +82,7 @@ MinuetoWindowHandler, Serializable{
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
 			Client.mainHero.UseWineSkinForMove();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;

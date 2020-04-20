@@ -85,41 +85,49 @@ MinuetoWindowHandler, Serializable{
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
 			Client.getMainHero().Buy2SPfor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_2:
 			Client.getMainHero().BuyBowFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_3:
 			Client.getMainHero().BuyWineskinFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_4:
 			Client.getMainHero().BuyFalconFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_5:
 			Client.getMainHero().BuyHelmFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_6:
 			Client.getMainHero().BuyShieldFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_7:
 			Client.getMainHero().BuyWitchBrewForGold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
 		case MinuetoKeyboard.KEY_8:
 			Client.getMainHero().BuyTelescopeFor2Gold();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;

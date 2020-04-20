@@ -92,66 +92,77 @@ public void handleKeyPress(int value) {
 switch(value) {
 case MinuetoKeyboard.KEY_1:
 	Client.getMainHero().pickupFarmer();
+	InputThread.updateVariable();
 	this.closing = true;
 	window.close();
 	break;
 
 case MinuetoKeyboard.KEY_2:
 	Client.getMainHero().pickupGold();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_3:
 	Client.getMainHero().replenishWP();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_4:
 	Client.getMainHero().RevealFogToken();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_5:
 	Client.getMainHero().pickupBow();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_6:
-	Client.getMainHero().pickupWineskin();;
+	Client.getMainHero().pickupWineskin();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_7:
 	Client.getMainHero().pickupFalcon();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_8:
 	Client.getMainHero().pickupHelm();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_9:
 	Client.getMainHero().pickupShield();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_A:
 	Client.getMainHero().pickupWitchBrew();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_B:
 	Client.getMainHero().pickupTelescope();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;

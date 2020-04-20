@@ -92,54 +92,63 @@ public void handleKeyPress(int value) {
 switch(value) {
 case MinuetoKeyboard.KEY_F:
 Client.getMainHero().dropFarmer();
+InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_G:
 	Client.getMainHero().dropGold();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_1:
-	Client.getMainHero().dropBow();;
+	Client.getMainHero().dropBow();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_2:
 	Client.getMainHero().dropWineskin();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_3:
 	Client.getMainHero().dropFalcon();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_4:
 	Client.getMainHero().dropHelm();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_5:
 	Client.getMainHero().dropShield();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_6:
 	Client.getMainHero().dropWitchBrew();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_7:
 	Client.getMainHero().dropTelescope();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;

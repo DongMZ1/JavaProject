@@ -82,6 +82,7 @@ MinuetoWindowHandler, Serializable{
 		switch(value) {
 		case MinuetoKeyboard.KEY_1:
 			Client.getMainHero().UseWineSkinForMove();
+			InputThread.updateVariable();
 			this.closing = true;
 			window.close();
 			break;
@@ -91,6 +92,7 @@ MinuetoWindowHandler, Serializable{
 				for(Item item: Client.getMainHero().items) {
 					if(item instanceof Telescope) {
 						Client.getMainHero().items.remove(item);
+						InputThread.updateVariable();
 						break;
 					}
 				}
