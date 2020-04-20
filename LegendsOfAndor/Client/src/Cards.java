@@ -91,6 +91,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			}
 	   }
 	   Client.gameStatus.EventCardIndex++;
+	   InputThread.updateVariable();
    }
    
    
@@ -134,14 +135,72 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
    
 
    
-   public static void DrawLegend2Card(int legend2cardindex) {
+   public static void DrawLegend2Card(int legend2cardindex) throws IOException {
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
+			   
+			  Gor gor1 = new Gor(8);
+			   GameScreen.gameScreen.tiles.get(8).addTileEntity(gor1);
+			   GameScreen.gameScreen.monsters.add(gor1);
+			   
+			   Gor gor2 = new Gor(20);
+			   GameScreen.gameScreen.tiles.get(20).addTileEntity(gor2);
+			   GameScreen.gameScreen.monsters.add(gor2);
+			   
+			   Gor gor3 = new Gor(21);
+			   GameScreen.gameScreen.tiles.get(21).addTileEntity(gor3);
+			   GameScreen.gameScreen.monsters.add(gor3);
+			   
+			   Gor gor4 = new Gor(26);
+			   GameScreen.gameScreen.tiles.get(26).addTileEntity(gor4);
+			   GameScreen.gameScreen.monsters.add(gor4);
+			   
+			   Gor gor5 = new Gor(48);
+			   GameScreen.gameScreen.tiles.get(48).addTileEntity(gor5);
+			   GameScreen.gameScreen.monsters.add(gor5);
+			   
+			   Skral s1 = new Skral(19);
+			   GameScreen.gameScreen.tiles.get(19).addTileEntity(s1);
+			   GameScreen.gameScreen.monsters.add(s1);
+			   
+			   Farmer f1 = new Farmer(24);
+			   GameScreen.gameScreen.tiles.get(24).addTileEntity(f1);
+			   
+			   Farmer f2 = new Farmer(36);
+			   GameScreen.gameScreen.tiles.get(36).addTileEntity(f2);
+
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
+				 
+				  Gor gor1 = new Gor(8);
+				   GameScreen.gameScreen.tiles.get(8).addTileEntity(gor1);
+				   GameScreen.gameScreen.monsters.add(gor1);
+				   
+				   Gor gor2 = new Gor(20);
+				   GameScreen.gameScreen.tiles.get(20).addTileEntity(gor2);
+				   GameScreen.gameScreen.monsters.add(gor2);
+				   
+				   Gor gor3 = new Gor(21);
+				   GameScreen.gameScreen.tiles.get(21).addTileEntity(gor3);
+				   GameScreen.gameScreen.monsters.add(gor3);
+				   
+				   Gor gor4 = new Gor(26);
+				   GameScreen.gameScreen.tiles.get(26).addTileEntity(gor4);
+				   GameScreen.gameScreen.monsters.add(gor4);
+				   
+				   Gor gor5 = new Gor(48);
+				   GameScreen.gameScreen.tiles.get(48).addTileEntity(gor5);
+				   GameScreen.gameScreen.monsters.add(gor5);
+				   
+				   Skral s1 = new Skral(19);
+				   GameScreen.gameScreen.tiles.get(19).addTileEntity(s1);
+				   GameScreen.gameScreen.monsters.add(s1);
+				   
+				   Farmer f1 = new Farmer(24);
+				   GameScreen.gameScreen.tiles.get(24).addTileEntity(f1);
 			   }
 		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);

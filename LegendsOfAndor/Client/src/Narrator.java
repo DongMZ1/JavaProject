@@ -19,7 +19,7 @@ public class Narrator implements Serializable{
 	
 
 	
-	public void advance() {
+	public void advance() throws IOException {
 		if(y > 600) {
           y = y -620;
           narrartorTrack ++;

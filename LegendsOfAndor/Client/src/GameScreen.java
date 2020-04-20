@@ -96,7 +96,7 @@ public class GameScreen implements Serializable{
 		tileEntity.setTile(destination);
 	}
 
-    public void newDay() {
+    public void newDay() throws IOException {
     	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
     	ArrayList<Integer> occupiedSpaces = new ArrayList<>();
     	
