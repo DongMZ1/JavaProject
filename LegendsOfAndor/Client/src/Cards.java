@@ -203,6 +203,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 				   GameScreen.gameScreen.tiles.get(24).addTileEntity(f1);
 			   }
 		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
+		   
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
 		   break;
 	   case 2:
@@ -229,6 +230,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   }
 		   break;
 	   }
+	   InputThread.updateVariable();
    }
    
    

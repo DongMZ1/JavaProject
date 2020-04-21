@@ -599,6 +599,17 @@ public class Hero implements Character, Serializable {
 		}
 	}	
 	
+	//MedicalHerb////////////////////////////////////////////////
+	public int getMedicalHerb() {
+		int MedicalCount = 0;
+		for(Item i: items) {
+			if(i instanceof MedicalHerb) {
+				MedicalCount ++;
+			}
+		}
+		return MedicalCount;
+	}
+	
 	//Well///////////////////////////////////////////////////////////////////////////////
 
 	public void replenishWP() {

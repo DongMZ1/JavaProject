@@ -24,6 +24,12 @@ public class Narrator implements Serializable{
           y = y -620;
           narrartorTrack ++;
 		}
+		//set rune stone cards for draw
+		if(narrartorTrack == GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard) {
+			Cards.DrawLegend2Card(100);
+			GameStatus.gameStatus.legend2CardIndex = GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard;
+			
+		}
 		
 		if(narrartorTrack == 1) {
 			Cards.DrawLegend2Card(1);
@@ -44,7 +50,7 @@ public class Narrator implements Serializable{
 			Cards.DrawLegend2Card(4);
 			GameStatus.gameStatus.legend2CardIndex = 4;
 		}
-		
+		InputThread.updateVariable();
 	}	
 
 	

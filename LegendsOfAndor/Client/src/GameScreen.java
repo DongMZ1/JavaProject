@@ -101,6 +101,26 @@ public class GameScreen implements Serializable{
     	ArrayList<Integer> occupiedSpaces = new ArrayList<>();
     	
     	for (Monster monster : monsters) {
+    		
+    		if(monster instanceof Wardraks) {
+    			for(int i = 0; i <2; i++) {
+    				Integer mTile = monster.advance();
+    	    		//If at castle then toRemove
+    	    		if(mTile == 0) {
+    	    			tiles.get(monster.tile).removeTileEntity(monster);
+    	    			toRemove.add(monster);
+    	    		}
+    	    		//If space is occupied, skip over it and add new space to occupied space
+    	    		else if (occupiedSpaces.contains(mTile)) {
+    	    			occupiedSpaces.add(monster.advance());
+    	    		}
+    	    		//Else was just a normal move. Save tile that ended on
+    	    		else {
+    	    			occupiedSpaces.add(mTile);
+    	    		}
+    				
+    			}
+    		}else {
     		Integer mTile = monster.advance();
     		//If at castle then toRemove
     		if(mTile == 0) {
@@ -114,6 +134,7 @@ public class GameScreen implements Serializable{
     		//Else was just a normal move. Save tile that ended on
     		else {
     			occupiedSpaces.add(mTile);
+    		}
     		}
     	}
     	//These are monsters that reached castle
