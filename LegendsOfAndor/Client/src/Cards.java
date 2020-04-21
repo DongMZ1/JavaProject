@@ -219,9 +219,24 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   break;
 	   case 2:
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
-			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
+			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);   
+			   DiceRoller dr1 = new DiceRoller();
+			   ArrayList<Integer> list1 = dr1.roll(1);
+			   DiceHandler dd1 = new DiceHandler(list1);
+			   dd1.start();
+			   SkralTower st = new SkralTower((list1.get(0)+50));
+			   GameScreen.gameScreen.tiles.get((list1.get(0)+50)).addTileEntity(st);
+			   st.sp = 2*GameScreen.gameScreen.tm.heroes.size() - 10;
+			   
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
+				  DiceRoller dr1 = new DiceRoller();
+				   ArrayList<Integer> list1 = dr1.roll(1);
+				   DiceHandler dd1 = new DiceHandler(list1);
+				   dd1.start();
+				   SkralTower st = new SkralTower((list1.get(0)+50));
+				   GameScreen.gameScreen.tiles.get((list1.get(0)+50)).addTileEntity(st);
+				   st.sp = 2*GameScreen.gameScreen.tm.heroes.size();
 			   }
 		   Cards C2 = new Cards(308);
 		   PlacePrinceHandler p1 = new PlacePrinceHandler();
