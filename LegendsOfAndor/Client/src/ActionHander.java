@@ -101,6 +101,18 @@ MinuetoWindowHandler, Serializable{
 			this.closing = true;
 			window.close();
 			break;
+		//case MinuetoKeyboard.KEY_3:
+		//	Client.getMainHero().UseMedicalHerbForMove();
+		//	InputThread.updateVariable();
+		//	this.closing = true;
+		//	window.close();
+	//		break;
+	//	case MinuetoKeyboard.KEY_4:
+	//		Client.getMainHero().UseMedicalHerbForWP();
+	//		InputThread.updateVariable();
+	//		this.closing = true;
+	//		window.close();
+	//		break;
 		case  MinuetoKeyboard.KEY_Q:
 			this.closing = true;
 			window.close();

@@ -155,7 +155,7 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == ' ') {
 			System.out.println(toMove);
-			if (Client.getMainHero().time.getTime() < 7 || Client.getMainHero().time.getTime() < 10){
+			if (Client.getMainHero().canMakeMove()){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {

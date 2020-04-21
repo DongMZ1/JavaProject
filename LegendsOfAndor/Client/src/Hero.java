@@ -14,6 +14,7 @@ public class Hero implements Character, Serializable {
 	Farmer farmer = null;
 	boolean hasfarmer = false;
 	boolean hasGold = false;
+	boolean hasBlackDice = false;
     boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
     //set it true before move, so that timer will not increase if this attribute is true
     //get a final list of items
@@ -600,6 +601,8 @@ public class Hero implements Character, Serializable {
 	}	
 	
 	//MedicalHerb////////////////////////////////////////////////
+	
+	
 	public int getMedicalHerb() {
 		int MedicalCount = 0;
 		for(Item i: items) {
@@ -609,6 +612,65 @@ public class Hero implements Character, Serializable {
 		}
 		return MedicalCount;
 	}
+	
+	public void pickupMedicalHerb() {
+		boolean hasGor = false;
+		for(TileEntity t :GameScreen.gameScreen.tiles.get(this.tile).tileEntities) {
+			if(t instanceof Gor) {
+				hasGor = true;
+			}
+		}
+		if(!hasGor) {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof MedicalHerb) {
+				this.items.add((MedicalHerb)t);
+				Tile.get(tile).removeTileEntity(t);
+				break;
+			}
+		}
+		}
+	}	
+	
+	public void dropMedicalHerb() {
+		if(this.tile == 0) {
+			for (Item t: this.items) {
+				if(t instanceof MedicalHerb) {
+					this.items.remove(t);
+					break;
+				}
+			}
+		}
+		else {
+		
+		for (Item t: this.items) {
+			if(t instanceof MedicalHerb) {
+				this.items.remove(t);
+				Tile.get(tile).addTileEntity(t);
+				break;
+			}
+		}
+	}
+	}
+	
+	public void UseMedicalHerbForMove() {
+		for(Item i: items) {
+			if(i instanceof MedicalHerb) {
+				this.items.remove(i);
+				this.time.time --;
+				this.time.x = this.time.x - 550;
+			}
+		}
+	}
+	
+	public void UseMedicalHerbForWP() {
+		for(Item i: items) {
+			if(i instanceof MedicalHerb) {
+				this.items.remove(i);
+				this.wp++;
+			}
+		}
+	}
+	   	
 	
 	//Well///////////////////////////////////////////////////////////////////////////////
 
@@ -826,12 +888,49 @@ public class Hero implements Character, Serializable {
 						this.items.add(new WitchBrew(this.tile));
 					}
 					
+					DiceRoller dr = new DiceRoller();
+					ArrayList<Integer> list = dr.roll(1);
+					DiceHandler dd = new DiceHandler(list);
+					dd.start();
+					if(list.get(0) == 1 || list.get(0) == 2) {
+						MedicalHerb m1 = new MedicalHerb(37);
+						GameScreen.gameScreen.tiles.get(37).addTileEntity(m1);
+						try {
+							GameScreen.gameScreen.tiles.get(37).addTileEntity(new Gor(37));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					if(list.get(0) == 3 || list.get(0) == 4) {
+						MedicalHerb m1 = new MedicalHerb(67);
+						GameScreen.gameScreen.tiles.get(67).addTileEntity(m1);
+						try {
+							GameScreen.gameScreen.tiles.get(67).addTileEntity(new Gor(67));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					if(list.get(0) == 5 || list.get(0) == 6) {
+						MedicalHerb m1 = new MedicalHerb(61);
+						GameScreen.gameScreen.tiles.get(61).addTileEntity(m1);
+						try {
+							GameScreen.gameScreen.tiles.get(61).addTileEntity(new Gor(61));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
 				}
 				 
 					Tile.get(tile).getTileEntities().remove(f);
 					break;
 			}
 		}
+    	InputThread.updateVariable();
     }
 
 	

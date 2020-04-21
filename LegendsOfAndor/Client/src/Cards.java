@@ -205,6 +205,17 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
 		   
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
+		   DiceRoller dr = new DiceRoller();
+		   ArrayList<Integer> list = dr.roll(1);
+		   DiceHandler dd = new DiceHandler(list);
+		   dd.start();
+		   if(list.get(0) == 1) { GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 2;}
+		   else if(list.get(0) == 2){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 4;}
+		   else if(list.get(0) == 3){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 5;}
+		   else if(list.get(0) == 4){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 5){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 6){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 8;}
+		   // WE also need COOB decision to distribute 5gold 2wp
 		   break;
 	   case 2:
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
@@ -420,7 +431,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText = new MinuetoText("Bow Number:  " + Client.getMainHero().getBow() + "  Falcon:  " + Client.getMainHero().getFalcon() ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("Helm:   " + Client.getMainHero().getHelm() + "   Shield:   " + Client.getMainHero().getShield() ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("WitchBrew:    " + Client.getMainHero().getWitchBrew() + "Telescope: " + Client.getMainHero().getTelescope()  ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("MedicalHerb:   " + Client.getMainHero().getMedicalHerb() ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
