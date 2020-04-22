@@ -258,6 +258,18 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   break;
 	   case 3: 
 		   Cards G = new Cards(309);
+		   //remove prince
+		   GameScreen.gameScreen.tiles.get(GameScreen.gameScreen.princeThorald.tile).removeTileEntity(GameScreen.gameScreen.princeThorald);
+		   GameScreen.gameScreen.hasPrince = false;
+		   //add wardrak
+		   Wardraks w1 = new Wardraks(26);
+		   Wardraks w2 = new Wardraks(27);
+		   
+		   GameScreen.gameScreen.tiles.get(26).addTileEntity(w1);
+		   GameScreen.gameScreen.tiles.get(27).addTileEntity(w2);
+		   
+		   GameScreen.gameScreen.monsters.add(w1);
+		   GameScreen.gameScreen.monsters.add(w2);
 		   break;
 	   case 4:
 		   Cards N = new Cards(310);
@@ -499,7 +511,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText = new MinuetoText("Bow Number:  " + Client.getMainHero().getBow() + "  Falcon:  " + Client.getMainHero().getFalcon() ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("Helm:   " + Client.getMainHero().getHelm() + "   Shield:   " + Client.getMainHero().getShield() ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("WitchBrew:    " + Client.getMainHero().getWitchBrew() + "Telescope: " + Client.getMainHero().getTelescope()  ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("MedicalHerb:   " + Client.getMainHero().getMedicalHerb() ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("MedicalHerb:   " + Client.getMainHero().getMedicalHerb() + "RuneStone:  " + Client.getMainHero().getRuneStone() ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);

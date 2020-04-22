@@ -670,7 +670,42 @@ public class Hero implements Character, Serializable {
 			}
 		}
 	}
-	   	
+	   //RuneStone ///////////////////////////////////////////////////////////////////////
+	
+	
+	public void pickupRuneStone() {
+		for (TileEntity t: Tile.get(tile).getTileEntities()) {
+			if(t instanceof RuneStone) {
+				this.items.add((RuneStone)t);
+				Tile.get(tile).getTileEntities().remove(t);
+				break;
+			}
+		}
+		if(this.getRuneStone() == 3) {
+			//get a black dice
+		}
+	}	
+
+    
+	public void dropRuneStone() {
+		for (Item i: items) {
+			if(i instanceof RuneStone) {
+				this.items.remove(i);
+				Tile.get(tile).getTileEntities().add(i);
+				break;
+			}
+		}
+	}
+    
+	public int getRuneStone() {
+		int RuneStoneCount = 0;
+		for(Item i: items) {
+			if(i instanceof RuneStone) {
+				RuneStoneCount ++;
+			}
+		}
+		return RuneStoneCount;
+	}
 	
 	//Well///////////////////////////////////////////////////////////////////////////////
 

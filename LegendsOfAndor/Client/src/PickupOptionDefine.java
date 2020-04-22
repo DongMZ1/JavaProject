@@ -30,7 +30,7 @@ MinuetoImage imageText2, exitText, imageText3, imageText4, text5;		// Instructio
 Random random = new Random();		
 this.name = name;		
 this.closing = false;
-window = new MinuetoFrame(640, 480, true);
+window = new MinuetoFrame(1000, 800, true);
 // Build the event queue.
 eventQueue = new MinuetoEventQueue();
 // Register the keyboard handler with the event queue.
@@ -51,7 +51,7 @@ imageText2 = new MinuetoText("press '1' to pickup Farmer, '2' to pickup Gold, '3
 exitText = new MinuetoText(" '4' to reveal a token, '5' to pickup a Bow, '6' to pick a Wineskin;" ,fontArial19,MinuetoColor.BLUE);
 imageText3 = new MinuetoText("'7' to pick up a falcon, '8' to pick up a helm '9' to pickup Shield" ,fontArial19,MinuetoColor.BLUE);
 imageText4 = new MinuetoText("'A' to pick up WitchBrew, 'B' to pick up Telescope,  press Q to exit" ,fontArial19,MinuetoColor.BLUE);
-text5 = new MinuetoText("C to pickup medicalherb, u can pick it up if there is no GOR" ,fontArial19,MinuetoColor.BLUE);
+text5 = new MinuetoText("C to pickup medicalherb, u can pick it up if there is no GOR, D to pickup RuneStone" ,fontArial19,MinuetoColor.BLUE);
 // Show the game window.
 window.setVisible(true);
 
@@ -171,6 +171,13 @@ break;
 
 case MinuetoKeyboard.KEY_C:
 	Client.getMainHero().pickupMedicalHerb();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_D:
+	Client.getMainHero().pickupRuneStone();
 	InputThread.updateVariable();
 this.closing = true;
 window.close();

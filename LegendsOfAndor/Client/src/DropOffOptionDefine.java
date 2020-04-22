@@ -52,7 +52,7 @@ fontArial19 = new MinuetoFont("Arial",19,false, false);
 imageText2 = new MinuetoText("press 'F' to dropoff Farmer, 'G' to dropoff Gold,",fontArial19,MinuetoColor.BLUE);
 imageText3 = new MinuetoText("For Items, press 1 to drop Bow, press 2 to drop Wineskin, press 3 to drop Falcon, press 4 to drop helm;",fontArial19,MinuetoColor.BLUE);
 imageText4 = new MinuetoText("Press 5 to drop Shield, Press 6 to drop WitchBrew, Press 7 to drop Telescope",fontArial19,MinuetoColor.BLUE);
-text5 =  new MinuetoText("8 to drop MedicalHerb ,  'Q' to exit",fontArial19,MinuetoColor.BLUE);
+text5 =  new MinuetoText("8 to drop MedicalHerb , '9' to drop RuneStone  'Q' to exit",fontArial19,MinuetoColor.BLUE);
 //Show the game window.
 window.setVisible(true);
 
@@ -157,6 +157,13 @@ break;
 
 case MinuetoKeyboard.KEY_8:
 Client.getMainHero().dropMedicalHerb();
+InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_9:
+Client.getMainHero().dropRuneStone();
 InputThread.updateVariable();
 this.closing = true;
 window.close();
