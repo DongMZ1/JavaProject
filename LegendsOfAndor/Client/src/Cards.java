@@ -238,7 +238,22 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 				   GameScreen.gameScreen.tiles.get((list1.get(0)+50)).addTileEntity(st);
 				   st.sp = 2*GameScreen.gameScreen.tm.heroes.size();
 			   }
+		   Farmer f1 = new Farmer(28);
+		   GameScreen.gameScreen.tiles.get(28).addTileEntity(f1);
+		   
 		   Cards C2 = new Cards(308);
+		   
+		   Gor gor6 = new Gor(27);
+		   GameScreen.gameScreen.tiles.get(27).addTileEntity(gor6);
+		   GameScreen.gameScreen.monsters.add(gor6);
+		   
+		   Gor gor7 = new Gor(31);
+		   GameScreen.gameScreen.tiles.get(31).addTileEntity(gor7);
+		   GameScreen.gameScreen.monsters.add(gor7);
+		   
+		   Skral s2 = new Skral(29);
+		   GameScreen.gameScreen.tiles.get(29).addTileEntity(s2);
+		   GameScreen.gameScreen.monsters.add(s2);
 		   PlacePrinceHandler p1 = new PlacePrinceHandler();
 		   break;
 	   case 3: 
@@ -251,8 +266,46 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
 			   
+			   Gor gor8 = new Gor(43);
+			   GameScreen.gameScreen.tiles.get(43).addTileEntity(gor8);
+			   GameScreen.gameScreen.monsters.add(gor8);
+			   
+			   Skral s3 = new Skral(39);
+			   GameScreen.gameScreen.tiles.get(39).addTileEntity(s3);
+			   GameScreen.gameScreen.monsters.add(s3);
+			   
+			   for(int i = 0 ; i < 5 ; i++) {
+				   DiceRoller dr3 = new DiceRoller();
+				   ArrayList<Integer> list3 = dr3.roll(2);
+				   DiceHandler dd3 = new DiceHandler(list3);
+				   dd3.start();
+				   RuneStone r1 = new RuneStone((list3.get(0)*10 + list3.get(1)));
+				   GameScreen.gameScreen.tiles.get((list3.get(0)*10 + list3.get(1))).addTileEntity(r1);
+			   }
+			   
 		   }else {
 			   @SuppressWarnings("unused") Cards RuneStoneHard = new Cards(-4);
+			   Gor gor8 = new Gor(43);
+			   GameScreen.gameScreen.tiles.get(43).addTileEntity(gor8);
+			   GameScreen.gameScreen.monsters.add(gor8);
+			   
+			   Gor gor9 = new Gor(32);
+			   GameScreen.gameScreen.tiles.get(32).addTileEntity(gor9);
+			   GameScreen.gameScreen.monsters.add(gor9);
+			   
+			   Skral s3 = new Skral(39);
+			   GameScreen.gameScreen.tiles.get(39).addTileEntity(s3);
+			   GameScreen.gameScreen.monsters.add(s3);
+			   
+			   for(int i = 0 ; i < 5 ; i++) {
+				   DiceRoller dr3 = new DiceRoller();
+				   ArrayList<Integer> list3 = dr3.roll(2);
+				   DiceHandler dd3 = new DiceHandler(list3);
+				   dd3.start();
+				   RuneStone r1 = new RuneStone((list3.get(0)*10 + list3.get(1)));
+				   GameScreen.gameScreen.tiles.get((list3.get(0)*10 + list3.get(1))).addTileEntity(r1);
+			   }
+			   
 		   }
 		   break;
 	   }
