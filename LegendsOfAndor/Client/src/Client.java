@@ -35,8 +35,8 @@ public class Client {
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.gameScreen.cd);
-        
-      //  gameScreenDrawer.gameScreen.addHero(mainHero);
+       
+        gameScreenDrawer.gameScreen.addHero(mainHero);
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
