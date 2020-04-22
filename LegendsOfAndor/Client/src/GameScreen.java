@@ -61,7 +61,7 @@ public class GameScreen implements Serializable{
         //GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
         tm = new TurnManager(new ArrayList<>());
-        tm.heroes.add(Client.mainHero);
+        tm.addHero(Client.mainHero);
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
 //        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
