@@ -63,7 +63,7 @@ public class GameScreen implements Serializable{
        // tm = new TurnManager(new ArrayList<>());
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
-//        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
+        cd = new CollaborativeDecision(DecisionType.START, tm); 
         castle = new Castle(5 - tm.heroes.size());
     }
 
