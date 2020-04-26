@@ -20,18 +20,19 @@ public class DiceHandler extends Thread implements Serializable{
 	ArrayList<Integer> rolls;
 	
 	public DiceHandler(ArrayList<Integer> Rolls) {
-		rolls = Rolls;
+		rolls = (ArrayList<Integer>) Rolls.clone();
 	}
-	
-	
+
 	private class DiceImage implements Serializable, MinuetoWindowHandler, MinuetoKeyboardHandler{
 		MinuetoFrame window;			
 		MinuetoEventQueue eventQueue;
 		MinuetoFont fontArial19 = new MinuetoFont("Arial",25,false, false);
 		MinuetoImage text = new MinuetoText("press any key to close this window" ,fontArial19,MinuetoColor.BLUE);
 		boolean closing;
+		int indicator;
+		ArrayList<MinuetoImage> acList;
 		
-		ArrayList<MinuetoImage> diceList = new ArrayList<MinuetoImage>(
+		final ArrayList<MinuetoImage> heroDice = new ArrayList<MinuetoImage>(
 				Arrays.asList(
 						new MinuetoImageFile("images/Heroes/Dice/1.png").scale(300/ 671.0, 300/ 671.0),
 						new MinuetoImageFile("images/Heroes/Dice/2.png").scale(300/ 671.0, 300/ 671.0),
@@ -40,9 +41,29 @@ public class DiceHandler extends Thread implements Serializable{
 						new MinuetoImageFile("images/Heroes/Dice/5.png").scale(300/ 671.0, 300/ 671.0),
 						new MinuetoImageFile("images/Heroes/Dice/6.png").scale(300/ 671.0, 300/ 671.0)));
 		
+		final ArrayList<MinuetoImage> monsterDice = new ArrayList<MinuetoImage>(
+				Arrays.asList(
+						new MinuetoImageFile("images/Monsters/Dice/1.png").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Monsters/Dice/2.png").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Monsters/Dice/3.png").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Monsters/Dice/4.png").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Monsters/Dice/5.png").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Monsters/Dice/6.png").scale(300/ 671.0, 300/ 671.0)));
+		
 		
 		public DiceImage() throws MinuetoFileException {
-
+			
+			indicator = rolls.get(rolls.size() - 1);
+			rolls.remove(rolls.size() - 1);
+			
+			if(indicator == -3) {
+				acList = monsterDice;
+			}
+			
+			else {
+				acList = heroDice;
+			}
+			
 			closing = false;
 			Random random = new Random();	
 			window = new MinuetoFrame(640, 480, true);
@@ -80,7 +101,7 @@ public class DiceHandler extends Thread implements Serializable{
 
 			
 			for(int i = 0; i < rolls.size(); i++) {
-				window.draw(diceList.get(rolls.get(i) - 1), 100 * i, 100);
+				window.draw(acList.get(rolls.get(i) - 1), 100 * i, 100);
 			}
 		}
 		
