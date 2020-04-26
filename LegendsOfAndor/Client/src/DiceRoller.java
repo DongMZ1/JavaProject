@@ -12,10 +12,14 @@ import org.minueto.window.MinuetoWindow;
 public class DiceRoller implements Serializable {
 	
 	private int[] numbers;
+	private final int[] normalDice;
+	private final int[] blackDice;
 	private Random random;
 	
 	public DiceRoller() {
-		this.numbers = new int[]{1,2,3,4,5,6};
+		normalDice = new int[]{1,2,3,4,5,6};
+		blackDice = new int[] {6,7,8,9,10,11};
+		numbers = normalDice;
 		random = new Random();
 	}
 
@@ -96,10 +100,13 @@ public class DiceRoller implements Serializable {
 	public ArrayList<Integer> roll(Character c) {
 		//Hero needs to add his current strength points to his highest roll
 		ArrayList<Integer> diceRoll = new ArrayList<Integer>();
+		if(c instanceof Hero) {
+			numbers = ((Hero) c).hasBlackDice ? blackDice : normalDice;
+		}
+		
 		
 		if(c instanceof Warrior) {
 			diceRoll = warriorRoll(((Warrior) c).wp);
-			
 		}
 		
 		else if(c instanceof Archer) {
@@ -123,6 +130,7 @@ public class DiceRoller implements Serializable {
 			diceRoll = skralRoll();
 		}
 		
+		numbers = normalDice;
 		return diceRoll;
 	}
 	
@@ -136,7 +144,7 @@ public class DiceRoller implements Serializable {
 		
 		return rolls;
 	}
-	
+
 	
 	private ArrayList<Integer> gorRoll() {
 		ArrayList<Integer> rolls = new ArrayList<Integer>();
