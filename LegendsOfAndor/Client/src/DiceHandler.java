@@ -41,6 +41,15 @@ public class DiceHandler extends Thread implements Serializable{
 						new MinuetoImageFile("images/Heroes/Dice/5.png").scale(300/ 671.0, 300/ 671.0),
 						new MinuetoImageFile("images/Heroes/Dice/6.png").scale(300/ 671.0, 300/ 671.0)));
 		
+		final ArrayList<MinuetoImage> blackDice = new ArrayList<MinuetoImage>(
+				Arrays.asList(
+						new MinuetoImageFile("images/Heroes/Dice/6.JPG").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/7.JPG").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/8.JPG").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/9.JPG").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/10.JPG").scale(300/ 671.0, 300/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/11.JPG").scale(300/ 671.0, 300/ 671.0)));
+		
 		final ArrayList<MinuetoImage> monsterDice = new ArrayList<MinuetoImage>(
 				Arrays.asList(
 						new MinuetoImageFile("images/Monsters/Dice/1.png").scale(300/ 671.0, 300/ 671.0),
@@ -58,6 +67,10 @@ public class DiceHandler extends Thread implements Serializable{
 			
 			if(indicator == -3) {
 				acList = monsterDice;
+			}
+			
+			else if(indicator == -2) {
+				acList = blackDice;
 			}
 			
 			else {

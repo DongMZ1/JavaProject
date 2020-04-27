@@ -31,6 +31,8 @@ public class GameStatus implements Serializable {
 	public boolean Legend2ModeIsEasy = false;
     public int EventCardIndex = 1;
     public int WhenToDrawRuneStoneLegendCard = 100;
+	
+	public int TheHeroNumberInTurnManagerForFalconTrade = 100;
 	int screenWidth = 1280;
 	int screenHeight = 720;
 	int focus;
