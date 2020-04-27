@@ -78,6 +78,15 @@ public class Hero implements Character, Serializable {
 		  	return false;
 	  	}
 	 
+	  	public Item removeItem(Item i) {
+	  		for (Item item: items) {
+	  			if (item.getClass() == i.getClass()) {
+	  				items.remove(item);
+	  				return item;
+	  			}
+	  		}
+	  		return null;
+	  	}
 	 
 	 
 	//Wineskin//////////////////////////////////////////////////////////////////////

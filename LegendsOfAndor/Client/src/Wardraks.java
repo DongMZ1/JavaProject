@@ -7,6 +7,8 @@ public class Wardraks extends Monster {
 
 	public Wardraks(int tile) throws IOException {
 		super(tile);
+		this.health = 7;
+		this.strength = 10;
 	}
 
 }

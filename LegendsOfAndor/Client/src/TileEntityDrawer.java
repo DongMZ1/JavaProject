@@ -27,6 +27,7 @@ public class TileEntityDrawer {
     private MinuetoImage runestoneImage;
     private MinuetoImage medicalherbImage;
     private MinuetoImage skraltowerImage;
+    private MinuetoImage wpImage;
 	private static TileEntityDrawer tileEntityDrawer;
 
 	private TileEntityDrawer() throws MinuetoFileException {
@@ -54,6 +55,8 @@ public class TileEntityDrawer {
 		runestoneImage = new MinuetoImageFile("images/runestone.jpg").scale(0.2, 0.2);
 		medicalherbImage = new MinuetoImageFile("images/MedicalHerb.jpg").scale(0.1, 0.1);
 		skraltowerImage = new MinuetoImageFile("images/skraltower.jpg").scale(0.1, 0.1);
+		wpImage = new MinuetoImageFile("images/skraltower.jpg").scale(0.1, 0.1);
+
 	}
 
 	public static TileEntityDrawer getInstance() throws MinuetoFileException {
@@ -110,6 +113,9 @@ public class TileEntityDrawer {
 				Client.screen.draw(emptyWellImage, xCoord, yCoord);
 			else
 				Client.screen.draw(fullWellImage, xCoord, yCoord);
+		}
+		else if (tileEntity instanceof WP) {
+			Client.screen.draw(wpImage, xCoord, yCoord);
 		}
 		else System.out.println(tileEntity.getClass());
 	}

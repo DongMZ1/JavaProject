@@ -9,6 +9,7 @@ public class Monster implements Character, Serializable
 {
     int tile;
     int health;
+    int strength;
     ArrayList<Dice> diceList;
     public Monster(int tile) throws IOException {
         this.tile = tile;

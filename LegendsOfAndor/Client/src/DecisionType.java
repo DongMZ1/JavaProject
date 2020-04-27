@@ -1,4 +1,4 @@
 
 public enum DecisionType {
-	START, NONE;
+	START, NONE, TEST, REWARD, FINISHED;
 }

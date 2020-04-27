@@ -20,9 +20,11 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 	ArrayList<Button> itemButtons;
 	Button okButton;
 	TextBox textBox;
+//	Button rewardButton;
 //	private InputHandler inputHandler;
 	GameStatus gameStatus;
-	
+	int maxNumItems;
+	int selectedNumItems = 0;
 	
 	public static CollaborativeDecisionDrawer getInstance() throws IOException {
 		if(cdDrawer == null)
@@ -35,7 +37,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		
 		try {
 			archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
-			
+//			rewardButton = new Button(new Coordinate(400,50), 0, 0, "SELECT HOW MUCH GOLD YOU WANT AS A REWARD (any gold left over will be converted to willpoints", false);
 			textBox = TextBox.getInstance();
 			gameStatus = GameStatus.getInstance();
 //			 inputHandler = InputHandler.getInputHandler();
@@ -48,10 +50,14 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		if (CollaborativeDecision.toDecide == DecisionType.START) {
 			createDecision(7);
 		}
-		
+		else if (CollaborativeDecision.toDecide == DecisionType.TEST) {
+			createDecision(4);
+		}
 }
-	private void createDecision(int numberOfItems) {
+	public void createDecision(int numberOfItems) {
 		itemButtons.clear();
+		selectedNumItems=0;
+		maxNumItems = numberOfItems;
 		int offset = 3;
 		try {
 		for (int i = 0; i < numberOfItems; i++) {
@@ -63,6 +69,18 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		okButton = new Button(new Coordinate(100*offset + 150, 150),50,89,"READY",true);
 		}
 		catch (Exception e) {}
+	}
+	public void endBattle(Monster m) {
+		if (m instanceof Wardraks) {
+			createDecision(12);
+		}
+		else if (m instanceof Gor) {
+			createDecision(4);
+		}
+		else if (m instanceof Skral) {
+			createDecision(8);
+		}
+		maxNumItems /= 2;
 	}
 	public void decisionLoop() {
 		Client.screen.draw(background, 0, 0);
@@ -91,7 +109,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				remainingSlots--;
 
 			}
-			if (remainingSlots < 1) {
+			if (selectedNumItems == maxNumItems) {
 				okButton.draw();
 				
 			}
@@ -128,9 +146,19 @@ public class CollaborativeDecisionDrawer implements Inputtable {
             
         }
 		int i = 0;
+		
 		for (Button b : itemButtons) {
 			if (b.isClicked(x, y)) {
-				CollaborativeDecision.items.get(i).second = Client.mainHero;
+				if (CollaborativeDecision.items.get(i).second == null) {
+					if (selectedNumItems < maxNumItems) {
+						CollaborativeDecision.items.get(i).second = Client.mainHero;
+						selectedNumItems++;
+					}
+				}
+				else {
+					CollaborativeDecision.items.get(i).second = Client.mainHero;
+				}
+				
 			}
 			i++;
 		}

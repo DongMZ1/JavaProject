@@ -66,7 +66,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.138";
+    static String serverAddress = "192.168.1.100";
 
     static Socket socket;
     static ObjectInputStream in;

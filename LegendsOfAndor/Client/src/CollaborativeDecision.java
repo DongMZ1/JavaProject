@@ -42,6 +42,12 @@ public class CollaborativeDecision implements Serializable {
 		if (toDecide == DecisionType.START) {
 			createStart();
 		}
+		if (toDecide == DecisionType.TEST) {
+			items.add(new Tuple(new Bow(-1),null));
+			items.add(new Tuple(new Shield(-1),null));
+			items.add(new Tuple(new WitchBrew(-1),null));
+			items.add(new Tuple(new Helm(-1),null));
+		}
 		
 	
 		
@@ -75,11 +81,36 @@ public class CollaborativeDecision implements Serializable {
 		
 		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 		for (Tuple<Item,Hero> combo : items) {
-			combo.second.items.add(combo.first);
+			if (combo.first instanceof WP) {
+				combo.second.wp++;
+			}
+			else {
+				combo.second.items.add(combo.first);
+			}
+			
 		}
 		}
 		
 		
+	}
+	
+	public void endBattle(Monster m) {
+		items.clear();
+		int reward = -1;
+		if (m instanceof Wardraks) {
+			reward = 6;
+		}
+		else if (m instanceof Gor) {
+			reward = 2;
+		}
+		else if (m instanceof Skral) {
+			reward = 4;
+		}
+		toDecide = DecisionType.REWARD;
+		for (int i = 0; i < reward; i++) {
+			items.add(new Tuple(new Gold(-1),null));
+			items.add(new Tuple(new WP(),null));
+		}
 	}
 	
 	public void draw() {

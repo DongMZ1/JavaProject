@@ -7,6 +7,8 @@ public class Gor extends Monster {
 
 	public Gor(int tile) throws IOException {
 		super(tile);
+		this.health = 4;
+		this.strength = 4;
 	}
 
 }

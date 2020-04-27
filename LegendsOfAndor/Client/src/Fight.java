@@ -11,6 +11,10 @@ import org.minueto.window.MinuetoWindow;
 
 public class Fight implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4625916128508934867L;
 	private Tile fightTile;
 	boolean isHappening = false;
 	TurnManager tm;
@@ -22,13 +26,18 @@ public class Fight implements Serializable{
 	GameStatus gameStatus;
 
 	int herosLeft;
-	int monsterRoll;
+	int monsterTotalRoll;
 
-	int heroRoll;
+	int heroTotalRoll;
 	int currentRoll;
 	Monster currentMonster;
 	Dice targetDice;
 	private int diceRolled;
+	ArrayList<Integer> heroRolls = new ArrayList<Integer>();
+	ArrayList<Integer> monsterRolls = new ArrayList<Integer>();
+	boolean heroTurn = true;
+	int archerRollNumber = 0;
+	boolean brewUsed=false;
 	public Fight(TurnManager tm) throws IOException {
 		
 		this.tm = tm;
@@ -43,8 +52,8 @@ public class Fight implements Serializable{
 	public void start(Tile fightTile, Hero initiator) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
-		heroRoll = 0;
-		monsterRoll = 0;
+		heroTotalRoll = 0;
+		monsterTotalRoll = 0;
 		currentHero = initiator;
 		mainHero = Client.mainHero;
 		

@@ -171,6 +171,17 @@ public class DiceRoller implements Serializable {
 		return rolls;
 	}
 	
+	private ArrayList<Integer> wardrakRoll() {
+		ArrayList<Integer> rolls = new ArrayList<Integer>();
+		int nbDice = 2;
+		
+		for(int i = 0; i <= nbDice; i++) {
+			rolls.add(blackDice[random.nextInt(6)]);
+		}
+		
+		return rolls;
+	}
+	
 	
 	private ArrayList<Integer> mageRoll() {
 		ArrayList<Integer> rolls = new ArrayList<Integer>();
@@ -204,7 +215,11 @@ public class DiceRoller implements Serializable {
 	
 	private ArrayList<Integer> archerRoll(int wp) {
 		ArrayList<Integer> rolls = new ArrayList<Integer>();
-		rolls.add(numbers[random.nextInt(6)]);
+		for(int i = 0; i < 5; i++) {
+			int temp = random.nextInt(6);
+			rolls.add(numbers[temp]);
+
+		}
 		return rolls;
 	}
 	
