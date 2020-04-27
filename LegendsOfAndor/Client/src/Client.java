@@ -15,7 +15,7 @@ import org.minueto.window.*;
 
 public class Client {
 
-    static LobbyScreen lobbyScreen;
+    static PreGameScreen preGameScreen;
     static GameScreenDrawer gameScreenDrawer;
     static GameStatus gameStatus;
     public static Hero mainHero;
@@ -33,9 +33,9 @@ public class Client {
         new InputThread().start();
         screen.setVisible(true);
         inputHandler = InputHandler.getInputHandler();
-        lobbyScreen = new LobbyScreen();
+        preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
-        inputHandler.addInput(lobbyScreen);
+        inputHandler.addInput(preGameScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
@@ -45,7 +45,7 @@ public class Client {
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
-                lobbyScreen.draw();
+                preGameScreen.draw();
             else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
                 gameScreenDrawer.draw();
             }
@@ -105,7 +105,7 @@ class InputThread extends Thread{
             if(input instanceof GameStatus) {
                 Client.gameStatus = (GameStatus) input;
                 Client.gameScreenDrawer.updateGameStatus((GameStatus) input);
-                Client.lobbyScreen.gameStatus = (GameStatus) input;
+                Client.preGameScreen.lobbyScreen.gameStatus = (GameStatus) input;
                 Client.inputHandler.gameStatus = (GameStatus) input;
             }
             else if(input instanceof GameScreen) {
