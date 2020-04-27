@@ -1,14 +1,12 @@
-import org.minueto.MinuetoFileException;
-import org.minueto.image.MinuetoImage;
-import org.minueto.image.MinuetoImageFile;
+
 
 import java.io.Serializable;
 
 public class Bow implements Item, Serializable {
 	int Tile;
 
-	public void Bow(int tile) throws MinuetoFileException{
-		Tile = tile;
+	public Bow(int tile){
+		this.Tile = tile;
 	}
 
 	@Override

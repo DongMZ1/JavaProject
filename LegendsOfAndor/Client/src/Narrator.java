@@ -13,18 +13,28 @@ public class Narrator implements Serializable{
 	
 	public Narrator() {
 		x = 12600;
-		y = 8200;
-		narrartorTrack = 1;
+		y = 8820;
+		narrartorTrack = 0;
 	}
 	
 
 	
-	public void advance() {
+	public void advance() throws IOException {
 		if(y > 600) {
           y = y -620;
           narrartorTrack ++;
 		}
+		//set rune stone cards for draw
+		if(narrartorTrack == GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard) {
+			Cards.DrawLegend2Card(100);
+			GameStatus.gameStatus.legend2CardIndex = GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard;
+			
+		}
 		
+		if(narrartorTrack == 1) {
+			Cards.DrawLegend2Card(1);
+			GameStatus.gameStatus.legend2CardIndex = 1;
+		}
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
@@ -40,14 +50,14 @@ public class Narrator implements Serializable{
 			Cards.DrawLegend2Card(4);
 			GameStatus.gameStatus.legend2CardIndex = 4;
 		}
-		
+		InputThread.updateVariable();
 	}	
 
 	
 	public void reset() {
 		narrartorTrack = 1;
 		x = 12600;
-		y = 8200;
+		y = 8820;
 	}
 	
 }

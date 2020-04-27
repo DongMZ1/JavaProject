@@ -37,29 +37,61 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   	switch(cardNB) {
 	   	case 1:
 		   	@SuppressWarnings("unused") Cards card1 = new Cards(1);
+		   	for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h instanceof Archer) {
+		   			h.wp = h.wp +3;
+		   		}
+		   		if(h instanceof Dwarf) {
+		   			h.wp = h.wp +3;
+		   		}
+		   	}
 		   break;
 	   case 2:
 		   @SuppressWarnings("unused") Cards card2 = new Cards(2);
+		   GameScreen.gameScreen.tiles.get(60).addTileEntity(new Wineskin(60));
+		   GameScreen.gameScreen.tiles.get(60).addTileEntity(new Wineskin(60));
 		   break;
 	   case 3:
 		   @SuppressWarnings("unused") Cards card3 = new Cards(3);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile < 10) {
+                  h.wp = h.wp+2;
+		   	}
+			}
 		   break;
 	   case 4:
 		   @SuppressWarnings("unused") Cards card4 = new Cards(4);
+		   for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile != 0 || h.tile != 71 || h.tile != 72) {
+                 h.wp = h.wp - 2;
+		   	}
+		   }
 		   break;
 	   case 5:
 		   @SuppressWarnings("unused") Cards card5 = new Cards(5);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile < 21) {
+                 h.wp = h.wp-2;
+		   	}
+			}
 		   break;
 	   case 6: 
 		   @SuppressWarnings("unused") Cards card6 = new Cards(6);
+		   for(TileEntity t: GameScreen.gameScreen.tiles.get(60).tileEntities) {
+			   if(t instanceof Well) {
+				   GameScreen.gameScreen.tiles.get(60).tileEntities.remove(t);
+			   }
+		   }
 	   case 7: 
 		   @SuppressWarnings("unused") Cards card7 = new Cards(7);
-	   case 8: 
-		   @SuppressWarnings("unused") Cards card8 = new Cards(8);
-	   case 9: 
-		   @SuppressWarnings("unused") Cards card9 = new Cards(9);
+			for(Hero h: GameScreen.gameScreen.tm.heroes) {
+		   		if(h.tile <= 70 || h.tile >= 37) {
+                  h.wp = h.wp-3;
+		   	}
+			}
 	   }
 	   Client.gameStatus.EventCardIndex++;
+	   InputThread.updateVariable();
    }
    
    
@@ -103,28 +135,141 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
    
 
    
-   public static void DrawLegend2Card(int legend2cardindex) {
+   public static void DrawLegend2Card(int legend2cardindex) throws IOException {
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
+			   
+			  Gor gor1 = new Gor(8);
+			   GameScreen.gameScreen.tiles.get(8).addTileEntity(gor1);
+			   GameScreen.gameScreen.monsters.add(gor1);
+			   
+			   Gor gor2 = new Gor(20);
+			   GameScreen.gameScreen.tiles.get(20).addTileEntity(gor2);
+			   GameScreen.gameScreen.monsters.add(gor2);
+			   
+			   Gor gor3 = new Gor(21);
+			   GameScreen.gameScreen.tiles.get(21).addTileEntity(gor3);
+			   GameScreen.gameScreen.monsters.add(gor3);
+			   
+			   Gor gor4 = new Gor(26);
+			   GameScreen.gameScreen.tiles.get(26).addTileEntity(gor4);
+			   GameScreen.gameScreen.monsters.add(gor4);
+			   
+			   Gor gor5 = new Gor(48);
+			   GameScreen.gameScreen.tiles.get(48).addTileEntity(gor5);
+			   GameScreen.gameScreen.monsters.add(gor5);
+			   
+			   Skral s1 = new Skral(19);
+			   GameScreen.gameScreen.tiles.get(19).addTileEntity(s1);
+			   GameScreen.gameScreen.monsters.add(s1);
+			   
+			   Farmer f1 = new Farmer(24);
+			   GameScreen.gameScreen.tiles.get(24).addTileEntity(f1);
+			   
+			   Farmer f2 = new Farmer(36);
+			   GameScreen.gameScreen.tiles.get(36).addTileEntity(f2);
+
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
+				 
+				  Gor gor1 = new Gor(8);
+				   GameScreen.gameScreen.tiles.get(8).addTileEntity(gor1);
+				   GameScreen.gameScreen.monsters.add(gor1);
+				   
+				   Gor gor2 = new Gor(20);
+				   GameScreen.gameScreen.tiles.get(20).addTileEntity(gor2);
+				   GameScreen.gameScreen.monsters.add(gor2);
+				   
+				   Gor gor3 = new Gor(21);
+				   GameScreen.gameScreen.tiles.get(21).addTileEntity(gor3);
+				   GameScreen.gameScreen.monsters.add(gor3);
+				   
+				   Gor gor4 = new Gor(26);
+				   GameScreen.gameScreen.tiles.get(26).addTileEntity(gor4);
+				   GameScreen.gameScreen.monsters.add(gor4);
+				   
+				   Gor gor5 = new Gor(48);
+				   GameScreen.gameScreen.tiles.get(48).addTileEntity(gor5);
+				   GameScreen.gameScreen.monsters.add(gor5);
+				   
+				   Skral s1 = new Skral(19);
+				   GameScreen.gameScreen.tiles.get(19).addTileEntity(s1);
+				   GameScreen.gameScreen.monsters.add(s1);
+				   
+				   Farmer f1 = new Farmer(24);
+				   GameScreen.gameScreen.tiles.get(24).addTileEntity(f1);
 			   }
 		   @SuppressWarnings("unused") Cards A4 = new Cards(304);
+		   
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
+		   DiceRoller dr = new DiceRoller();
+		   ArrayList<Integer> list = dr.roll(1);
+		   DiceHandler dd = new DiceHandler(list);
+		   dd.start();
+		   if(list.get(0) == 1) { GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 2;}
+		   else if(list.get(0) == 2){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 4;}
+		   else if(list.get(0) == 3){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 5;}
+		   else if(list.get(0) == 4){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 5){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 6){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 8;}
+		   // WE also need COOB decision to distribute 5gold 2wp
 		   break;
 	   case 2:
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
-			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
+			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);   
+			   DiceRoller dr1 = new DiceRoller();
+			   ArrayList<Integer> list1 = dr1.roll(1);
+			   DiceHandler dd1 = new DiceHandler(list1);
+			   dd1.start();
+			   SkralTower st = new SkralTower((list1.get(0)+50));
+			   GameScreen.gameScreen.tiles.get((list1.get(0)+50)).addTileEntity(st);
+			   st.sp = 2*GameScreen.gameScreen.tm.heroes.size() - 10;
+			   
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
+				  DiceRoller dr1 = new DiceRoller();
+				   ArrayList<Integer> list1 = dr1.roll(1);
+				   DiceHandler dd1 = new DiceHandler(list1);
+				   dd1.start();
+				   SkralTower st = new SkralTower((list1.get(0)+50));
+				   GameScreen.gameScreen.tiles.get((list1.get(0)+50)).addTileEntity(st);
+				   st.sp = 2*GameScreen.gameScreen.tm.heroes.size();
 			   }
+		   Farmer f1 = new Farmer(28);
+		   GameScreen.gameScreen.tiles.get(28).addTileEntity(f1);
+		   
 		   Cards C2 = new Cards(308);
+		   
+		   Gor gor6 = new Gor(27);
+		   GameScreen.gameScreen.tiles.get(27).addTileEntity(gor6);
+		   GameScreen.gameScreen.monsters.add(gor6);
+		   
+		   Gor gor7 = new Gor(31);
+		   GameScreen.gameScreen.tiles.get(31).addTileEntity(gor7);
+		   GameScreen.gameScreen.monsters.add(gor7);
+		   
+		   Skral s2 = new Skral(29);
+		   GameScreen.gameScreen.tiles.get(29).addTileEntity(s2);
+		   GameScreen.gameScreen.monsters.add(s2);
+		   PlacePrinceHandler p1 = new PlacePrinceHandler();
 		   break;
 	   case 3: 
 		   Cards G = new Cards(309);
+		   //remove prince
+		   GameScreen.gameScreen.tiles.get(GameScreen.gameScreen.princeThorald.tile).removeTileEntity(GameScreen.gameScreen.princeThorald);
+		   GameScreen.gameScreen.hasPrince = false;
+		   //add wardrak
+		   Wardraks w1 = new Wardraks(26);
+		   Wardraks w2 = new Wardraks(27);
+		   
+		   GameScreen.gameScreen.tiles.get(26).addTileEntity(w1);
+		   GameScreen.gameScreen.tiles.get(27).addTileEntity(w2);
+		   
+		   GameScreen.gameScreen.monsters.add(w1);
+		   GameScreen.gameScreen.monsters.add(w2);
 		   break;
 	   case 4:
 		   Cards N = new Cards(310);
@@ -133,11 +278,50 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
 			   
+			   Gor gor8 = new Gor(43);
+			   GameScreen.gameScreen.tiles.get(43).addTileEntity(gor8);
+			   GameScreen.gameScreen.monsters.add(gor8);
+			   
+			   Skral s3 = new Skral(39);
+			   GameScreen.gameScreen.tiles.get(39).addTileEntity(s3);
+			   GameScreen.gameScreen.monsters.add(s3);
+			   
+			   for(int i = 0 ; i < 5 ; i++) {
+				   DiceRoller dr3 = new DiceRoller();
+				   ArrayList<Integer> list3 = dr3.roll(2);
+				   DiceHandler dd3 = new DiceHandler(list3);
+				   dd3.start();
+				   RuneStone r1 = new RuneStone((list3.get(0)*10 + list3.get(1)));
+				   GameScreen.gameScreen.tiles.get((list3.get(0)*10 + list3.get(1))).addTileEntity(r1);
+			   }
+			   
 		   }else {
 			   @SuppressWarnings("unused") Cards RuneStoneHard = new Cards(-4);
+			   Gor gor8 = new Gor(43);
+			   GameScreen.gameScreen.tiles.get(43).addTileEntity(gor8);
+			   GameScreen.gameScreen.monsters.add(gor8);
+			   
+			   Gor gor9 = new Gor(32);
+			   GameScreen.gameScreen.tiles.get(32).addTileEntity(gor9);
+			   GameScreen.gameScreen.monsters.add(gor9);
+			   
+			   Skral s3 = new Skral(39);
+			   GameScreen.gameScreen.tiles.get(39).addTileEntity(s3);
+			   GameScreen.gameScreen.monsters.add(s3);
+			   
+			   for(int i = 0 ; i < 5 ; i++) {
+				   DiceRoller dr3 = new DiceRoller();
+				   ArrayList<Integer> list3 = dr3.roll(2);
+				   DiceHandler dd3 = new DiceHandler(list3);
+				   dd3.start();
+				   RuneStone r1 = new RuneStone((list3.get(0)*10 + list3.get(1)));
+				   GameScreen.gameScreen.tiles.get((list3.get(0)*10 + list3.get(1))).addTileEntity(r1);
+			   }
+			   
 		   }
 		   break;
 	   }
+	   InputThread.updateVariable();
    }
    
    
@@ -161,21 +345,22 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		fontArial19 = new MinuetoFont("Arial",19,false, false);
 		
 		{
+
 		if(CardNumber == 1) {
 			eventcardindexText = new MinuetoText("Event Card 1:" ,fontArial19,MinuetoColor.BLUE);
-		imageText = new MinuetoText("One of the heros immediately loses 1 strength point, you can decide as a group which" ,fontArial19,MinuetoColor.BLUE);
-		imageText1 = new MinuetoText("hero that will be. If no hero has more than 1 strength point, nothing will happen!" ,fontArial19,MinuetoColor.BLUE);
-		imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-		}
+			imageText = new MinuetoText("The wizard and the archer each immediately get 3 willpower!" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			}
 		if(CardNumber == 2) {
 			eventcardindexText = new MinuetoText("Event Card 2:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("The wizard and the arther each immediately get 3 willpower!" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Place a wineskin on the tavern space(60). A hero who enter space 60 can" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("collect the wineskin and place it on the small storage space on his board." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -185,17 +370,6 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			}
 		if(CardNumber == 3) {
 			eventcardindexText = new MinuetoText("Event Card 3:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Place a wineskin on the tavern space(72). A hero who enter space 32 can" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("collect the wineskin and place it on the small storage space on his board." ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 4) {
-			eventcardindexText = new MinuetoText("Event Card 4:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each Hero who is on a space with a number between 0 and 9" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("will now get 2 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -205,8 +379,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 5) {
-			eventcardindexText = new MinuetoText("Event Card 5:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 4) {
+			eventcardindexText = new MinuetoText("Event Card 4:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Any hero who is not in the mine(space 71), in the tavern(space 72), or in  " ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("the castle(space 0) loses 2 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -217,8 +391,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 6) {
-			eventcardindexText = new MinuetoText("Event Card 6:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 5) {
+			eventcardindexText = new MinuetoText("Event Card 5:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each hero standing on a space with number between 0 and 20 now loses 3 willpower" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("points" ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -228,8 +402,8 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			}
-		if(CardNumber == 7) {
-			eventcardindexText = new MinuetoText("Event Card 7:" ,fontArial19,MinuetoColor.BLUE);
+		if(CardNumber == 6) {
+			eventcardindexText = new MinuetoText("Event Card 6:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("The well token on space 45 is removed from the game!" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("But a token is only triggered when a hero ends his move on that space." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -238,20 +412,9 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 8) {
-			eventcardindexText = new MinuetoText("Event Card 8:" ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("Each hero who is standing on a space boardering the river gets a wineskin." ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("2 gold." ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			}
-		if(CardNumber == 9) {
-			eventcardindexText = new MinuetoText("Event Card 9:" ,fontArial19,MinuetoColor.BLUE);
+			}	
+		if(CardNumber == 7) {
+			eventcardindexText = new MinuetoText("Event Card 7:" ,fontArial19,MinuetoColor.BLUE);
 			imageText = new MinuetoText("Each hero standing on a space with a number between 37 and 70 now loses" ,fontArial19,MinuetoColor.BLUE);
 			imageText1 = new MinuetoText("3 willpower points." ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
@@ -344,11 +507,11 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			}
 		//card number -1 is to show what does the main hero have
 		if(CardNumber == -1) {
-			eventcardindexText = new MinuetoText("Gold Number:  " + Client.mainHero.getGoldNm() + "  Wineskin:  " +  Client.mainHero.getWineskin() ,fontArial19,MinuetoColor.BLUE);
-			imageText = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText3 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			eventcardindexText = new MinuetoText("Gold Number:  " + Client.getMainHero().getGoldNm() + "  Wineskin:  " +  Client.getMainHero().getWineskin() ,fontArial19,MinuetoColor.BLUE);
+			imageText = new MinuetoText("Bow Number:  " + Client.getMainHero().getBow() + "  Falcon:  " + Client.getMainHero().getFalcon() ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("Helm:   " + Client.getMainHero().getHelm() + "   Shield:   " + Client.getMainHero().getShield() ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("WitchBrew:    " + Client.getMainHero().getWitchBrew() + "Telescope: " + Client.getMainHero().getTelescope()  ,fontArial19,MinuetoColor.BLUE);
+			imageText3 = new MinuetoText("MedicalHerb:   " + Client.getMainHero().getMedicalHerb() + "RuneStone:  " + Client.getMainHero().getRuneStone() ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);

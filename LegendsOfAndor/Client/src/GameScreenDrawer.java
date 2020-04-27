@@ -1,3 +1,4 @@
+
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoFileException;
 import org.minueto.handlers.MinuetoMouse;
@@ -12,6 +13,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	final int NUMBERS[] = {0,1,2,3,4,5,6,7,8,9};
 	final int ASCIINUMBERS[] = {48,49,50,51,52,53,54,55,56,57};
+	private int PrinceCost = 0;
 
 	private MinuetoImageFile defaultBoard = new MinuetoImageFile("images/LegendsOfAndorBoard.jpg");
 	private MinuetoImageFile timeImage = new MinuetoImageFile("images/tokenWP.png");
@@ -31,6 +33,7 @@ public class GameScreenDrawer implements Inputtable{
 	private CastleDrawer castleDrawer;
 	public FightDrawer fightDrawer;
 	public TileDrawer tileDrawer;
+	public CollaborativeDecisionDrawer collabDrawer;
 	private GameScreenDrawer() throws IOException {
 		gameScreen = GameScreen.getInstance();
 		gameUi = GameUi.getInstance();
@@ -40,6 +43,7 @@ public class GameScreenDrawer implements Inputtable{
 		tileDrawer = TileDrawer.getInstance();
 		fightDrawer = new FightDrawer(new Fight(gameScreen.tm));
 		castleDrawer = CastleDrawer.getInstance();
+		collabDrawer = CollaborativeDecisionDrawer.getInstance();
 	}
 
 	public void updateGameScreen(GameScreen gameScreen) {
@@ -50,7 +54,6 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
-		this.gameScreen.gameStatus = gameStatus;
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -60,7 +63,6 @@ public class GameScreenDrawer implements Inputtable{
 	}
 
 	public void draw() {
-		Client.screen.draw(timeImage, gameScreen.time.x, gameScreen.time.y);
 		Client.screen.draw(background, 0, 0);
 		Client.screen.draw(gameBoard, camera.currentPos.getX(), camera.currentPos.getY());
 		for(Tile tile : gameScreen.tiles)
@@ -69,15 +71,15 @@ public class GameScreenDrawer implements Inputtable{
 		playerBoard.draw();
 		//gameScreen.tm.draw();
 		if (gameScreen.gameStatus.currentScreen == gameScreen.gameStatus.COLLABORATIVE_SCREEN) {
-			gameScreen.cd.draw();
+			collabDrawer.decisionLoop();
+			gameScreen.cd.decisionLoop();
 		}
 		castleDrawer.draw(gameScreen.castle);
-		//draw time
-		Coordinate timeCoordinate = this.camera.getPosOnScreen(gameScreen.time.x, gameScreen.time.y);
-		Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
-		//draw narrator
-		Coordinate narratorCoordinate = this.camera.getPosOnScreen(gameScreen.narrator.x, gameScreen.narrator.y);
-		Client.screen.draw(timeImage, narratorCoordinate.getX(), narratorCoordinate.getY());
+				Coordinate timeCoordinate = this.camera.getPosOnScreen(Client.getMainHero().time.x, Client.getMainHero().time.y);
+				Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
+				//draw narrator
+				Coordinate narratorCoordinate = this.camera.getPosOnScreen(gameScreen.narrator.x, gameScreen.narrator.y);
+				Client.screen.draw(narratorImage, narratorCoordinate.getX(), narratorCoordinate.getY());
 		
 	}
 
@@ -102,11 +104,11 @@ public class GameScreenDrawer implements Inputtable{
 
 	public void moveHero(int currentTile, int destination) {
 		for(int i = 0; i < gameScreen.tiles.get(currentTile).tileEntities.size(); i++) {
-			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.mainHero.getClass().toString()))
+			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.getMainHero().getClass().toString()))
 				gameScreen.tiles.get(currentTile).tileEntities.remove(i);
 		}
-		Client.mainHero.setTile(destination);
-		gameScreen.tiles.get(destination).tileEntities.add(Client.mainHero);
+		Client.getMainHero().setTile(destination);
+		gameScreen.tiles.get(destination).tileEntities.add(Client.getMainHero());
 		InputThread.updateVariable();
 	}
 
@@ -118,33 +120,61 @@ public class GameScreenDrawer implements Inputtable{
 	//IAN testing shit
 	public void handleKeyType(char c) {
 		if (c == 'd') {
-			gameScreen.newDay();
+			try {
+				gameScreen.newDay();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			InputThread.updateVariable();
 		}
 		else if (c == 'a')
 		{
-			System.out.println(Client.mainHero);
+			System.out.println(Client.getMainHero());
 		}
 		else if(c == 'm') {
-			playerBoard.update(Client.mainHero);
+			playerBoard.update(Client.getMainHero());
 			playerBoard.toggleFlag();
+		}
+		else if(c == 'g') {
+			//move 4 tile will cost one time
+			if(this.PrinceCost == 4) {
+				Client.mainHero.time.advance();
+				this.PrinceCost = 0;
+			}
+			if(gameScreen.gameStatus.ui == UIStatus.MovePrince && Client.getMainHero().canMakeMove() && this.gameScreen.hasPrince) {
+				//when starting move prince, it cost 1 time;
+				int[] adjacentTile = Tile.get(GameScreen.gameScreen.princeThorald.tile).getAdjacentTiles();
+				for(int i = 0; i < adjacentTile.length; i++) {
+					if(adjacentTile[i] == toMove) {
+						Tile.get(GameScreen.gameScreen.princeThorald.tile).removeTileEntity(GameScreen.gameScreen.princeThorald);
+						Tile.get(toMove).addTileEntity(GameScreen.gameScreen.princeThorald);
+						GameScreen.gameScreen.princeThorald.tile = toMove;
+						this.PrinceCost ++;
+						InputThread.updateVariable();
+					}
+				}
+			}
+			toMove = 0;
 		}
 		else if (c == ' ') {
 			System.out.println(toMove);
-			if (Client.mainHero.time.getTime() < 7 || Client.mainHero.time.getTime() < 10){
+			if (Client.getMainHero().canMakeMove()){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {
-						if (isValidMove(Client.mainHero.getTile(),toMove)) {
-							moveHero(Client.mainHero.getTile(),toMove);
-							Client.mainHero.time.advance();
+						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
+							moveHero(Client.getMainHero().getTile(),toMove);
+							Client.getMainHero().time.advance();
 							gameScreen.gameStatus.ui = UIStatus.MOVING;
 							gameUi.moveButton.setLabel("End Move");
+							InputThread.updateVariable();
 						}
 					}
 					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
-						if (isValidMove(Client.mainHero.getTile(),toMove)) {
-							moveHero(Client.mainHero.getTile(),toMove);
-							Client.mainHero.time.advance();
+						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
+							moveHero(Client.getMainHero().getTile(),toMove);
+							Client.getMainHero().time.advance();
+							InputThread.updateVariable();
 						}
 					}
 				}
@@ -169,15 +199,15 @@ public class GameScreenDrawer implements Inputtable{
 		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT)
 			this.movingCam = true;
 		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT) {
-			if (Client.mainHero.canMakeMove()) {
+			if (Client.getMainHero().canMakeMove()) {
 				if (Client.gameStatus.ui == UIStatus.MOVEBEGIN) {
-					moveTileEntity(Client.mainHero, Client.mainHero.getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
-					Client.mainHero.time.advance();
+					moveTileEntity(Client.getMainHero(), Client.getMainHero().getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
+					Client.getMainHero().time.advance();
 					Client.gameStatus.ui = UIStatus.MOVING;
 					gameUi.moveButton.setLabel("End Move");
 				} else if (Client.gameStatus.ui == UIStatus.MOVING) {
-					moveTileEntity(Client.mainHero, Client.mainHero.getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
-					Client.mainHero.time.advance();
+					moveTileEntity(Client.getMainHero(), Client.getMainHero().getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));
+					Client.getMainHero().time.advance();
 				}
 			} else
 				gameUi.moveButton.setLabel("No Time");
@@ -187,7 +217,7 @@ public class GameScreenDrawer implements Inputtable{
 	public void handleMouseRelease(int x, int y, int button) {
 		if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
 		if (gameScreen.gameStatus.ui == UIStatus.WAITING) {
-			if(Client.mainHero.time.getTime() <= 10) {Client.mainHero.time.advance();}
+			if(Client.getMainHero().time.getTime() <= 10) {Client.getMainHero().time.advance();}
 
 			gameScreen.tm.endTurn();
 
@@ -199,8 +229,8 @@ public class GameScreenDrawer implements Inputtable{
 			gameUi.moveButton.setLabel("Move");
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
-			Tile t = gameScreen.tiles.get(Client.mainHero.getTile());
-			if (Client.mainHero.time.getTime() <= 10) {
+			Tile t = gameScreen.tiles.get(Client.getMainHero().getTile());
+			if (Client.getMainHero().time.getTime() <= 10) {
 				monsterLoop:
 				for (Monster monster : gameScreen.monsters)
 				{
@@ -213,14 +243,14 @@ public class GameScreenDrawer implements Inputtable{
 					}
 
 					//fight monter on adjacent tile
-					else if(Client.mainHero instanceof Archer) {
+					else if(Client.getMainHero() instanceof Archer) {
 						int[] adjacentTiles = t.getAdjacentTiles();
 //	        			System.out.println(t);
 						for (int i =0; i < adjacentTiles.length; i++) {
 //	        				System.out.println(adjacentTiles[i]);
 							Tile adjacentTile = Tile.get(adjacentTiles[i]);
 							if (adjacentTile.containsTileEntity(monster)) {
-								fightDrawer.fight.startAdjacent(adjacentTile, Client.mainHero);
+								fightDrawer.fight.startAdjacent(adjacentTile, Client.getMainHero());
 								gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 								gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 								break monsterLoop;

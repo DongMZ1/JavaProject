@@ -26,12 +26,13 @@ public class GameUi implements Inputtable {
     public Button actionButton;
     public Button informationButton;
     public Button currentLegendCard;
+    public Button MovePrince;
     public GameStatus gameStatus;
     public GameScreen gameScreen;
     private TextBox textBox;
 
     private int turnButtonWidth = 200;
-    private int turnButtonHeight = 40;
+    private int turnButtonHeight = 36;
     public int uiHeight = 360;
    
 
@@ -58,6 +59,8 @@ public class GameUi implements Inputtable {
                 turnButtonHeight, turnButtonWidth, "Move", true);
         currentLegendCard = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 9*turnButtonHeight),
                 turnButtonHeight, turnButtonWidth, "LegendCard", true);
+        MovePrince = new Button(new Coordinate(textBox.getWidth(), gameStatus.screenHeight - 10*turnButtonHeight),
+                turnButtonHeight, turnButtonWidth, "Move Prince", true);
  //       cancel = new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - turnButtonHeight),
   //              turnButtonHeight, turnButtonWidth, "cancel", true);
 //        pickupFarmer =  new Button(new Coordinate(Pickupscreen.getWidth(), Pickupscreen.getHeight() - 2*turnButtonHeight),
@@ -89,6 +92,7 @@ public class GameUi implements Inputtable {
         textBox.draw();
         informationButton.draw();
         currentLegendCard.draw();
+        MovePrince.draw();
         Client.screen.draw(timeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
     }
 
@@ -113,7 +117,7 @@ public class GameUi implements Inputtable {
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
 	        }
 	        else {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().getClass().equals(Client.mainHero.getClass())) {
+	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero() == Client.mainHero) {
 	                if (gameStatus.ui == UIStatus.NONE) {
 	                    gameStatus.ui = UIStatus.MOVEBEGIN;
 	                    moveButton.setLabel("Cancel Move");
@@ -131,6 +135,16 @@ public class GameUi implements Inputtable {
 	            }
 	            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.FIGHTING;
+	            }
+	            else if(MovePrince.isClickable() && MovePrince.isClicked(x, y)) {
+	            	if(gameStatus.ui != UIStatus.MovePrince) {
+	            	gameStatus.ui = UIStatus.MovePrince;
+	            	MovePrince.setLabel("Stop Move");
+	            	}else {
+		            	MovePrince.setLabel("Move Prince");
+		            	gameStatus.ui = UIStatus.NONE;
+	            	}
+	      
 	            }
 	            else if(pickupButton.isClickable() && pickupButton.isClicked(x, y)) {
 	            	PickupOption p1 = new PickupOption("Pick up choice:");

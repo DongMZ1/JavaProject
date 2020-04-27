@@ -6,11 +6,21 @@ import java.util.stream.Collectors;
 
 public class DiceRoller implements Serializable {
 	
+	// 0 for system roll
+	// -1 for hero roll
+	//-2 for black die
+	//-3 for monster
+	
+	
 	private int[] numbers;
+	private final int[] normalDice;
+	private final int[] blackDice;
 	private Random random;
 	
 	public DiceRoller() {
-		this.numbers = new int[]{1,2,3,4,5,6};
+		normalDice = new int[]{1,2,3,4,5,6};
+		blackDice = new int[] {6,7,8,9,10,11};
+		numbers = normalDice;
 		random = new Random();
 	}
 	
@@ -74,38 +84,58 @@ public class DiceRoller implements Serializable {
 		
 		return value;
 	}
+
+	public ArrayList<Integer> roll(int times){
+		
+		ArrayList<Integer> diceRoll = new ArrayList<Integer>();
+		for(int i = 0; i < times; i++) {
+			diceRoll.add(numbers[random.nextInt(6)]);
+		}
+		diceRoll.add(0);
+		return diceRoll;
+		
+	}
 	
 	//roll a dice
 	public ArrayList<Integer> roll(Character c) {
 		//Hero needs to add his current strength points to his highest roll
+		int indicator = -1;
 		ArrayList<Integer> diceRoll = new ArrayList<Integer>();
+		if(c instanceof Hero) {
+			numbers = ((Hero) c).hasBlackDice ? blackDice : normalDice;
+			indicator = -2;
+		}	
 		
 		if(c instanceof Warrior) {
 			diceRoll = warriorRoll(((Warrior) c).wp);
-			
+			diceRoll.add(indicator);
 		}
-		
 		else if(c instanceof Archer) {
 			//archerRoll() is incomplete: archer can only re-roll the die for a limited number of time (= number of dice he has)
 			diceRoll = archerRoll(((Archer) c).wp);
+			diceRoll.add(indicator);
 		}
-		
 		else if(c instanceof Dwarf) {
 			diceRoll = dwarfRoll(((Dwarf) c).wp);
+			diceRoll.add(indicator);
 		}
-		
+
 		else if(c instanceof Mage) {
 			diceRoll = mageRoll();
+			diceRoll.add(indicator);
 		}
-		
+
 		else if(c instanceof Gor) {
 			diceRoll = gorRoll();
+			diceRoll.add(-3);
 		}
 		
 		else if(c instanceof Skral) {
 			diceRoll = skralRoll();
+			diceRoll.add(-3);
 		}
 		
+		numbers = normalDice;
 		return diceRoll;
 	}
 	
@@ -119,8 +149,7 @@ public class DiceRoller implements Serializable {
 		
 		return rolls;
 	}
-	
-	
+
 	private ArrayList<Integer> gorRoll() {
 		ArrayList<Integer> rolls = new ArrayList<Integer>();
 		int nbDice = 2;

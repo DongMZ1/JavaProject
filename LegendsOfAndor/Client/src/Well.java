@@ -3,8 +3,9 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Well implements TileEntity{
+public class Well implements TileEntity, Serializable{
 
 	private int tile;
 	

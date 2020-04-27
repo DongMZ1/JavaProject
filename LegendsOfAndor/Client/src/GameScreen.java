@@ -23,28 +23,30 @@ public class GameScreen implements Serializable{
 	public DwarfMine mine;
 	public Castle castle;
 	public Witch witch;
+	public ArrayList<Gold> golds;
     public Castle getCastle() {
     	return this.castle;
     }
-    public TurnManager tm;
+    public TurnManager tm = new TurnManager(new ArrayList<>());
 	CollaborativeDecision cd;
     public GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
     public Narrator narrator;
+    public boolean hasPrince = false;
     public static GameScreen gameScreen;
-    public Time time;
 	public static GameScreen getInstance() throws IOException {
 		if(gameScreen == null)
 			gameScreen = new GameScreen();
 		return gameScreen;
 	}
+	public PrinceThorald princeThorald;
 
     private GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
 //        tiles = new TileInitialiser().initialiseCoords(tiles);
         tiles = Tile.getAll();
-        
+        golds = GoldInitializer.GoldIntializer();
         monsters = MonsterInitializer.initializeMonsters();
         wells = new ArrayList<>();
         wells.add(new Well(5));
@@ -58,12 +60,11 @@ public class GameScreen implements Serializable{
         farmers = FarmerInitializer.initializeFarmers();
         //GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
-        tm = new TurnManager(new ArrayList<>());
-        time = new Time();
+       // tm = new TurnManager(new ArrayList<>());
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
-//        cd = new CollaborativeDecision(DecisionType.START,screen, tm);
-        castle = new Castle(5 - tm.getSize());
+        cd = new CollaborativeDecision(DecisionType.START, tm); 
+        castle = new Castle(5 - tm.heroes.size());
     }
 
     public void addHero(Hero hero) {
@@ -95,11 +96,31 @@ public class GameScreen implements Serializable{
 		tileEntity.setTile(destination);
 	}
 
-    public void newDay() {
+    public void newDay() throws IOException {
     	ArrayList<Monster> toRemove = new ArrayList<>(); //must use because of Enhanced for loop
     	ArrayList<Integer> occupiedSpaces = new ArrayList<>();
     	
     	for (Monster monster : monsters) {
+    		
+    		if(monster instanceof Wardraks) {
+    			for(int i = 0; i <2; i++) {
+    				Integer mTile = monster.advance();
+    	    		//If at castle then toRemove
+    	    		if(mTile == 0) {
+    	    			tiles.get(monster.tile).removeTileEntity(monster);
+    	    			toRemove.add(monster);
+    	    		}
+    	    		//If space is occupied, skip over it and add new space to occupied space
+    	    		else if (occupiedSpaces.contains(mTile)) {
+    	    			occupiedSpaces.add(monster.advance());
+    	    		}
+    	    		//Else was just a normal move. Save tile that ended on
+    	    		else {
+    	    			occupiedSpaces.add(mTile);
+    	    		}
+    				
+    			}
+    		}else {
     		Integer mTile = monster.advance();
     		//If at castle then toRemove
     		if(mTile == 0) {
@@ -114,6 +135,7 @@ public class GameScreen implements Serializable{
     		else {
     			occupiedSpaces.add(mTile);
     		}
+    		}
     	}
     	//These are monsters that reached castle
     	for (Monster rMonster : toRemove)
@@ -127,7 +149,6 @@ public class GameScreen implements Serializable{
     		w.replenishWell();
     	}
     	tm.newDay();
-    	this.time.advance();
     	this.narrator.advance();
     }
 

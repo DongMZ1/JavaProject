@@ -25,12 +25,14 @@ String name;
 		
 public DropOffOptionDefine(String name) {
 
-MinuetoFont fontArial19;				// Font used to draw on the screen.
+MinuetoFont fontArial19;
+MinuetoImage imageText3;	// Font used to draw on the screen.
 MinuetoImage imageText2;		// Instructions drawn on the screen.		// Background for this demo		
+MinuetoImage imageText4, text5;
 Random random = new Random();		
 this.name = name;		
 this.closing = false;
-window = new MinuetoFrame(640, 480, true);
+window = new MinuetoFrame(1000, 1000, true);
 //Build the event queue.
 eventQueue = new MinuetoEventQueue();
 //Register the keyboard handler with the event queue.
@@ -47,8 +49,10 @@ window.exitOnClose(true);
 fontArial19 = new MinuetoFont("Arial",19,false, false);
 
 //Build images of the demo instructions.
-imageText2 = new MinuetoText("press 'F' to dropoff Farmer, 'G' to dropoff Gold, 'Q' to exit",fontArial19,MinuetoColor.BLUE);
-
+imageText2 = new MinuetoText("press 'F' to dropoff Farmer, 'G' to dropoff Gold,",fontArial19,MinuetoColor.BLUE);
+imageText3 = new MinuetoText("For Items, press 1 to drop Bow, press 2 to drop Wineskin, press 3 to drop Falcon, press 4 to drop helm;",fontArial19,MinuetoColor.BLUE);
+imageText4 = new MinuetoText("Press 5 to drop Shield, Press 6 to drop WitchBrew, Press 7 to drop Telescope",fontArial19,MinuetoColor.BLUE);
+text5 =  new MinuetoText("8 to drop MedicalHerb , '9' to drop RuneStone  'Q' to exit",fontArial19,MinuetoColor.BLUE);
 //Show the game window.
 window.setVisible(true);
 
@@ -63,7 +67,9 @@ window.clear();
 
 //Draw the background.
 window.draw(imageText2, 0, 0);
-
+window.draw(imageText3, 0, 30);
+window.draw(imageText4, 0, 60);
+window.draw(text5, 0, 90);
 //Handle all the events in the event queue.
 while (eventQueue.hasNext()) {
 eventQueue.handle();
@@ -84,20 +90,85 @@ Thread.yield();
 **/
 public void handleKeyPress(int value) {
 
-System.out.println(this.name + ": Keyboard key " + value + " was pressed.");
 
 switch(value) {
 case MinuetoKeyboard.KEY_F:
-Client.mainHero.dropFarmer();
+Client.getMainHero().dropFarmer();
+InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
 
 case MinuetoKeyboard.KEY_G:
-Client.mainHero.dropGold();
+	Client.getMainHero().dropGold();
+	InputThread.updateVariable();
 this.closing = true;
 window.close();
 break;
+
+case MinuetoKeyboard.KEY_1:
+	Client.getMainHero().dropBow();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_2:
+	Client.getMainHero().dropWineskin();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_3:
+	Client.getMainHero().dropFalcon();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_4:
+	Client.getMainHero().dropHelm();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_5:
+	Client.getMainHero().dropShield();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_6:
+	Client.getMainHero().dropWitchBrew();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_7:
+	Client.getMainHero().dropTelescope();
+	InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_8:
+Client.getMainHero().dropMedicalHerb();
+InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
+case MinuetoKeyboard.KEY_9:
+Client.getMainHero().dropRuneStone();
+InputThread.updateVariable();
+this.closing = true;
+window.close();
+break;
+
 
 case  MinuetoKeyboard.KEY_Q:
 this.closing = true;
