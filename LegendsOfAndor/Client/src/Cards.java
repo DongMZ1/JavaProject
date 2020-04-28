@@ -90,7 +90,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   	}
 			}
 	   }
-	   GameStatus.gameStatus.EventCardIndex++;
+	   Client.gameStatus.EventCardIndex++;
    }
    
    
@@ -98,7 +98,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
 			   }else {
 				 @SuppressWarnings("unused") Cards A3Hard = new Cards(303);
@@ -107,7 +107,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   @SuppressWarnings("unused") Cards A5 = new Cards(305);
 		   break;
 	   case 2:
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);
 			   }else {
 				 @SuppressWarnings("unused") Cards C1Hard = new Cards(307);
@@ -121,7 +121,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   Cards N = new Cards(310);
 		   break;
 	   case 100:
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
 			   
 		   }else {
@@ -138,7 +138,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 	   switch(legend2cardindex) {
 	   case 1:
 		   @SuppressWarnings("unused") Cards A1 = new Cards(301);
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards A3Easy = new Cards(302);
 			   
 			  Gor gor1 = new Gor(8);
@@ -208,16 +208,16 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   ArrayList<Integer> list = dr.roll(1);
 		   DiceHandler dd = new DiceHandler(list);
 		   dd.start();
-		   if(list.get(0) == 1) { GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 2;}
-		   else if(list.get(0) == 2){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 4;}
-		   else if(list.get(0) == 3){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 5;}
-		   else if(list.get(0) == 4){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
-		   else if(list.get(0) == 5){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
-		   else if(list.get(0) == 6){GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard = 8;}
+		   if(list.get(0) == 1) { Client.gameStatus.WhenToDrawRuneStoneLegendCard = 2;}
+		   else if(list.get(0) == 2){Client.gameStatus.WhenToDrawRuneStoneLegendCard = 4;}
+		   else if(list.get(0) == 3){Client.gameStatus.WhenToDrawRuneStoneLegendCard = 5;}
+		   else if(list.get(0) == 4){Client.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 5){Client.gameStatus.WhenToDrawRuneStoneLegendCard = 6;}
+		   else if(list.get(0) == 6){Client.gameStatus.WhenToDrawRuneStoneLegendCard = 8;}
 		   // WE also need COOB decision to distribute 5gold 2wp
 		   break;
 	   case 2:
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards C1Easy = new Cards(306);   
 			   DiceRoller dr1 = new DiceRoller();
 			   ArrayList<Integer> list1 = dr1.roll(1);
@@ -274,7 +274,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   Cards N = new Cards(310);
 		   break;
 	   case 100:
-		   if(GameStatus.gameStatus.Legend2ModeIsEasy) {
+		   if(Client.gameStatus.Legend2ModeIsEasy) {
 			   @SuppressWarnings("unused") Cards RuneStoneEasy = new Cards(-3);
 			   
 			   Gor gor8 = new Gor(43);

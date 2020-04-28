@@ -871,7 +871,7 @@ public class Hero implements Character, Serializable {
 			if(f instanceof FogToken) {
 				//1 is draw a event card
 				if(((FogToken)f).tokenNumber == 1) {
-								Cards.drawEventCard(GameStatus.gameStatus.EventCardIndex);
+								Cards.drawEventCard(Client.gameStatus.EventCardIndex);
 								System.out.println(tile);
 								Tile.get(f.getTile()).getTileEntities().remove(f);
 								InputThread.updateVariable();

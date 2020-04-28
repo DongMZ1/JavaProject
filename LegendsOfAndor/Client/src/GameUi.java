@@ -166,8 +166,8 @@ public class GameUi implements Inputtable {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
 	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y)) {
-	            	System.out.println("The Legend2Cardindex: " + GameStatus.gameStatus.legend2CardIndex);
-	            		Cards.showLegend2Card(GameStatus.gameStatus.legend2CardIndex);
+	            	System.out.println("The Legend2Cardindex: " + Client.gameStatus.legend2CardIndex);
+	            		Cards.showLegend2Card(Client.gameStatus.legend2CardIndex);
 	            }
 	            
 	        }

@@ -25,30 +25,30 @@ public class Narrator implements Serializable{
           narrartorTrack ++;
 		}
 		//set rune stone cards for draw
-		if(narrartorTrack == GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard) {
+		if(narrartorTrack == Client.gameStatus.WhenToDrawRuneStoneLegendCard) {
 			Cards.DrawLegend2Card(100);
-			GameStatus.gameStatus.legend2CardIndex = GameStatus.gameStatus.WhenToDrawRuneStoneLegendCard;
+			Client.gameStatus.legend2CardIndex = Client.gameStatus.WhenToDrawRuneStoneLegendCard;
 			
 		}
 		
 		if(narrartorTrack == 1) {
 			Cards.DrawLegend2Card(1);
-			GameStatus.gameStatus.legend2CardIndex = 1;
+			Client.gameStatus.legend2CardIndex = 1;
 		}
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
-			GameStatus.gameStatus.legend2CardIndex = 2;
+			Client.gameStatus.legend2CardIndex = 2;
 		}
 
 		if(narrartorTrack == 7) {
 			Cards.DrawLegend2Card(3);
-			GameStatus.gameStatus.legend2CardIndex = 3;
+			Client.gameStatus.legend2CardIndex = 3;
 		}
 		
 		if(narrartorTrack == 14) {
 			Cards.DrawLegend2Card(4);
-			GameStatus.gameStatus.legend2CardIndex = 4;
+			Client.gameStatus.legend2CardIndex = 4;
 		}
 		InputThread.updateVariable();
 	}	
