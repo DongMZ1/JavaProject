@@ -12,6 +12,9 @@ public class TileEntityDrawer {
 	private MinuetoImage emptyWellImage;
 	private MinuetoImage fogTokenImage;
 	private MinuetoImage archerImage;
+	private MinuetoImage dwarfImage;
+	private MinuetoImage warriorImage;
+	private MinuetoImage mageImage;
 	private MinuetoImage farmerImage;
 	private MinuetoImage goldImage;
 	private MinuetoImage wineskinImage;
@@ -40,6 +43,7 @@ public class TileEntityDrawer {
 		fogTokenImage = new MinuetoImageFile("images/fogtoken.jpg").scale(0.2, 0.2);
 		witchImage = new MinuetoImageFile("images/witch.jpg").scale(0.07, 0.07);
 		archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
+		dwarfImage = new MinuetoImageFile("images/Heroes/DwarfMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
 		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.25,0.25);
 		wineskinImage = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
@@ -78,6 +82,12 @@ public class TileEntityDrawer {
 			Client.screen.draw(fogTokenImage, xCoord, yCoord);
 		else if(tileEntity instanceof Archer)
 			Client.screen.draw(archerImage, xCoord, yCoord);
+		else if(tileEntity instanceof Dwarf)
+			Client.screen.draw(dwarfImage, xCoord, yCoord);
+		else if(tileEntity instanceof Warrior)
+			Client.screen.draw(warriorImage, xCoord, yCoord);
+		else if(tileEntity instanceof Mage)
+			Client.screen.draw(mageImage, xCoord, yCoord);
 		else if(tileEntity instanceof Farmer)
 			Client.screen.draw(farmerImage, xCoord, yCoord);
 		else if(tileEntity instanceof Gold)

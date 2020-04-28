@@ -22,9 +22,8 @@ public class Client {
     static GameStatus gameStatus;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
-        new InputThread().start();
         screen.setVisible(true);
-    	mainHero = new Archer(0);
+    	mainHero = new Dwarf(0);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
@@ -34,8 +33,9 @@ public class Client {
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
-        inputHandler.addInput(gameScreenDrawer.collabDrawer); 
-       
+        inputHandler.addInput(gameScreenDrawer.collabDrawer);
+        new InputThread().start();
+        Thread.sleep(2000);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         InputThread.updateVariable();
         while (true) {
@@ -66,7 +66,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "127.0.1.1";
+    static String serverAddress = "192.168.1.84";
 
     static Socket socket;
     static ObjectInputStream in;
