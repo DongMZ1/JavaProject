@@ -103,10 +103,6 @@ MinuetoWindowHandler, Serializable{
 			this.closing = true;
 			window.close();
 			break;
-		case  MinuetoKeyboard.KEY_Q:
-			this.closing = true;
-			window.close();
-			break;
 		}
 		
 	}
