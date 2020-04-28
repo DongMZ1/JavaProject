@@ -32,6 +32,9 @@ public class GameStatus implements Serializable {
     public int EventCardIndex = 1;
     public int WhenToDrawRuneStoneLegendCard = 100;
 	
+	public boolean MedicalHerbInCastle = false;
+	public boolean SkralTowerDefeated = false;
+	
 	public int TheHeroNumberInTurnManagerForFalconTrade = 100;
 	int screenWidth = 1280;
 	int screenHeight = 720;
