@@ -9,6 +9,10 @@ public class Castle implements Serializable{
 	public Castle(int health) throws IOException {
 		this.health = health;
 	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
 	
 	public void damage(Monster m) {
     	//TODO: Should decrease shield count of castle

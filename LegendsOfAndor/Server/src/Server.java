@@ -122,6 +122,7 @@ public class Server {
                 // Accept messages from this client and broadcast them.
                 while (true) {
                     Object input = in.readObject();
+                    System.out.println(input.getClass());
                     if(input instanceof GameScreen)
                         gameScreen = (GameScreen) input;
                     else if(input instanceof GameStatus)

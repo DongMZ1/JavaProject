@@ -31,6 +31,5 @@ public class CastleDrawer {
 		Coordinate coordinates = camera.getPosOnScreen(80,400);
 		Client.screen.draw(upperBlock, coordinates.getX(),coordinates.getY());
 		Client.screen.draw(new MinuetoText(castle.message, font, MinuetoColor.BLACK), coordinates.getX(), coordinates.getY());
-		InputThread.updateVariable();
 	}
 }

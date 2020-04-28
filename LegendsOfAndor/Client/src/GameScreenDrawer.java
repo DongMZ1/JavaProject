@@ -74,11 +74,11 @@ public class GameScreenDrawer implements Inputtable{
 			gameScreen.cd.decisionLoop();
 		}
 		castleDrawer.draw(gameScreen.castle);
-				Coordinate timeCoordinate = this.camera.getPosOnScreen(Client.getMainHero().time.x, Client.getMainHero().time.y);
-				Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
-				//draw narrator
-				Coordinate narratorCoordinate = this.camera.getPosOnScreen(gameScreen.narrator.x, gameScreen.narrator.y);
-				Client.screen.draw(narratorImage, narratorCoordinate.getX(), narratorCoordinate.getY());
+		Coordinate timeCoordinate = this.camera.getPosOnScreen(Client.getMainHero().time.x, Client.getMainHero().time.y);
+		Client.screen.draw(timeImage, timeCoordinate.getX(), timeCoordinate.getY());
+		//draw narrator
+		Coordinate narratorCoordinate = this.camera.getPosOnScreen(gameScreen.narrator.x, gameScreen.narrator.y);
+		Client.screen.draw(narratorImage, narratorCoordinate.getX(), narratorCoordinate.getY());
 		
 	}
 

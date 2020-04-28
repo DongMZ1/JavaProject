@@ -161,12 +161,13 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				
 			}
 			i++;
+			InputThread.updateVariable();
 		}
 		
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {
 			CollaborativeDecision.toDecide = DecisionType.NONE;
+			InputThread.updateVariable();
 		}
-		InputThread.updateVariable();
 		
 	}
 	@Override
