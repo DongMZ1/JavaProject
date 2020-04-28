@@ -93,7 +93,7 @@ public class GameUi implements Inputtable {
         informationButton.draw();
         currentLegendCard.draw();
         MovePrince.draw();
-        Client.screen.draw(timeTokenImage, Client.getMainHero().time.x, Client.getMainHero().time.y);
+        //Client.screen.draw(timeTokenImage, Client.getMainHero().time.x, Client.getMainHero().time.y);
     }
 
    // public void drawPickup() {

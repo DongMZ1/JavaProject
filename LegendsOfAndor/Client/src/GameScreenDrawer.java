@@ -110,7 +110,7 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		Client.getMainHero().setTile(destination);
 		gameScreen.tiles.get(destination).tileEntities.add(Client.getMainHero());
-		InputThread.updateVariable();
+		//InputThread.updateVariable();
 	}
 
 	public void handleKeyPress(int key) {
@@ -140,8 +140,9 @@ public class GameScreenDrawer implements Inputtable{
 		else if(c == 'g') {
 			//move 4 tile will cost one time
 			if(this.PrinceCost == 4) {
-				Client.mainHero.time.advance();
+				Client.getMainHero().time.advance();
 				this.PrinceCost = 0;
+				InputThread.updateVariable();
 			}
 			if(gameScreen.gameStatus.ui == UIStatus.MovePrince && Client.getMainHero().canMakeMove() && this.gameScreen.hasPrince) {
 				//when starting move prince, it cost 1 time;
@@ -153,6 +154,7 @@ public class GameScreenDrawer implements Inputtable{
 						GameScreen.gameScreen.princeThorald.tile = toMove;
 						this.PrinceCost ++;
 						InputThread.updateVariable();
+						System.out.println(this.PrinceCost);
 					}
 				}
 			}
@@ -170,6 +172,7 @@ public class GameScreenDrawer implements Inputtable{
 							gameScreen.gameStatus.ui = UIStatus.MOVING;
 							gameUi.moveButton.setLabel("End Move");
 							InputThread.updateVariable();
+							System.out.println(Client.getMainHero().time.time);
 						}
 					}
 					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
@@ -177,6 +180,7 @@ public class GameScreenDrawer implements Inputtable{
 							moveHero(Client.getMainHero().getTile(),toMove);
 							Client.getMainHero().time.advance();
 							InputThread.updateVariable();
+							System.out.println(Client.getMainHero().time.time);
 						}
 					}
 				}

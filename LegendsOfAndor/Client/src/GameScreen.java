@@ -27,7 +27,7 @@ public class GameScreen implements Serializable{
     public Castle getCastle() {
     	return this.castle;
     }
-    public TurnManager tm = new TurnManager(new ArrayList<>());
+    public TurnManager tm;
 	CollaborativeDecision cd;
     public GameStatus gameStatus;
     public ArrayList<FogToken> fogtokens;
@@ -60,7 +60,7 @@ public class GameScreen implements Serializable{
         farmers = FarmerInitializer.initializeFarmers();
         //GoldInitializer.GoldIntializer();
         fogtokens = FogTokenInitializer.InitializeFogtoken();
-       // tm = new TurnManager(new ArrayList<>());
+        tm = new TurnManager(new ArrayList<>());
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
         cd = new CollaborativeDecision(DecisionType.TEST, tm); 
@@ -150,7 +150,9 @@ public class GameScreen implements Serializable{
     	}
     	tm.newDay();
     	this.narrator.advance();
+    	InputThread.updateVariable();
     }
+
 
 }
 
