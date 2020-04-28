@@ -85,37 +85,134 @@ MinuetoWindowHandler, Serializable{
 	@Override
 	public void handleKeyPress(int value) {
 		if (value == MinuetoKeyboard.KEY_1) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Gold) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_2) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Gold) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_3) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof RuneStone) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_4) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof RuneStone) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_5) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Bow) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_6) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Bow) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_7) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Shield) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_8) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Shield) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_9) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof WitchBrew) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_0) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof WitchBrew) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_A) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Telescope) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_B) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Telescope) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_C) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Wineskin) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_D) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Wineskin) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_E) {
+			for(Item i: Client.getMainHero().items) {
+				if(i instanceof Helm) {
+					Client.getMainHero().items.remove(i);
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
+				}
+			}
 		}
 		if (value == MinuetoKeyboard.KEY_F) {
+			for(Item i: GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items) {
+				if(i instanceof Helm) {
+					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
+					Client.getMainHero().items.add(i);
+				}
+			}
 		}
+	
 
 		if(value == MinuetoKeyboard.KEY_Q) {
 			this.closing = true;
