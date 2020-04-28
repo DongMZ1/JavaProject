@@ -11,5 +11,5 @@
 	<classpathentry kind="src" path="LegendsOfAndor/Server/src"/>
 	<classpathentry exported="true" kind="lib" path="LegendsOfAndor/Minueto_2.0/minueto-samples.jar"/>
 	<classpathentry exported="true" kind="lib" path="LegendsOfAndor/Minueto_2.0/minueto.jar"/>
-	<classpathentry kind="output" path="LegendsOfAndor/Client/out/production/Client"/>
+	
 </classpath>
