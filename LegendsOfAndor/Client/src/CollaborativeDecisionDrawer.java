@@ -39,7 +39,9 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			archerImage = new MinuetoImageFile("images/Heroes/ArcherMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 			dwarfImage = new MinuetoImageFile("images/Heroes/DwarfMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 			warriorImage = new MinuetoImageFile("images/Heroes/WarriorMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
-//			rewardButton = new Button(new Coordinate(400,50), 0, 0, "SELECT HOW MUCH GOLD YOU WANT AS A REWARD (any gold left over will be converted to willpoints", false);
+			mageImage = new MinuetoImageFile("images/Heroes/MageMaleIcon.png").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
+
+			//			rewardButton = new Button(new Coordinate(400,50), 0, 0, "SELECT HOW MUCH GOLD YOU WANT AS A REWARD (any gold left over will be converted to willpoints", false);
 			textBox = TextBox.getInstance();
 			gameStatus = GameStatus.getInstance();
 //			 inputHandler = InputHandler.getInputHandler();

@@ -210,12 +210,13 @@ public class GameScreenDrawer implements Inputtable{
 			if(Client.getMainHero().time.getTime() <= 10) {Client.getMainHero().time.advance();}
 
 			gameScreen.tm.endTurn();
-
+			gameScreen.currentHero = gameScreen.tm.getHero();
 			gameScreen.gameStatus.ui = UIStatus.NONE;
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.MOVED) {
 			gameScreen.gameStatus.ui = UIStatus.NONE;
 			gameScreen.tm.endTurn();
+			gameScreen.currentHero = gameScreen.tm.getHero();
 			gameUi.moveButton.setLabel("Move");
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
