@@ -171,7 +171,7 @@ public class GameUi implements Inputtable {
 	            else if(waitButton.isClickable() && waitButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
-	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y) && verify()) {
+	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y)) {
 	            		Cards.showLegend2Card(GameStatus.gameStatus.legend2CardIndex);
 	            }
 	            
