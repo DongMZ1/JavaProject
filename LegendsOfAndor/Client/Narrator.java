@@ -13,18 +13,28 @@ public class Narrator implements Serializable{
 	
 	public Narrator() {
 		x = 12600;
+<<<<<<< HEAD
 		y = 8820;
 		narrartorTrack = 0;
+=======
+		y = 8200;
+		narrartorTrack = 1;
+>>>>>>> jamie_branch
 	}
 	
 
 	
+<<<<<<< HEAD
 	public void advance() throws IOException {
+=======
+	public void advance() {
+>>>>>>> jamie_branch
 		if(y > 600) {
           y = y -620;
           narrartorTrack ++;
 		}
 		
+<<<<<<< HEAD
 		if(GameStatus.gameStatus.SkralTowerDefeated && GameStatus.gameStatus.MedicalHerbInCastle) {
 			Cards.DrawLegend2Card(4);
 			GameStatus.gameStatus.legend2CardIndex = 4;
@@ -40,6 +50,8 @@ public class Narrator implements Serializable{
 			Cards.DrawLegend2Card(1);
 			GameStatus.gameStatus.legend2CardIndex = 1;
 		}
+=======
+>>>>>>> jamie_branch
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
@@ -55,14 +67,22 @@ public class Narrator implements Serializable{
 			Cards.DrawLegend2Card(4);
 			GameStatus.gameStatus.legend2CardIndex = 4;
 		}
+<<<<<<< HEAD
 		InputThread.updateVariable();
+=======
+		
+>>>>>>> jamie_branch
 	}	
 
 	
 	public void reset() {
 		narrartorTrack = 1;
 		x = 12600;
+<<<<<<< HEAD
 		y = 8820;
+=======
+		y = 8200;
+>>>>>>> jamie_branch
 	}
 	
 }

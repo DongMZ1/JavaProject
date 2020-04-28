@@ -4,11 +4,6 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.minueto.MinuetoEventQueue;
-import org.minueto.image.MinuetoFont;
-import org.minueto.image.MinuetoImage;
-import org.minueto.window.MinuetoWindow;
-
 public class DiceRoller implements Serializable {
 	
 	// 0 for system roll
@@ -32,7 +27,6 @@ public class DiceRoller implements Serializable {
 		numbers = normalDice;
 		random = new Random();
 	}
-
 	
 	//function for Mage to turn a roll to opposite value
 	public int getOppositeNumber(int rollValue) {
@@ -94,8 +88,7 @@ public class DiceRoller implements Serializable {
 		
 		return value;
 	}
-	
-	
+
 	public ArrayList<Integer> roll(int times){
 		
 		ArrayList<Integer> diceRoll = new ArrayList<Integer>();
@@ -121,23 +114,21 @@ public class DiceRoller implements Serializable {
 			diceRoll = warriorRoll(((Warrior) c).wp);
 			diceRoll.add(indicator);
 		}
-		
 		else if(c instanceof Archer) {
 			//archerRoll() is incomplete: archer can only re-roll the die for a limited number of time (= number of dice he has)
 			diceRoll = archerRoll(((Archer) c).wp);
 			diceRoll.add(indicator);
 		}
-		
 		else if(c instanceof Dwarf) {
 			diceRoll = dwarfRoll(((Dwarf) c).wp);
 			diceRoll.add(indicator);
 		}
-		
+
 		else if(c instanceof Mage) {
 			diceRoll = mageRoll();
 			diceRoll.add(indicator);
 		}
-		
+
 		else if(c instanceof Gor) {
 			diceRoll = gorRoll();
 			diceRoll.add(-3);
@@ -163,7 +154,6 @@ public class DiceRoller implements Serializable {
 		return rolls;
 	}
 
-	
 	private ArrayList<Integer> gorRoll() {
 		ArrayList<Integer> rolls = new ArrayList<Integer>();
 		int nbDice = 2;

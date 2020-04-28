@@ -23,7 +23,7 @@ public class TextBox implements Inputtable, Serializable{
         pastMessages.add(new Message(sender, message));
     }
 
-    private class Message {
+    public class Message {
         private String messageSender;
         private String message;
         public Message(String messageSender, String message) {

@@ -15,21 +15,29 @@ import org.minueto.window.*;
 
 public class Client {
 
-    static LobbyScreen lobbyScreen;
+    static PreGameScreen preGameScreen;
     static GameScreenDrawer gameScreenDrawer;
-    static TextBox textBox;
-    public static Hero mainHero;
     static GameStatus gameStatus;
+    public static Hero mainHero;
+    static {
+        try {
+            mainHero = new Archer(0);
+            gameScreenDrawer = GameScreenDrawer.getInstance();
+            gameStatus = GameStatus.getInstance();
+        } catch (IOException e) { e.printStackTrace();}
+    }
+    static InputHandler inputHandler;
+    static TextBox textBox;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
     	mainHero = new Archer(1);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
-        lobbyScreen = new LobbyScreen();
         gameScreenDrawer = GameScreenDrawer.getInstance();
+        preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
-        inputHandler.addInput(lobbyScreen);
+        inputHandler.addInput(preGameScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
@@ -41,7 +49,7 @@ public class Client {
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
-                lobbyScreen.draw();
+                preGameScreen.draw();
             else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
                 gameScreenDrawer.draw();
             }
@@ -67,7 +75,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.100";
+    static String serverAddress = "192.168.1.84";
 
     static Socket socket;
     static ObjectInputStream in;
@@ -100,6 +108,8 @@ class InputThread extends Thread{
             if(input instanceof GameStatus) {
                 Client.gameStatus = (GameStatus) input;
                 Client.gameScreenDrawer.updateGameStatus((GameStatus) input);
+                Client.preGameScreen.lobbyScreen.gameStatus = (GameStatus) input;
+                Client.inputHandler.gameStatus = (GameStatus) input;
             }
             else if(input instanceof GameScreen) {
                 Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
@@ -107,7 +117,7 @@ class InputThread extends Thread{
             else
                 System.out.print("Whoops");
         }
-        } catch(Exception e) {}
+        } catch(Exception e) { System.out.println("Goodbye!"); }
     }
 
     public static void updateVariable() {
@@ -118,4 +128,5 @@ class InputThread extends Thread{
 			e.printStackTrace();
 		}
     }
+
 }

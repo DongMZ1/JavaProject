@@ -14,7 +14,10 @@ public class Hero implements Character, Serializable {
 	Farmer farmer = null;
 	boolean hasfarmer = false;
 	boolean hasGold = false;
+<<<<<<< HEAD
 	boolean hasBlackDice = false;
+=======
+>>>>>>> jamie_branch
     boolean holdWineSkinForUse = false; //set wineskin to ready to use before using it, example: 
     //set it true before move, so that timer will not increase if this attribute is true
     //get a final list of items
@@ -51,6 +54,7 @@ public class Hero implements Character, Serializable {
 	    	return false;
 	    }
 	 
+<<<<<<< HEAD
 	 public boolean hasWitch() {
 	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
 	    		if(t instanceof Witch) {
@@ -60,6 +64,8 @@ public class Hero implements Character, Serializable {
 	    	return false;
 	    }
 	 
+=======
+>>>>>>> jamie_branch
 	    public boolean hasMonster() {
 	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
 	    		if(t instanceof Monster) {
@@ -78,6 +84,7 @@ public class Hero implements Character, Serializable {
 		  	return false;
 	  	}
 	 
+<<<<<<< HEAD
 	  	public Item removeItem(Item i) {
 	  		for (Item item: items) {
 	  			if (item.getClass() == i.getClass()) {
@@ -87,6 +94,8 @@ public class Hero implements Character, Serializable {
 	  		}
 	  		return null;
 	  	}
+=======
+>>>>>>> jamie_branch
 	 
 	 
 	//Wineskin//////////////////////////////////////////////////////////////////////
@@ -120,9 +129,14 @@ public class Hero implements Character, Serializable {
 		}
 	}
 	
+<<<<<<< HEAD
 	public void BuyWineskinFor2Gold(){
 		//if have money/merchant
 		if(this.getGoldNm() >= 2 && this.hasMerchant() && this.getWineskin() <2) { 
+=======
+	public void BuyWineSkinFor2Gold(){
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+>>>>>>> jamie_branch
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -141,6 +155,7 @@ public class Hero implements Character, Serializable {
 				items.remove(count);
 		
 		//add wine skin
+<<<<<<< HEAD
 		int WineskinCount = 0;
 		for(Item i: items) {
 			if(i instanceof Wineskin) {
@@ -152,6 +167,15 @@ public class Hero implements Character, Serializable {
 			WineskinCount++;
 		}
 		if(WineskinCount < 2) {
+=======
+		int wineSkinCount = 0;
+		for(Item i: items) {
+			if(i instanceof Wineskin) {
+				wineSkinCount ++;
+			}
+		}
+		while(wineSkinCount < 2) {
+>>>>>>> jamie_branch
 			this.items.add(new Wineskin(this.tile));
 		}
 		}
@@ -179,6 +203,7 @@ public class Hero implements Character, Serializable {
 		return WineskinCount;
 	}
 	
+<<<<<<< HEAD
 	public void dropWineskin() {
 		for (Item t: this.items) {
 			if(t instanceof Wineskin) {
@@ -202,6 +227,13 @@ public class Hero implements Character, Serializable {
 	public void BuyBowFor2Gold(){
 		//if have money/merchant
 		if(this.getGoldNm() >= 2 && this.hasMerchant() &&this.getBow()<2 ) { 
+=======
+	
+////////////Bow///////////////////////////////////////////////////////////////////
+	public void BuyBowFor2Gold(){
+		//if have money/merchant
+		if(this.getGoldNm() >= 2 && this.hasMerchant()) { 
+>>>>>>> jamie_branch
 			//remove gold first
 			int count = 0;
 				for(Item i: this.items) {
@@ -226,16 +258,21 @@ public class Hero implements Character, Serializable {
 				BowCount ++;
 			}
 		}
+<<<<<<< HEAD
 		if(BowCount < 2) {
 			this.items.add(new Bow(this.tile));
 			BowCount++;
 		}
 		if(BowCount < 2) {
+=======
+		while(BowCount < 2) {
+>>>>>>> jamie_branch
 			this.items.add(new Bow(this.tile));
 		}
 		}
 	}
 	
+<<<<<<< HEAD
 	public int getBow() {
 		int BowCount = 0;
 		for(Item i: items) {
@@ -719,6 +756,14 @@ public class Hero implements Character, Serializable {
 	
 	//Well///////////////////////////////////////////////////////////////////////////////
 
+=======
+
+	
+	
+	
+	//Well///////////////////////////////////////////////////////////////////////////////
+	//UPDATE
+>>>>>>> jamie_branch
 	public void replenishWP() {
 		ArrayList<TileEntity> entities = Tile.get(tile).getTileEntities(); 	
 		if(entities != null) {
@@ -775,8 +820,22 @@ public class Hero implements Character, Serializable {
 
 			// call farmer.isguide to assign hero to the farmer, then add farmer as a item to itemlist of hero 
 		
+<<<<<<< HEAD
 
     
+=======
+	
+
+	
+
+
+
+    
+
+
+    
+    
+>>>>>>> jamie_branch
 //Gold///////////////////////////////////////////////////////////////////   
 	//UPDATE
 	public void pickupGold() {
@@ -926,6 +985,7 @@ public class Hero implements Character, Serializable {
 					Cards c1 = new Cards(1006);
 					GameScreen.gameScreen.witch = new Witch(this.tile);
 					GameScreen.gameScreen.tiles.get(this.tile).addTileEntity(GameScreen.gameScreen.witch);
+<<<<<<< HEAD
 					if(this.getWitchBrew() < 2) {
 						this.items.add(new WitchBrew(this.tile));
 					}
@@ -969,13 +1029,18 @@ public class Hero implements Character, Serializable {
 						}
 					}
 					
+=======
+>>>>>>> jamie_branch
 				}
 				 
 					Tile.get(tile).getTileEntities().remove(f);
 					break;
 			}
 		}
+<<<<<<< HEAD
     	InputThread.updateVariable();
+=======
+>>>>>>> jamie_branch
     }
 
 	
