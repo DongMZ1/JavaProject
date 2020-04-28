@@ -53,6 +53,8 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
+		this.gameScreen.gameStatus = gameStatus;
+		this.gameScreen.cd.gameStatus = gameStatus;
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -158,6 +160,7 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == ' ') {
 			System.out.println(toMove);
+			System.out.println(gameScreen.tm.getHero().getClass());
 			if (Client.getMainHero().canMakeMove()){
 				if (toMove >= 0 && toMove <= 76) {
 					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {

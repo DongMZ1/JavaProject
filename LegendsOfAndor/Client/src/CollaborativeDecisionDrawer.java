@@ -154,6 +154,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 					if (selectedNumItems < maxNumItems) {
 						CollaborativeDecision.items.get(i).second = Client.mainHero;
 						selectedNumItems++;
+						InputThread.updateVariable();
 					}
 				}
 				else {
@@ -162,7 +163,6 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				
 			}
 			i++;
-			InputThread.updateVariable();
 		}
 		
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {

@@ -117,7 +117,7 @@ public class GameUi implements Inputtable {
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
 	        }
 	        else {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero() == Client.mainHero) {
+	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
 	                if (gameStatus.ui == UIStatus.NONE) {
 	                    gameStatus.ui = UIStatus.MOVEBEGIN;
 	                    moveButton.setLabel("Cancel Move");

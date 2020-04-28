@@ -23,7 +23,7 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	mainHero = new Dwarf(0);
+    	mainHero = new Archer(0);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
