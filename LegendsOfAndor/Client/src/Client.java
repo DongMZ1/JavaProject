@@ -37,7 +37,7 @@ public class Client {
         inputHandler.addInput(gameScreenDrawer.collabDrawer); 
        
         gameScreenDrawer.gameScreen.addHero(mainHero);
-        //InputThread.updateVariable();
+        InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
                 lobbyScreen.draw();
