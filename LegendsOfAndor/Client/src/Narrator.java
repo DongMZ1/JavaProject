@@ -20,6 +20,11 @@ public class Narrator implements Serializable{
 
 	
 	public void advance() throws IOException {
+		
+		if(Client.gameStatus.MedicalHerbInCastle && Client.gameStatus.SkralTowerDefeated && Client.gameScreenDrawer.gameScreen.castle.health >= 0) {
+			Cards.DrawLegend2Card(4);
+		}
+		
 		if(y > 600) {
           y = y -620;
           narrartorTrack ++;
