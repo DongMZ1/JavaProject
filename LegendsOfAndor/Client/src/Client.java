@@ -37,6 +37,7 @@ public class Client {
         new InputThread().start();
         Thread.sleep(2000);
         gameScreenDrawer.gameScreen.addHero(mainHero);
+        gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
@@ -66,7 +67,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.84";
+    static String serverAddress = "192.168.2.142";
 
     static Socket socket;
     static ObjectInputStream in;

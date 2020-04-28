@@ -93,7 +93,7 @@ public class GameUi implements Inputtable {
         informationButton.draw();
         currentLegendCard.draw();
         MovePrince.draw();
-        Client.screen.draw(timeTokenImage, Client.mainHero.time.x, Client.mainHero.time.y);
+        Client.screen.draw(timeTokenImage, Client.getMainHero().time.x, Client.getMainHero().time.y);
     }
 
    // public void drawPickup() {
@@ -172,6 +172,7 @@ public class GameUi implements Inputtable {
 	            	gameStatus.ui = UIStatus.WAITING;
 	            }
 	            else if(currentLegendCard.isClickable() && currentLegendCard.isClicked(x, y)) {
+	            	System.out.println("The Legend2Cardindex: " + GameStatus.gameStatus.legend2CardIndex);
 	            		Cards.showLegend2Card(GameStatus.gameStatus.legend2CardIndex);
 	            }
 	            
