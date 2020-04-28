@@ -44,6 +44,7 @@ public class GameScreen implements Serializable{
 		return gameScreen;
 	}
 	public PrinceThorald princeThorald;
+	public Hero currentHero;
 
     private GameScreen() throws IOException {
         
@@ -73,6 +74,9 @@ public class GameScreen implements Serializable{
 
     public void addHero(Hero hero) {
 		tm.addHero(hero);
+		if (currentHero == null) {
+			currentHero = tm.getHero();
+		}
 	}
 
     public int findTileClicked(Coordinate clickedCoord) {
