@@ -114,8 +114,7 @@ window.close();
 break;
 
 case MinuetoKeyboard.KEY_4:
-	Client.getMainHero().RevealFogToken();
-	InputThread.updateVariable();
+Client.getMainHero().RevealFogToken();
 this.closing = true;
 window.close();
 break;

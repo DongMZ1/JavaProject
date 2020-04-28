@@ -90,8 +90,7 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   	}
 			}
 	   }
-	   Client.gameStatus.EventCardIndex++;
-	   InputThread.updateVariable();
+	   GameStatus.gameStatus.EventCardIndex++;
    }
    
    
