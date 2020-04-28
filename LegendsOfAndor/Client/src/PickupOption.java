@@ -13,6 +13,10 @@ import org.minueto.image.MinuetoText;
 import org.minueto.window.MinuetoFrame;
 
 public class PickupOption extends Thread implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5824985243561826528L;
 	String name;
 	public PickupOption(String name) {
 		this.name = name; 

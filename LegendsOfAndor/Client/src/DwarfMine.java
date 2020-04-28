@@ -2,6 +2,10 @@ import org.minueto.image.MinuetoImage;
 
 public class DwarfMine implements TileEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5750501813044605449L;
 	int tile;
 
 	public DwarfMine(int newTile ) {

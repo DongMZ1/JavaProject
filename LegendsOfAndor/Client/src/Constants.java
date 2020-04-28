@@ -5,7 +5,11 @@ import org.minueto.MinuetoFileException;
 import org.minueto.image.*;
 
 public class Constants implements Serializable {
-    //TODO Move Constants to Own Classes
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1159089522960529388L;
+	//TODO Move Constants to Own Classes
     public static final int TOP_OF_BOARD = -6476;
     public static final int SIDE_OF_BOARD = -9861;
     public static final int BOTTOM_SCREEN_SPACE = 300;

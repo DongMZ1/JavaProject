@@ -10,7 +10,11 @@ import java.io.Serializable;
 
 public class Button implements Serializable{
 
-    private Coordinate coordinate;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 413069635207958205L;
+	private Coordinate coordinate;
     private int height, width;
     private MinuetoText label;
     private boolean clickable;

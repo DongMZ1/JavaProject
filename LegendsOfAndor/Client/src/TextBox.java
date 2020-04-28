@@ -14,7 +14,12 @@ import java.util.ArrayList;
 
 public class TextBox implements Inputtable, Serializable{
 
-    public void addMessage(String sender, String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -379708026495566452L;
+
+	public void addMessage(String sender, String message) {
         pastMessages.add(new Message(sender, message));
     }
 

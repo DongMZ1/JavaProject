@@ -1,7 +1,11 @@
 import java.io.Serializable;
 
 public class PrinceThorald implements Character, Serializable {
-    public int tile;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 921499384106716628L;
+	public int tile;
  
 	public PrinceThorald(int tile) {
 		this.tile = tile;

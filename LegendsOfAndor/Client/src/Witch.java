@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class Witch implements TileEntity, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2196967333559463320L;
 	int tile;
 
 	public Witch(int tile) {

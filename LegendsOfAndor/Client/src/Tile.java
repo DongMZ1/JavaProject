@@ -2,7 +2,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Tile implements Serializable{
-    // TODO Make Tile Class Flyweight
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6749023786128312066L;
+	// TODO Make Tile Class Flyweight
     // TODO Make accessor to get tile from index
     public ArrayList<Coordinate> coords;
     public ArrayList<TileEntity> tileEntities;

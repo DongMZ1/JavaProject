@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FightDrawer implements Inputtable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3038256961366914056L;
 	private GameStatus gameStatus;
 	MinuetoImage background;
 	public Fight fight;

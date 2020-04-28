@@ -2,6 +2,10 @@
 import java.io.Serializable;
 
 public class Shield implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4938974285687148033L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

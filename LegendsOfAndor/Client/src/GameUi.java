@@ -13,7 +13,12 @@ import java.io.Serializable;
 
 
 public class GameUi implements Inputtable {
-    private static GameUi gameUi;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5637901486561880437L;
+
+	private static GameUi gameUi;
 
 	MinuetoImage timeTokenImage;
 

@@ -2,6 +2,10 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class Dice implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4531343155464895578L;
 	private int[] numbers;
 	private Random random;
 	public int roll() {

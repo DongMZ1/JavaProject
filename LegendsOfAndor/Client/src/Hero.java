@@ -7,6 +7,10 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Hero implements Character, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1248451598884901811L;
 	int tile;
 	int wp;
 	int sp;

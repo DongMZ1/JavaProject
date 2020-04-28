@@ -15,6 +15,10 @@ import org.minueto.window.MinuetoWindow;
 public class useItemHander implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1852558696595159981L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

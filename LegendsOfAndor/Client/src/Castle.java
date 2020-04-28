@@ -3,6 +3,10 @@ import java.io.Serializable;
 
 public class Castle implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2443137192783921016L;
 	public int health;
 	public String message;
 

@@ -17,6 +17,10 @@ public class DiceRoller implements Serializable {
 	//-3 for monster
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3896697425917574311L;
 	private int[] numbers;
 	private final int[] normalDice;
 	private final int[] blackDice;

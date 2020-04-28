@@ -8,6 +8,11 @@ public class Archer extends Hero{
 	//the features mentioned above are implemented in fight class
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3760727839441370599L;
+
 	public Archer(int tile) throws IOException {
 		super(tile);
 		diceList.add(new Dice(new int[]{1, 2, 3, 4, 5, 6}));

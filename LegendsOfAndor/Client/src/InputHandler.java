@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoMouseWheelHandler, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7868507482747865999L;
+
 	private static InputHandler inputHandler;
 
 	private static GameStatus gameStatus;

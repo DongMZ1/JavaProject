@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class Gold implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5964844813214796596L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

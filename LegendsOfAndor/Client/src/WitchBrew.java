@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class WitchBrew implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8323501784942334255L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

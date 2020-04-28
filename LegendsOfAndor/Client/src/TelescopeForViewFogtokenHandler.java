@@ -16,6 +16,10 @@ import org.minueto.window.MinuetoWindow;
 public class TelescopeForViewFogtokenHandler implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6175940386785934069L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

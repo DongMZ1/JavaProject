@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class Time implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2177194751906316579L;
 	public int time;
 	public int x;
 	public int y;

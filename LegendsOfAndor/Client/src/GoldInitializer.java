@@ -6,6 +6,11 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class GoldInitializer implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -812793946290448444L;
+
 	//freeGoldList is that there are some gold has no regions
 	public static ArrayList<Gold> GoldIntializer() throws MinuetoFileException {
         ArrayList<Gold> output = new ArrayList<>();

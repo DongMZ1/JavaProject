@@ -17,6 +17,10 @@ import org.minueto.window.MinuetoFrame;
 
 public class DiceHandler extends Thread implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8780641316623632521L;
 	ArrayList<Integer> rolls;
 	
 	public DiceHandler(ArrayList<Integer> Rolls) {
@@ -24,6 +28,10 @@ public class DiceHandler extends Thread implements Serializable{
 	}
 
 	private class DiceImage implements Serializable, MinuetoWindowHandler, MinuetoKeyboardHandler{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7293312381040281519L;
 		MinuetoFrame window;			
 		MinuetoEventQueue eventQueue;
 		MinuetoFont fontArial19 = new MinuetoFont("Arial",25,false, false);

@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class MedicalHerb implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7954278663141484332L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

@@ -12,6 +12,11 @@ import java.util.Scanner;
 
 public class GameStatus implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1787705417226009606L;
+
 	public static GameStatus gameStatus;
 
     public static final int FOCUS_ON_LOBBY = 0;

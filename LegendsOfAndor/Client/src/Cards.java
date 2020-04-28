@@ -17,6 +17,10 @@ import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
 public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5949321029678402811L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

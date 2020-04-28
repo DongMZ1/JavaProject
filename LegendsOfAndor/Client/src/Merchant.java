@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class Merchant implements TileEntity, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9127717617857352973L;
 	int tile;
 
 	public Merchant(int tile) {

@@ -16,6 +16,10 @@ import org.minueto.window.MinuetoWindow;
 public class UseFalconForTrade implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7557488656565338090L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

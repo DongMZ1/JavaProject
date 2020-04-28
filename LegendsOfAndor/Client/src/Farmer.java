@@ -6,6 +6,10 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Farmer implements TileEntity, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4156072255305180009L;
 	private int tile;
 	private Hero hero = null;
 	private boolean guided = false;

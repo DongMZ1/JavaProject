@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class Narrator implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8376814387488014369L;
 	int narrartorTrack;
 	int x;
 	int y;

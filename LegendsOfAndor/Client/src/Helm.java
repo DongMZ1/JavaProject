@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class Helm implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1020011376083237518L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

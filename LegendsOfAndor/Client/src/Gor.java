@@ -5,6 +5,11 @@ import java.io.IOException;
 
 public class Gor extends Monster {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -709501381963345088L;
+
 	public Gor(int tile) throws IOException {
 		super(tile);
 		this.health = 4;

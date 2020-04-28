@@ -6,6 +6,10 @@ import org.minueto.image.MinuetoImageFile;
 
 public class Wineskin implements Item , Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5574884307050746815L;
 	int tile;
 	
 	public Wineskin(int tile){

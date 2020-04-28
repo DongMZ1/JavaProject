@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 public class Camera implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6103193489310145181L;
 	private static Camera camera;
 	public int boardZoom;
 	public Coordinate currentPos;

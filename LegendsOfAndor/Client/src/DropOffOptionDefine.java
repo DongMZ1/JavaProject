@@ -16,6 +16,10 @@ public class DropOffOptionDefine implements MinuetoKeyboardHandler, Serializable
 MinuetoMouseHandler,
 MinuetoWindowHandler{
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7154544232921222680L;
 MinuetoFrame window;			// The Minueto window		
 MinuetoEventQueue eventQueue;			// The Minueto queue that will hold
 // the events.

@@ -16,6 +16,10 @@ import org.minueto.window.MinuetoWindow;
 public class PlacePrinceHandler implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4445438570497169089L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

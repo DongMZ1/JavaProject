@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
 public class RuneStone implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4683280104664928120L;
 	//private MinuetoImage goldImage;
 	private int tile;
 	

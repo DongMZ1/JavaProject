@@ -7,6 +7,12 @@ import java.io.Serializable;
 
 public class Well implements TileEntity, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2151761214361281364L;
+
+
 	private int tile;
 	
 

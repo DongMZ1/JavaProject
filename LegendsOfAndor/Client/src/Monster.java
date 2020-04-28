@@ -7,7 +7,11 @@ import java.util.ArrayList;
 
 public class Monster implements Character, Serializable
 {
-    int tile;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6562256286229349527L;
+	int tile;
     int health;
     int strength;
     ArrayList<Dice> diceList;

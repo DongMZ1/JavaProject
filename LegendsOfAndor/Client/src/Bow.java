@@ -3,6 +3,10 @@
 import java.io.Serializable;
 
 public class Bow implements Item, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4284917989365020330L;
 	int Tile;
 
 	public Bow(int tile){

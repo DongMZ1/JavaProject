@@ -16,6 +16,10 @@ public class PickupOptionDefine implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable {
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 925839743173971364L;
 MinuetoFrame window;			// The Minueto window		
 MinuetoEventQueue eventQueue;			// The Minueto queue that will hold
 	// the events.

@@ -6,6 +6,11 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class FarmerInitializer implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5301285402763610499L;
+
 	public static ArrayList<Farmer> initializeFarmers() throws MinuetoFileException {
         ArrayList<Farmer> output = new ArrayList<>();
      //   Farmer f1 = new Farmer(5);

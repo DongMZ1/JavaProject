@@ -8,6 +8,11 @@ import org.minueto.window.MinuetoWindow;
 
 public class MonsterInitializer implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7409197014565614212L;
+
 	public static ArrayList<Monster> initializeMonsters() throws IOException {
         ArrayList<Monster> output = new ArrayList<>();
         Monster m1 = new Gor(8);

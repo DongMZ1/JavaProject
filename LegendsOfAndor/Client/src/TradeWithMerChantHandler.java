@@ -16,6 +16,10 @@ import org.minueto.window.MinuetoWindow;
 public class TradeWithMerChantHandler implements MinuetoKeyboardHandler,
 MinuetoMouseHandler,
 MinuetoWindowHandler, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7319846447371168902L;
 	MinuetoWindow window;			// The Minueto window
 	MinuetoEventQueue eventQueue;
 	boolean closing;

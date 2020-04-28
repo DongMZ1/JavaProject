@@ -10,7 +10,11 @@ import org.minueto.image.MinuetoRectangle;
 import org.minueto.image.MinuetoText;
 
 public class PlayerBoard implements Serializable{
-    private static PlayerBoard playerBoard;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9190818352523591677L;
+	private static PlayerBoard playerBoard;
     private static GameStatus gameStatus;
     private boolean flag = false;
     

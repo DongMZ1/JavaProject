@@ -11,7 +11,12 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class LobbyScreen implements Inputtable, Serializable {
-    //TODO Clean LobbyScreen class
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5178509001230895367L;
+
+	//TODO Clean LobbyScreen class
     private boolean isEasy;
 
     private int currentChar = 0;

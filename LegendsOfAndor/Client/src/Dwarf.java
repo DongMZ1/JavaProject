@@ -8,6 +8,11 @@ public class Dwarf extends Hero implements Serializable {
 
 	// dwarfs can buy SP in dwarf mine for one gold each
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8340230892698155216L;
+
 	public Dwarf(int tile) throws IOException {
 		super(tile);
 		diceList.add(new Dice(new int[] {1,2,3,4,5,6}));

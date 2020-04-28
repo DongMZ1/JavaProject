@@ -5,6 +5,11 @@ import java.io.IOException;
 
 public class Wardraks extends Monster {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1990966408294611957L;
+
 	public Wardraks(int tile) throws IOException {
 		super(tile);
 		this.health = 7;

@@ -1,8 +1,12 @@
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+
 public class FogToken implements TileEntity, Serializable {
-		
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3838112663007106688L;
 	public int tile;
     public int tokenNumber; // this number indicate what will this token do.
 	public FogToken() {

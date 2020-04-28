@@ -5,6 +5,10 @@ public class TurnManager implements Serializable{
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -5743305818514358234L;
+	/**
+	 * 
+	 */
 	private static TurnManager tm;
 	public ArrayList<Hero> heroes;
 	private int index = 0;
