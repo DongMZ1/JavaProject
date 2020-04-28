@@ -64,10 +64,10 @@ public class Tile implements Serializable{
     	TILES.add(new Tile(164, 3608, 21, new int[] {4, 5, 20, 22, 24}, 4));   	
     	TILES.add(new Tile(1032, 4788, 22, new int[] {19, 20, 21, 23, 24, 72}, 10));
     	TILES.add(new Tile(1652, 5628, 23, new int[] {19, 22, 24, 25, 31, 34, 35, 72}, 19));
-    	TILES.add(new Tile(316, 5240, 24, new int[] {20, 21, 2, 23, 25}, 21));
+    	TILES.add(new Tile(316, 5240, 24, new int[] {20, 21, 22, 23, 25}, 21));
     	TILES.add(new Tile(400, 6432, 25, new int[] {23, 24, 26, 27, 31}, 24));
     	TILES.add(new Tile(212, 7320, 26, new int[] {25, 27}, 25));
-    	TILES.add(new Tile(812, 7260, 27, new int[] {25, 6, 31}, 25));
+    	TILES.add(new Tile(812, 7260, 27, new int[] {25, 26, 31}, 25));
     	TILES.add(new Tile(4132, 5360, 28, new int[] {18, 29, 36, 38, 72}, 18));
     	TILES.add(new Tile(3544, 5864, 29, new int[] {28, 30, 34, 72}, 28));   	
     	TILES.add(new Tile(3248, 6568, 30, new int[] {29, 33, 34, 35}, 29));
