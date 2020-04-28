@@ -42,7 +42,7 @@ MinuetoWindowHandler, Serializable{
 		
 		
 			imageText = new MinuetoText("Press 1 to use Wineskin; Press 2 to use Telescope to reveal adjacent Fogtoken" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("Press 3 to use Falcon for Trade" ,fontArial19,MinuetoColor.BLUE);
 			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
 
 
@@ -101,12 +101,21 @@ MinuetoWindowHandler, Serializable{
 			this.closing = true;
 			window.close();
 			break;
-		//case MinuetoKeyboard.KEY_3:
-		//	Client.getMainHero().UseMedicalHerbForMove();
-		//	InputThread.updateVariable();
-		//	this.closing = true;
-		//	window.close();
-	//		break;
+		case MinuetoKeyboard.KEY_3:
+			if(Client.getMainHero().getFalcon() > 0) {
+				for(Item i: Client.getMainHero().items) {
+					if(i instanceof Falcon) {
+						Client.getMainHero().items.remove(i);
+						break;
+					}
+				}
+				
+				SelectHeroHandler s1 = new SelectHeroHandler();
+				UseFalconForTrade u1 = new UseFalconForTrade();
+			}
+			this.closing = true;
+			window.close();
+			break;
 	//	case MinuetoKeyboard.KEY_4:
 	//		Client.getMainHero().UseMedicalHerbForWP();
 	//		InputThread.updateVariable();
