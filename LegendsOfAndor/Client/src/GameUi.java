@@ -121,14 +121,14 @@ public class GameUi implements Inputtable {
 	        	gameStatus.lastFocused=gameStatus.FOCUS_ON_GAMESCREEN;
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
 	        }
-	        else if(gameScreen.currentHero == Client.getMainHero()) {
+	        else if(gameScreen.mainIsCurrent()) {
 	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
 	            	if(gameStatus.ui != UIStatus.MOVING) {
 		            	gameStatus.ui = UIStatus.MOVING;
 		            	moveButton.setLabel("Stop Hero");
 		            	}else {
 		            		moveButton.setLabel("Move Hero");
-			            	gameStatus.ui = UIStatus.NONE;
+			            	gameStatus.ui = UIStatus.MOVED;
 		            	}
 	                
 	            }

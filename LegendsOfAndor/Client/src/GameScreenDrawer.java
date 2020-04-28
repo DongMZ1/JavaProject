@@ -163,7 +163,7 @@ public class GameScreenDrawer implements Inputtable{
 		else if (c == ' ') {
 			System.out.println(toMove);
 			System.out.println(gameScreen.tm.getHero().getClass());
-			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING && gameScreen.currentHero == Client.getMainHero()){
+			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING && gameScreen.mainIsCurrent()){
 				if (toMove >= 0 && toMove <= 76) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
 							moveHero(Client.getMainHero().getTile(),toMove);
@@ -188,7 +188,7 @@ public class GameScreenDrawer implements Inputtable{
 			gameUi.handleMousePress(x, y, button);
 		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT)
 			this.movingCam = true;
-		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameScreen.currentHero == Client.getMainHero()) {
+		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameScreen.mainIsCurrent()) {
 			if (Client.getMainHero().canMakeMove()) {
 				if (Client.gameStatus.ui == UIStatus.MOVEBEGIN) {
 					moveTileEntity(Client.getMainHero(), Client.getMainHero().getTile(), gameScreen.findTileClicked(camera.getPosOnBoard(x, y)));

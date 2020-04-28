@@ -79,6 +79,13 @@ public class GameScreen implements Serializable{
 		}
 	}
 
+    public boolean mainIsCurrent() {
+    	if (currentHero.getClass() == Client.mainHero.getClass()) {
+    		return true;
+    	}
+    	else {return false;}
+    }
+    
     public int findTileClicked(Coordinate clickedCoord) {
         int closestDist = Integer.MAX_VALUE;
         int closestNum = 0;
