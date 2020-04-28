@@ -113,5 +113,4 @@ public class TileEntityDrawer {
 		}
 		else System.out.println(tileEntity.getClass());
 	}
-
 }
