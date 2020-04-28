@@ -27,13 +27,13 @@ public class GameStatus implements Serializable {
 
     public static int lastFocused = 0;
 
-	public int legend2CardIndex = 0;
-	public boolean Legend2ModeIsEasy = false;
-    public int EventCardIndex = 1;
-    public int WhenToDrawRuneStoneLegendCard = 100;
+	public int legend2CardIndex;
+	public boolean Legend2ModeIsEasy;
+    public int EventCardIndex;
+    public int WhenToDrawRuneStoneLegendCard;
 	
-	public boolean MedicalHerbInCastle = false;
-	public boolean SkralTowerDefeated = false;
+	public boolean MedicalHerbInCastle;
+	public boolean SkralTowerDefeated;
 	
 	public int TheHeroNumberInTurnManagerForFalconTrade = 100;
 	int screenWidth = 1280;
@@ -70,6 +70,12 @@ public class GameStatus implements Serializable {
 	private GameStatus() throws IOException {
 		focus = FOCUS_ON_LOBBY;
 		currentScreen = LOBBY_SCREEN;
+		legend2CardIndex = 0;
+		Legend2ModeIsEasy = false;
+		 EventCardIndex = 1;
+		 WhenToDrawRuneStoneLegendCard = 100;
+		 MedicalHerbInCastle = false;
+				 SkralTowerDefeated = false;
 
 	}
 
