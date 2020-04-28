@@ -90,6 +90,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -99,6 +100,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -108,6 +110,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -117,6 +120,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -126,6 +130,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -135,6 +140,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -144,6 +150,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -153,6 +160,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -162,6 +170,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -171,6 +180,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -180,6 +190,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -189,6 +200,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -198,6 +210,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -207,6 +220,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -216,6 +230,7 @@ MinuetoWindowHandler, Serializable{
 					Client.getMainHero().items.remove(i);
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}
@@ -225,6 +240,7 @@ MinuetoWindowHandler, Serializable{
 					GameScreen.gameScreen.tm.heroes.get(GameStatus.gameStatus.TheHeroNumberInTurnManagerForFalconTrade).items.remove(i);
 					Client.getMainHero().items.add(i);
 					InputThread.updateVariable();
+					break;
 				}
 			}
 		}

@@ -100,7 +100,7 @@ public class GameScreenDrawer implements Inputtable{
 		gameScreen.tiles.get(currentTile).removeTileEntity(tileEntity);
 		gameScreen.tiles.get(destination).addTileEntity(tileEntity);
 		tileEntity.setTile(destination);
-		InputThread.updateVariable();
+		//InputThread.updateVariable();
 	}
 
 	public void moveHero(int currentTile, int destination) {
@@ -163,31 +163,15 @@ public class GameScreenDrawer implements Inputtable{
 		else if (c == ' ') {
 			System.out.println(toMove);
 			System.out.println(gameScreen.tm.getHero().getClass());
-			if (Client.getMainHero().canMakeMove()){
+			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING){
 				if (toMove >= 0 && toMove <= 76) {
-					if(gameScreen.gameStatus.ui == UIStatus.MOVEBEGIN) {
-						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
-							moveHero(Client.getMainHero().getTile(),toMove);
-							Client.getMainHero().time.advance();
-							gameScreen.gameStatus.ui = UIStatus.MOVING;
-							gameUi.moveButton.setLabel("End Move");
-							InputThread.updateVariable();
-							System.out.println(Client.getMainHero().time.time);
-						}
-					}
-					else if(gameScreen.gameStatus.ui == UIStatus.MOVING) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
 							moveHero(Client.getMainHero().getTile(),toMove);
 							Client.getMainHero().time.advance();
 							InputThread.updateVariable();
-							System.out.println(Client.getMainHero().time.time);
 						}
 					}
 				}
-			}
-			else {
-				gameUi.moveButton.setLabel("No Time");
-			}
 			toMove = 0;
 		}
 		else {

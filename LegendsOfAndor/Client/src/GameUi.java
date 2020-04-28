@@ -118,19 +118,13 @@ public class GameUi implements Inputtable {
 	        }
 	        else {
 	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
-	                if (gameStatus.ui == UIStatus.NONE) {
-	                    gameStatus.ui = UIStatus.MOVEBEGIN;
-	                    moveButton.setLabel("Cancel Move");
-	                }
-	                else if ((gameStatus.ui == UIStatus.MOVEBEGIN)) {
-	                    gameStatus.ui = UIStatus.NONE;
-	                    gameUi.moveButton.setLabel("Move");
-	                    
-	                }
-	                else if ((gameStatus.ui == UIStatus.MOVING)) {
-	                    gameStatus.ui = UIStatus.MOVED;
-	                    
-	                }
+	            	if(gameStatus.ui != UIStatus.MOVING) {
+		            	gameStatus.ui = UIStatus.MOVING;
+		            	moveButton.setLabel("Stop Hero");
+		            	}else {
+		            		moveButton.setLabel("Move Hero");
+			            	gameStatus.ui = UIStatus.NONE;
+		            	}
 	                
 	            }
 	            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
