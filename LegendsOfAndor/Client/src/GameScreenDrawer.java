@@ -131,7 +131,7 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == 'a')
 		{
-			System.out.println(Client.getMainHero());
+			System.out.println(gameScreen.currentHero);
 		}
 		else if(c == 'm') {
 			playerBoard.update(Client.getMainHero());
@@ -212,12 +212,14 @@ public class GameScreenDrawer implements Inputtable{
 			gameScreen.tm.endTurn();
 			gameScreen.currentHero = gameScreen.tm.getHero();
 			gameScreen.gameStatus.ui = UIStatus.NONE;
+			InputThread.updateVariable();
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.MOVED) {
 			gameScreen.gameStatus.ui = UIStatus.NONE;
 			gameScreen.tm.endTurn();
 			gameScreen.currentHero = gameScreen.tm.getHero();
 			gameUi.moveButton.setLabel("Move");
+			InputThread.updateVariable();
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
 			Tile t = gameScreen.tiles.get(Client.getMainHero().getTile());
