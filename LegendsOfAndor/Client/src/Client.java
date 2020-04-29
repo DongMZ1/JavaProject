@@ -23,7 +23,7 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	mainHero = new Archer(1);
+    	mainHero = new Dwarf(7);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         lobbyScreen = new LobbyScreen();
@@ -67,7 +67,7 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.100";
+    static String serverAddress = "192.168.2.138";
 
     static Socket socket;
     static ObjectInputStream in;
