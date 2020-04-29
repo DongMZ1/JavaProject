@@ -71,7 +71,6 @@ public class LobbyScreen implements Inputtable, Serializable {
     	}
     }
     public void handleMousePress(int x, int y, int button) {
-<<<<<<< HEAD
         if(x > 100) {
             if(y > 50 && y < 150 && Client.playerNum==1)
                 players.get(0).handleMousePress(x,y,button);
@@ -81,13 +80,6 @@ public class LobbyScreen implements Inputtable, Serializable {
                 players.get(2).handleMousePress(x,y,button);
             else if(y > 425 && y < 525 && players.size()>3 && Client.playerNum==4)
                 players.get(3).handleMousePress(x,y,button);
-=======
-    	System.out.println("X: " + x + "Y: " + y);
-        if(isClicked(660,700,900,650, x, y)) {
-        	System.out.println("HAHAHAHAHAHA");
-            gameStatus.focus = gameStatus.FOCUS_ON_GAMESCREEN;
-            gameStatus.currentScreen = gameStatus.GAME_SCREEN;
->>>>>>> 35191d240b290afc4a07f4c8466ce252a1b85c84
         }
 
         if(y > gameStatus.screenHeight - 100) {
