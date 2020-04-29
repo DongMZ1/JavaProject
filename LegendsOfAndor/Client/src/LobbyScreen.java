@@ -49,7 +49,7 @@ public class LobbyScreen implements Inputtable, Serializable {
         Client.screen.draw(difficultyToggle, 300, gameStatus.screenHeight - 150 + 50);
         Client.screen.draw(startText, 325, 3*(gameStatus.screenHeight)/2 - 100);
         for(int i = 0; i < players.size(); i++) {
-            players.get(i).draw(100, 50+(i*125));
+            players.get(i).draw();
         }
         if(isEasy)
             Client.screen.draw(Constants.easy, gameStatus.screenWidth - (int) (400 / 1.2), 15);
@@ -76,7 +76,16 @@ public class LobbyScreen implements Inputtable, Serializable {
 
     }
     public void handleMousePress(int x, int y, int button) {
-
+        if(x > 100) {
+            if(y > 50 && y < 150)
+                players.get(0).handleMousePress(x,y,button);
+            else if(y > 175 && y < 275 && players.size()>1)
+                players.get(1).handleMousePress(x,y,button);
+            else if(y > 300 && y < 400 && players.size()>2)
+                players.get(2).handleMousePress(x,y,button);
+            else if(y > 425 && y < 525 && players.size()>3)
+                players.get(3).handleMousePress(x,y,button);
+        }
     }
     public void handleMouseRelease(int x, int y, int button) {
 

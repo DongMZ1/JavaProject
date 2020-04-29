@@ -11,8 +11,10 @@ public class LobbyPlayer {
 	static MinuetoImage chooseCharHighlight;
 	int index;
 	int currentHero;
+	int x;
+	int y;
 	MinuetoText playerName;
-	public LobbyPlayer(int playerNum) {
+	public LobbyPlayer(int playerNum, int x, int y) {
 		try {
 			dwarfThumbnail = new MinuetoImageFile("images/Heroes/DwarfMaleThumbnail.png").scale(0.75,0.75);
 			mageThumbnail = new MinuetoImageFile("images/Heroes/MageMaleThumbnail.png").scale(0.75,0.75);
@@ -21,11 +23,13 @@ public class LobbyPlayer {
 		} catch(Exception e) {}
 		this.playerName = new MinuetoText("Player " + playerNum, font, MinuetoColor.BLACK);
 		this.currentHero = 0;
+		this.x = x;
+		this.y = y;
 		this.chooseCharHighlight = new MinuetoRectangle(100, 100, MinuetoColor.RED, false);
 		index = 0;
 	}
 
-	public void draw(int x, int y) {
+	public void draw() {
 		Client.screen.draw(background, x, y);
 		Client.screen.draw(playerName, x+10, y+10);
 
@@ -40,7 +44,25 @@ public class LobbyPlayer {
 		this.index = index;
 	}
 
-	public void handleMousePress(int x, int y, int button) {
-
+	public void handleMousePress(int xClick, int yClick, int button) {
+		boolean changed = false;
+		if(xClick > x+300 && xClick < x+400) {
+			index = 0;
+			changed = true;
+		}
+		else if(xClick > x+450 && xClick < x+550) {
+			index = 1;
+			changed = true;
+		}
+		else if(xClick > x+600 && xClick < x+700) {
+			index = 2;
+			changed = true;
+		}
+		else if(xClick > x+750 && xClick < x+850) {
+			index = 3;
+			changed = true;
+		}
+		if(changed)
+			InputThread.sendString("p " + Client.playerNum + " " + index);
 	}
 }

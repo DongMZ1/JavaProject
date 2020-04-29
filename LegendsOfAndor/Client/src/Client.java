@@ -19,6 +19,7 @@ public class Client {
     static GameScreenDrawer gameScreenDrawer;
     static GameStatus gameStatus;
     public static Hero mainHero;
+    public static int playerNum;
     static {
         try {
             mainHero = new Archer(0);
@@ -118,11 +119,17 @@ class InputThread extends Thread{
             else if(input instanceof String) {
                 String[] inputs = ((String) input).split(" ");
                 System.out.println(inputs[0]);
-                if(inputs[0].equals("p")) {
+                if(inputs[0].equals("s")) {
+                    int playerNum = Integer.parseInt(inputs[1]);
+                    Client.playerNum = playerNum;
+                }
+                else if(inputs[0].equals("p")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     int selection = Integer.parseInt(inputs[2]);
-                    while(Client.preGameScreen.lobbyScreen.players.size()<playerNum)
-                        Client.preGameScreen.lobbyScreen.players.add(new LobbyPlayer(Client.preGameScreen.lobbyScreen.players.size()+1));
+                    while(Client.preGameScreen.lobbyScreen.players.size()<playerNum) {
+                        int currentPlayerNum = Client.preGameScreen.lobbyScreen.players.size() + 1;
+                        Client.preGameScreen.lobbyScreen.players.add(new LobbyPlayer(currentPlayerNum, 100, 50 + ((currentPlayerNum-1) * 125)));
+                    }
                     Client.preGameScreen.lobbyScreen.players.get(playerNum-1).setHero(selection);
                     System.out.println(Client.preGameScreen.lobbyScreen.players.size());
                 }
