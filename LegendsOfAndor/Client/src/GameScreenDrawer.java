@@ -52,7 +52,7 @@ public class GameScreenDrawer implements Inputtable{
 		this.gameUi.gameScreen = gameScreen;
 		this.collabDrawer.gameScreen = gameScreen;
 		this.gameScreen.cd = gameScreen.cd;
-		this.gameScreen.fight = gameScreen.fight;
+		this.fightDrawer.gameScreen = gameScreen;
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
