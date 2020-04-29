@@ -119,6 +119,7 @@ public class Server {
                 out.writeObject(Server.gameScreen);
                 out.writeObject(Server.gameStatus);
                 writers.add(out);
+                out.writeObject("s " + writers.size());
                 for(ObjectOutputStream writer : writers)
                     writer.writeObject("p " + writers.size() + " 0");
                 // Accept messages from this client and broadcast them.

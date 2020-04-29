@@ -45,7 +45,6 @@ public class ConnectionScreen {
 	public void handleKeyPress(int key) { }
 	public void handleKeyRelease(int key) { }
 	public void handleKeyType(char c) {
-		System.out.println(c);
 		if((c >= MinuetoKeyboard.KEY_0 && c <= MinuetoKeyboard.KEY_9) || c == 46) {
 			ipAddress += c;
 			ipAddressDisplay = new MinuetoText(ipAddress, ipFont, MinuetoColor.BLACK);
@@ -54,8 +53,10 @@ public class ConnectionScreen {
 			PreGameScreen.connect();
 		}
 		if(c == MinuetoKeyboard.KEY_BACKSPACE) {
-			if (ipAddress.length() > 0)
+			if (ipAddress.length() > 0) {
 				ipAddress = ipAddress.substring(0, ipAddress.length() - 1);
+				ipAddressDisplay = new MinuetoText(ipAddress, ipFont, MinuetoColor.BLACK);
+			}
 		}
 	}
 	public void handleMousePress(int x, int y, int button) { }

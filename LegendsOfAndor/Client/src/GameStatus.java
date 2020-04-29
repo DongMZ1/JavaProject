@@ -24,7 +24,6 @@ public class GameStatus implements Serializable {
     public static final int FOCUS_ON_TEXTBOX = 2;
     public static final int FOCUS_ON_FIGHT = 3;
     public static final int FOCUS_ON_COLLABORATIVE = 4;
-	public static final int FOCUS_ON_CONNECTION = 5;
 
     public static final int LOBBY_SCREEN = 0;
     public static final int GAME_SCREEN = 1;
@@ -74,14 +73,14 @@ public class GameStatus implements Serializable {
 	}
 
 	private GameStatus() throws IOException {
-		focus = FOCUS_ON_LOBBY;
-		currentScreen = LOBBY_SCREEN;
-		legend2CardIndex = 0;
-		Legend2ModeIsEasy = false;
+		 focus = FOCUS_ON_LOBBY;
+		 currentScreen = LOBBY_SCREEN;
+		 legend2CardIndex = 0;
+		 Legend2ModeIsEasy = false;
 		 EventCardIndex = 1;
 		 WhenToDrawRuneStoneLegendCard = 100;
 		 MedicalHerbInCastle = false;
-				 SkralTowerDefeated = false;
+		 SkralTowerDefeated = false;
 
 	}
 

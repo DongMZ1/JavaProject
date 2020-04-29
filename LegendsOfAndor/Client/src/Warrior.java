@@ -12,7 +12,7 @@ public class Warrior extends Hero {
 	 */
 	private static final long serialVersionUID = 1463985262713026798L;
 
-	public Warrior(MinuetoImage heroImage, int tile) throws IOException {
+	public Warrior(int tile) throws IOException {
         super(tile);
         diceList.add(new Dice(new int[] {1,2,3,4,5,6}));
         diceList.add(new Dice(new int[] {1,2,3,4,5,6}));

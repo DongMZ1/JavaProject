@@ -144,6 +144,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 	}
 	@Override
 	public void handleMousePress(int x, int y, int button) {
+		System.out.println("Hello!");
 		if(textBox.inputClicked(x, y) || textBox.outputClicked(x, y)) {
 			gameStatus.lastFocused = gameStatus.FOCUS_ON_COLLABORATIVE;
             gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;

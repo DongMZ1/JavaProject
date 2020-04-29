@@ -22,14 +22,4 @@ public class Constants implements Serializable {
 
     public static final double HERO_SCALE = 0.2;
 
-    static String lobbyName = "Hex 13";
-    static MinuetoFont toggleFont = new MinuetoFont("Times New Roman",60, true, false);
-    static MinuetoImage easy = new MinuetoText("EASY", toggleFont, MinuetoColor.GREEN);
-    static MinuetoImage hard = new MinuetoText("HARD", toggleFont, MinuetoColor.RED);
-    static MinuetoImage empty = new MinuetoText("EMPTY", toggleFont, MinuetoColor.BLACK);
-    static MinuetoImage player1 = new MinuetoText("Jamie", toggleFont, MinuetoColor.BLACK);
-    static MinuetoImage tavernName = new MinuetoText(lobbyName + " Tavern", toggleFont, MinuetoColor.BLACK);
-
-    public Constants() throws MinuetoFileException {
-    }
 }

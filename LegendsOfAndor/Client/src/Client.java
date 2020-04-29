@@ -20,55 +20,59 @@ public class Client {
     static GameStatus gameStatus;
     public static Hero mainHero;
     public static int playerNum;
-    static {
-        try {
-            mainHero = new Archer(0);
-            gameScreenDrawer = GameScreenDrawer.getInstance();
-            gameStatus = GameStatus.getInstance();
-        } catch (IOException e) { e.printStackTrace();}
-    }
     static InputHandler inputHandler;
     static TextBox textBox;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	mainHero = new Dwarf(7);
     	gameStatus = GameStatus.getInstance();
+    	mainHero = new Archer(0);
         InputHandler inputHandler = InputHandler.getInputHandler();
         gameScreenDrawer = GameScreenDrawer.getInstance();
         preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
+        inputHandler.addInput(preGameScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.collabDrawer);
         inputHandler.addInput(preGameScreen);
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
         while(!preGameScreen.isConnected) {
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
         }
         new InputThread(preGameScreen.getAddress()).start();
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
+        InputThread.updateVariable();
         while(!preGameScreen.lobbyScreen.readyToStart) {
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
+            System.out.println(gameStatus.focus);
         }
+        int index = preGameScreen.lobbyScreen.players.get(playerNum-1).index;
+        if(index == 0)
+            mainHero = new Warrior(0);
+        else if(index == 1)
+            mainHero = new Archer(0);
+        else if(index == 2)
+            mainHero = new Dwarf(0);
+        else
+            mainHero = new Mage(0);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
+        gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
         InputThread.updateVariable();
         while (true) {
-            if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
-                preGameScreen.draw();
-            else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
+            if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
                 gameScreenDrawer.draw();
             }
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
                 gameScreenDrawer.fightDrawer.draw();
             }
-
             textBox.draw();
-
             screen.render();
             inputHandler.handleQueue();
         }
@@ -118,7 +122,6 @@ class InputThread extends Thread{
             }
             else if(input instanceof String) {
                 String[] inputs = ((String) input).split(" ");
-                System.out.println(inputs[0]);
                 if(inputs[0].equals("s")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;
@@ -131,14 +134,13 @@ class InputThread extends Thread{
                         Client.preGameScreen.lobbyScreen.players.add(new LobbyPlayer(currentPlayerNum, 100, 50 + ((currentPlayerNum-1) * 125)));
                     }
                     Client.preGameScreen.lobbyScreen.players.get(playerNum-1).setHero(selection);
-                    System.out.println(Client.preGameScreen.lobbyScreen.players.size());
                 }
                 else if(inputs[0].equals('m')) {
 
                 }
             }
         }
-        } catch(Exception e) { System.out.println("Goodbye!"); }
+        } catch(Exception e) { e.printStackTrace(); }
     }
 
     public static void updateVariable() {
