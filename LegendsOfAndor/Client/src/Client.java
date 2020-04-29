@@ -32,17 +32,18 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	mainHero = new Dwarf(7);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         gameScreenDrawer = GameScreenDrawer.getInstance();
         preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
+        inputHandler.addInput(null); //TAKING PLACE OF LOBBY SCREEN RN
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.collabDrawer);
         inputHandler.addInput(preGameScreen);
+        gameStatus.focus = 5; //preGameScreen
         while(!preGameScreen.isConnected) {
             preGameScreen.draw();
             screen.render();
@@ -75,6 +76,7 @@ public class Client {
     }
 
     public static Hero getMainHero() {
+    	
         for(Hero hero : gameScreenDrawer.gameScreen.tm.heroes) {
             if(hero.getClass().equals(mainHero.getClass()))
                 return hero;

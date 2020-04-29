@@ -649,6 +649,8 @@ public class Hero implements Character, Serializable {
 			for (Item t: this.items) {
 				if(t instanceof MedicalHerb) {
 					this.items.remove(t);
+					Client.gameStatus.MedicalHerbInCastle = true;
+					System.out.println("Medical Herb" + Client.gameStatus.MedicalHerbInCastle);
 					break;
 				}
 			}
@@ -694,9 +696,30 @@ public class Hero implements Character, Serializable {
 				break;
 			}
 		}
-		if(this.getRuneStone() == 3) {
+		if(this.getRuneStone() >= 3) {
 			Client.getMainHero().hasBlackDice = true;
 			System.out.println("get a black dice" +Client.getMainHero().hasBlackDice);
+			for (Item i: items) {
+				if(i instanceof RuneStone) {
+					this.items.remove(i);
+					break;
+				}
+			}
+			
+			for (Item i: items) {
+				if(i instanceof RuneStone) {
+					this.items.remove(i);
+					break;
+				}
+			}
+			
+			for (Item i: items) {
+				if(i instanceof RuneStone) {
+					this.items.remove(i);
+					break;
+				}
+			}
+			//remove them
 		}
 	}	
 
@@ -990,7 +1013,7 @@ public class Hero implements Character, Serializable {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+					}
 					}
 					Tile.get(f.getTile()).getTileEntities().remove(f);
 					InputThread.updateVariable();

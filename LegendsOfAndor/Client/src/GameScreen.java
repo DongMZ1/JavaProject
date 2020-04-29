@@ -80,7 +80,7 @@ public class GameScreen implements Serializable{
 	}
 
     public boolean mainIsCurrent() {
-    	if (currentHero.getClass() == Client.mainHero.getClass()) {
+    	if (currentHero.getClass() == Client.getMainHero().getClass()) {
     		return true;
     	}
     	else {return false;}

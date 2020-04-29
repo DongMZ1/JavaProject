@@ -47,7 +47,7 @@ public class TileEntityDrawer {
 		warriorImage = new MinuetoImageFile("images/Heroes/WarriorMaleIcon.jpg").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		mageImage = new MinuetoImageFile("images/Heroes/MageMaleIcon.jpg").scale(Constants.HERO_SCALE, Constants.HERO_SCALE);
 		farmerImage = new MinuetoImageFile("images/farmer.png").scale(0.5, 0.5);
-		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.25,0.25);
+		goldImage = new MinuetoImageFile("images/gold.jpg").scale(0.3,0.3);
 		wineskinImage = new MinuetoImageFile("images/wineskin.png").scale(0.5, 0.5);
 		//TODO: Set proper Bow image
 		bowImage = new MinuetoImageFile("images/Bow.png");

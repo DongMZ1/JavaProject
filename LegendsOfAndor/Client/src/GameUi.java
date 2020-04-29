@@ -39,6 +39,7 @@ public class GameUi implements Inputtable {
     private int turnButtonWidth = 200;
     private int turnButtonHeight = 36;
     public int uiHeight = 360;
+    public boolean moveInterrupted = false;
    
 
 
@@ -121,18 +122,18 @@ public class GameUi implements Inputtable {
 	        	gameStatus.lastFocused=gameStatus.FOCUS_ON_GAMESCREEN;
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
 	        }
-	        else if(gameScreen.mainIsCurrent()) {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
+	        else if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
 	            	if(gameStatus.ui != UIStatus.MOVING) {
 		            	gameStatus.ui = UIStatus.MOVING;
 		            	moveButton.setLabel("Stop Hero");
 		            	}else {
 		            		moveButton.setLabel("Move Hero");
-			            	gameStatus.ui = UIStatus.MOVED;
+			            	gameStatus.ui = UIStatus.NONE;
 		            	}
 	                
 	            }
-	            else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
+	            
+	        else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.FIGHTING;
 	            }
 	            else if(MovePrince.isClickable() && MovePrince.isClicked(x, y)) {
@@ -177,9 +178,9 @@ public class GameUi implements Inputtable {
 	            
 	        }
         }
-    }
+ 
     private boolean verify() {
-    	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero() == Client.mainHero) {
+    	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero().equals(Client.mainHero)) {
     		return true;
     	}
     	else {

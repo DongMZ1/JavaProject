@@ -73,7 +73,11 @@ public class LobbyScreen implements Inputtable, Serializable {
     public void handleKeyPress(int i) { }
     public void handleKeyRelease(int i) {}
     public void handleKeyType(char c) {
-
+    	if (c == ' ') {
+    		System.out.println("hacked by IAN");
+    		gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
+    		gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
+    	}
     }
     public void handleMousePress(int x, int y, int button) {
         if(x > 100) {
