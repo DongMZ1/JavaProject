@@ -239,13 +239,14 @@ public class GameScreenDrawer implements Inputtable{
 				e.printStackTrace();
 			}
 			Tile t = gameScreen.tiles.get(Client.getMainHero().getTile());
+			
 			if (Client.getMainHero().time.getTime() <= 10) {
 				monsterLoop:
 				for (Monster monster : gameScreen.monsters)
 				{
 					//normal fight
 					if(t.containsTileEntity(monster)) {
-						gameScreen.fight.start(t, gameScreen.tm.getHero());
+						gameScreen.fight.start(t.tileNumber, gameScreen.tm.getHero());
 						gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 						gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 						break;
@@ -259,7 +260,7 @@ public class GameScreenDrawer implements Inputtable{
 //	        				System.out.println(adjacentTiles[i]);
 							Tile adjacentTile = Tile.get(adjacentTiles[i]);
 							if (adjacentTile.containsTileEntity(monster)) {
-								gameScreen.fight.startAdjacent(adjacentTile, Client.getMainHero());
+								gameScreen.fight.startAdjacent(t.tileNumber, Client.getMainHero());
 								gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 								gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 								break monsterLoop;
@@ -268,6 +269,7 @@ public class GameScreenDrawer implements Inputtable{
 						}
 					}
 				}
+				InputThread.updateVariable();
 			}
 			else {
 				System.out.println("NO TIME");

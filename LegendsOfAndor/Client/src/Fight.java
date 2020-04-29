@@ -49,7 +49,7 @@ public class Fight implements Serializable{
 		else return false;
 	}
 	
-	public void start(Tile fightTile, Hero initiator) {
+	public void start(int tileNumber, Hero initiator) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		heroTotalRoll = 0;
@@ -57,7 +57,7 @@ public class Fight implements Serializable{
 		currentHero = initiator;
 		
 		
-		this.fightTile = fightTile;
+		this.fightTile = Tile.get(tileNumber);
 		isHappening = true;
 		int monsterOffset = 1;
 		for (Character entity : fightTile.getTileCharacters()) {
@@ -82,11 +82,11 @@ public class Fight implements Serializable{
 	}
 	
 	//fight monster on adjacent tile
-	public void startAdjacent(Tile fightTile, Hero hero) {
+	public void startAdjacent(int tileNumber, Hero hero) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		
-		this.fightTile = fightTile;
+		this.fightTile = Tile.get(tileNumber);
 		isHappening = true;
 		int monsterOffset = 1;
 		
