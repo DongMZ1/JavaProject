@@ -47,7 +47,6 @@ public class Client {
         gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
         //InputThread.updateVariable();
         while(!preGameScreen.lobbyScreen.readyToStart) {
-            System.out.println(gameStatus.focus);
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
@@ -61,6 +60,7 @@ public class Client {
             mainHero = new Dwarf(0);
         else
             mainHero = new Mage(0);
+        Thread.sleep(1000*playerNum);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
         gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
@@ -126,6 +126,9 @@ class InputThread extends Thread{
                 if(inputs[0].equals("s")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;
+                }
+                else if(inputs[0].equals("d")) {
+                    Client.preGameScreen.lobbyScreen.isEasy = !Client.preGameScreen.lobbyScreen.isEasy;
                 }
                 else if(inputs[0].equals("r")) {
                     Client.preGameScreen.lobbyScreen.readyToStart = true;

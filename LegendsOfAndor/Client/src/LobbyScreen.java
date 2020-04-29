@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class LobbyScreen implements Inputtable, Serializable {
 
 	private static final long serialVersionUID = -5178509001230895367L;
-	private boolean isEasy;
+	public boolean isEasy;
 
     private int currentChar = 0;
     public static GameStatus gameStatus;
@@ -81,10 +81,11 @@ public class LobbyScreen implements Inputtable, Serializable {
         if(y > gameStatus.screenHeight - 100) {
             if(x > 300 && x < 700) {
                 readyToStart = true;
-                InputThread.sendString("r 1");
+                InputThread.sendString("r " + "1");
             }
-            else if(x > gameStatus.screenWidth-400 && x < gameStatus.screenWidth)
-                isEasy = !isEasy;
+            else if(x > gameStatus.screenWidth-400 && x < gameStatus.screenWidth) {
+                InputThread.sendString("d 1");
+            }
         }
     }
     public void handleMouseRelease(int x, int y, int button) {
