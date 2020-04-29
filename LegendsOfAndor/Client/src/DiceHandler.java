@@ -51,12 +51,12 @@ public class DiceHandler extends Thread implements Serializable{
 		
 		final ArrayList<MinuetoImage> blackDice = new ArrayList<MinuetoImage>(
 				Arrays.asList(
-						new MinuetoImageFile("images/Heroes/Dice/6.JPG").scale(300/ 671.0, 300/ 671.0),
-						new MinuetoImageFile("images/Heroes/Dice/7.JPG").scale(300/ 671.0, 300/ 671.0),
-						new MinuetoImageFile("images/Heroes/Dice/8.JPG").scale(300/ 671.0, 300/ 671.0),
-						new MinuetoImageFile("images/Heroes/Dice/9.JPG").scale(300/ 671.0, 300/ 671.0),
-						new MinuetoImageFile("images/Heroes/Dice/10.JPG").scale(300/ 671.0, 300/ 671.0),
-						new MinuetoImageFile("images/Heroes/Dice/11.JPG").scale(300/ 671.0, 300/ 671.0)));
+						new MinuetoImageFile("images/Heroes/Dice/6.JPG").scale(100/ 671.0, 100/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/7.JPG").scale(100/ 671.0, 100/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/8.JPG").scale(100/ 671.0, 100/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/9.JPG").scale(100/ 671.0, 100/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/10.JPG").scale(100/ 671.0, 100/ 671.0),
+						new MinuetoImageFile("images/Heroes/Dice/11.JPG").scale(100/ 671.0, 100/ 671.0)));
 		
 		final ArrayList<MinuetoImage> monsterDice = new ArrayList<MinuetoImage>(
 				Arrays.asList(
@@ -120,9 +120,14 @@ public class DiceHandler extends Thread implements Serializable{
 		
 		private void drawDice() {
 
-			
 			for(int i = 0; i < rolls.size(); i++) {
-				window.draw(acList.get(rolls.get(i) - 1), 100 * i, 100);
+				if(indicator == -2) {
+					window.draw(acList.get(rolls.get(i) - 6), 100 * i, 100);
+				}
+				
+				else {
+					window.draw(acList.get(rolls.get(i) - 1), 100 * i, 100);
+				}
 			}
 		}
 		
