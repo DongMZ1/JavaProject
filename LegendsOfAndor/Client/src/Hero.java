@@ -695,7 +695,8 @@ public class Hero implements Character, Serializable {
 			}
 		}
 		if(this.getRuneStone() == 3) {
-			//get a black dice
+			Client.getMainHero().hasBlackDice = true;
+			System.out.println("get a black dice" +Client.getMainHero().hasBlackDice);
 		}
 	}	
 
