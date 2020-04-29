@@ -14,8 +14,8 @@ public class CollaborativeDecision implements Serializable {
 	
 	
 	TurnManager tm;
-	public static ArrayList<Tuple<Item,Hero>> items;
-	
+	ArrayList<Tuple<Item,Hero>> items;
+	int selectedNumItems = 0;
 	
 	
 	

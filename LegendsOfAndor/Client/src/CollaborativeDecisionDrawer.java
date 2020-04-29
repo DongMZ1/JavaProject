@@ -25,7 +25,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 	GameStatus gameStatus;
 	GameScreen gameScreen;
 	int maxNumItems;
-	int selectedNumItems = 0;
+	
 	
 	public static CollaborativeDecisionDrawer getInstance() throws IOException {
 		if(cdDrawer == null)
@@ -62,7 +62,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 }
 	public void createDecision(int numberOfItems) {
 		itemButtons.clear();
-		selectedNumItems=0;
+		gameScreen.cd.selectedNumItems=0;
 		maxNumItems = numberOfItems;
 		int offset = 3;
 		try {
@@ -115,7 +115,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				remainingSlots--;
 
 			}
-			if (selectedNumItems == maxNumItems) {
+			if (gameScreen.cd.selectedNumItems == maxNumItems) {
 				okButton.draw();
 				
 			}
@@ -152,19 +152,19 @@ public class CollaborativeDecisionDrawer implements Inputtable {
             
         }
 		int i = 0;
-		
+		System.out.println(gameScreen.cd.selectedNumItems);
 		for (Button b : itemButtons) {
 			if (b.isClicked(x, y)) {
 				if (gameScreen.cd.items.get(i).second == null) {
-					if (selectedNumItems < maxNumItems) {
+					if (gameScreen.cd.selectedNumItems < maxNumItems) {
 						gameScreen.cd.items.get(i).second = Client.mainHero;
-						selectedNumItems++;
+						gameScreen.cd.selectedNumItems++;
 						
 					}
 				}
 				else if (gameScreen.cd.items.get(i).second.getClass() == Client.mainHero.getClass()) {
 					gameScreen.cd.items.get(i).second = null;
-					selectedNumItems--;
+					gameScreen.cd.selectedNumItems--;
 				}
 				else {
 					gameScreen.cd.items.get(i).second = Client.mainHero;
