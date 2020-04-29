@@ -249,6 +249,7 @@ public class GameScreenDrawer implements Inputtable{
 						gameScreen.fight.start(t.tileNumber, gameScreen.tm.getHero());
 						gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 						gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+						gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;
 						break;
 					}
 
@@ -263,6 +264,7 @@ public class GameScreenDrawer implements Inputtable{
 								gameScreen.fight.startAdjacent(t.tileNumber, Client.getMainHero());
 								gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 								gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+								gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;
 								break monsterLoop;
 
 							}

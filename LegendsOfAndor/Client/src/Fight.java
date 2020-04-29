@@ -78,7 +78,7 @@ public class Fight implements Serializable{
 		}
 		
 		herosLeft = fightHeroes.size();
-		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
+//		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
 		System.out.println(fightMembers);
 	}
 	
@@ -114,7 +114,7 @@ public class Fight implements Serializable{
 		
 		
 		herosLeft = fightHeroes.size();
-		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
+//		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
 		
 	}
 	
