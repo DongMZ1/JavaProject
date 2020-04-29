@@ -16,7 +16,7 @@ public class FightDrawer implements Inputtable{
 	GameStatus gameStatus;
 	GameScreen gameScreen;
 	MinuetoImage background;
-	static FightDrawer fightdrawer;
+	private static FightDrawer fightdrawer;
 
 	
 	TileEntityDrawer teDrawer;
