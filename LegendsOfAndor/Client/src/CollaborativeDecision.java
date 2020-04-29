@@ -84,13 +84,13 @@ public class CollaborativeDecision implements Serializable {
 		for (Tuple<Item,Hero> combo : items) {
 			if (combo.second.getClass() == Client.mainHero.getClass()) {
 				if (combo.first instanceof WP) {
-					Client.mainHero.wp++;
+					Client.getMainHero().wp++;
 				}
 				else {
-					Client.mainHero.items.add(combo.first);
+					Client.getMainHero().items.add(combo.first);
 				}
 				
-				System.out.println(Client.mainHero.items);
+				System.out.println(Client.getMainHero().items);
 			}
 			
 			

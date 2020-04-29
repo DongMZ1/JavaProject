@@ -180,7 +180,7 @@ public class GameUi implements Inputtable {
         }
  
     private boolean verify() {
-    	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero().equals(Client.mainHero)) {
+    	if (gameStatus.ui == UIStatus.NONE && gameScreen.mainIsCurrent()) {
     		return true;
     	}
     	else {

@@ -21,7 +21,7 @@ public class Fight implements Serializable{
 	ArrayList<Tuple<Character,Coordinate>> fightMembers;
 	ArrayList<Hero> fightHeroes;
 	
-	Hero mainHero = Client.mainHero;
+	
 	public Hero currentHero = Client.mainHero;
 	GameStatus gameStatus;
 
@@ -39,8 +39,8 @@ public class Fight implements Serializable{
 	int archerRollNumber = 0;
 	boolean brewUsed=false;
 	public Fight(TurnManager tm) throws IOException {
-		
 		this.tm = tm;
+		
 		gameStatus = GameStatus.getInstance();
 	}
 	
@@ -55,7 +55,7 @@ public class Fight implements Serializable{
 		heroTotalRoll = 0;
 		monsterTotalRoll = 0;
 		currentHero = initiator;
-		mainHero = Client.mainHero;
+		
 		
 		this.fightTile = fightTile;
 		isHappening = true;
@@ -113,7 +113,7 @@ public class Fight implements Serializable{
 		
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.setFight(FightStatus.ROLLPROMPT);
+		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
 		
 	}
 	
@@ -123,5 +123,7 @@ public class Fight implements Serializable{
 		return flipNumber;
 	}
 	
-	
+	public boolean currentIsMain() {
+		return (currentHero.getClass() == Client.mainHero.getClass());
+	}
 }
