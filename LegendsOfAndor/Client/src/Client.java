@@ -48,7 +48,11 @@ public class Client {
             inputHandler.handleQueue();
         }
         new InputThread(preGameScreen.getAddress()).start();
-        Thread.sleep(2000);
+        while(!preGameScreen.lobbyScreen.readyToStart) {
+            preGameScreen.draw();
+            screen.render();
+            inputHandler.handleQueue();
+        }
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
         InputThread.updateVariable();
@@ -111,8 +115,21 @@ class InputThread extends Thread{
             else if(input instanceof GameScreen) {
                 Client.gameScreenDrawer.updateGameScreen((GameScreen) input);
             }
-            else
-                System.out.print("Whoops");
+            else if(input instanceof String) {
+                String[] inputs = ((String) input).split(" ");
+                System.out.println(inputs[0]);
+                if(inputs[0].equals("p")) {
+                    int playerNum = Integer.parseInt(inputs[1]);
+                    int selection = Integer.parseInt(inputs[2]);
+                    while(Client.preGameScreen.lobbyScreen.players.size()<playerNum)
+                        Client.preGameScreen.lobbyScreen.players.add(new LobbyPlayer(Client.preGameScreen.lobbyScreen.players.size()+1));
+                    Client.preGameScreen.lobbyScreen.players.get(playerNum-1).setHero(selection);
+                    System.out.println(Client.preGameScreen.lobbyScreen.players.size());
+                }
+                else if(inputs[0].equals('m')) {
+
+                }
+            }
         }
         } catch(Exception e) { System.out.println("Goodbye!"); }
     }
@@ -124,6 +141,12 @@ class InputThread extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+
+    public static void sendString(String toSend) {
+        try {
+            out.writeObject(toSend);
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
 }

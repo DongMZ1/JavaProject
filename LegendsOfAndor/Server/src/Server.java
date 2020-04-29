@@ -118,6 +118,7 @@ public class Server {
                 out = new ObjectOutputStream(socket.getOutputStream());
                 out.writeObject(Server.gameScreen);
                 out.writeObject(Server.gameStatus);
+                out.writeObject("p " + (writers.size()+1) + " 0");
                 writers.add(out);
                 // Accept messages from this client and broadcast them.
                 while (true) {
