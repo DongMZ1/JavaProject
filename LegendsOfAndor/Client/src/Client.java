@@ -45,12 +45,12 @@ public class Client {
         }
         new InputThread(preGameScreen.getAddress()).start();
         gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
-        InputThread.updateVariable();
+        //InputThread.updateVariable();
         while(!preGameScreen.lobbyScreen.readyToStart) {
+            System.out.println(gameStatus.focus);
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
-            System.out.println(gameStatus.focus);
         }
         int index = preGameScreen.lobbyScreen.players.get(playerNum-1).index;
         if(index == 0)
@@ -64,6 +64,7 @@ public class Client {
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
         gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
+        gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
@@ -125,6 +126,9 @@ class InputThread extends Thread{
                 if(inputs[0].equals("s")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;
+                }
+                else if(inputs[0].equals("r")) {
+                    Client.preGameScreen.lobbyScreen.readyToStart = true;
                 }
                 else if(inputs[0].equals("p")) {
                     int playerNum = Integer.parseInt(inputs[1]);

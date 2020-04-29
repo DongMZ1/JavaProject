@@ -79,8 +79,10 @@ public class LobbyScreen implements Inputtable, Serializable {
         }
 
         if(y > gameStatus.screenHeight - 100) {
-            if(x > 300 && x < 700)
+            if(x > 300 && x < 700) {
                 readyToStart = true;
+                InputThread.sendString("r 1");
+            }
             else if(x > gameStatus.screenWidth-400 && x < gameStatus.screenWidth)
                 isEasy = !isEasy;
         }

@@ -40,6 +40,7 @@ public class Server {
     public static void createNewGame() throws IOException {
         gameScreen = GameScreen.getInstance();
         gameStatus = GameStatus.getInstance();
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
     }
 
     public static void loadGame(String nameOfSaveFile) throws IOException, ClassNotFoundException {
@@ -136,7 +137,7 @@ public class Server {
                     }
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             } finally {
                 try {
                     System.out.println("Player has left the server");
