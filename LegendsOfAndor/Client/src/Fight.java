@@ -23,7 +23,7 @@ public class Fight implements Serializable{
 	
 	
 	public Hero currentHero = Client.mainHero;
-	GameStatus gameStatus;
+//	GameStatus gameStatus;
 
 	int herosLeft;
 	int monsterTotalRoll;
@@ -41,7 +41,7 @@ public class Fight implements Serializable{
 	public Fight(TurnManager tm) throws IOException {
 		this.tm = tm;
 		
-		gameStatus = GameStatus.getInstance();
+//		gameStatus = GameStatus.getInstance();
 	}
 	
 	public boolean inFight(Hero h) {
@@ -78,7 +78,7 @@ public class Fight implements Serializable{
 		}
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.setFight(FightStatus.ROLLPROMPT);
+		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
 		System.out.println(fightMembers);
 	}
 	

@@ -125,7 +125,7 @@ public class FightDrawer implements Inputtable{
 		}
 		
 		
-		if (Client.gameStatus.fight == FightStatus.ROLLPROMPT) {
+		if (gameScreen.gameStatus.fight == FightStatus.ROLLPROMPT) {
 			confirm.setClickable(true);
 			rollButton.setClickable(true);
 			if (gameScreen.fight.currentIsMain()) {
