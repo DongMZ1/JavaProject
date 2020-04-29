@@ -159,7 +159,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 					if (selectedNumItems < maxNumItems) {
 						gameScreen.cd.items.get(i).second = Client.mainHero;
 						selectedNumItems++;
-						InputThread.updateVariable();
+						
 					}
 				}
 				else if (gameScreen.cd.items.get(i).second.getClass() == Client.mainHero.getClass()) {
@@ -169,7 +169,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				else {
 					gameScreen.cd.items.get(i).second = Client.mainHero;
 				}
-				
+				InputThread.updateVariable();
 			}
 			i++;
 		}
