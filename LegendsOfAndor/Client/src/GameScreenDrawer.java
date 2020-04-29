@@ -110,10 +110,10 @@ public class GameScreenDrawer implements Inputtable{
 	public void moveHero(int currentTile, int destination) {
 		for(int i = 0; i < gameScreen.tiles.get(currentTile).tileEntities.size(); i++) {
 			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.getMainHero().getClass().toString()))
-				gameScreen.tiles.get(currentTile).tileEntities.remove(i);
+				gameScreen.tiles.get(currentTile).removeTileEntity(Client.getMainHero());
 		}
 		Client.getMainHero().setTile(destination);
-		gameScreen.tiles.get(destination).tileEntities.add(Client.getMainHero());
+		gameScreen.tiles.get(destination).addTileEntity(Client.getMainHero());
 		//InputThread.updateVariable();
 	}
 

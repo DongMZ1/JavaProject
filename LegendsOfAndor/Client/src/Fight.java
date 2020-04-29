@@ -62,6 +62,7 @@ public class Fight implements Serializable{
 		int monsterOffset = 1;
 		for (Character entity : fightTile.getTileCharacters()) {
 			//member is a Hero
+			System.out.println(entity);
 			if (entity instanceof Hero) {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
 				fightHeroes.add((Hero) entity);
@@ -95,7 +96,7 @@ public class Fight implements Serializable{
 		
 		for (Character entity : fightTile.getTileCharacters()) {
 			//member is a Hero
-			
+			System.out.println(entity);
 			if (entity instanceof Hero) {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
 				fightHeroes.add((Hero) entity);
