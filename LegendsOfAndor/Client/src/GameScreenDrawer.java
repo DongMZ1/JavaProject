@@ -193,6 +193,7 @@ public class GameScreenDrawer implements Inputtable{
 			gameUi.handleMousePress(x, y, button);
 		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT)
 			this.movingCam = true;
+		/*
 		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameScreen.mainIsCurrent()) {
 			if (Client.getMainHero().canMakeMove()) {
 				if (Client.gameStatus.ui == UIStatus.MOVEBEGIN) {
@@ -207,6 +208,7 @@ public class GameScreenDrawer implements Inputtable{
 			} else
 				gameUi.moveButton.setLabel("No Time");
 		}
+		*/
 	}
 
 	public void handleMouseRelease(int x, int y, int button) {
