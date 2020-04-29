@@ -133,6 +133,8 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == 'a')
 		{
+			gameScreen.tm.endTurn();
+			gameScreen.currentHero = gameScreen.tm.getHero();
 			System.out.println(gameScreen.currentHero);
 		}
 		else if(c == 'm') {
@@ -165,9 +167,7 @@ public class GameScreenDrawer implements Inputtable{
 		else if (c == ' ') {
 			System.out.println(toMove);
 			System.out.println(gameScreen.tm.getHero().getClass());
-			if (Client.getMainHero().canMakeMove() && 
-					(gameScreen.gameStatus.ui == UIStatus.MOVING || (gameScreen.gameStatus.ui == UIStatus.NONE && gameUi.moveInterrupted) )
-					&& gameScreen.mainIsCurrent()){
+			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING){
 				if (toMove >= 0 && toMove <= 76) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
 							moveHero(Client.getMainHero().getTile(),toMove);
@@ -220,8 +220,8 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.MOVED) {
 			gameScreen.gameStatus.ui = UIStatus.NONE;
-			gameScreen.tm.endTurn();
-			gameScreen.currentHero = gameScreen.tm.getHero();
+		//	gameScreen.tm.endTurn();
+		//	gameScreen.currentHero = gameScreen.tm.getHero();
 			gameUi.moveButton.setLabel("Move");
 			InputThread.updateVariable();
 		}

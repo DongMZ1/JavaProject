@@ -27,39 +27,45 @@ public class Narrator implements Serializable{
 		
 		if(Client.gameStatus.MedicalHerbInCastle && Client.gameStatus.SkralTowerDefeated && Client.gameScreenDrawer.gameScreen.castle.health >= 0) {
 			Cards.DrawLegend2Card(4);
+			InputThread.updateVariable();
 		}
 		
 		if(y > 600) {
           y = y -620;
           narrartorTrack ++;
+          InputThread.updateVariable();
 		}
 		//set rune stone cards for draw
 		if(narrartorTrack == Client.gameStatus.WhenToDrawRuneStoneLegendCard) {
 			Cards.DrawLegend2Card(100);
 			Client.gameStatus.legend2CardIndex = Client.gameStatus.WhenToDrawRuneStoneLegendCard;
+			InputThread.updateVariable();
 			
 		}
 		
 		if(narrartorTrack == 1) {
 			Cards.DrawLegend2Card(1);
 			Client.gameStatus.legend2CardIndex = 1;
+			InputThread.updateVariable();
 		}
 		
 		if(narrartorTrack == 3) {
 			Cards.DrawLegend2Card(2);
 			Client.gameStatus.legend2CardIndex = 2;
+			InputThread.updateVariable();
 		}
 
 		if(narrartorTrack == 7) {
 			Cards.DrawLegend2Card(3);
 			Client.gameStatus.legend2CardIndex = 3;
+			InputThread.updateVariable();
 		}
 		
 		if(narrartorTrack == 14) {
 			Cards.DrawLegend2Card(4);
 			Client.gameStatus.legend2CardIndex = 4;
+			InputThread.updateVariable();
 		}
-		InputThread.updateVariable();
 	}	
 
 	

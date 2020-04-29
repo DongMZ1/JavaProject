@@ -649,6 +649,7 @@ public class Hero implements Character, Serializable {
 			for (Item t: this.items) {
 				if(t instanceof MedicalHerb) {
 					this.items.remove(t);
+					Client.gameStatus.MedicalHerbInCastle = true;
 					break;
 				}
 			}
@@ -694,7 +695,7 @@ public class Hero implements Character, Serializable {
 				break;
 			}
 		}
-		if(this.getRuneStone() == 3) {
+		if(this.getRuneStone() >= 3) {
 			Client.getMainHero().hasBlackDice = true;
 			System.out.println("get a black dice" +Client.getMainHero().hasBlackDice);
 		}

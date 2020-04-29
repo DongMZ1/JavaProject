@@ -122,23 +122,18 @@ public class GameUi implements Inputtable {
 	        	gameStatus.lastFocused=gameStatus.FOCUS_ON_GAMESCREEN;
 	            gameStatus.focus = gameStatus.FOCUS_ON_TEXTBOX;
 	        }
-	        else if(gameScreen.mainIsCurrent()) {
-	            if(moveButton.isClicked(x, y) && moveButton.isClickable()) {
-	            	if(gameStatus.ui != UIStatus.MOVING && !moveInterrupted) {
+	        else if(moveButton.isClicked(x, y) && moveButton.isClickable() && gameScreen.tm.getHero().equals(Client.getMainHero())) {
+	            	if(gameStatus.ui != UIStatus.MOVING) {
 		            	gameStatus.ui = UIStatus.MOVING;
 		            	moveButton.setLabel("Stop Hero");
 		            	}else {
 		            		moveButton.setLabel("Move Hero");
-			            	gameStatus.ui = UIStatus.MOVED;
-			            	moveInterrupted = false;
+			            	gameStatus.ui = UIStatus.NONE;
 		            	}
 	                
 	            }
-	            else{
-	            	moveInterrupted = true;
-	            }
 	            
-	            if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
+	        else if(fightButton.isClickable() && fightButton.isClicked(x, y) && verify()) {
 	            	gameStatus.ui = UIStatus.FIGHTING;
 	            }
 	            else if(MovePrince.isClickable() && MovePrince.isClicked(x, y)) {
@@ -183,7 +178,7 @@ public class GameUi implements Inputtable {
 	            
 	        }
         }
-    }
+ 
     private boolean verify() {
     	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero() == Client.mainHero) {
     		return true;
