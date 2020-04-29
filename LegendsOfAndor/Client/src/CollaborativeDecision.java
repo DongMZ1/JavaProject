@@ -76,6 +76,7 @@ public class CollaborativeDecision implements Serializable {
 	
 	public void decisionLoop() {
 		//Right now only used when finish
+		
 		if (toDecide == DecisionType.NONE) {
 		gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 		

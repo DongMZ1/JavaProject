@@ -37,11 +37,13 @@ public class Client {
         gameScreenDrawer = GameScreenDrawer.getInstance();
         preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
+        inputHandler.addInput(null); //TAKING PLACE OF LOBBY SCREEN RN
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.collabDrawer);
         inputHandler.addInput(preGameScreen);
+        gameStatus.focus = 5; //preGameScreen
         while(!preGameScreen.isConnected) {
             preGameScreen.draw();
             screen.render();
