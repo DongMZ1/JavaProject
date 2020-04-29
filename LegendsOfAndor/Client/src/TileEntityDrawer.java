@@ -58,7 +58,7 @@ public class TileEntityDrawer {
 		princeThoraldImage = new MinuetoImageFile("images/princeThorald.jpg").scale(0.04, 0.04);
 		wardrakImage = new MinuetoImageFile("images/wardrak.jpg").scale(0.04, 0.04);
 		telescopeImage = new MinuetoImageFile("images/telescope.jpg").scale(0.05, 0.05);
-		runestoneImage = new MinuetoImageFile("images/runestone.jpg").scale(0.2, 0.2);
+		runestoneImage = new MinuetoImageFile("images/runestone.jpg").scale(0.1, 0.1);
 		medicalherbImage = new MinuetoImageFile("images/MedicalHerb.jpg").scale(0.1, 0.1);
 		skraltowerImage = new MinuetoImageFile("images/skraltower.jpg").scale(0.1, 0.1);
 		wpImage = new MinuetoImageFile("images/skraltower.jpg").scale(0.1, 0.1);
