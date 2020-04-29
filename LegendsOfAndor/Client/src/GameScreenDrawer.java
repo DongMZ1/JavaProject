@@ -135,6 +135,7 @@ public class GameScreenDrawer implements Inputtable{
 		{
 			gameScreen.tm.endTurn();
 			gameScreen.currentHero = gameScreen.tm.getHero();
+			InputThread.updateVariable();
 			System.out.println(gameScreen.currentHero);
 		}
 		else if(c == 'm') {

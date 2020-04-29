@@ -31,7 +31,6 @@ public class Client {
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
-    	mainHero = new Dwarf(7);
     	gameStatus = GameStatus.getInstance();
         InputHandler inputHandler = InputHandler.getInputHandler();
         gameScreenDrawer = GameScreenDrawer.getInstance();
@@ -72,13 +71,12 @@ public class Client {
     }
 
     public static Hero getMainHero() {
-    	/*
+    	
         for(Hero hero : gameScreenDrawer.gameScreen.tm.heroes) {
             if(hero.getClass().equals(mainHero.getClass()))
                 return hero;
         }
-        throw new NullPointerException();*/
-    	return mainHero;
+        throw new NullPointerException();
     }
 }
 
