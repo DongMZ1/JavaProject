@@ -80,6 +80,7 @@ public class Client {
     }
 
     public static Hero getMainHero() {
+    	
         for(Hero hero : gameScreenDrawer.gameScreen.tm.heroes) {
             if(hero.getClass().equals(mainHero.getClass()))
                 return hero;

@@ -14,8 +14,8 @@ public class CollaborativeDecision implements Serializable {
 	
 	
 	TurnManager tm;
-	public static ArrayList<Tuple<Item,Hero>> items;
-	
+	ArrayList<Tuple<Item,Hero>> items;
+	int selectedNumItems = 0;
 	
 	
 	
@@ -76,19 +76,26 @@ public class CollaborativeDecision implements Serializable {
 	
 	public void decisionLoop() {
 		//Right now only used when finish
+		
 		if (toDecide == DecisionType.NONE) {
 		gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 		
 		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 		for (Tuple<Item,Hero> combo : items) {
-			if (combo.first instanceof WP) {
-				combo.second.wp++;
-			}
-			else {
-				combo.second.items.add(combo.first);
+			if (combo.second.getClass() == Client.mainHero.getClass()) {
+				if (combo.first instanceof WP) {
+					Client.mainHero.wp++;
+				}
+				else {
+					Client.mainHero.items.add(combo.first);
+				}
+				
+				System.out.println(Client.mainHero.items);
 			}
 			
+			
 		}
+		InputThread.updateVariable();
 		}
 		
 		

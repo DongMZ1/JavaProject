@@ -324,7 +324,6 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 		   }
 		   break;
 	   }
-	   InputThread.updateVariable();
    }
    
    

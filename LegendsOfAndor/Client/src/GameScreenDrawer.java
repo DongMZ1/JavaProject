@@ -50,6 +50,8 @@ public class GameScreenDrawer implements Inputtable{
 		this.gameScreen.gameScreen = gameScreen;
 		Tile.TILES = gameScreen.tiles;
 		this.gameUi.gameScreen = gameScreen;
+		this.collabDrawer.gameScreen = gameScreen;
+		this.gameScreen.cd = gameScreen.cd;
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
@@ -131,6 +133,9 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (c == 'a')
 		{
+			gameScreen.tm.endTurn();
+			gameScreen.currentHero = gameScreen.tm.getHero();
+			InputThread.updateVariable();
 			System.out.println(gameScreen.currentHero);
 		}
 		else if(c == 'm') {
@@ -163,7 +168,7 @@ public class GameScreenDrawer implements Inputtable{
 		else if (c == ' ') {
 			System.out.println(toMove);
 			System.out.println(gameScreen.tm.getHero().getClass());
-			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING && gameScreen.mainIsCurrent()){
+			if (Client.getMainHero().canMakeMove() && gameScreen.gameStatus.ui == UIStatus.MOVING){
 				if (toMove >= 0 && toMove <= 76) {
 						if (isValidMove(Client.getMainHero().getTile(),toMove)) {
 							moveHero(Client.getMainHero().getTile(),toMove);
@@ -188,6 +193,7 @@ public class GameScreenDrawer implements Inputtable{
 			gameUi.handleMousePress(x, y, button);
 		else if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT)
 			this.movingCam = true;
+		/*
 		else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && gameScreen.mainIsCurrent()) {
 			if (Client.getMainHero().canMakeMove()) {
 				if (Client.gameStatus.ui == UIStatus.MOVEBEGIN) {
@@ -202,6 +208,7 @@ public class GameScreenDrawer implements Inputtable{
 			} else
 				gameUi.moveButton.setLabel("No Time");
 		}
+		*/
 	}
 
 	public void handleMouseRelease(int x, int y, int button) {
@@ -216,8 +223,8 @@ public class GameScreenDrawer implements Inputtable{
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.MOVED) {
 			gameScreen.gameStatus.ui = UIStatus.NONE;
-			gameScreen.tm.endTurn();
-			gameScreen.currentHero = gameScreen.tm.getHero();
+		//	gameScreen.tm.endTurn();
+		//	gameScreen.currentHero = gameScreen.tm.getHero();
 			gameUi.moveButton.setLabel("Move");
 			InputThread.updateVariable();
 		}
