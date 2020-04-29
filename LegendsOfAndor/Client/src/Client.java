@@ -37,12 +37,17 @@ public class Client {
         gameScreenDrawer = GameScreenDrawer.getInstance();
         preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
-        inputHandler.addInput(preGameScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.collabDrawer);
-        new InputThread().start();
+        inputHandler.addInput(preGameScreen);
+        while(!preGameScreen.isConnected) {
+            preGameScreen.draw();
+            screen.render();
+            inputHandler.handleQueue();
+        }
+        new InputThread(preGameScreen.getAddress()).start();
         Thread.sleep(2000);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
@@ -75,29 +80,21 @@ public class Client {
 
 class InputThread extends Thread{
     //Basic network code init
-    static String serverAddress = "192.168.1.84";
+    static String serverAddress;
 
     static Socket socket;
     static ObjectInputStream in;
     static ObjectOutputStream out;
 
-    static {
+    public InputThread(String serverAddress) {
         try {
+            this.serverAddress = serverAddress;
             socket = new Socket(serverAddress, 59001);
             OutputStream pee = socket.getOutputStream();
             out = new ObjectOutputStream(pee);
             InputStream poop = socket.getInputStream();
             in = new ObjectInputStream(poop);
-            
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public InputThread() {
-
+        } catch (Exception e) {}
     }
 
     public void run() {

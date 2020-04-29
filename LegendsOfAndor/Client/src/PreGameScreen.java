@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class PreGameScreen implements Inputtable {
 
-	boolean isConnected;
+	static boolean isConnected;
 
 	public static LobbyScreen lobbyScreen;
 	public static ConnectionScreen connectionScreen;
@@ -27,6 +27,14 @@ public class PreGameScreen implements Inputtable {
 		}
 		else
 			lobbyScreen.draw();
+	}
+
+	public static void connect() {
+		isConnected = true;
+	}
+
+	public String getAddress() {
+		return connectionScreen.ipAddress;
 	}
 
 	public void handleKeyPress(int key) {
