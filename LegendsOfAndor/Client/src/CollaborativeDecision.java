@@ -82,11 +82,14 @@ public class CollaborativeDecision implements Serializable {
 		
 		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 		for (Tuple<Item,Hero> combo : items) {
-			if (combo.first instanceof WP) {
-				combo.second.wp++;
-			}
-			else {
-				combo.second.items.add(combo.first);
+			if (combo.second.getClass() == Client.mainHero.getClass()) {
+				if (combo.first instanceof WP) {
+					Client.mainHero.wp++;
+				}
+				else {
+					Client.mainHero.items.add(combo.first);
+				}
+				
 			}
 			
 		}
