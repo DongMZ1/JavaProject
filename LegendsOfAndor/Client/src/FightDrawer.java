@@ -244,15 +244,22 @@ public class FightDrawer implements Inputtable{
 			
 			gameScreen.fight.heroRolls = dice.roll(gameScreen.fight.currentHero);
 			System.out.println(gameScreen.fight.heroRolls);
-			
-			Client.gameStatus.setFight(FightStatus.ROLLRESPONSE);
-			
-			if (!(gameScreen.fight.currentHero instanceof Archer)) {
-				gameScreen.fight.currentRoll = dice.getHighestRoll(gameScreen.fight.heroRolls);
+			gameScreen.fight.herosLeft--;
+			if (gameScreen.fight.herosLeft > 0) {
+				gameScreen.fight.tm.endTurn();
+				gameScreen.fight.currentHero = gameScreen.tm.getHero();
+			}else {
+				gameScreen.fight.herosLeft = gameScreen.fight.fightHeroes.size();
+				Client.gameStatus.setFight(FightStatus.ROLLRESPONSE);
+				
+				if (!(gameScreen.fight.currentHero instanceof Archer)) {
+					gameScreen.fight.currentRoll = dice.getHighestRoll(gameScreen.fight.heroRolls);
+				}
+				else {
+					gameScreen.fight.currentRoll = gameScreen.fight.heroRolls.get(0);
+				}
 			}
-			else {
-				gameScreen.fight.currentRoll = gameScreen.fight.heroRolls.get(0);
-			}
+			
 			//		rollAgain.setClickable(false);
 			
 		}

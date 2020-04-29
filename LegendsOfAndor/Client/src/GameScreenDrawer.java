@@ -46,7 +46,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 
 	public void updateGameScreen(GameScreen gameScreen) {
-		this.gameScreen.fight = gameScreen.fight;
+		
 		this.gameScreen = gameScreen;
 		this.gameScreen.gameScreen = gameScreen;
 		Tile.TILES = gameScreen.tiles;
@@ -54,6 +54,7 @@ public class GameScreenDrawer implements Inputtable{
 		this.collabDrawer.gameScreen = gameScreen;
 		this.gameScreen.cd = gameScreen.cd;
 		this.fightDrawer.gameScreen = gameScreen;
+		this.fightDrawer.gameScreen.fight = gameScreen.fight;
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
@@ -248,6 +249,7 @@ public class GameScreenDrawer implements Inputtable{
 					//normal fight
 					if(t.containsTileEntity(monster)) {
 						gameScreen.fight.start(t.tileNumber, Client.getMainHero());
+						InputThread.updateVariable();
 						gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 						gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 						gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;
@@ -263,6 +265,7 @@ public class GameScreenDrawer implements Inputtable{
 							Tile adjacentTile = Tile.get(adjacentTiles[i]);
 							if (adjacentTile.containsTileEntity(monster)) {
 								gameScreen.fight.startAdjacent(t.tileNumber, Client.getMainHero());
+								InputThread.updateVariable();
 								gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 								gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
 								gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;

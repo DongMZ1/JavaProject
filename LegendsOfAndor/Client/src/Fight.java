@@ -125,6 +125,6 @@ public class Fight implements Serializable{
 	}
 	
 	public boolean currentIsMain() {
-		return (currentHero.getClass() == Client.mainHero.getClass());
+		return (currentHero.getClass() == Client.getMainHero().getClass());
 	}
 }
