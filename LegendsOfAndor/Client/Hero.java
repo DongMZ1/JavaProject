@@ -7,6 +7,10 @@ import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoImageFile;
 
 public class Hero implements Character, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1248451598884901811L;
 	int tile;
 	int wp;
 	int sp;
@@ -645,7 +649,6 @@ public class Hero implements Character, Serializable {
 			for (Item t: this.items) {
 				if(t instanceof MedicalHerb) {
 					this.items.remove(t);
-					GameStatus.gameStatus.MedicalHerbInCastle = true;
 					break;
 				}
 			}
@@ -692,7 +695,8 @@ public class Hero implements Character, Serializable {
 			}
 		}
 		if(this.getRuneStone() == 3) {
-			this.hasBlackDice = true;
+			Client.getMainHero().hasBlackDice = true;
+			System.out.println("get a black dice" +Client.getMainHero().hasBlackDice);
 		}
 	}	
 
@@ -872,21 +876,33 @@ public class Hero implements Character, Serializable {
 			if(f instanceof FogToken) {
 				//1 is draw a event card
 				if(((FogToken)f).tokenNumber == 1) {
-								Cards.drawEventCard(GameStatus.gameStatus.EventCardIndex);
+								Cards.drawEventCard(Client.gameStatus.EventCardIndex);
+								System.out.println(tile);
+								Tile.get(f.getTile()).getTileEntities().remove(f);
+								InputThread.updateVariable();
 				}
 				if(((FogToken)f).tokenNumber == 2) {
 					Cards c1 = new Cards(1000);
 					 this.sp ++;
+					 System.out.println(tile);
+					 Tile.get(f.getTile()).getTileEntities().remove(f);
+					 InputThread.updateVariable();
 				}
 
 				if(((FogToken)f).tokenNumber == 3) {
 					Cards c1 = new Cards(1001);
 					 this.wp = this.wp + 2;
+					 System.out.println(tile);
+					 Tile.get(f.getTile()).getTileEntities().remove(f);
+					 InputThread.updateVariable();
 				}
 
 				if(((FogToken)f).tokenNumber == 4) {
 					Cards c1 = new Cards(1002);
 					this.wp = this.wp + 3;
+					System.out.println(tile);
+					Tile.get(f.getTile()).getTileEntities().remove(f);
+					InputThread.updateVariable();
 				}
 
 				if(((FogToken)f).tokenNumber == 5) {
@@ -894,6 +910,9 @@ public class Hero implements Character, Serializable {
 						Item g = new Gold(this.tile);
 						Tile.get(tile).getTileEntities().add(g);
 						this.pickupGold();
+						System.out.println(tile);
+						Tile.get(f.getTile()).getTileEntities().remove(f);
+						InputThread.updateVariable();
 				}
 
 				if(((FogToken)f).tokenNumber == 6) {
@@ -913,12 +932,17 @@ public class Hero implements Character, Serializable {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					 Tile.get(f.getTile()).getTileEntities().remove(f);
+					 InputThread.updateVariable();
 				}
 
 				if(((FogToken)f).tokenNumber == 7) {
 					Cards c1 = new Cards(1005);
 						this.addWineSkin();
 						this.addWineSkin();
+						Tile.get(f.getTile()).getTileEntities().remove(f);
+						System.out.println(tile);
+						InputThread.updateVariable();
 					}
 				
 
@@ -968,14 +992,13 @@ public class Hero implements Character, Serializable {
 							e.printStackTrace();
 						}
 					}
-					
+					Tile.get(f.getTile()).getTileEntities().remove(f);
+					InputThread.updateVariable();
 				}
 				 
-					Tile.get(tile).getTileEntities().remove(f);
 					break;
 			}
 		}
-    	InputThread.updateVariable();
     }
 
 	
