@@ -90,9 +90,12 @@ public class CollaborativeDecision implements Serializable {
 					Client.mainHero.items.add(combo.first);
 				}
 				
+				System.out.println(Client.mainHero.items);
 			}
 			
+			
 		}
+		InputThread.updateVariable();
 		}
 		
 		
