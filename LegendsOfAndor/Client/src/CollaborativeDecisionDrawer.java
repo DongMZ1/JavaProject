@@ -174,11 +174,26 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			}
 			i++;
 		}
-		
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {
 			CollaborativeDecision.toDecide = DecisionType.NONE;
 			InputThread.updateVariable();
+			for (Tuple<Item,Hero> combo : gameScreen.cd.items) {
+				if (combo.second != null && combo.second.getClass() == Client.mainHero.getClass()) {
+					if (combo.first instanceof WP) {
+						Client.getMainHero().wp++;
+					}
+					else {
+						Client.getMainHero().items.add(combo.first);
+					}
+					InputThread.updateVariable();
+					System.out.println(Client.getMainHero().items);
+				}
+				
+				
+			}
+			
 		}
+		
 		
 	}
 	@Override

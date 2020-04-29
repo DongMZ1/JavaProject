@@ -81,21 +81,7 @@ public class CollaborativeDecision implements Serializable {
 		gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 		
 		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
-		for (Tuple<Item,Hero> combo : items) {
-			if (combo.second != null && combo.second.getClass() == Client.mainHero.getClass()) {
-				if (combo.first instanceof WP) {
-					Client.getMainHero().wp++;
-				}
-				else {
-					Client.getMainHero().items.add(combo.first);
-				}
-				
-				System.out.println(Client.getMainHero().items);
-			}
-			
-			
-		}
-		InputThread.updateVariable();
+		
 		}
 		
 		
