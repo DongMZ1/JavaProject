@@ -34,7 +34,7 @@ public class GameUi implements Inputtable {
     public Button MovePrince;
     public GameStatus gameStatus;
     public GameScreen gameScreen;
-    private TextBox textBox;
+    public TextBox textBox;
 
     private int turnButtonWidth = 200;
     private int turnButtonHeight = 36;
