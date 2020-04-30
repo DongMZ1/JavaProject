@@ -71,7 +71,7 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 		backToMain4 = new ServerButton(50, 495, 200, 100, "Menu", 50, screen);
 
 
-		saveGameButton = new ServerButton(25, 500, 250, 100, "Save Game", 50, screen);
+		saveGameButton = new ServerButton(490, 500, 300, 100, "Save Game", 50, screen);
 		this.ipAddress = new MinuetoText(ipAddress, ipFont, MinuetoColor.BLACK);
 
 		saveFiles = new ArrayList<>();
@@ -111,12 +111,11 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 			screen.draw(ipAddressMessageBackground2, 440, 190);
 			screen.draw(ipAddressMessage, 150, 125);
 			screen.draw(ipAddress, 460, 195);
-			screen.draw(saveNameBackground, 100, 400);
-			screen.draw(saveNameMessage, 110, 410);
-			screen.draw(saveNameTextBox, 380, 410);
-			screen.draw(saveNameDisplay, 390, 410);
+			screen.draw(saveNameBackground, 100, 375);
+			screen.draw(saveNameMessage, 110, 385);
+			screen.draw(saveNameTextBox, 380, 385);
+			screen.draw(saveNameDisplay, 390, 385);
 			saveGameButton.draw();
-
 		}
 		screen.render();
 	}
