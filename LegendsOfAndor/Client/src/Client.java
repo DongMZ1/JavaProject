@@ -61,10 +61,12 @@ public class Client {
         else
             mainHero = new Mage(34);
         Thread.sleep(1000*playerNum);
-        gameScreenDrawer.gameScreen.addHero(mainHero);
-        gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
-        gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
-        gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
+        if(!gameStatus.loaded) {
+            gameScreenDrawer.gameScreen.addHero(mainHero);
+            gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
+            gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
+            gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
+        }
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {

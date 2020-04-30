@@ -60,6 +60,9 @@ public class Server {
         saveGame = new ObjectInputStream(new FileInputStream(new File("./saves/"+nameOfSaveFile+"/gameStatus")));
         gameStatus = (GameStatus) saveGame.readObject();
         saveGame.close();
+        gameStatus.focus=GameStatus.FOCUS_ON_LOBBY;
+        gameStatus.currentScreen=GameStatus.LOBBY_SCREEN;
+        gameStatus.loaded = true;
 
     }
 

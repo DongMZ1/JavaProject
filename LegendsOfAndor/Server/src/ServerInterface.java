@@ -1,8 +1,6 @@
 import org.minueto.MinuetoColor;
 import org.minueto.MinuetoEventQueue;
-import org.minueto.handlers.MinuetoFocusHandler;
-import org.minueto.handlers.MinuetoMouse;
-import org.minueto.handlers.MinuetoMouseHandler;
+import org.minueto.handlers.*;
 import org.minueto.image.MinuetoFont;
 import org.minueto.image.MinuetoImage;
 import org.minueto.image.MinuetoRectangle;
@@ -13,11 +11,10 @@ import org.minueto.window.MinuetoWindow;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ServerInterface extends Thread implements MinuetoFocusHandler, MinuetoMouseHandler {
+public class ServerInterface extends Thread implements MinuetoFocusHandler, MinuetoMouseHandler, MinuetoKeyboardHandler, MinuetoMouseWheelHandler {
 
 	private boolean isFocused;
-	private boolean isTyping;
-
+	private int selectedSave;
 	private static final int UI_SAVE_LOAD = 0;
 	private static final int UI_SELECT_SAVE = 1;
 	private static final int UI_RUNNING = 2;
@@ -37,11 +34,17 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 	private static final MinuetoImage saveNameTextBox = new MinuetoRectangle(780, 40, MinuetoColor.WHITE, true);
 	private static final MinuetoText saveNameMessage = new MinuetoText("Save File Name:", font, MinuetoColor.BLACK);
 	private String saveName;
-
+	private MinuetoText saveNameDisplay;
 
 	private MinuetoWindow screen;
 	private ServerButton newGameButton;
 	private ServerButton loadGameButton;
+	private ServerButton selectGameButton;
+	private ServerButton selectGameButton2;
+	private ServerButton backToMain;
+	private ServerButton backToMain2;
+	private ServerButton backToMain3;
+	private ServerButton backToMain4;
 	private ServerButton saveGameButton;
 
 	private ArrayList<ServerButton> saveFiles;
@@ -50,20 +53,37 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 	private MinuetoEventQueue queue;
 
 	public ServerInterface(String ipAddress) throws IOException {
+		selectedSave = -1;
 		isFocused = true;
-		isTyping = false;
 		saveName = "";
+		saveNameDisplay = new MinuetoText(saveName, font, MinuetoColor.BLACK);
 		screen = new MinuetoFrame(SCREEN_WIDTH, SCREEN_HEIGHT, true);
 		screen.setVisible(true);
 		currentScreen = UI_SAVE_LOAD;
 		newGameButton = new ServerButton(250, 310, 300, 100, "New Game", 50, screen);
 		loadGameButton = new ServerButton(730, 310, 300, 100, "Load Game", 50, screen);
-		saveGameButton = new ServerButton(730, 310, 300, 100, "Save Game", 50, screen);
+
+		selectGameButton = new ServerButton(50, 100, 200, 65, "Start", 50, screen);
+		selectGameButton2 = new ServerButton(50, 165, 200, 100, "Game", 50, screen);
+		backToMain = new ServerButton(50, 300, 200, 65, "Return", 50, screen);
+		backToMain2 = new ServerButton(50, 365, 200, 65, "to", 50, screen);
+		backToMain3 = new ServerButton(50, 430, 200, 65, "Main", 50, screen);
+		backToMain4 = new ServerButton(50, 495, 200, 100, "Menu", 50, screen);
+
+
+		saveGameButton = new ServerButton(25, 500, 250, 100, "Save Game", 50, screen);
 		this.ipAddress = new MinuetoText(ipAddress, ipFont, MinuetoColor.BLACK);
+
+		saveFiles = new ArrayList<>();
+		String[] saves = Server.getSaveFiles();
+		for(int i = 0; i < saves.length; i++)
+			saveFiles.add(new ServerButton(300, 100 + (i*100), 880, 75, saves[i], 35, screen));
 
 		queue = new MinuetoEventQueue();
 		screen.registerMouseHandler(this, queue);
 		screen.registerFocusHandler(this, queue);
+		screen.registerKeyboardHandler(this, queue);
+		screen.registerMouseWheelHandler(this, queue);
 	}
 
 	public void draw() {
@@ -77,7 +97,14 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 			loadGameButton.draw();
 		}
 		else if(currentScreen == UI_SELECT_SAVE) {
-
+			selectGameButton2.draw();
+			selectGameButton.draw();
+			backToMain4.draw();
+			backToMain3.draw();
+			backToMain2.draw();
+			backToMain.draw();
+			for(ServerButton button : saveFiles)
+				button.draw();
 		}
 		else if(currentScreen == UI_RUNNING) {
 			screen.draw(ipAddressMessageBackground, 100, 100);
@@ -87,6 +114,8 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 			screen.draw(saveNameBackground, 100, 400);
 			screen.draw(saveNameMessage, 110, 410);
 			screen.draw(saveNameTextBox, 380, 410);
+			screen.draw(saveNameDisplay, 390, 410);
+			saveGameButton.draw();
 
 		}
 		screen.render();
@@ -116,14 +145,63 @@ public class ServerInterface extends Thread implements MinuetoFocusHandler, Minu
 					}
 				}
 				else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && currentScreen == UI_SELECT_SAVE) {
-
+					for (int i = 0; i < saveFiles.size(); i++) {
+						if (saveFiles.get(i).isClicked(x, y)) {
+							if (selectedSave >= 0)
+								saveFiles.get(selectedSave).deselect();
+							saveFiles.get(i).select();
+							selectedSave = i;
+						}
+					}
+					if (selectGameButton.isClicked(x, y) || selectGameButton2.isClicked(x, y)) {
+						if (selectedSave != -1) {
+							Server.loadGame(saveFiles.get(selectedSave).getLabelText());
+							currentScreen = UI_RUNNING;
+							new Server.ServerRunner().start();
+						}
+					}
+					else if(backToMain.isClicked(x, y) || backToMain2.isClicked(x, y) || backToMain3.isClicked(x, y) || backToMain4.isClicked(x, y)) {
+						currentScreen = UI_SAVE_LOAD;
+						if(selectedSave != -1) {
+							saveFiles.get(selectedSave).deselect();
+							selectedSave = -1;
+						}
+					}
 				}
 				else if(button == MinuetoMouse.MOUSE_BUTTON_LEFT && currentScreen == UI_RUNNING) {
-
+					if(saveGameButton.isClicked(x, y)) {
+						Server.saveGame(saveName);
+						saveName = "";
+						saveNameDisplay = new MinuetoText(saveName, font, MinuetoColor.BLACK);
+					}
 				}
 			}
-		} catch (IOException e) {}
+		} catch (IOException | ClassNotFoundException e) {}
 	}
 	public void handleMouseRelease(int i, int i1, int i2) { }
 	public void handleMouseMove(int i, int i1) { }
+
+	public void handleKeyPress(int i) {}
+
+	public void handleKeyRelease(int i) {}
+
+	public void handleKeyType(char c) {
+		if(isFocused && currentScreen == UI_RUNNING) {
+			if(c == MinuetoKeyboard.KEY_BACKSPACE) {
+				if (saveName.length() > 0) {
+					saveName = saveName.substring(0, saveName.length() - 1);
+					saveNameDisplay = new MinuetoText(saveName, font, MinuetoColor.BLACK);
+				}
+			}
+			else {
+				this.saveName += c;
+				saveNameDisplay = new MinuetoText(saveName, font, MinuetoColor.BLACK);
+			}
+		}
+	}
+	public void handleMouseWheelRotate(int i) {
+		if(isFocused && currentScreen == UI_SELECT_SAVE)
+			for(ServerButton button : saveFiles)
+				button.changeY(-i * 4);
+	}
 }

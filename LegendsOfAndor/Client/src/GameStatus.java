@@ -18,7 +18,7 @@ public class GameStatus implements Serializable {
 	private static final long serialVersionUID = 1787705417226009606L;
 
 	public static GameStatus gameStatus;
-
+	public boolean loaded;
     public static final int FOCUS_ON_LOBBY = 0;
     public static final int FOCUS_ON_GAMESCREEN = 1;
     public static final int FOCUS_ON_TEXTBOX = 2;
@@ -81,7 +81,7 @@ public class GameStatus implements Serializable {
 		 WhenToDrawRuneStoneLegendCard = 100;
 		 MedicalHerbInCastle = false;
 		 SkralTowerDefeated = false;
-
+		loaded = false;
 	}
 
 	public static GameStatus getInstance() throws IOException {
