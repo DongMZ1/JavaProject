@@ -385,9 +385,13 @@ public class FightDrawer implements Inputtable{
 				Client.gameStatus.currentScreen = Client.gameStatus.COLLABORATIVE_SCREEN;
 				Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_COLLABORATIVE;
 				try {
-					GameScreen.getInstance().cd.endBattle(gameScreen.fight.currentMonster);
-					GameScreenDrawer.getInstance().collabDrawer.endBattle(gameScreen.fight.currentMonster);
-				} catch (IOException e) {
+					gameScreen.cd = new CollaborativeDecision(DecisionType.REWARD, gameScreen.tm);
+					Client.gameScreenDrawer.collabDrawer = new CollaborativeDecisionDrawer(DecisionType.REWARD, gameScreen.tm);
+					gameScreen.cd.endBattle(gameScreen.fight.currentMonster);
+					Client.gameScreenDrawer.collabDrawer.endBattle(gameScreen.fight.currentMonster);
+//					GameScreen.getInstance().cd.endBattle(gameScreen.fight.currentMonster);
+//					GameScreenDrawer.getInstance().collabDrawer.endBattle(gameScreen.fight.currentMonster);
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
