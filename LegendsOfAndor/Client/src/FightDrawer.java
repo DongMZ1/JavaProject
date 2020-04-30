@@ -193,7 +193,12 @@ public class FightDrawer implements Inputtable{
 			}
 			if (damageButton == null) {
 				String damage = createDamageString();
-				damageButton = new Button(new Coordinate(700,500),1,1,damage,false);
+				try {
+					damageButton = new Button(new Coordinate(700,500),1,1,damage,false);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			damageButton.draw();
 			if (Client.getMainHero().getShield() > 0 && gameScreen.fight.heroTotalRoll < gameScreen.fight.monsterTotalRoll) {
