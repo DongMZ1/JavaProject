@@ -30,6 +30,7 @@ public class Fight implements Serializable{
 
 	int heroTotalRoll;
 	int currentRoll;
+	int wizardRoll;
 	Monster currentMonster;
 	Dice targetDice;
 	private int diceRolled;
@@ -53,6 +54,7 @@ public class Fight implements Serializable{
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		heroTotalRoll = 0;
+		wizardRoll = 0;
 		monsterTotalRoll = 0;
 		currentHero = initiator;
 		
@@ -86,7 +88,7 @@ public class Fight implements Serializable{
 	public void startAdjacent(int tileNumber, Hero hero) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
-		
+		wizardRoll = 0;
 		this.fightTile = Tile.get(tileNumber);
 		isHappening = true;
 		int monsterOffset = 1;

@@ -124,8 +124,12 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				okButton.draw();
 				
 			}
-			button.draw();
-			tileDrawer.draw(item, button.getCoordinate().getX(), button.getCoordinate().getY()-150);
+			if (button != null) {
+				button.draw();
+				tileDrawer.draw(item, button.getCoordinate().getX(), button.getCoordinate().getY()-150);
+			}
+			
+			
 			
 		}
 		
@@ -216,6 +220,19 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 			InputThread.updateVariable();
 			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		 try {
+			GameScreen.gameScreen.startGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 		}
 		

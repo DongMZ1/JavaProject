@@ -47,6 +47,7 @@ public class GameScreen implements Serializable{
 	public Hero currentHero;
 	public Fight fight;
 	public boolean movementLock = false;
+	public boolean gameStarted = false;
     private GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
@@ -75,6 +76,13 @@ public class GameScreen implements Serializable{
         //castle = new Castle(5 - tm.heroes.size());
     }
 
+    
+    public void startGame() throws IOException {
+    	if (!gameStarted) {
+    		newDay();
+    		gameStarted = true;
+    	}
+    }
     public void addHero(Hero hero) {
 		tm.addHero(hero);
 		if (currentHero == null) {

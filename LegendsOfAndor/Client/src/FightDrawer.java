@@ -282,11 +282,15 @@ public class FightDrawer implements Inputtable{
 				
 				
 			}
-			if (!(gameScreen.fight.currentHero instanceof Archer)) {
-				gameScreen.fight.heroTotalRoll += dice.getHighestRoll(gameScreen.fight.heroRolls);
+			if ((gameScreen.fight.currentHero instanceof Archer)) {
+				gameScreen.fight.currentRoll = gameScreen.fight.heroRolls.get(0);
+				
+			}
+			else if(gameScreen.fight.currentHero instanceof Mage) {
+				gameScreen.fight.wizardRoll = dice.getHighestRoll(gameScreen.fight.heroRolls);
 			}
 			else {
-				gameScreen.fight.currentRoll = gameScreen.fight.heroRolls.get(0);
+				gameScreen.fight.heroTotalRoll += dice.getHighestRoll(gameScreen.fight.heroRolls);
 			}
 			
 			//		rollAgain.setClickable(false);
@@ -300,6 +304,11 @@ public class FightDrawer implements Inputtable{
 				rollAgain.setClickable(false);
 			}
 		}
+		else if(gameScreen.fight.currentIsMain() && changeRollResult.isClicked(x, y) && changeRollResult.isClickable()) {
+			System.out.println("CRR");
+			gameScreen.fight.wizardRoll = gameScreen.fight.flipRoll(gameScreen.fight.wizardRoll);
+	
+		}
 		else if (Client.gameStatus.fight == FightStatus.ROLLRESPONSE && gameScreen.fight.currentIsMain()) { 
 			
 			if(confirm.isClicked(x, y) && confirm.isClickable()) {
@@ -307,6 +316,7 @@ public class FightDrawer implements Inputtable{
 			gameScreen.fight.heroTurn = false;
 			Client.gameStatus.fight = FightStatus.ROLLMONSTER;
 			gameScreen.fight.brewUsed = false;
+			gameScreen.fight.heroTotalRoll += gameScreen.fight.wizardRoll;
 			gameScreen.fight.heroTotalRoll += gameScreen.fight.currentRoll;
 			for (Hero hero : gameScreen.fight.fightHeroes) {
 				if (hero.getClass() == Client.mainHero.getClass()) {
