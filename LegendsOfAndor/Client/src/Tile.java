@@ -13,7 +13,7 @@ public class Tile implements Serializable{
     public ArrayList<Character> tileCharacters;
     private Coordinate moveCoords;
     private int[] adjacentTiles;
-    private int tileNumber;
+    int tileNumber;
     private int nextTile;
     //private ArrayList<Grid> grids = new ArrayList<>();
     

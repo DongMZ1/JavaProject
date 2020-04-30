@@ -34,7 +34,7 @@ public class GameUi implements Inputtable {
     public Button MovePrince;
     public GameStatus gameStatus;
     public GameScreen gameScreen;
-    private TextBox textBox;
+    public TextBox textBox;
 
     private int turnButtonWidth = 200;
     private int turnButtonHeight = 36;
@@ -180,7 +180,7 @@ public class GameUi implements Inputtable {
         }
  
     private boolean verify() {
-    	if (gameStatus.ui == UIStatus.NONE && gameScreen.tm.getHero().equals(Client.mainHero)) {
+    	if (gameStatus.ui == UIStatus.NONE && gameScreen.mainIsCurrent()) {
     		return true;
     	}
     	else {

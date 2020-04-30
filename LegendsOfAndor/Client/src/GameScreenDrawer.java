@@ -40,23 +40,33 @@ public class GameScreenDrawer implements Inputtable{
 		this.movingCam = false;
 		playerBoard = PlayerBoard.getInstance(Client.mainHero);
 		tileDrawer = TileDrawer.getInstance();
-		fightDrawer = new FightDrawer(new Fight(gameScreen.tm));
+		fightDrawer = fightDrawer.getInstance();
 		castleDrawer = CastleDrawer.getInstance();
 		collabDrawer = CollaborativeDecisionDrawer.getInstance();
 	}
 
 	public void updateGameScreen(GameScreen gameScreen) {
+		if (this.gameScreen.gameStatus.fight == FightStatus.OVER) {
+			Client.gameScreenDrawer.collabDrawer.endBattle(gameScreen.fight.currentMonster);
+			this.gameScreen.gameStatus.fight = FightStatus.NONE;
+			this.gameScreen.movementLock = true;
+		}
 		this.gameScreen = gameScreen;
 		this.gameScreen.gameScreen = gameScreen;
 		Tile.TILES = gameScreen.tiles;
 		this.gameUi.gameScreen = gameScreen;
 		this.collabDrawer.gameScreen = gameScreen;
 		this.gameScreen.cd = gameScreen.cd;
+		this.fightDrawer.gameScreen = gameScreen;
+		this.fightDrawer.gameScreen.fight = gameScreen.fight;
+		
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
 		this.gameScreen.gameStatus = gameStatus;
 		this.gameScreen.cd.gameStatus = gameStatus;
+		this.collabDrawer.gameStatus = gameStatus;
+		
 	}
 
 	public static GameScreenDrawer getInstance() throws IOException {
@@ -108,10 +118,10 @@ public class GameScreenDrawer implements Inputtable{
 	public void moveHero(int currentTile, int destination) {
 		for(int i = 0; i < gameScreen.tiles.get(currentTile).tileEntities.size(); i++) {
 			if(gameScreen.tiles.get(currentTile).tileEntities.get(i).getClass().toString().equals(Client.getMainHero().getClass().toString()))
-				gameScreen.tiles.get(currentTile).tileEntities.remove(i);
+				gameScreen.tiles.get(currentTile).removeTileEntity(Client.getMainHero());
 		}
 		Client.getMainHero().setTile(destination);
-		gameScreen.tiles.get(destination).tileEntities.add(Client.getMainHero());
+		gameScreen.tiles.get(destination).addTileEntity(Client.getMainHero());
 		//InputThread.updateVariable();
 	}
 
@@ -122,7 +132,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	//IAN testing shit
 	public void handleKeyType(char c) {
-		if (c == 'd') {
+		if (c == 'd'  && GameScreen.gameScreen.mainIsCurrent()) {
 			try {
 				gameScreen.newDay();
 			} catch (IOException e) {
@@ -213,6 +223,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	public void handleMouseRelease(int x, int y, int button) {
 		if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
+		if (!gameScreen.movementLock) {
 		if (gameScreen.gameStatus.ui == UIStatus.WAITING) {
 			if(Client.getMainHero().time.getTime() <= 10) {Client.getMainHero().time.advance();}
 
@@ -229,16 +240,26 @@ public class GameScreenDrawer implements Inputtable{
 			InputThread.updateVariable();
 		}
 		else if (gameScreen.gameStatus.ui == UIStatus.FIGHTING) {
+			System.out.println("HERE");
+			try {
+				gameScreen.fight = new Fight(gameScreen.tm);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Tile t = gameScreen.tiles.get(Client.getMainHero().getTile());
+			
 			if (Client.getMainHero().time.getTime() <= 10) {
 				monsterLoop:
 				for (Monster monster : gameScreen.monsters)
 				{
 					//normal fight
 					if(t.containsTileEntity(monster)) {
-						fightDrawer.fight.start(t, gameScreen.tm.getHero());
+						gameScreen.fight.start(t.tileNumber, Client.getMainHero());
+						InputThread.updateVariable();
 						gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 						gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+						gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;
 						break;
 					}
 
@@ -250,23 +271,27 @@ public class GameScreenDrawer implements Inputtable{
 //	        				System.out.println(adjacentTiles[i]);
 							Tile adjacentTile = Tile.get(adjacentTiles[i]);
 							if (adjacentTile.containsTileEntity(monster)) {
-								fightDrawer.fight.startAdjacent(adjacentTile, Client.getMainHero());
+								gameScreen.fight.startAdjacent(t.tileNumber, Client.getMainHero());
+								InputThread.updateVariable();
 								gameScreen.gameStatus.focus = GameStatus.FOCUS_ON_FIGHT;
 								gameScreen.gameStatus.currentScreen = GameStatus.FIGHT_SCREEN;
+								gameScreen.gameStatus.fight = FightStatus.ROLLPROMPT;
 								break monsterLoop;
 
 							}
 						}
 					}
 				}
+				InputThread.updateVariable();
 			}
 			else {
 				System.out.println("NO TIME");
 			}
-			if (!fightDrawer.fight.isHappening) {
+			if (!gameScreen.fight.isHappening) {
 				System.out.println("UNABLE TO FIGHT");
 			}
 			gameScreen.gameStatus.ui = UIStatus.NONE;
+		}
 		}
 
 		//  else if(gameStatus.ui == UIStatus.PICKING) {

@@ -65,6 +65,7 @@ public class InputHandler implements MinuetoKeyboardHandler, MinuetoMouseHandler
 	}
 
 	public void handleMousePress(int i, int i1, int i2) {
+		System.out.println(gameStatus.focus);
 		inputs.get(gameStatus.focus).handleMousePress(i, i1, i2);
 		
 	}

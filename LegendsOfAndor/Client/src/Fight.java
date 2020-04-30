@@ -21,9 +21,9 @@ public class Fight implements Serializable{
 	ArrayList<Tuple<Character,Coordinate>> fightMembers;
 	ArrayList<Hero> fightHeroes;
 	
-	Hero mainHero = Client.mainHero;
+	
 	public Hero currentHero = Client.mainHero;
-	GameStatus gameStatus;
+//	GameStatus gameStatus;
 
 	int herosLeft;
 	int monsterTotalRoll;
@@ -39,9 +39,9 @@ public class Fight implements Serializable{
 	int archerRollNumber = 0;
 	boolean brewUsed=false;
 	public Fight(TurnManager tm) throws IOException {
-		
 		this.tm = tm;
-		gameStatus = GameStatus.getInstance();
+		
+//		gameStatus = GameStatus.getInstance();
 	}
 	
 	public boolean inFight(Hero h) {
@@ -49,20 +49,21 @@ public class Fight implements Serializable{
 		else return false;
 	}
 	
-	public void start(Tile fightTile, Hero initiator) {
+	public void start(int tileNumber, Hero initiator) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		heroTotalRoll = 0;
 		monsterTotalRoll = 0;
 		currentHero = initiator;
-		mainHero = Client.mainHero;
 		
-		this.fightTile = fightTile;
+		
+		this.fightTile = Tile.get(tileNumber);
 		isHappening = true;
 		int monsterOffset = 1;
 		for (Character entity : fightTile.getTileCharacters()) {
 			//member is a Hero
-			if (tm.contains(entity)) {
+			System.out.println(entity);
+			if (entity instanceof Hero) {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
 				fightHeroes.add((Hero) entity);
 			}
@@ -77,16 +78,16 @@ public class Fight implements Serializable{
 		}
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.setFight(FightStatus.ROLLPROMPT);
-		
+//		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
+		System.out.println(fightMembers);
 	}
 	
 	//fight monster on adjacent tile
-	public void startAdjacent(Tile fightTile, Hero hero) {
+	public void startAdjacent(int tileNumber, Hero hero) {
 		fightMembers = new ArrayList<>();
 		fightHeroes = new ArrayList<>();
 		
-		this.fightTile = fightTile;
+		this.fightTile = Tile.get(tileNumber);
 		isHappening = true;
 		int monsterOffset = 1;
 		
@@ -95,8 +96,8 @@ public class Fight implements Serializable{
 		
 		for (Character entity : fightTile.getTileCharacters()) {
 			//member is a Hero
-			
-			if (tm.contains(entity)) {
+			System.out.println(entity);
+			if (entity instanceof Hero) {
 				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
 				fightHeroes.add((Hero) entity);
 				
@@ -113,7 +114,7 @@ public class Fight implements Serializable{
 		
 		
 		herosLeft = fightHeroes.size();
-		gameStatus.setFight(FightStatus.ROLLPROMPT);
+//		Client.gameStatus.setFight(FightStatus.ROLLPROMPT);
 		
 	}
 	
@@ -123,5 +124,7 @@ public class Fight implements Serializable{
 		return flipNumber;
 	}
 	
-	
+	public boolean currentIsMain() {
+		return (currentHero.getClass() == Client.getMainHero().getClass());
+	}
 }

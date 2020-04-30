@@ -46,8 +46,8 @@ MinuetoWindowHandler, Serializable{
 		
 		
 			imageText = new MinuetoText("Type adjancent tile + a space to place Prince Thorald" ,fontArial19,MinuetoColor.BLUE);
-			imageText1 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText2 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText1 = new MinuetoText("For MovePrince, press Move prince buttom first, then enter the " ,fontArial19,MinuetoColor.BLUE);
+			imageText2 = new MinuetoText("adjacent to move then Press 'g' " ,fontArial19,MinuetoColor.BLUE);
 
 
 		

@@ -2,10 +2,7 @@ import org.minueto.window.MinuetoFrame;
 import org.minueto.window.MinuetoWindow;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,6 +25,13 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         savesFolder.mkdir();
+        /*
+        URL url_name = new URL("http://bot.whatismyipaddress.com");
+        BufferedReader sc =
+                new BufferedReader(new InputStreamReader(url_name.openStream()));
+        // reads system IPAddress
+        addr = InetAddress.getByName(sc.readLine().trim());
+        */
         addr = InetAddress.getLocalHost();
         pool = Executors.newFixedThreadPool(4);
         ServerInterface serverInterface = new ServerInterface(addr.getHostAddress());
@@ -40,6 +44,7 @@ public class Server {
     public static void createNewGame() throws IOException {
         gameScreen = GameScreen.getInstance();
         gameStatus = GameStatus.getInstance();
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
     }
 
     public static void loadGame(String nameOfSaveFile) throws IOException, ClassNotFoundException {
@@ -80,7 +85,7 @@ public class Server {
     public static class ServerRunner extends Thread {
 
         public void run() {
-            try (ServerSocket listener = new ServerSocket(59001,50, addr)) {
+            try (ServerSocket listener = new ServerSocket(59001,50, InetAddress.getLocalHost())) {
                 while (true) {
                     pool.execute(new Handler(listener.accept()));
                 }
@@ -119,6 +124,7 @@ public class Server {
                 out.writeObject(Server.gameScreen);
                 out.writeObject(Server.gameStatus);
                 writers.add(out);
+                out.writeObject("s " + writers.size());
                 for(ObjectOutputStream writer : writers)
                     writer.writeObject("p " + writers.size() + " 0");
                 // Accept messages from this client and broadcast them.
@@ -135,7 +141,7 @@ public class Server {
                     }
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             } finally {
                 try {
                     System.out.println("Player has left the server");

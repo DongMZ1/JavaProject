@@ -531,9 +531,9 @@ public class Cards implements MinuetoKeyboardHandler, MinuetoMouseHandler, Minue
 			imageText2 = new MinuetoText("Trade or give gold/gemstones or artiles to another hero on the same space" ,fontArial19,MinuetoColor.BLUE);
 			imageText3 = new MinuetoText("Use articles, buy artiles or strength points from a merchant." ,fontArial19,MinuetoColor.BLUE);
 			imageText4 = new MinuetoText("None of these actions cost any hours on the time track. They can also be carried out when it is not the hero turn." ,fontArial19,MinuetoColor.BLUE);
-			imageText5 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText6 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
-			imageText7 = new MinuetoText("" ,fontArial19,MinuetoColor.BLUE);
+			imageText5 = new MinuetoText("If it is your turn, Press move to start move by enter adjacent tile on keyboard then press 'Space'" ,fontArial19,MinuetoColor.BLUE);
+			imageText6 = new MinuetoText("A remind of Game Play: Each hero has its turn, start from the first player, press A to end his turn to next hero" ,fontArial19,MinuetoColor.BLUE);
+			imageText7 = new MinuetoText("Only Hero in his turn can end the day by press D, be careful about it!!!" ,fontArial19,MinuetoColor.BLUE);
 			}
 		if(CardNumber == 302) {
 			eventcardindexText = new MinuetoText("A3 Easy: Place your heros on the spaces corresponding to their rank numbers:" ,fontArial19,MinuetoColor.BLUE);

@@ -20,56 +20,60 @@ public class Client {
     static GameStatus gameStatus;
     public static Hero mainHero;
     public static int playerNum;
-    static {
-        try {
-            mainHero = new Archer(0);
-            gameScreenDrawer = GameScreenDrawer.getInstance();
-            gameStatus = GameStatus.getInstance();
-        } catch (IOException e) { e.printStackTrace();}
-    }
     static InputHandler inputHandler;
     static TextBox textBox;
     static MinuetoWindow screen = new MinuetoFrame(1280, 720, true);
     public static void main(String[] args) throws Exception {
         screen.setVisible(true);
     	gameStatus = GameStatus.getInstance();
+    	mainHero = new Archer(0);
         InputHandler inputHandler = InputHandler.getInputHandler();
         gameScreenDrawer = GameScreenDrawer.getInstance();
         preGameScreen = PreGameScreen.getInstance();
         textBox = TextBox.getInstance();
-        inputHandler.addInput(null); //TAKING PLACE OF LOBBY SCREEN RN
+        inputHandler.addInput(preGameScreen);
         inputHandler.addInput(gameScreenDrawer);
         inputHandler.addInput(textBox);
         inputHandler.addInput(gameScreenDrawer.fightDrawer);
         inputHandler.addInput(gameScreenDrawer.collabDrawer);
         inputHandler.addInput(preGameScreen);
-        gameStatus.focus = 5; //preGameScreen
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
         while(!preGameScreen.isConnected) {
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
         }
         new InputThread(preGameScreen.getAddress()).start();
+        gameStatus.focus = gameStatus.FOCUS_ON_LOBBY;
+        //InputThread.updateVariable();
         while(!preGameScreen.lobbyScreen.readyToStart) {
             preGameScreen.draw();
             screen.render();
             inputHandler.handleQueue();
         }
+        int index = preGameScreen.lobbyScreen.players.get(playerNum-1).index;
+        if(index == 0)
+            mainHero = new Warrior(14);
+        else if(index == 1)
+            mainHero = new Archer(25);
+        else if(index == 2)
+            mainHero = new Dwarf(7);
+        else
+            mainHero = new Mage(34);
+        Thread.sleep(1000*playerNum);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());
+        gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
+        gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
         InputThread.updateVariable();
         while (true) {
-            if (gameStatus.currentScreen == gameStatus.LOBBY_SCREEN)
-                preGameScreen.draw();
-            else if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
+            if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
                 gameScreenDrawer.draw();
             }
             else if (gameStatus.currentScreen == gameStatus.FIGHT_SCREEN) {
                 gameScreenDrawer.fightDrawer.draw();
             }
-
             textBox.draw();
-
             screen.render();
             inputHandler.handleQueue();
         }
@@ -125,6 +129,12 @@ class InputThread extends Thread{
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;
                 }
+                else if(inputs[0].equals("d")) {
+                    Client.preGameScreen.lobbyScreen.isEasy = !Client.preGameScreen.lobbyScreen.isEasy;
+                }
+                else if(inputs[0].equals("r")) {
+                    Client.preGameScreen.lobbyScreen.readyToStart = true;
+                }
                 else if(inputs[0].equals("p")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     int selection = Integer.parseInt(inputs[2]);
@@ -133,14 +143,16 @@ class InputThread extends Thread{
                         Client.preGameScreen.lobbyScreen.players.add(new LobbyPlayer(currentPlayerNum, 100, 50 + ((currentPlayerNum-1) * 125)));
                     }
                     Client.preGameScreen.lobbyScreen.players.get(playerNum-1).setHero(selection);
-                    System.out.println(Client.preGameScreen.lobbyScreen.players.size());
                 }
-                else if(inputs[0].equals('m')) {
-
+                else {
+                    String message = "";
+                    for(int i = 2; i < inputs.length; i++)
+                        message += inputs[i] + " ";
+                    Client.gameScreenDrawer.gameUi.textBox.addMessage("player "+ inputs[1], message);
                 }
             }
         }
-        } catch(Exception e) { System.out.println("Goodbye!"); }
+        } catch(Exception e) { e.printStackTrace(); }
     }
 
     public static void updateVariable() {

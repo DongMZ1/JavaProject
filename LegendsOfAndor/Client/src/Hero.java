@@ -46,6 +46,14 @@ public class Hero implements Character, Serializable {
 		return this.tile;
 	}
 	///////////////general///////////////////////////////////////////////////////////
+	public void IsDead() {
+		if(this.sp > 0) {
+			this.sp = this.sp -1;
+			this.wp = this.wp+3;
+		}else {
+			this.wp = this.wp +3;
+		}
+	}
 	 public boolean hasMerchant() {
 	    	for(TileEntity t: Tile.get(this.tile).getTileEntities()) {
 	    		if(t instanceof Merchant) {

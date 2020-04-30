@@ -53,10 +53,10 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
 		itemButtons = new ArrayList<>();
 		
-		if (CollaborativeDecision.toDecide == DecisionType.START) {
+		if (gameScreen.cd.toDecide == DecisionType.START) {
 			createDecision(7);
 		}
-		else if (CollaborativeDecision.toDecide == DecisionType.TEST) {
+		else if (gameScreen.cd.toDecide == DecisionType.TEST) {
 			createDecision(4);
 		}
 }
@@ -75,6 +75,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		okButton = new Button(new Coordinate(100*offset + 150, 150),50,89,"READY",true);
 		}
 		catch (Exception e) {}
+		System.out.println("CREATED");
 	}
 	public void endBattle(Monster m) {
 		if (m instanceof Wardraks) {
@@ -90,7 +91,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 	}
 	public void decisionLoop() {
 		Client.screen.draw(background, 0, 0);
-		if (CollaborativeDecision.toDecide == DecisionType.NONE) {
+		if (gameScreen.cd.toDecide == DecisionType.NONE) {
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 //			inputHandler.removeInput(this);
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
@@ -173,11 +174,60 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			}
 			i++;
 		}
-		
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {
-			CollaborativeDecision.toDecide = DecisionType.NONE;
+	
+			gameScreen.cd.toDecide = DecisionType.NONE;
+			
+			for (Tuple<Item,Hero> combo : gameScreen.cd.items) {
+				if (combo.second != null && combo.second.getClass() == Client.mainHero.getClass()) {
+					if (combo.first instanceof WP) {
+						Client.getMainHero().wp++;
+					}
+					else {
+						Client.getMainHero().items.add(combo.first);
+					}
+					
+					System.out.println(Client.getMainHero().items);
+				}
+				else if (combo.second != null) {
+					for(Hero hero : gameScreen.tm.heroes) {
+			            if(hero.getClass().equals(combo.second.getClass())) {
+			            	if (combo.first instanceof WP) {
+								hero.wp++;
+							}
+							else {
+								hero.items.add(combo.first);
+							}
+			            	break;
+			            }
+			                
+			        }
+				}
+				
+				
+			}
+			gameScreen.cd.items.clear();
+			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
+			
+			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 			InputThread.updateVariable();
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		 try {
+			GameScreen.gameScreen.newDay();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+			
+		}
+		
 		
 	}
 	@Override

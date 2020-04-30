@@ -103,9 +103,7 @@ public class TextBox implements Inputtable, Serializable{
         }
         else if(c == MinuetoKeyboard.KEY_ENTER) {
             if(!currentTypedText.equals("")) {
-                this.pastMessages.add(new Message("You", currentTypedText));
-//                InputThread.updateVariable("message", currentTypedText);
-                InputThread.updateVariable();
+                InputThread.sendString("M " + Client.playerNum + " " + currentTypedText);
                 currentTypedText = "";
             }
         }

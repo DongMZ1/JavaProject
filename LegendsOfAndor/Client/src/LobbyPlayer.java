@@ -25,7 +25,7 @@ public class LobbyPlayer {
 		this.currentHero = 0;
 		this.x = x;
 		this.y = y;
-		this.chooseCharHighlight = new MinuetoRectangle(100, 100, MinuetoColor.RED, false);
+		this.chooseCharHighlight = new MinuetoRectangle(75, 75, MinuetoColor.RED, false);
 		index = 0;
 	}
 

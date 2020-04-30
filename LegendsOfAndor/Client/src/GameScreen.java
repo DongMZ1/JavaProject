@@ -45,7 +45,8 @@ public class GameScreen implements Serializable{
 	}
 	public PrinceThorald princeThorald;
 	public Hero currentHero;
-
+	public Fight fight;
+	public boolean movementLock = false;
     private GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);
@@ -58,6 +59,7 @@ public class GameScreen implements Serializable{
 		wells.add(new Well(35));
 		wells.add(new Well(45));
 		wells.add(new Well(55));
+		
 		for (Well well : wells)
 			tiles.get(well.getTile()).addTileEntity(well);
         mine = DwarfMineInitializer.initializemine();
@@ -68,7 +70,8 @@ public class GameScreen implements Serializable{
         tm = new TurnManager(new ArrayList<>());
         narrator = new Narrator();
         gameStatus = GameStatus.getInstance();
-        cd = new CollaborativeDecision(DecisionType.TEST, tm); 
+        cd = new CollaborativeDecision(DecisionType.START, tm); 
+        
         //castle = new Castle(5 - tm.heroes.size());
     }
 
