@@ -126,7 +126,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	//IAN testing shit
 	public void handleKeyType(char c) {
-		if (c == 'd') {
+		if (c == 'd'  && GameScreen.gameScreen.mainIsCurrent()) {
 			try {
 				gameScreen.newDay();
 			} catch (IOException e) {
