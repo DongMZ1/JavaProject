@@ -216,19 +216,6 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 			InputThread.updateVariable();
 			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		 try {
-			GameScreen.gameScreen.newDay();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 			
 		}
 		
