@@ -369,7 +369,7 @@ public class FightDrawer implements Inputtable{
 			
 	
 		else if (Client.gameStatus.fight == FightStatus.ROLLMONSTER && confirm.isClickable() && confirm.isClicked(x, y)) {
-			gameScreen.fight.monsterTotalRoll = dice.getHighestRoll(gameScreen.fight.monsterRolls) ;// + gameScreen.fight.currentMonster.strength;
+			gameScreen.fight.monsterTotalRoll = dice.getHighestRoll(gameScreen.fight.monsterRolls) + gameScreen.fight.currentMonster.strength;
 			String damage = createDamageString();
 			
 			try {
@@ -433,9 +433,12 @@ public class FightDrawer implements Inputtable{
 			if (fightOver) {
 				if (allDead) {
 					System.out.println("ALL DEAD");
+					gameScreen.fight.currentMonster = null;
 					Client.gameStatus.fight = FightStatus.NONE;
+					Client.gameStatus.ui = UIStatus.NONE;
 					Client.gameStatus.currentScreen = Client.gameStatus.GAME_SCREEN;
 					Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_GAMESCREEN;
+					
 					
 				}else {
 					try {
@@ -445,6 +448,7 @@ public class FightDrawer implements Inputtable{
 						e.printStackTrace();
 					}
 					Client.gameStatus.fight = FightStatus.OVER;
+					
 					Client.gameStatus.currentScreen = Client.gameStatus.COLLABORATIVE_SCREEN;
 					Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_COLLABORATIVE;
 					try {					

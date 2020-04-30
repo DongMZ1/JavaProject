@@ -87,6 +87,9 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		else if (m instanceof Skral) {
 			createDecision(8);
 		}
+		else {
+			createDecision(0);
+		}
 		maxNumItems /= 2;
 	}
 	public void decisionLoop() {
@@ -131,6 +134,9 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			
 			
 			
+		}
+		if (maxNumItems == 0) {
+			okButton.draw();
 		}
 		
 	}

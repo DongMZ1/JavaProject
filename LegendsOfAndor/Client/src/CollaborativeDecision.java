@@ -95,6 +95,9 @@ public class CollaborativeDecision implements Serializable {
 		else if (m instanceof Skral) {
 			reward = 4;
 		}
+		else {
+			reward = 0;
+		}
 		toDecide = DecisionType.REWARD;
 		for (int i = 0; i < reward; i++) {
 			items.add(new Tuple(new Gold(-1),null));
