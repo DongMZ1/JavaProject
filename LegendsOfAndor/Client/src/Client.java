@@ -124,6 +124,7 @@ class InputThread extends Thread{
             }
             else if(input instanceof String) {
                 String[] inputs = ((String) input).split(" ");
+                System.out.println(inputs[0]);
                 if(inputs[0].equals("s")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;
@@ -143,8 +144,11 @@ class InputThread extends Thread{
                     }
                     Client.preGameScreen.lobbyScreen.players.get(playerNum-1).setHero(selection);
                 }
-                else if(inputs[0].equals('m')) {
-
+                else {
+                    String message = "";
+                    for(int i = 2; i < inputs.length; i++)
+                        message += inputs[i] + " ";
+                    Client.gameScreenDrawer.gameUi.textBox.addMessage("player "+ inputs[1], message);
                 }
             }
         }
