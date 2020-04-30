@@ -191,6 +191,10 @@ public class FightDrawer implements Inputtable{
 			if (gameScreen.fight.currentIsMain()) {
 				confirm.draw();
 			}
+			if (damageButton == null) {
+				String damage = createDamageString();
+				damageButton = new Button(new Coordinate(700,500),1,1,damage,false);
+			}
 			damageButton.draw();
 			if (Client.getMainHero().getShield() > 0 && gameScreen.fight.heroTotalRoll < gameScreen.fight.monsterTotalRoll) {
 				teDrawer.draw(shield, SHIELD_X, SHIELD_Y);
@@ -203,6 +207,24 @@ public class FightDrawer implements Inputtable{
 		//TODO Draw items once items are implemented
 	}
 
+	public String createDamageString() {
+		String damage;
+		if (gameScreen.fight.monsterTotalRoll > gameScreen.fight.heroTotalRoll) {
+			damage = "Heroes took " + (gameScreen.fight.monsterTotalRoll - gameScreen.fight.heroTotalRoll) + " damage";
+			for (Hero hero : gameScreen.fight.fightHeroes) {
+				hero.wp -= (gameScreen.fight.monsterTotalRoll - gameScreen.fight.heroTotalRoll);
+			}
+		}
+		else if (gameScreen.fight.monsterTotalRoll < gameScreen.fight.heroTotalRoll ) {
+			damage = "Monsters took " + (-gameScreen.fight.monsterTotalRoll + gameScreen.fight.heroTotalRoll) + " damage";
+			gameScreen.fight.currentMonster.health -= (-gameScreen.fight.monsterTotalRoll + gameScreen.fight.heroTotalRoll);
+		}
+		else {
+			damage = "No one took damage this round";
+		}
+		return damage;
+	}
+	
 	public void heroRoll(int roll,int offset)  {
 		Client.screen.draw(diceImages.get(Math.abs(roll)-1), 400 + 100*offset, 400);
 	}
@@ -297,20 +319,8 @@ public class FightDrawer implements Inputtable{
 	
 		else if (Client.gameStatus.fight == FightStatus.ROLLMONSTER && confirm.isClickable() && confirm.isClicked(x, y)) {
 			gameScreen.fight.monsterTotalRoll = dice.getHighestRoll(gameScreen.fight.monsterRolls) ;// + gameScreen.fight.currentMonster.strength;
-			String damage;
-			if (gameScreen.fight.monsterTotalRoll > gameScreen.fight.heroTotalRoll) {
-				damage = "Heroes took " + (gameScreen.fight.monsterTotalRoll - gameScreen.fight.heroTotalRoll) + " damage";
-				for (Hero hero : gameScreen.fight.fightHeroes) {
-					hero.wp -= (gameScreen.fight.monsterTotalRoll - gameScreen.fight.heroTotalRoll);
-				}
-			}
-			else if (gameScreen.fight.monsterTotalRoll < gameScreen.fight.heroTotalRoll ) {
-				damage = "Monsters took " + (-gameScreen.fight.monsterTotalRoll + gameScreen.fight.heroTotalRoll) + " damage";
-				gameScreen.fight.currentMonster.health -= (-gameScreen.fight.monsterTotalRoll + gameScreen.fight.heroTotalRoll);
-			}
-			else {
-				damage = "No one took damage this round";
-			}
+			String damage = createDamageString();
+			
 			try {
 				damageButton = new Button(new Coordinate(700,500),1,1,damage,false);
 			} catch (IOException e) {

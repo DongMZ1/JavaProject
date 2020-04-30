@@ -196,6 +196,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 							else {
 								hero.items.add(combo.first);
 							}
+			            	break;
 			            }
 			                
 			        }
