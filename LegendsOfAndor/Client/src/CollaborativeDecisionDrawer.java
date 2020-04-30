@@ -170,6 +170,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				else {
 					gameScreen.cd.items.get(i).second = Client.mainHero;
 				}
+				gameScreen.movementLock = false;
 				InputThread.updateVariable();
 			}
 			i++;
@@ -206,6 +207,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				
 			}
 			gameScreen.cd.items.clear();
+			
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 			
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;

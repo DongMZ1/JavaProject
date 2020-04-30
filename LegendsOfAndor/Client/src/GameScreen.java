@@ -46,6 +46,7 @@ public class GameScreen implements Serializable{
 	public PrinceThorald princeThorald;
 	public Hero currentHero;
 	public Fight fight;
+	public boolean movementLock = false;
     private GameScreen() throws IOException {
         
 //        tiles = new TileInitialiser().initialiseTiles(screen);

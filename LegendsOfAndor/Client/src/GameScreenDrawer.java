@@ -49,6 +49,7 @@ public class GameScreenDrawer implements Inputtable{
 		if (this.gameScreen.gameStatus.fight == FightStatus.OVER) {
 			Client.gameScreenDrawer.collabDrawer.endBattle(gameScreen.fight.currentMonster);
 			this.gameScreen.gameStatus.fight = FightStatus.NONE;
+			this.gameScreen.movementLock = true;
 		}
 		this.gameScreen = gameScreen;
 		this.gameScreen.gameScreen = gameScreen;
@@ -222,6 +223,7 @@ public class GameScreenDrawer implements Inputtable{
 
 	public void handleMouseRelease(int x, int y, int button) {
 		if(button == MinuetoMouse.MOUSE_BUTTON_RIGHT) this.movingCam = false;
+		if (!gameScreen.movementLock) {
 		if (gameScreen.gameStatus.ui == UIStatus.WAITING) {
 			if(Client.getMainHero().time.getTime() <= 10) {Client.getMainHero().time.advance();}
 
@@ -289,6 +291,7 @@ public class GameScreenDrawer implements Inputtable{
 				System.out.println("UNABLE TO FIGHT");
 			}
 			gameScreen.gameStatus.ui = UIStatus.NONE;
+		}
 		}
 
 		//  else if(gameStatus.ui == UIStatus.PICKING) {
