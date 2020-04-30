@@ -60,6 +60,7 @@ public class GameScreenDrawer implements Inputtable{
 		this.gameUi.gameStatus = gameStatus;
 		this.gameScreen.gameStatus = gameStatus;
 		this.gameScreen.cd.gameStatus = gameStatus;
+		this.collabDrawer.gameStatus = gameStatus;
 		
 	}
 

@@ -53,10 +53,10 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		background = new MinuetoRectangle(gameStatus.screenWidth, 400, MinuetoColor.GREEN, true);
 		itemButtons = new ArrayList<>();
 		
-		if (CollaborativeDecision.toDecide == DecisionType.START) {
+		if (gameScreen.cd.toDecide == DecisionType.START) {
 			createDecision(7);
 		}
-		else if (CollaborativeDecision.toDecide == DecisionType.TEST) {
+		else if (gameScreen.cd.toDecide == DecisionType.TEST) {
 			createDecision(4);
 		}
 }
@@ -90,7 +90,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 	}
 	public void decisionLoop() {
 		Client.screen.draw(background, 0, 0);
-		if (CollaborativeDecision.toDecide == DecisionType.NONE) {
+		if (gameScreen.cd.toDecide == DecisionType.NONE) {
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 //			inputHandler.removeInput(this);
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
@@ -174,8 +174,8 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			i++;
 		}
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {
-			CollaborativeDecision.toDecide = DecisionType.NONE;
-			InputThread.updateVariable();
+			gameScreen.cd.toDecide = DecisionType.NONE;
+			
 			for (Tuple<Item,Hero> combo : gameScreen.cd.items) {
 				if (combo.second != null && combo.second.getClass() == Client.mainHero.getClass()) {
 					if (combo.first instanceof WP) {
@@ -184,12 +184,17 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 					else {
 						Client.getMainHero().items.add(combo.first);
 					}
-					InputThread.updateVariable();
+					
 					System.out.println(Client.getMainHero().items);
 				}
 				
 				
 			}
+			gameScreen.cd.items.clear();
+			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
+			
+			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
+			InputThread.updateVariable();
 			
 		}
 		

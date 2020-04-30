@@ -9,7 +9,7 @@ public class CollaborativeDecision implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2759410189088674714L;
-	public static DecisionType toDecide;
+	public DecisionType toDecide;
 	GameStatus gameStatus;
 	
 	
@@ -77,12 +77,7 @@ public class CollaborativeDecision implements Serializable {
 	public void decisionLoop() {
 		//Right now only used when finish
 		
-		if (toDecide == DecisionType.NONE) {
-		gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 		
-		gameStatus.currentScreen = gameStatus.GAME_SCREEN;
-		
-		}
 		
 		
 	}
