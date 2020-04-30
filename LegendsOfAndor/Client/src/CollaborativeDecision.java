@@ -84,6 +84,7 @@ public class CollaborativeDecision implements Serializable {
 	
 	public void endBattle(Monster m) {
 		items.clear();
+		selectedNumItems = 0;
 		int reward = -1;
 		if (m instanceof Wardraks) {
 			reward = 6;

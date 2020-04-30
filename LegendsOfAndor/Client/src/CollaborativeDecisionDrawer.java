@@ -75,6 +75,7 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 		okButton = new Button(new Coordinate(100*offset + 150, 150),50,89,"READY",true);
 		}
 		catch (Exception e) {}
+		System.out.println("CREATED");
 	}
 	public void endBattle(Monster m) {
 		if (m instanceof Wardraks) {
