@@ -102,9 +102,13 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 			
 			Item item = gameScreen.cd.items.get(i).first;
 			Hero hero = gameScreen.cd.items.get(i).second;
-			Button button = itemButtons.get(i);
+			Button button = null;
+			if (itemButtons != null && itemButtons.size() > i) {
+				button = itemButtons.get(i);
+			}
+			
 //			System.out.println(item);
-			if (hero != null) {
+			if (hero != null && button != null) {
 				if(hero instanceof Warrior)
 					Client.screen.draw(warriorImage, button.getCoordinate().getX(), button.getCoordinate().getY()-300);
 				else if(hero instanceof Dwarf)
