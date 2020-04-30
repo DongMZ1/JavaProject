@@ -48,7 +48,13 @@ public class TurnManager implements Serializable{
 		return false;
 	}
 	
-	
+	public boolean isPresent(TileEntity hero) {
+		for(Hero hero2 : heroes) {
+			if(hero.getClass().equals(hero2.getClass()))
+				return true;
+		}
+		return false;
+	}
 	
 	public boolean contains(TileEntity hero) {
 		return heroes.contains(hero);

@@ -45,24 +45,31 @@ public class LobbyPlayer {
 	}
 
 	public void handleMousePress(int xClick, int yClick, int button) {
-		boolean changed = false;
-		if(xClick > x+300 && xClick < x+400) {
-			index = 0;
-			changed = true;
-		}
-		else if(xClick > x+450 && xClick < x+550) {
-			index = 1;
-			changed = true;
-		}
-		else if(xClick > x+600 && xClick < x+700) {
-			index = 2;
-			changed = true;
-		}
-		else if(xClick > x+750 && xClick < x+850) {
-			index = 3;
-			changed = true;
-		}
-		if(changed)
-			InputThread.sendString("p " + Client.playerNum + " " + index);
+		try {
+			boolean changed = false;
+			if (xClick > x + 300 && xClick < x + 400) {
+				if (!Client.gameStatus.loaded || Client.gameScreenDrawer.gameScreen.tm.isPresent(new Warrior(0))) {
+					index = 0;
+					changed = true;
+				}
+			} else if (xClick > x + 450 && xClick < x + 550) {
+				if (!Client.gameStatus.loaded || Client.gameScreenDrawer.gameScreen.tm.isPresent(new Archer(0))) {
+					index = 1;
+					changed = true;
+				}
+			} else if (xClick > x + 600 && xClick < x + 700) {
+				if (!Client.gameStatus.loaded || Client.gameScreenDrawer.gameScreen.tm.isPresent(new Dwarf(0))) {
+					index = 2;
+					changed = true;
+				}
+			} else if (xClick > x + 750 && xClick < x + 850) {
+				if (!Client.gameStatus.loaded || Client.gameScreenDrawer.gameScreen.tm.isPresent(new Mage(0))) {
+					index = 3;
+					changed = true;
+				}
+			}
+			if (changed)
+				InputThread.sendString("p " + Client.playerNum + " " + index);
+		} catch(Exception e) {};
 	}
 }
