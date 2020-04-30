@@ -46,7 +46,10 @@ public class GameScreenDrawer implements Inputtable{
 	}
 
 	public void updateGameScreen(GameScreen gameScreen) {
-		
+		if (this.gameScreen.gameStatus.fight == FightStatus.OVER) {
+			Client.gameScreenDrawer.collabDrawer.endBattle(gameScreen.fight.currentMonster);
+			this.gameScreen.gameStatus.fight = FightStatus.NONE;
+		}
 		this.gameScreen = gameScreen;
 		this.gameScreen.gameScreen = gameScreen;
 		Tile.TILES = gameScreen.tiles;
@@ -55,6 +58,7 @@ public class GameScreenDrawer implements Inputtable{
 		this.gameScreen.cd = gameScreen.cd;
 		this.fightDrawer.gameScreen = gameScreen;
 		this.fightDrawer.gameScreen.fight = gameScreen.fight;
+		
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;

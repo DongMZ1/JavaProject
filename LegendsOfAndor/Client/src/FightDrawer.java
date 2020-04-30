@@ -309,7 +309,10 @@ public class FightDrawer implements Inputtable{
 			gameScreen.fight.brewUsed = false;
 			gameScreen.fight.heroTotalRoll += gameScreen.fight.currentRoll;
 			for (Hero hero : gameScreen.fight.fightHeroes) {
-				gameScreen.fight.heroTotalRoll += hero.sp;
+				if (hero.getClass() == Client.mainHero.getClass()) {
+					gameScreen.fight.heroTotalRoll += hero.sp;
+				}
+				
 			}
 			
 			
@@ -386,13 +389,13 @@ public class FightDrawer implements Inputtable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Client.gameStatus.fight = FightStatus.NONE;
+				Client.gameStatus.fight = FightStatus.OVER;
 				Client.gameStatus.currentScreen = Client.gameStatus.COLLABORATIVE_SCREEN;
 				Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_COLLABORATIVE;
 				try {					
 					gameScreen.cd.endBattle(gameScreen.fight.currentMonster);
 					gameScreen.cd.tm = gameScreen.tm;
-					Client.gameScreenDrawer.collabDrawer.endBattle(gameScreen.fight.currentMonster);
+					
 //					GameScreen.getInstance().cd.endBattle(gameScreen.fight.currentMonster);
 //					GameScreenDrawer.getInstance().collabDrawer.endBattle(gameScreen.fight.currentMonster);
 				} catch (Exception e) {
