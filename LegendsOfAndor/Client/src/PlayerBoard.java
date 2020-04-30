@@ -91,6 +91,31 @@ public class PlayerBoard implements Serializable{
     }
     
     public void update(Hero hero) {
+	if(hero instanceof Warrior) {
+    		image = "images/Heroes/WarriorMaleBoard.jpg";
+    	}
+    	
+    	else if(hero instanceof Archer) {
+    		image = "images/Heroes/ArcherMaleBoard.jpg";
+    	}
+    	
+    	else if(hero instanceof Dwarf) {
+    		image = "images/Heroes/DwarfMaleBoard.jpg";
+    	}
+    	
+    	else {
+    		image = "images/Heroes/MageMaleBoard.jpg";
+    	}
+    	
+    	
+    	try {
+			playerBoardImage = new MinuetoImageFile(image).scale(300/ 671.0, 300/ 671.0);
+		} catch (MinuetoFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    
     	sp = hero.sp;
     	wp = hero.wp;
     	
