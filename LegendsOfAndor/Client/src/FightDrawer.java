@@ -71,7 +71,7 @@ public class FightDrawer implements Inputtable{
 			try {
 				String diceFile = ("images/Heroes/Dice/" + i + ".jpg");
 				System.out.println(diceFile);
-				diceImages.add( new MinuetoImageFile(diceFile));
+				diceImages.add( new MinuetoImageFile(diceFile).scale(.2, .2));
 			} catch (Exception e) {}
 			
 		}
@@ -79,7 +79,7 @@ public class FightDrawer implements Inputtable{
 			try {
 				String diceFile = ("images/Monsters/Dice/" + i + ".jpg");
 				
-				diceImages.add( new MinuetoImageFile(diceFile));
+				diceImages.add( new MinuetoImageFile(diceFile).scale(.2,.2));
 			} catch (Exception e) {}
 			
 		}
@@ -95,8 +95,30 @@ public class FightDrawer implements Inputtable{
 		Client.screen.draw(background, 0, 0);
 		for (Tuple<Character, Coordinate> member : gameScreen.fight.fightMembers) {
 			
-		teDrawer.draw(member.first, member.second.getX(), member.second.getY()*200);
-			
+		
+		if (member.first instanceof Hero) {
+			teDrawer.draw(member.first, member.second.getX()*200, member.second.getY());
+			Hero hero = (Hero) member.first;
+			String info = ("Hero sp: " +hero.sp + " Hero wp" + hero.wp);
+					try {
+						Button infoButton = new Button(new Coordinate(member.second.getX()*200, member.second.getY()-100),1,1,info,false);
+						infoButton.draw();
+					} catch (Exception e) {
+						System.out.println("FUCKFUCKFUCK");
+					}
+		}
+		else {
+			teDrawer.draw(member.first, 900, 200);
+			Monster monster = (Monster) member.first;
+			String info = ("Monster health: " +monster.health + " Monster strength" + monster.strength);
+					try {
+						Button infoButton = new Button(new Coordinate(900, 150),1,1,info,false);
+						infoButton.draw();
+					} catch (Exception e) {
+						System.out.println("FUCKFUCKFUCK");
+					}
+		}
+		
 		}
 		
 		int j = 1;
@@ -231,11 +253,17 @@ public class FightDrawer implements Inputtable{
 	}
 	
 	public void heroRoll(int roll,int offset)  {
-		Client.screen.draw(diceImages.get(Math.abs(roll)-1), 400 + 100*offset, 400);
+		if (roll > 0) {
+			Client.screen.draw(diceImages.get(Math.abs(roll)-1), 400 + 100*offset, 400);
+		}
+		
 	}
 
 	public void monsterRoll(int roll,int offset)  {
-		Client.screen.draw(diceImages.get(roll+5), 400 + 100*offset, 400);
+		if (roll > 0) {
+			Client.screen.draw(diceImages.get(roll+5), 400 + 100*offset, 400);
+		}
+		
 		
 	}
 
@@ -380,38 +408,57 @@ public class FightDrawer implements Inputtable{
 			for (Hero hero : gameScreen.fight.fightHeroes) {
 				if (hero.wp < 1) {
 					deadHeroes.add(hero);
+					System.out.println(hero + " DEAD");
 				}
 				
 			}
+			for (Hero hero: deadHeroes) {
+				hero.IsDead();
+			}
+			boolean fightOver = false;
+			boolean allDead = false;
 			if (gameScreen.fight.fightHeroes.size() == deadHeroes.size()) {
 				//ALL HEROES DEAD
+				fightOver = true;
+				allDead = true;
 			}
 			else {
 				gameScreen.fight.fightHeroes.removeAll(deadHeroes);
 			}
+			if (gameScreen.fight.currentMonster.health < 1) {
+				fightOver = true;
+			}
 			//HANDLE DEAD HEROES
 			System.out.println("MONSTER HEALTH" + gameScreen.fight.currentMonster.health);
-			if (gameScreen.fight.currentMonster.health < 1) {
-				
-				try {
-					GameScreen.getInstance().tiles.get(gameScreen.fight.currentMonster.tile).removeTileEntity(gameScreen.fight.currentMonster);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Client.gameStatus.fight = FightStatus.OVER;
-				Client.gameStatus.currentScreen = Client.gameStatus.COLLABORATIVE_SCREEN;
-				Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_COLLABORATIVE;
-				try {					
-					gameScreen.cd.endBattle(gameScreen.fight.currentMonster);
-					gameScreen.cd.tm = gameScreen.tm;
+			if (fightOver) {
+				if (allDead) {
+					System.out.println("ALL DEAD");
+					Client.gameStatus.fight = FightStatus.NONE;
+					Client.gameStatus.currentScreen = Client.gameStatus.GAME_SCREEN;
+					Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_GAMESCREEN;
 					
-//					GameScreen.getInstance().cd.endBattle(gameScreen.fight.currentMonster);
-//					GameScreenDrawer.getInstance().collabDrawer.endBattle(gameScreen.fight.currentMonster);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				}else {
+					try {
+						GameScreen.getInstance().tiles.get(gameScreen.fight.currentMonster.tile).removeTileEntity(gameScreen.fight.currentMonster);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Client.gameStatus.fight = FightStatus.OVER;
+					Client.gameStatus.currentScreen = Client.gameStatus.COLLABORATIVE_SCREEN;
+					Client.gameStatus.focus = Client.gameStatus.FOCUS_ON_COLLABORATIVE;
+					try {					
+						gameScreen.cd.endBattle(gameScreen.fight.currentMonster);
+						gameScreen.cd.tm = gameScreen.tm;
+						
+//						GameScreen.getInstance().cd.endBattle(gameScreen.fight.currentMonster);
+//						GameScreenDrawer.getInstance().collabDrawer.endBattle(gameScreen.fight.currentMonster);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				
 			}
 			else {
 				Client.gameStatus.fight = FightStatus.ROLLPROMPT;

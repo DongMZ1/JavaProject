@@ -49,9 +49,9 @@ public class Hero implements Character, Serializable {
 	public void IsDead() {
 		if(this.sp > 0) {
 			this.sp = this.sp -1;
-			this.wp = this.wp+3;
+			this.wp = 3;
 		}else {
-			this.wp = this.wp +3;
+			this.wp = 3;
 		}
 	}
 	 public boolean hasMerchant() {

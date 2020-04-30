@@ -66,13 +66,15 @@ public class Fight implements Serializable{
 			//member is a Hero
 			System.out.println(entity);
 			if (entity instanceof Hero) {
-				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
+				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(tm.indexOf(entity) + 1,300)));
+				System.out.println(tm.indexOf(entity) + 1 + " " + 300);
 				fightHeroes.add((Hero) entity);
+				
 			}
 			
 			//member is a Monster
 			else {
-				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(900, monsterOffset)));
+				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(45, monsterOffset*200)));
 				monsterOffset++;
 				currentMonster = (Monster) entity;
 			}
@@ -100,7 +102,8 @@ public class Fight implements Serializable{
 			//member is a Hero
 			System.out.println(entity);
 			if (entity instanceof Hero) {
-				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(600, tm.indexOf(entity) + 1)));
+				fightMembers.add(new Tuple<Character,Coordinate>(entity,new Coordinate(tm.indexOf(entity) + 1,300)));
+				System.out.println(tm.indexOf(entity) + 1 + " " + 300);
 				fightHeroes.add((Hero) entity);
 				
 			}
