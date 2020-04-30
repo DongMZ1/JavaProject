@@ -67,6 +67,10 @@ public class Client {
             gameStatus.focus = gameStatus.FOCUS_ON_COLLABORATIVE;
             gameStatus.currentScreen = gameStatus.COLLABORATIVE_SCREEN;
         }
+        else {
+            gameStatus.focus = gameStatus.FOCUS_ON_GAMESCREEN;
+            gameStatus.currentScreen = gameStatus.GAME_SCREEN;
+        }
         InputThread.updateVariable();
         while (true) {
             if (gameStatus.currentScreen == gameStatus.GAME_SCREEN || gameStatus.currentScreen == gameStatus.COLLABORATIVE_SCREEN) {
