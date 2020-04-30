@@ -31,6 +31,7 @@ public class Castle implements Serializable{
 		
 		if (health <= 0) {
 			message = "Game Over Rookies\n";
+			Cards N = new Cards(310);
 		}
     	
     }
