@@ -53,13 +53,13 @@ public class Client {
         }
         int index = preGameScreen.lobbyScreen.players.get(playerNum-1).index;
         if(index == 0)
-            mainHero = new Warrior(0);
+            mainHero = new Warrior(14);
         else if(index == 1)
-            mainHero = new Archer(0);
+            mainHero = new Archer(25);
         else if(index == 2)
-            mainHero = new Dwarf(0);
+            mainHero = new Dwarf(7);
         else
-            mainHero = new Mage(0);
+            mainHero = new Mage(34);
         Thread.sleep(1000*playerNum);
         gameScreenDrawer.gameScreen.addHero(mainHero);
         gameScreenDrawer.gameScreen.castle = new Castle(5 - gameScreenDrawer.gameScreen.tm.heroes.size());

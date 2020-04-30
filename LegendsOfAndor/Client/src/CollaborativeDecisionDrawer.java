@@ -170,12 +170,12 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				else {
 					gameScreen.cd.items.get(i).second = Client.mainHero;
 				}
-				gameScreen.movementLock = false;
 				InputThread.updateVariable();
 			}
 			i++;
 		}
 		if (okButton.isClickable() && okButton.isClicked(x, y)) {
+	
 			gameScreen.cd.toDecide = DecisionType.NONE;
 			
 			for (Tuple<Item,Hero> combo : gameScreen.cd.items) {
@@ -207,11 +207,24 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 				
 			}
 			gameScreen.cd.items.clear();
-			
 			gameStatus.focus = GameStatus.FOCUS_ON_GAMESCREEN;
 			
 			gameStatus.currentScreen = gameStatus.GAME_SCREEN;
 			InputThread.updateVariable();
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		 try {
+			GameScreen.gameScreen.newDay();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 		}
 		
