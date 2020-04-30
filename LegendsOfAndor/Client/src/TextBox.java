@@ -36,7 +36,7 @@ public class TextBox implements Inputtable, Serializable{
     private String currentTypedText;
     private ArrayList<Message> pastMessages;
     private MinuetoFont font = new MinuetoFont("Helvetica",14, false, false);
-    private static GameStatus gameStatus;
+    public static GameStatus gameStatus;
     private static TextBox textBox;
     private int width = 450;
     private int inputHeight = 30;
@@ -91,7 +91,7 @@ public class TextBox implements Inputtable, Serializable{
         return  x < width && y > gameStatus.screenHeight - inputHeight;
     }
     public boolean outputClicked(int x, int y) {
-        return !inputClicked(x,y) && x < width  && y > gameStatus.screenHeight - inputHeight - outputHeight; 
+        return !inputClicked(x,y) && x < width  && y > gameStatus.screenHeight - inputHeight - outputHeight;
         }
 
     public void handleKeyPress(int i) {}
@@ -111,8 +111,12 @@ public class TextBox implements Inputtable, Serializable{
             this.currentTypedText += c;
     }
     public void handleMousePress(int x, int y, int button) {
+        System.out.println(inputClicked(x,y));
+        System.out.println(outputClicked(x,y));
         if(!inputClicked(x, y) && !outputClicked(x, y)) {
+            System.out.println(gameStatus.focus);
             gameStatus.focus = gameStatus.lastFocused;
+            System.out.println(gameStatus.focus);
         }
     }
     public void handleMouseRelease(int x, int y, int button) { }

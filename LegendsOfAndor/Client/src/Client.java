@@ -130,7 +130,6 @@ class InputThread extends Thread{
             }
             else if(input instanceof String) {
                 String[] inputs = ((String) input).split(" ");
-                System.out.println(inputs[0]);
                 if(inputs[0].equals("s")) {
                     int playerNum = Integer.parseInt(inputs[1]);
                     Client.playerNum = playerNum;

@@ -81,7 +81,7 @@ public class GameStatus implements Serializable {
 		 WhenToDrawRuneStoneLegendCard = 100;
 		 MedicalHerbInCastle = false;
 		 SkralTowerDefeated = false;
-		loaded = false;
+		 loaded = false;
 	}
 
 	public static GameStatus getInstance() throws IOException {

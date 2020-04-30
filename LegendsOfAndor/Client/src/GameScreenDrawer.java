@@ -63,6 +63,7 @@ public class GameScreenDrawer implements Inputtable{
 	}
 	public void updateGameStatus(GameStatus gameStatus) {
 		this.gameUi.gameStatus = gameStatus;
+		this.gameUi.textBox.gameStatus = gameStatus;
 		this.gameScreen.gameStatus = gameStatus;
 		this.gameScreen.cd.gameStatus = gameStatus;
 		this.collabDrawer.gameStatus = gameStatus;
