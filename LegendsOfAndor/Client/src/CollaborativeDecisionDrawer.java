@@ -187,6 +187,19 @@ public class CollaborativeDecisionDrawer implements Inputtable {
 					
 					System.out.println(Client.getMainHero().items);
 				}
+				else if (combo.second != null) {
+					for(Hero hero : gameScreen.tm.heroes) {
+			            if(hero.getClass().equals(combo.second.getClass())) {
+			            	if (combo.first instanceof WP) {
+								hero.wp++;
+							}
+							else {
+								hero.items.add(combo.first);
+							}
+			            }
+			                
+			        }
+				}
 				
 				
 			}
